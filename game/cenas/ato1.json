@@ -1,0 +1,2036 @@
+[
+  {
+    "id": "c01_bilhete",
+    "classe": "bilhete",
+    "chegada": {
+      "flags": {
+        "conheceu_elisabeta": false,
+        "lily_conhecida": false
+      }
+    },
+    "narrativa": [
+      {
+        "estilo": "bilhete",
+        "texto": "Parabéns!"
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "Você ganhou um ano inteiro de hospedagem, com tudo pago!"
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "Deixe-me conferir os seus dados..."
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "Seu nome é Thiago {sobrenome}.<br>Você tem 19 anos. Certo?"
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "Aqui também diz que você é órfão."
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "Nunca conheceu sua família...<br>E nunca foi adotado."
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "Que triste..."
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "Mas não precisa continuar assim."
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "Esta pode ser a oportunidade que você esperou durante toda a sua vida."
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "Um ano inteiro longe do orfanato."
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "Hospedagem, alimentação e transporte completamente pagos."
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "Nenhuma conta.<br>Nenhuma preocupação.<br>Nenhum motivo para voltar."
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "Então... vamos lá?"
+      },
+      {
+        "estilo": "bilhete",
+        "texto": "O grandioso <b>Hotel Los Segredos</b> está esperando por você."
+      },
+      "O bilhete desaparece. Ainda no escuro, começa o som do motor de um ônibus."
+    ],
+    "destino_auto": "c02_viagem"
+  },
+  {
+    "id": "c02_viagem",
+    "narrativa": [
+      "O motor do ônibus continua sobre a escuridão. A imagem abre e fecha, como um piscar de olhos: você acorda, encostado na janela.",
+      "A estrada é ruim. O ônibus balança, e você segura sua única mochila entre as pernas.",
+      {
+        "estilo": "pensamento",
+        "texto": "Um ano inteiro num hotel... com tudo pago."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Como será que vou viver aqui?"
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Eu só trouxe algumas roupas e meus objetos pessoais. É tudo o que tenho."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Ainda parece estranho... Como um simples brasileiro conseguiu uma passagem para o outro lado do mundo?"
+      },
+      "Você olha de novo o bilhete dourado.",
+      {
+        "estilo": "pensamento",
+        "texto": "Mas não importa. Esta é a minha oportunidade. Uma chance de começar algo novo."
+      },
+      "O ônibus passa por um desnível e a imagem treme. A voz do motorista anuncia a chegada ao ponto."
+    ],
+    "destino_auto": "c03_ponto"
+  },
+  {
+    "id": "c03_ponto",
+    "chegada": {
+      "hud": [
+        "tempo",
+        "social"
+      ],
+      "itens": [
+        "bilhete_dourado"
+      ],
+      "conhece": [
+        "louise",
+        "gabriel",
+        "eugenie",
+        "arthur"
+      ]
+    },
+    "narrativa": [
+      "O ônibus para num local isolado. Você desce meio torto, quase tropeça no último degrau e segura a mochila contra o corpo.",
+      "Também descem quatro outros passageiros: um casal elegante, uma senhora de postura firme e um homem de olhar atento, com um caderno no bolso do casaco.",
+      "No ponto, duas pessoas de pele acinzentada esperam em silêncio. Observam o grupo sem demonstrar reação alguma.",
+      "O ônibus parte. Os cinco ficam sozinhos, cada um segurando um bilhete dourado.",
+      "",
+      {
+        "quem": "louise",
+        "texto": "Parece que todos estamos esperando o mesmo transporte."
+      },
+      "Ela mostra o próprio bilhete.",
+      {
+        "quem": "louise",
+        "texto": "Eu sou Louise de Bellacourt. Este é Gabriel, meu marido."
+      },
+      {
+        "quem": "louise",
+        "texto": "Nós nos casamos recentemente. Ganhamos dois bilhetes para passar um ano aqui. Consideramos uma espécie de lua de mel prolongada."
+      },
+      "Gabriel apenas cumprimenta o grupo com a cabeça.",
+      "",
+      {
+        "quem": "eugenie",
+        "texto": "Meu nome é Eugénie Bresson."
+      },
+      {
+        "quem": "eugenie",
+        "texto": "Trabalhei a vida inteira. Agora estou aposentada e quero aproveitar um ano de paz. Boa comida e nenhum restaurante para administrar."
+      },
+      "",
+      {
+        "quem": "arthur",
+        "texto": "Arthur Doyle. Também ganhei o sorteio, como vocês."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Para ser sincero, achei a premiação estranha. Um ano de hospedagem, alimentação e transporte gratuitos não é exatamente um prêmio comum."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Sou jornalista. Trabalho a distância, faço pesquisas e escrevo pequenas reportagens. Por isso, consigo continuar trabalhando durante a viagem."
+      },
+      "Arthur olha de relance para as duas pessoas acinzentadas.",
+      {
+        "quem": "arthur",
+        "texto": "Pelo menos, acho que consigo."
+      },
+      "",
+      "Você não diz nada. Segura o bilhete e observa o grupo.",
+      "Ao longe, o som de cascos se aproxima. As duas pessoas acinzentadas viram a cabeça, ao mesmo tempo, para a estrada."
+    ],
+    "destino_auto": "c04_carruagem"
+  },
+  {
+    "id": "c04_carruagem",
+    "chegada": {
+      "tempo": 10,
+      "conhece": [
+        "cocheiro"
+      ]
+    },
+    "narrativa": [
+      "Uma carruagem antiga surge pela estrada, puxada por dois cavalos completamente brancos.",
+      "Um homem de trajes vitorianos desce do assento do condutor, passa a mão sobre um dos cavalos e abre a porta.",
+      {
+        "quem": "cocheiro",
+        "texto": "Por favor, entrem. Posso ajudá-los com as bagagens?"
+      },
+      {
+        "quem": "louise",
+        "texto": "Sim, por favor."
+      },
+      "O Cocheiro recolhe as malas. A cada uma que ele guarda, um turista entra. Você é o último.",
+      {
+        "quem": "cocheiro",
+        "texto": "Sua bagagem, por favor."
+      },
+      "Você entrega a única mochila. Todos os lugares internos já estão ocupados.",
+      {
+        "quem": "cocheiro",
+        "texto": "Parece que não há mais espaço. Você terá que viajar comigo."
+      },
+      "Ele fecha a porta, sobe no assento e estende a mão. Você aceita a ajuda e senta ao lado dele.",
+      "",
+      {
+        "quem": "thiago",
+        "texto": "Então... qual é o seu nome?"
+      },
+      {
+        "quem": "cocheiro",
+        "texto": "Todos me chamam de Cocheiro. E você?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Meu nome é Thiago."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Como é trabalhar naquele hotel?"
+      },
+      {
+        "quem": "cocheiro",
+        "texto": "Diferente. Aquele lugar é diferente de qualquer outro que você já conheceu."
+      },
+      {
+        "quem": "cocheiro",
+        "texto": "Pelo que entendi, todos vocês ganharam um ano de hospedagem."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Sim. Isso é normal?"
+      },
+      "O Cocheiro esboça um sorriso frio.",
+      {
+        "quem": "cocheiro",
+        "texto": "Mais do que você imagina. Mas fale um pouco sobre você."
+      }
+    ],
+    "opcoes": [
+      {
+        "id": "reservado",
+        "texto": "“Não existe muito o que contar. Sou apenas um órfão.”",
+        "destino": "c04b_chegada",
+        "efeitos": {
+          "flags": {
+            "cocheiro_impressao": "reservado"
+          }
+        }
+      },
+      {
+        "id": "otimista",
+        "texto": "“Sou um cara de muita sorte. Um órfão que ganhou um ano inteiro num hotel, com tudo pago.”",
+        "destino": "c04b_chegada",
+        "efeitos": {
+          "flags": {
+            "cocheiro_impressao": "otimista"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "c04b_chegada",
+    "chegada": {
+      "tempo": 30
+    },
+    "narrativa": [
+      {
+        "texto": "O Cocheiro olha para você por um instante. Parece enxergar, por trás da frase, a solidão de quem não tem para onde voltar.",
+        "se": {
+          "flag": "cocheiro_impressao",
+          "valor": "reservado"
+        }
+      },
+      {
+        "texto": "O Cocheiro olha para você por um instante. Parece ter percebido que você acredita, de verdade, no sorteio.",
+        "se": {
+          "flag": "cocheiro_impressao",
+          "valor": "otimista"
+        }
+      },
+      "Ele apenas acena com a cabeça.",
+      "",
+      "Os portões se abrem antes de a carruagem parar. O Cocheiro descarrega as malas e conduz Gabriel, Louise, Eugénie e Arthur até a entrada.",
+      "Você tenta ver quem recolhe as bagagens, mas, quando acompanha o movimento, os turistas já desapareceram no interior.",
+      "O Cocheiro volta, ajuda você a descer e entrega um cartão.",
+      {
+        "quem": "cocheiro",
+        "texto": "Pelo que me contou, talvez você precise de um emprego quando sua hospedagem terminar."
+      },
+      {
+        "quem": "cocheiro",
+        "texto": "Você não tem uma família nem outro lugar esperando por você. Correto?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Sim."
+      },
+      {
+        "quem": "cocheiro",
+        "texto": "Então guarde isto. Se precisar de alguma coisa, procure por mim."
+      },
+      {
+        "item": "cartao_cocheiro"
+      },
+      "Você caminha até a entrada. Ao olhar para trás, a carruagem, os cavalos e o Cocheiro desapareceram.",
+      "O portão começa a se fechar."
+    ],
+    "opcoes": [
+      {
+        "id": "correr",
+        "texto": "Correr até o portão.",
+        "destino": "c05_porteiro"
+      }
+    ]
+  },
+  {
+    "id": "c05_porteiro",
+    "chegada": {
+      "tempo": 5,
+      "conhece": [
+        "porteiro"
+      ]
+    },
+    "narrativa": [
+      "Você atravessa o portão no último instante.",
+      "Do lado de dentro, vê uma menina vestida de preto brincando sozinha com uma bola. Ela a joga contra a muralha e espera que volte. Não olha para você, nem fala.",
+      "Antes que você consiga observá-la melhor, uma voz chama sua atenção.",
+      {
+        "quem": "porteiro",
+        "texto": "Você está atrasado."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Atrasado? E os outros hóspedes?"
+      },
+      {
+        "quem": "porteiro",
+        "texto": "Todos estão atrasados. Nenhum de vocês deveria estar aqui a esta hora."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Mas eu ganhei um sorteio. Posso entrar?"
+      },
+      {
+        "quem": "porteiro",
+        "texto": "Mostre-me o seu bilhete."
+      },
+      "Você entrega o bilhete dourado. O Porteiro examina a escrita, o selo e o próprio hóspede.",
+      {
+        "quem": "porteiro",
+        "texto": "O bilhete parece verdadeiro. Mas preciso fazer uma última pergunta."
+      },
+      {
+        "quem": "porteiro",
+        "texto": "Você realmente deseja estar aqui?"
+      }
+    ],
+    "opcoes": [
+      {
+        "id": "sim",
+        "texto": "“Sim.”",
+        "destino": "c05b_porteiro_fim"
+      }
+    ]
+  },
+  {
+    "id": "c05b_porteiro_fim",
+    "narrativa": [
+      {
+        "quem": "thiago",
+        "texto": "Eu sou órfão. Não tenho outro lugar para onde ir."
+      },
+      "O Porteiro avalia você em silêncio e devolve o bilhete.",
+      {
+        "quem": "porteiro",
+        "texto": "Entendo. Siga-me, por favor."
+      },
+      "Ele conduz você até o hall. A porta se fecha atrás de vocês e, quando você se vira, o Porteiro já desapareceu.",
+      "Ao longe, você vê Arthur, o último dos turistas, entrando no elevador. Depois, caminha até a recepção."
+    ],
+    "destino_auto": "c06_sorteio"
+  },
+  {
+    "id": "c06_sorteio",
+    "tipo": "sorteio",
+    "dados": {
+      "opcoes": [
+        {
+          "destino": "c06_recepcao",
+          "efeitos": {
+            "flags": {
+              "recepcionista": "mavis"
+            },
+            "conhece": [
+              "mavis"
+            ]
+          }
+        },
+        {
+          "destino": "c06_recepcao",
+          "efeitos": {
+            "flags": {
+              "recepcionista": "jonathan"
+            },
+            "conhece": [
+              "jonathan"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "c06_recepcao",
+    "chegada": {
+      "tempo": 5
+    },
+    "narrativa": [
+      {
+        "texto": "Uma jovem de cabelos pretos e curtos organiza as chaves atrás do balcão.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "Você deve ser o último hóspede.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "thiago",
+        "texto": "Acho que sim. Meu nome é Thiago.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "Prazer, Thiago. Eu sou Mavis. Bem-vindo ao Hotel Los Segredos.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "texto": "Ela encontra o nome dele no registro.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "Dezenove anos... hospedagem por um ano inteiro... Está tudo certo.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "texto": "Mavis observa sua única mochila.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "Essa é toda a sua bagagem?",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "texto": "Um homem de terno impecável organiza documentos e chaves atrás do balcão.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Thiago. Dezenove anos. Brasil.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "quem": "thiago",
+        "texto": "Como você sabe?",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "texto": "Jonathan vira o livro de hóspedes na sua direção.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Eu estava esperando por você. Meu nome é Jonathan. Bem-vindo ao Hotel Los Segredos.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "texto": "Ele observa a mochila.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Você trouxe pouca bagagem para alguém que ficará hospedado durante um ano.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      }
+    ],
+    "opcoes": [
+      {
+        "id": "m1",
+        "texto": "“É tudo o que tenho.”",
+        "destino": "c06_regras",
+        "efeitos": {
+          "flags": {
+            "impressao_recepcao": "sinceridade"
+          },
+          "relacoes": {
+            "mavis": {
+              "afeto": 3
+            }
+          }
+        },
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "id": "m2",
+        "texto": "“Prefiro viajar com pouca coisa.”",
+        "destino": "c06_regras",
+        "efeitos": {
+          "flags": {
+            "impressao_recepcao": "bom_humor"
+          },
+          "relacoes": {
+            "mavis": {
+              "afeto": 2
+            }
+          }
+        },
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "id": "m3",
+        "texto": "“Podemos falar sobre o meu quarto?”",
+        "destino": "c06_regras",
+        "efeitos": {
+          "flags": {
+            "impressao_recepcao": "reservado"
+          }
+        },
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "id": "j1",
+        "texto": "“É tudo o que tenho.”",
+        "destino": "c06_regras",
+        "efeitos": {
+          "flags": {
+            "impressao_recepcao": "vulneravel"
+          },
+          "relacoes": {
+            "jonathan": {
+              "confianca": 2
+            }
+          }
+        },
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "id": "j2",
+        "texto": "“Se eu precisar de alguma coisa, o hotel paga. Certo?”",
+        "destino": "c06_regras",
+        "efeitos": {
+          "flags": {
+            "impressao_recepcao": "confiante"
+          }
+        },
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "id": "j3",
+        "texto": "“Isso é algum problema?”",
+        "destino": "c06_regras",
+        "efeitos": {
+          "flags": {
+            "impressao_recepcao": "desconfiado"
+          },
+          "relacoes": {
+            "jonathan": {
+              "confianca": -2
+            }
+          }
+        },
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      }
+    ]
+  },
+  {
+    "id": "c06_regras",
+    "chegada": {
+      "tempo": 5
+    },
+    "narrativa": [
+      {
+        "texto": "Mavis sorri, um pouco apressada, e abre o registro numa página com três linhas.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "texto": "Jonathan fecha o livro de hóspedes e apoia as mãos no balcão.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "São só três regras. Prometo que são fáceis.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Existem três regras. Espero que você as memorize.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      "",
+      {
+        "estilo": "sistema",
+        "texto": "<b>REGRA 1</b><br>RESPEITE OS HORÁRIOS DAS REFEIÇÕES"
+      },
+      {
+        "quem": "mavis",
+        "texto": "O restaurante tem horários certinhos. Por favor, não perca nenhuma refeição, tá? Depois fica difícil arranjar comida.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "O restaurante não permanecerá aberto por causa de atrasos individuais.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      "",
+      {
+        "estilo": "sistema",
+        "texto": "<b>REGRA 2</b><br>NÃO CIRCULE DURANTE A NOITE"
+      },
+      {
+        "quem": "mavis",
+        "texto": "O hotel é muito antigo, e os corredores podem ser perigosos quando estão vazios. É mais seguro ficar no quarto.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Depois que os corredores fecharem, você permanece no seu quarto. Sem exceções.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      "",
+      {
+        "estilo": "sistema",
+        "texto": "<b>REGRA 3</b><br>NÃO ENTRE EM ÁREAS PROIBIDAS"
+      },
+      {
+        "quem": "mavis",
+        "texto": "Se uma porta estiver trancada, por favor, não tente abri-la. Existem bons motivos para certas áreas ficarem fechadas.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Portas trancadas e avisos não devem ser ignorados.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      "",
+      "Você recebe uma chave pesada, de metal escuro.",
+      {
+        "item": "chave_quarto"
+      },
+      {
+        "quem": "mavis",
+        "texto": "Não precisa ficar assustado. Se respeitar as regras, tenho certeza de que vai adorar este lugar.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "Venha. Vou mostrar o seu quarto.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Siga as regras e sua permanência será tranquila.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "quem": "thiago",
+        "texto": "E se eu quebrar alguma delas?",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Então sua permanência poderá terminar antes do previsto.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Venha. Vou levá-lo ao seu quarto.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      }
+    ],
+    "destino_auto": "c07_elevador"
+  },
+  {
+    "id": "c07_elevador",
+    "chegada": {
+      "tempo": 10
+    },
+    "narrativa": [
+      "Você olha a chave: <b>Suíte 14</b>. O botão do sétimo andar se acende.",
+      {
+        "quem": "thiago",
+        "texto": "Este hotel parece muito maior por dentro.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "E você ainda não viu quase nada.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "thiago",
+        "texto": "Este hotel é muito grande.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Maior do que você imagina.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      "",
+      "Depois do elevador, vocês atravessam um corredor ladeado por armaduras.",
+      {
+        "quem": "thiago",
+        "texto": "Que armaduras estranhas."
+      },
+      {
+        "quem": "mavis",
+        "texto": "Eu gosto delas. Mas tome cuidado com o que fala perto delas. As paredes têm ouvidos. Quer dizer... as armaduras.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Estão aqui há séculos. Velhas e bastante empoeiradas. Tenha cuidado com o que fala perto delas. Dizem as lendas que elas têm ouvidos.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      }
+    ],
+    "destino_auto": "c08_suite"
+  },
+  {
+    "id": "c08_suite",
+    "chegada": {
+      "tempo": 5,
+      "mapa": [
+        "suite14"
+      ]
+    },
+    "narrativa": [
+      "A porta se abre para um quarto amplo: cama de casal, janela fechada, um guarda-roupa grande, mesa, criado-mudo, uma penteadeira com espelho e a porta do banheiro.",
+      {
+        "quem": "thiago",
+        "texto": "Isso tudo é meu?"
+      },
+      {
+        "quem": "mavis",
+        "texto": "Durante um ano, sim. Espero que você se sinta em casa.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "O banheiro é ali, caso queira. Vou buscar seu jantar, já que você chegou atrasado.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Durante o período indicado no seu bilhete.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "O banheiro é ali. Daqui a pouco voltarei com seu jantar, já que você chegou atrasado.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      "A porta se fecha e você fica sozinho. Coloca a mochila sobre a cama."
+    ],
+    "opcoes": [
+      {
+        "id": "banho",
+        "texto": "Tomar um banho.",
+        "destino": "c08b_suspeita",
+        "efeitos": {
+          "flags": {
+            "tomou_banho": true
+          },
+          "definir": {
+            "suspeita": 0
+          },
+          "tempo": 25
+        }
+      },
+      {
+        "id": "descansar",
+        "texto": "Deitar e descansar.",
+        "destino": "c08b_suspeita",
+        "efeitos": {
+          "flags": {
+            "tomou_banho": false
+          },
+          "tempo": 15
+        }
+      }
+    ]
+  },
+  {
+    "id": "c08b_suspeita",
+    "chegada": {
+      "hud": [
+        "suspeita"
+      ]
+    },
+    "narrativa": [
+      {
+        "texto": "A água quente leva embora o cansaço e o cheiro da viagem. Você se sente, de algum jeito, mais leve e menos visível.",
+        "se": {
+          "flag": "tomou_banho",
+          "valor": true
+        }
+      },
+      {
+        "texto": "Você se joga na cama, sem tirar os sapatos. O cheiro da viagem ainda está em você, e o cansaço pesa nas pálpebras.",
+        "se": {
+          "flag": "tomou_banho",
+          "valor": false
+        }
+      },
+      "",
+      {
+        "estilo": "sistema",
+        "texto": "<b>SUSPEITA</b><br>Esta barra mostra o quanto os moradores desconfiam de você. Quanto maior o valor, mais eles suspeitam; quanto mais perto de zero, menos você chama atenção.<br>Banho, roupas limpas e comportamento convincente ajudam a baixar. Ela sobe quando você faz algo que não devia."
+      },
+      {
+        "texto": "Como você tomou banho, sua Suspeita caiu para <b>0</b>.",
+        "se": {
+          "flag": "tomou_banho",
+          "valor": true
+        }
+      },
+      {
+        "texto": "Como você não tomou banho, sua Suspeita continua em <b>50</b>.",
+        "se": {
+          "flag": "tomou_banho",
+          "valor": false
+        }
+      }
+    ],
+    "destino_auto": "c09_jantar"
+  },
+  {
+    "id": "c09_jantar",
+    "chegada": {
+      "tempo": 30
+    },
+    "narrativa": [
+      "Uma batida leve na porta. O cheiro de comida quente chega antes de qualquer coisa.",
+      {
+        "texto": "Você abre a porta usando apenas uma toalha. Mavis fica vermelha, entrega a bandeja rapidamente e olha para qualquer lugar menos para você.",
+        "se": [
+          {
+            "flag": "tomou_banho",
+            "valor": true
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "mavis"
+          }
+        ]
+      },
+      {
+        "quem": "mavis",
+        "texto": "Ah... você resolveu tomar banho. Aqui está seu jantar. Espero que goste. Não vou incomodar mais.",
+        "se": [
+          {
+            "flag": "tomou_banho",
+            "valor": true
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "mavis"
+          }
+        ]
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Pelo visto, resolveu tomar banho. Aqui está seu jantar. Não vou atrapalhá-lo mais.",
+        "se": [
+          {
+            "flag": "tomou_banho",
+            "valor": true
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "jonathan"
+          }
+        ]
+      },
+      {
+        "texto": "As batidas na porta acordam você. Mavis está do outro lado, segurando uma bandeja grande demais para os braços dela.",
+        "se": [
+          {
+            "flag": "tomou_banho",
+            "valor": false
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "mavis"
+          }
+        ]
+      },
+      {
+        "quem": "mavis",
+        "texto": "Desculpe acordar você! Aqui está o jantar. Boa noite, Thiago.",
+        "se": [
+          {
+            "flag": "tomou_banho",
+            "valor": false
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "mavis"
+          }
+        ]
+      },
+      {
+        "texto": "As batidas na porta acordam você. Jonathan está do outro lado, com a bandeja equilibrada numa mão só.",
+        "se": [
+          {
+            "flag": "tomou_banho",
+            "valor": false
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "jonathan"
+          }
+        ]
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Seu jantar. Boa noite.",
+        "se": [
+          {
+            "flag": "tomou_banho",
+            "valor": false
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "jonathan"
+          }
+        ]
+      },
+      "Quem trouxe a comida se retira, fechando a porta com cuidado."
+    ],
+    "opcoes": [
+      {
+        "id": "comer",
+        "texto": "Comer o jantar.",
+        "destino": "c10_fome"
+      }
+    ]
+  },
+  {
+    "id": "c10_fome",
+    "chegada": {
+      "hud": [
+        "fome"
+      ],
+      "tempo": 20
+    },
+    "narrativa": [
+      "É estranho. Você não consegue identificar bem o que é, mas o cheiro é inegavelmente convidativo. Come tudo. Uma refeição normal e segura, pelo menos aparentemente.",
+      "",
+      {
+        "estilo": "sistema",
+        "texto": "<b>FOME</b><br>Esta barra mostra o quanto você está alimentado: <b>100/100</b>.<br>Quanto maior, menos fome você sente; quanto mais perto de zero, mais faminto. Refeições restauram a barra."
+      },
+      "",
+      "Você se levanta, ainda mastigando o último pedaço, e para diante do espelho da penteadeira."
+    ],
+    "destino_auto": "c10_espelho"
+  },
+  {
+    "id": "c10_espelho",
+    "tipo": "espelho",
+    "chegada": {
+      "tempo": 10
+    },
+    "narrativa": [
+      "O espelho é antigo, de moldura escura. O rosto que o encara é o seu: moreno, cabelos negros, olhos castanhos claros, um corpo forte de quem sempre precisou se virar sozinho.",
+      {
+        "estilo": "pensamento",
+        "texto": "Um ano inteiro neste lugar..."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Quem eu vou ser durante esse tempo?"
+      }
+    ],
+    "dados": {
+      "pontos": 30,
+      "passo": 10,
+      "max": 80,
+      "base": 50
+    },
+    "destino_auto": "c11_musica"
+  },
+  {
+    "id": "c11_musica",
+    "chegada": {
+      "ate": "03:10",
+      "sono": true
+    },
+    "narrativa": [
+      "Depois da confirmação, você deita e adormece quase de imediato.",
+      "",
+      "Algum tempo depois, você acorda com um som distante: um piano.",
+      {
+        "quem": "thiago",
+        "texto": "Música a uma hora dessas? Isso deve estar acordando os outros hóspedes."
+      }
+    ],
+    "opcoes": [
+      {
+        "id": "seguir",
+        "texto": "Levantar e seguir a música.",
+        "destino": "c11a_piano"
+      },
+      {
+        "id": "ignorar",
+        "texto": "Ignorar e tentar dormir.",
+        "destino": "c11b_telefone"
+      }
+    ]
+  },
+  {
+    "id": "c11a_piano",
+    "chegada": {
+      "tempo": 15,
+      "flags": {
+        "conheceu_elisabeta": true
+      },
+      "mapa": [
+        "sala_musica"
+      ],
+      "conhece": [
+        "mulher_piano"
+      ]
+    },
+    "narrativa": [
+      "Você abre a porta e atravessa o corredor escuro. A música vem de uma sala no fim do andar. Lá dentro, na penumbra, uma mulher de vestido branco e cabelos longos toca ao piano.",
+      {
+        "quem": "mulher_piano",
+        "texto": "Não consegue dormir?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu ouvi a música."
+      },
+      {
+        "quem": "mulher_piano",
+        "texto": "Desculpe. Às vezes esqueço que algumas pessoas ainda precisam dormir."
+      },
+      {
+        "quem": "thiago",
+        "texto": "É uma música muito bonita."
+      },
+      {
+        "quem": "mulher_piano",
+        "texto": "Fui eu quem compôs. E então? O que achou do hotel?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Antigo. Muito grande... e bastante velho."
+      },
+      "A mulher ri, sem desviar os olhos das teclas.",
+      {
+        "quem": "mulher_piano",
+        "texto": "Diga-me uma coisa, Thiago. Você acredita em fantasmas?"
+      }
+    ],
+    "opcoes": [
+      {
+        "id": "sim",
+        "texto": "“Acredito, sim.”",
+        "destino": "c11a_pos",
+        "efeitos": {
+          "flags": {
+            "resposta_fantasmas": "sim"
+          }
+        }
+      },
+      {
+        "id": "nao",
+        "texto": "“Não. Fantasmas não existem.”",
+        "destino": "c11a_pos",
+        "efeitos": {
+          "flags": {
+            "resposta_fantasmas": "nao"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "c11a_pos",
+    "chegada": {
+      "tempo": 10
+    },
+    "narrativa": [
+      {
+        "texto": "Ela inclina a cabeça, com um brilho de curiosidade nos olhos.",
+        "se": {
+          "flag": "resposta_fantasmas",
+          "valor": "sim"
+        }
+      },
+      {
+        "quem": "mulher_piano",
+        "texto": "Interessante. Poucos têm essa coragem.",
+        "se": {
+          "flag": "resposta_fantasmas",
+          "valor": "sim"
+        }
+      },
+      {
+        "texto": "Ela sorri, e há algo de triste nesse sorriso.",
+        "se": {
+          "flag": "resposta_fantasmas",
+          "valor": "nao"
+        }
+      },
+      {
+        "quem": "mulher_piano",
+        "texto": "Que pena. Seria bom se fosse verdade.",
+        "se": {
+          "flag": "resposta_fantasmas",
+          "valor": "nao"
+        }
+      },
+      "",
+      "Ela se levanta e se aproxima. Antes que você possa recuar, ela sopra um pó branco no seu rosto.",
+      "As pernas cedem. Você cai para trás, e a última coisa que vê é o vestido branco se afastando na penumbra."
+    ],
+    "destino_auto": "c12_sonho"
+  },
+  {
+    "id": "c11b_telefone",
+    "chegada": {
+      "tempo": 5
+    },
+    "narrativa": [
+      "Você puxa o cobertor sobre a cabeça. A música continua, distante. De repente, outro som: o telefone do quarto começa a tocar."
+    ],
+    "opcoes": [
+      {
+        "id": "atender",
+        "texto": "Atender o telefone.",
+        "destino": "c11b_lily"
+      },
+      {
+        "id": "ignorar",
+        "texto": "Ignorar e voltar a dormir.",
+        "destino": "c12_sonho",
+        "efeitos": {
+          "flags": {
+            "lily_conhecida": false
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "c11b_lily",
+    "chegada": {
+      "tempo": 10,
+      "flags": {
+        "lily_conhecida": true
+      },
+      "conhece": [
+        "lily",
+        "nix"
+      ]
+    },
+    "narrativa": [
+      {
+        "quem": "desconhecida",
+        "texto": "Thiago? Espero não ter acordado você."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Quem está falando?"
+      },
+      {
+        "quem": "lily",
+        "texto": "Meu nome é Lily. Sou responsável pelo sorteio que você ganhou."
+      },
+      {
+        "quem": "lily",
+        "texto": "Chegou bem? Está tudo tranquilo? Notou alguma coisa diferente?"
+      }
+    ],
+    "opcoes": [
+      {
+        "id": "tranquilo",
+        "texto": "“Está tudo tranquilo.”",
+        "destino": "c11b_lily_fim",
+        "efeitos": {
+          "flags": {
+            "resposta_lily": "tranquilo"
+          }
+        }
+      },
+      {
+        "id": "estranho",
+        "texto": "“O hotel é velho e estranho.”",
+        "destino": "c11b_lily_fim",
+        "efeitos": {
+          "flags": {
+            "resposta_lily": "estranho"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "c11b_lily_fim",
+    "chegada": {
+      "tempo": 5
+    },
+    "narrativa": [
+      {
+        "texto": "Há uma pausa curta do outro lado da linha.",
+        "se": {
+          "flag": "resposta_lily",
+          "valor": "estranho"
+        }
+      },
+      {
+        "quem": "lily",
+        "texto": "Entendo. É assim mesmo no começo.",
+        "se": {
+          "flag": "resposta_lily",
+          "valor": "estranho"
+        }
+      },
+      {
+        "quem": "lily",
+        "texto": "Que bom que está tudo bem.",
+        "se": {
+          "flag": "resposta_lily",
+          "valor": "tranquilo"
+        }
+      },
+      {
+        "quem": "lily",
+        "texto": "Tenho uma amiga que trabalha aí. O nome dela é Nix."
+      },
+      {
+        "quem": "lily",
+        "texto": "Se precisar de ajuda, pode procurá-la."
+      },
+      {
+        "quem": "lily",
+        "texto": "Aproveite sua estadia, Thiago. Voltaremos a conversar."
+      },
+      "A linha fica muda. Você deixa o fone no gancho e volta a se deitar, sem conseguir tirar a voz da cabeça."
+    ],
+    "destino_auto": "c12_sonho"
+  },
+  {
+    "id": "c12_sonho",
+    "tipo": "tracos",
+    "narrativa": [
+      "Você sonha que está voando. Voando no escuro, sem chão, sem teto, sem medo.",
+      "Uma voz sem dono ecoa:",
+      {
+        "estilo": "pensamento",
+        "texto": "Bem... quem é você?"
+      }
+    ],
+    "dados": {
+      "virtudes": 2,
+      "vicios": 1
+    },
+    "destino_auto": "c13_despertar"
+  },
+  {
+    "id": "c13_despertar",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "hud": [
+        "perfil",
+        "vida",
+        "sanidade"
+      ]
+    },
+    "narrativa": [
+      "Você deixa de voar. Começa a cair. O escuro acelera, o vento rasga, e o chão vem ao seu encontro até o impacto apagar tudo.",
+      "",
+      "Você acorda assustado, caído ao lado da cama, enrolado no cobertor. Ainda sente o estômago preso na queda.",
+      "A luz da manhã passa pelas frestas da janela.",
+      "",
+      {
+        "estilo": "sistema",
+        "texto": "<b>SEU PERFIL</b><br>Agora você pode consultar seus atributos, suas características (duas virtudes e um vício) e suas habilidades no botão <b>Perfil</b>, no topo da tela. As barras de <b>Vida</b> e <b>Sanidade</b> também aparecem ali."
+      }
+    ],
+    "destino_auto": "c14_retrato"
+  },
+  {
+    "id": "c14_retrato",
+    "chegada": {
+      "tempo": 15,
+      "conhece": [
+        "mavis",
+        "jonathan"
+      ]
+    },
+    "narrativa": [
+      {
+        "texto": "Alguém bate à porta. É Mavis, de braços cruzados e com um sorriso cansado de quem já acordou há horas.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "texto": "Alguém bate à porta. É Jonathan, impecável como na véspera, com o relógio de bolso na mão.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "Bom dia! Vim buscar você para o café. Está na hora.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "O café da manhã tem horário. Vamos.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      "Vocês descem pelo corredor das armaduras. No caminho, você para diante de um grande retrato a óleo: uma mulher de vestido branco e cabelos longos.",
+      "",
+      {
+        "quem": "thiago",
+        "texto": "Esta mulher... eu a vi ontem à noite. Ela estava tocando piano.",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": true
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "Impossível. Aquela é minha mãe. Elisabeta morreu há muito tempo.",
+        "se": [
+          {
+            "flag": "conheceu_elisabeta",
+            "valor": true
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "jonathan"
+          }
+        ]
+      },
+      {
+        "texto": "Mavis desvia o rosto, magoada, e fica em silêncio.",
+        "se": [
+          {
+            "flag": "conheceu_elisabeta",
+            "valor": true
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "jonathan"
+          }
+        ]
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Você sonhou. A esposa do fundador morreu há séculos.",
+        "se": [
+          {
+            "flag": "conheceu_elisabeta",
+            "valor": true
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "mavis"
+          }
+        ]
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Morta há séculos... Mas eu a vi. Eu falei com ela.",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": true
+        }
+      },
+      {
+        "quem": "thiago",
+        "texto": "Quem é ela?",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": false
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "Elisabeta. Minha mãe. Ela morreu há muito tempo.",
+        "se": [
+          {
+            "flag": "conheceu_elisabeta",
+            "valor": false
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "jonathan"
+          }
+        ]
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Elisabeta, a esposa do fundador. Mãe de Mavis. Já falecida.",
+        "se": [
+          {
+            "flag": "conheceu_elisabeta",
+            "valor": false
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "mavis"
+          }
+        ]
+      },
+      "",
+      {
+        "quem": "thiago",
+        "texto": "Falando em pessoas... uma mulher chamada Lily ligou para o meu quarto. Disse ser responsável pelo sorteio. Mencionou uma amiga, a Nix.",
+        "se": {
+          "flag": "lily_conhecida",
+          "valor": true
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "Nix? Ela é nova aqui. Por favor, não atrapalhe o trabalho dela, tá?",
+        "se": [
+          {
+            "flag": "lily_conhecida",
+            "valor": true
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "jonathan"
+          }
+        ]
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Lily? Estranho. Recomendo que você não interfira nos funcionários.",
+        "se": [
+          {
+            "flag": "lily_conhecida",
+            "valor": true
+          },
+          {
+            "flag": "recepcionista",
+            "valor": "mavis"
+          }
+        ]
+      }
+    ],
+    "destino_auto": "c15_refeitorio"
+  },
+  {
+    "id": "c15_refeitorio",
+    "chegada": {
+      "tempo": 15
+    },
+    "narrativa": [
+      "O refeitório é um salão comprido, de mesas pesadas e janelas altas. No cheiro do café, há algo que você não consegue nomear.",
+      "Mavis e Jonathan ficam lado a lado, junto da entrada.",
+      {
+        "quem": "jonathan",
+        "texto": "Esta é Mavis. Minha noiva.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "texto": "Mavis sorri para você, mas há um segundo de hesitação antes do sorriso.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      {
+        "quem": "mavis",
+        "texto": "Então você conheceu o Jonathan.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Nós dois administramos a parte hoteleira, com a ajuda de outros funcionários. Qualquer dúvida, procure um de nós.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Nós dois administramos a parte hoteleira, com a ajuda de outros funcionários. Qualquer dúvida, procure um de nós.",
+        "se": {
+          "flag": "recepcionista",
+          "valor": "jonathan"
+        }
+      },
+      "",
+      "Você pega sua refeição e olha ao redor, procurando um lugar. Só dá para sentar com um grupo."
+    ],
+    "opcoes": [
+      {
+        "id": "arthur",
+        "texto": "Sentar com Arthur.",
+        "destino": "c16_arthur",
+        "efeitos": {
+          "flags": {
+            "mesa": "arthur"
+          }
+        }
+      },
+      {
+        "id": "casal",
+        "texto": "Sentar com Gabriel e Louise.",
+        "destino": "c16_casal",
+        "efeitos": {
+          "flags": {
+            "mesa": "casal"
+          }
+        }
+      },
+      {
+        "id": "eugenie",
+        "texto": "Sentar com Eugénie.",
+        "destino": "c16_eugenie",
+        "efeitos": {
+          "flags": {
+            "mesa": "eugenie"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "c16_arthur",
+    "chegada": {
+      "tempo": 25
+    },
+    "narrativa": [
+      {
+        "quem": "arthur",
+        "texto": "Dormiu bem?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Na verdade, tive um sonho estranho. Uma mulher de branco, tocando piano.",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": true
+        }
+      },
+      {
+        "texto": "Arthur larga o garfo. O olhar de repórter se acende.",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": true
+        }
+      },
+      {
+        "quem": "arthur",
+        "texto": "Branco, cabelos longos... e um pó que ela soprava no rosto? Eu sonhei com a mesma mulher.",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": true
+        }
+      },
+      {
+        "quem": "thiago",
+        "texto": "Isso é... uma coincidência enorme.",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": true
+        }
+      },
+      {
+        "quem": "arthur",
+        "texto": "Coincidência. Deve ser coincidência. A gente jantou a mesma comida pesada, dormiu no mesmo hotel antigo... é natural.",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": true
+        }
+      },
+      {
+        "quem": "thiago",
+        "texto": "Alguém ligou para o meu quarto, no meio da noite.",
+        "se": [
+          {
+            "flag": "lily_conhecida",
+            "valor": true
+          },
+          {
+            "flag": "conheceu_elisabeta",
+            "valor": false
+          }
+        ]
+      },
+      {
+        "quem": "arthur",
+        "texto": "Uma tal de Lily? Ela ligou para mim também. Disse que era responsável pelo sorteio.",
+        "se": {
+          "flag": "lily_conhecida",
+          "valor": true
+        }
+      },
+      {
+        "quem": "arthur",
+        "texto": "Eu não dei muita atenção. Acho que ela liga para todos os hóspedes.",
+        "se": {
+          "flag": "lily_conhecida",
+          "valor": true
+        }
+      },
+      {
+        "quem": "thiago",
+        "texto": "Tranquila. Dormi como uma pedra.",
+        "se": [
+          {
+            "flag": "conheceu_elisabeta",
+            "valor": false
+          },
+          {
+            "flag": "lily_conhecida",
+            "valor": false
+          }
+        ]
+      },
+      {
+        "quem": "arthur",
+        "texto": "Eu também. Uma noite normal, o que já é um alívio nesse lugar.",
+        "se": [
+          {
+            "flag": "conheceu_elisabeta",
+            "valor": false
+          },
+          {
+            "flag": "lily_conhecida",
+            "valor": false
+          }
+        ]
+      },
+      "Arthur racionaliza tudo com um sorriso torto, anotando alguma coisa no caderno. Mas, por um momento, você nota que ele não tira os olhos da porta da cozinha."
+    ],
+    "destino_auto": "c17_tutorial"
+  },
+  {
+    "id": "c16_casal",
+    "chegada": {
+      "tempo": 25
+    },
+    "narrativa": [
+      {
+        "quem": "louise",
+        "texto": "Dormiu bem, querido? Esses colchões são divinos."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Foi uma noite tranquila."
+      },
+      {
+        "quem": "louise",
+        "texto": "Que bom! Nós também. Gabriel e eu já começamos a lua de mel... se é que me entende."
+      },
+      "Gabriel limpa a garganta e finge examinar o próprio prato.",
+      {
+        "quem": "gabriel",
+        "texto": "Louise."
+      },
+      {
+        "quem": "louise",
+        "texto": "O que foi? Ele é jovem, não é bobo."
+      },
+      "Os dois riem. É uma risada sem maldade, de gente que sempre teve tudo. Você sente que vai gostar deles, mesmo que eles sejam um pouco insuportáveis."
+    ],
+    "destino_auto": "c17_tutorial"
+  },
+  {
+    "id": "c16_eugenie",
+    "chegada": {
+      "tempo": 25
+    },
+    "narrativa": [
+      {
+        "quem": "eugenie",
+        "texto": "E então, rapaz? O que achou da comida?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Ótima. Não sei bem o que é, mas é ótima."
+      },
+      "Eugénie levanta uma sobrancelha, satisfeita.",
+      {
+        "quem": "eugenie",
+        "texto": "Fui chef a vida inteira. Tive restaurantes famosos. Eu sei reconhecer mão de mestre quando provo."
+      },
+      {
+        "quem": "eugenie",
+        "texto": "Quem quer que cozinhe aqui... é muito bom. Preciso conhecê-lo pessoalmente."
+      },
+      "Ela diz isso com um brilho de admiração profissional, sem notar o olhar de Mavis, do outro lado do salão, que se vira bruscamente em sua direção."
+    ],
+    "destino_auto": "c17_tutorial"
+  },
+  {
+    "id": "c17_tutorial",
+    "classe": "desfoque",
+    "chegada": {
+      "definir": {
+        "fome": 100
+      },
+      "tempo": 20
+    },
+    "narrativa": [
+      "Enquanto você come, o salão fica levemente fora de foco, como se o hotel quisesse lhe dizer uma coisa em voz baixa.",
+      "",
+      {
+        "estilo": "sistema",
+        "texto": "<b>FOME</b><br>Valor atual: <b>100/100</b>.<br>Ela diminui com o tempo. Café da manhã, almoço e jantar têm horários certos.<br>Com <b>10 ou menos</b>, você pode desmaiar."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "<b>VIDA</b><br>Valor inicial: <b>100/100</b>.<br>Ataques, ferimentos e fome extrema reduzem esta barra. Se chegar a zero, você pode morrer."
+      },
+      "",
+      "Quando o salão volta ao foco, você termina o café e anuncia que vai voltar ao quarto."
+    ],
+    "destino_auto": "c17_sorteio"
+  },
+  {
+    "id": "c17_sorteio",
+    "tipo": "sorteio",
+    "dados": {
+      "opcoes": [
+        {
+          "destino": "c17_despedida",
+          "efeitos": {
+            "flags": {
+              "despedida": "mavis"
+            }
+          }
+        },
+        {
+          "destino": "c17_despedida",
+          "efeitos": {
+            "flags": {
+              "despedida": "jonathan"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "c17_despedida",
+    "chegada": {
+      "flags": {
+        "fome_ativa": true
+      },
+      "tempo": 5
+    },
+    "narrativa": [
+      {
+        "quem": "mavis",
+        "texto": "Qualquer coisa, é só chamar. Bom primeiro dia, Thiago!",
+        "se": {
+          "flag": "despedida",
+          "valor": "mavis"
+        }
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Respeite os horários. Até logo.",
+        "se": {
+          "flag": "despedida",
+          "valor": "jonathan"
+        }
+      }
+    ],
+    "destino_auto": "c18_mapa"
+  },
+  {
+    "id": "c18_mapa",
+    "chegada": {
+      "tempo": 10,
+      "hud": [
+        "mapa"
+      ],
+      "mapa": [
+        "suite14",
+        "corredores",
+        "hall",
+        "refeitorio",
+        "biblioteca"
+      ],
+      "marcadores": [
+        {
+          "area": "refeitorio",
+          "texto": "Missão de Jonathan"
+        },
+        {
+          "area": "biblioteca",
+          "texto": "Missão de Mavis"
+        }
+      ]
+    },
+    "narrativa": [
+      "No corredor, você para novamente diante do retrato da mulher de branco.",
+      {
+        "estilo": "pensamento",
+        "texto": "Será que foi tudo um sonho?",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": true
+        }
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Como é que nós dois sonhamos com a mesma pessoa?",
+        "se": [
+          {
+            "flag": "conheceu_elisabeta",
+            "valor": true
+          },
+          {
+            "flag": "mesa",
+            "valor": "arthur"
+          }
+        ]
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Uma mulher muito bonita...",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": false
+        }
+      },
+      "",
+      "Você entra na Suíte 14. A bandeja suja da noite passada desapareceu, e ninguém bateu na porta. No lugar dela, sobre a cama, há um mapa dobrado.",
+      {
+        "item": "mapa_hotel"
+      },
+      {
+        "estilo": "sistema",
+        "texto": "<b>MAPA DO HOTEL</b><br>O botão <b>Mapa</b>, no canto inferior direito, mostra as áreas que você já conhece e as missões liberadas. Áreas sempre liberadas: Suíte 14, corredores públicos, hall de entrada, refeitório e biblioteca."
+      },
+      {
+        "texto": "Se você seguiu o piano, uma área a mais aparece no mapa: a <b>sala de música</b>.",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": true
+        }
+      },
+      "Dois pontos de interrogação já aparecem: um no refeitório e outro na biblioteca."
+    ],
+    "destino_auto": "c19_fim"
+  },
+  {
+    "id": "c19_fim",
+    "narrativa": [
+      "Capítulo 1 — A Chegada.",
+      "",
+      "Você tem um mapa, uma chave, um bilhete dourado e a vaga sensação de que o hotel sabe mais sobre você do que você sobre ele.",
+      "A partir daqui, o hotel se abre. As missões, as pessoas e os segredos esperam por você. Algumas desaparecem se você demorar demais.",
+      "",
+      "Obrigado por jogar esta primeira parte. Se algo parecer estranho, anote a cena e a hora que aparece no relógio e me conte."
+    ],
+    "dados": {
+      "final": true,
+      "mostrar_tempo": true
+    }
+  }
+]

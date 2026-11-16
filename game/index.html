@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Los Segredos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<div class="moldura">
+  <!-- barra de status (topo). Começa escondida: a interface "acorda" aos poucos. -->
+  <header class="status oculto" id="status">
+    <div class="topo">
+      <div class="topo-esq">
+        <div class="nome-jogador" id="nome-jogador">Thiago</div>
+        <div class="tempo oculto" id="bloco-tempo"><span id="tempo"></span></div>
+        <button id="btn-perfil" class="btn-hud oculto">Perfil</button>
+      </div>
+      <div class="topo-dir">
+        <button id="btn-social" class="btn-hud oculto">Social</button>
+        <button id="btn-inventario" class="btn-hud oculto">Inventário</button>
+      </div>
+    </div>
+    <div class="barras">
+      <div class="barra b-vida oculto" id="b-vida"><span class="rot">Vida</span><div class="trilho"><div class="preench" id="p-vida"></div></div><span class="val" id="v-vida">100</span></div>
+      <div class="barra b-fome oculto" id="b-fome"><span class="rot">Fome</span><div class="trilho"><div class="preench" id="p-fome"></div></div><span class="val" id="v-fome">100</span></div>
+      <div class="barra b-sanidade oculto" id="b-sanidade"><span class="rot">Sanidade</span><div class="trilho"><div class="preench" id="p-sanidade"></div></div><span class="val" id="v-sanidade">100</span></div>
+      <div class="barra b-suspeita oculto" id="b-suspeita"><span class="rot">Suspeita</span><div class="trilho"><div class="preench" id="p-suspeita"></div></div><span class="val" id="v-suspeita">50</span></div>
+    </div>
+  </header>
+
+  <!-- painéis recolhíveis (Perfil / Social / Inventário / Mapa) -->
+  <div id="painel" class="painel oculto"></div>
+
+  <!-- onde a cena aparece -->
+  <div id="palco"></div>
+
+  <!-- rodapé -->
+  <div class="rodape">
+    <button id="btn-salvar" title="Salva rápido neste navegador">Salvar</button>
+    <button id="btn-continuar" title="Carrega o save rápido deste navegador">Continuar</button>
+    <button id="btn-exportar" title="Baixa um arquivo de save de verdade">Exportar arquivo</button>
+    <button id="btn-importar" title="Carrega um arquivo de save">Importar arquivo</button>
+    <button id="btn-reiniciar">Recomeçar</button>
+  </div>
+</div>
+
+<!-- botão do mapa: canto inferior direito, fechado durante os diálogos -->
+<button id="btn-mapa" class="btn-mapa oculto">Mapa</button>
+
+<!-- Os arquivos do motor, carregados NA ORDEM CERTA:
+     estado -> regras -> validador -> motor -> main (liga tudo) -->
+<script src="js/personagens.js"></script>
+<script src="js/tracos.js"></script>
+<script src="js/itens.js"></script>
+<script src="js/estado.js"></script>
+<script src="js/regras.js"></script>
+<script src="js/validador.js"></script>
+<script src="js/motor.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
