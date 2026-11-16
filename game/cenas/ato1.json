@@ -1270,6 +1270,25 @@
       "Ela se levanta e se aproxima. Antes que você possa recuar, ela sopra um pó branco no seu rosto.",
       "As pernas cedem. Você cai para trás, e a última coisa que vê é o vestido branco se afastando na penumbra."
     ],
+    "destino_auto": "c11a_acorda"
+  },
+  {
+    "id": "c11a_acorda",
+    "chegada": {
+      "tempo": 5
+    },
+    "narrativa": [
+      "Você acorda num sobressalto, deitado na cama, ainda vestido. O quarto está escuro e em silêncio. O piano parou.",
+      {
+        "estilo": "pensamento",
+        "texto": "Eu voltei para a cama sozinho? Eu não lembro de ter voltado."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Deve ter sido um sonho. A mulher, a música, aquele pó... Só pode ter sido um sonho."
+      },
+      "Você puxa o cobertor até o queixo e, depois de muito tempo olhando para o teto, volta a dormir."
+    ],
     "destino_auto": "c12_sonho"
   },
   {
@@ -1637,7 +1656,7 @@
       },
       {
         "quem": "mavis",
-        "texto": "Então você conheceu o Jonathan.",
+        "texto": "Então você conheceu o Jonathan. Ele é o meu noivo.",
         "se": {
           "flag": "recepcionista",
           "valor": "mavis"
@@ -1878,7 +1897,7 @@
       "",
       {
         "estilo": "sistema",
-        "texto": "<b>FOME</b><br>Valor atual: <b>100/100</b>.<br>Ela diminui com o tempo. Café da manhã, almoço e jantar têm horários certos.<br>Com <b>10 ou menos</b>, você pode desmaiar."
+        "texto": "<b>FOME</b><br>Lembre-se sempre de comer para não morrer de fome.<br>Se sua fome baixar para <b>10</b>, você pode ter alucinações. Isso afeta sua sanidade.<br>Se baixar para <b>5</b>, você pode desmaiar e acordar na clínica.<br>Se sua fome zerar, bem... você morre."
       },
       {
         "estilo": "sistema",
@@ -1939,32 +1958,12 @@
         }
       }
     ],
-    "destino_auto": "c18_mapa"
+    "destino_auto": "c18_corredor"
   },
   {
-    "id": "c18_mapa",
+    "id": "c18_corredor",
     "chegada": {
-      "tempo": 10,
-      "hud": [
-        "mapa"
-      ],
-      "mapa": [
-        "suite14",
-        "corredores",
-        "hall",
-        "refeitorio",
-        "biblioteca"
-      ],
-      "marcadores": [
-        {
-          "area": "refeitorio",
-          "texto": "Missão de Jonathan"
-        },
-        {
-          "area": "biblioteca",
-          "texto": "Missão de Mavis"
-        }
-      ]
+      "tempo": 5
     },
     "narrativa": [
       "No corredor, você para novamente diante do retrato da mulher de branco.",
@@ -1999,7 +1998,138 @@
         }
       },
       "",
-      "Você entra na Suíte 14. A bandeja suja da noite passada desapareceu, e ninguém bateu na porta. No lugar dela, sobre a cama, há um mapa dobrado.",
+      "Você entra na Suíte 14. A bandeja suja da noite passada desapareceu, e ninguém bateu na porta."
+    ],
+    "destino_auto": "c18_cond"
+  },
+  {
+    "id": "c18_cond",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "lily_conhecida",
+      "casos": {
+        "true": "c18_mapa"
+      },
+      "padrao": "c18_ligacao"
+    }
+  },
+  {
+    "id": "c18_ligacao",
+    "chegada": {
+      "tempo": 5,
+      "conhece": [
+        "lily"
+      ]
+    },
+    "narrativa": [
+      "O telefone do quarto começa a tocar. Desta vez, você atende.",
+      {
+        "quem": "desconhecida",
+        "texto": "Thiago? Espero não estar incomodando."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Quem está falando?"
+      },
+      {
+        "quem": "lily",
+        "texto": "Meu nome é Lily. Sou responsável pelo sorteio que você ganhou."
+      },
+      {
+        "quem": "lily",
+        "texto": "Chegou bem? Está tudo tranquilo? Notou alguma coisa diferente?"
+      }
+    ],
+    "opcoes": [
+      {
+        "id": "tranquilo",
+        "texto": "“Está tudo tranquilo.”",
+        "destino": "c18_ligacao_fim",
+        "efeitos": {
+          "flags": {
+            "resposta_lily": "tranquilo"
+          }
+        }
+      },
+      {
+        "id": "estranho",
+        "texto": "“O hotel é velho e estranho.”",
+        "destino": "c18_ligacao_fim",
+        "efeitos": {
+          "flags": {
+            "resposta_lily": "estranho"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "c18_ligacao_fim",
+    "chegada": {
+      "tempo": 5,
+      "flags": {
+        "lily_ligou_manha": true
+      }
+    },
+    "narrativa": [
+      {
+        "texto": "Há uma pausa curta do outro lado da linha.",
+        "se": {
+          "flag": "resposta_lily",
+          "valor": "estranho"
+        }
+      },
+      {
+        "quem": "lily",
+        "texto": "Entendo. É assim mesmo no começo.",
+        "se": {
+          "flag": "resposta_lily",
+          "valor": "estranho"
+        }
+      },
+      {
+        "quem": "lily",
+        "texto": "Que bom que está tudo bem.",
+        "se": {
+          "flag": "resposta_lily",
+          "valor": "tranquilo"
+        }
+      },
+      {
+        "quem": "lily",
+        "texto": "Aproveite sua estadia, Thiago. Voltaremos a conversar."
+      },
+      "A linha fica muda. Você deixa o fone no gancho."
+    ],
+    "destino_auto": "c18_mapa"
+  },
+  {
+    "id": "c18_mapa",
+    "chegada": {
+      "tempo": 5,
+      "hud": [
+        "mapa"
+      ],
+      "mapa": [
+        "suite14",
+        "corredores",
+        "hall",
+        "refeitorio",
+        "biblioteca"
+      ],
+      "marcadores": [
+        {
+          "area": "refeitorio",
+          "texto": "Missão de Jonathan"
+        },
+        {
+          "area": "biblioteca",
+          "texto": "Missão de Mavis"
+        }
+      ]
+    },
+    "narrativa": [
+      "No lugar da bandeja, sobre a cama, há um mapa dobrado.",
       {
         "item": "mapa_hotel"
       },
@@ -2015,6 +2145,22 @@
         }
       },
       "Dois pontos de interrogação já aparecem: um no refeitório e outro na biblioteca."
+    ],
+    "destino_auto": "c18_janela"
+  },
+  {
+    "id": "c18_janela",
+    "chegada": {
+      "tempo": 2
+    },
+    "narrativa": [
+      "Você desdobra o mapa sobre a cama. Uma sombra clara cruza a janela.",
+      "Você levanta os olhos. No parapeito, do lado de fora, uma gata branca de olhos azuis observa você através do vidro.",
+      "Ela fica imóvel por um instante. Então salta para o vazio.",
+      {
+        "estilo": "pensamento",
+        "texto": "Este quarto fica no sétimo andar."
+      }
     ],
     "destino_auto": "c19_fim"
   },

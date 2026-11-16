@@ -384,7 +384,14 @@ cena("c11a_pos", [
     "",
     "Ela se levanta e se aproxima. Antes que você possa recuar, ela sopra um pó branco no seu rosto.",
     "As pernas cedem. Você cai para trás, e a última coisa que vê é o vestido branco se afastando na penumbra.",
-], destino_auto="c12_sonho", chegada={"tempo": 10})
+], destino_auto="c11a_acorda", chegada={"tempo": 10})
+
+cena("c11a_acorda", [
+    "Você acorda num sobressalto, deitado na cama, ainda vestido. O quarto está escuro e em silêncio. O piano parou.",
+    pens("Eu voltei para a cama sozinho? Eu não lembro de ter voltado."),
+    pens("Deve ter sido um sonho. A mulher, a música, aquele pó... Só pode ter sido um sonho."),
+    "Você puxa o cobertor até o queixo e, depois de muito tempo olhando para o teto, volta a dormir.",
+], destino_auto="c12_sonho", chegada={"tempo": 5})
 
 # 11B — O TELEFONEMA
 cena("c11b_telefone", [
@@ -476,7 +483,7 @@ cena("c15_refeitorio", [
     "Mavis e Jonathan ficam lado a lado, junto da entrada.",
     f("jonathan", "Esta é Mavis. Minha noiva.", JON),
     n("Mavis sorri para você, mas há um segundo de hesitação antes do sorriso.", JON),
-    f("mavis", "Então você conheceu o Jonathan.", MAVIS),
+    f("mavis", "Então você conheceu o Jonathan. Ele é o meu noivo.", MAVIS),
     f("jonathan", "Nós dois administramos a parte hoteleira, com a ajuda de outros funcionários. Qualquer dúvida, procure um de nós.", MAVIS),
     f("jonathan", "Nós dois administramos a parte hoteleira, com a ajuda de outros funcionários. Qualquer dúvida, procure um de nós.", JON),
     "",
@@ -533,7 +540,7 @@ cena("c16_eugenie", [
 cena("c17_tutorial", [
     "Enquanto você come, o salão fica levemente fora de foco, como se o hotel quisesse lhe dizer uma coisa em voz baixa.",
     "",
-    sis("<b>FOME</b><br>Valor atual: <b>100/100</b>.<br>Ela diminui com o tempo. Café da manhã, almoço e jantar têm horários certos.<br>Com <b>10 ou menos</b>, você pode desmaiar."),
+    sis("<b>FOME</b><br>Lembre-se sempre de comer para não morrer de fome.<br>Se sua fome baixar para <b>10</b>, você pode ter alucinações. Isso afeta sua sanidade.<br>Se baixar para <b>5</b>, você pode desmaiar e acordar na clínica.<br>Se sua fome zerar, bem... você morre."),
     sis("<b>VIDA</b><br>Valor inicial: <b>100/100</b>.<br>Ataques, ferimentos e fome extrema reduzem esta barra. Se chegar a zero, você pode morrer."),
     "",
     "Quando o salão volta ao foco, você termina o café e anuncia que vai voltar ao quarto.",
@@ -548,27 +555,61 @@ cena("c17_sorteio", None, tipo="sorteio", dados={"opcoes": [
 cena("c17_despedida", [
     f("mavis", "Qualquer coisa, é só chamar. Bom primeiro dia, Thiago!", {"flag": "despedida", "valor": "mavis"}),
     f("jonathan", "Respeite os horários. Até logo.", {"flag": "despedida", "valor": "jonathan"}),
-], destino_auto="c18_mapa", chegada={"flags": {"fome_ativa": True}, "tempo": 5})
+], destino_auto="c18_corredor", chegada={"flags": {"fome_ativa": True}, "tempo": 5})
 
 # =====================================================================
 # CENA 18 — O MAPA
 # =====================================================================
-cena("c18_mapa", [
+cena("c18_corredor", [
     "No corredor, você para novamente diante do retrato da mulher de branco.",
     pens("Será que foi tudo um sonho?", VIU_ELI),
     pens("Como é que nós dois sonhamos com a mesma pessoa?", [VIU_ELI, {"flag": "mesa", "valor": "arthur"}]),
     pens("Uma mulher muito bonita...", NAO_VIU_ELI),
     "",
-    "Você entra na Suíte 14. A bandeja suja da noite passada desapareceu, e ninguém bateu na porta. No lugar dela, sobre a cama, há um mapa dobrado.",
+    "Você entra na Suíte 14. A bandeja suja da noite passada desapareceu, e ninguém bateu na porta.",
+], destino_auto="c18_cond", chegada={"tempo": 5})
+
+# quem atendeu o telefone à noite vai direto ao mapa; quem não atendeu recebe a ligação da manhã
+cena("c18_cond", None, tipo="condicional", dados={"flag": "lily_conhecida",
+    "casos": {"true": "c18_mapa"}, "padrao": "c18_ligacao"})
+
+cena("c18_ligacao", [
+    "O telefone do quarto começa a tocar. Desta vez, você atende.",
+    f("desconhecida", "Thiago? Espero não estar incomodando."),
+    f("thiago", "Quem está falando?"),
+    f("lily", "Meu nome é Lily. Sou responsável pelo sorteio que você ganhou."),
+    f("lily", "Chegou bem? Está tudo tranquilo? Notou alguma coisa diferente?"),
+], opcoes=[
+    op("tranquilo", "“Está tudo tranquilo.”", "c18_ligacao_fim", {"flags": {"resposta_lily": "tranquilo"}}),
+    op("estranho", "“O hotel é velho e estranho.”", "c18_ligacao_fim", {"flags": {"resposta_lily": "estranho"}}),
+], chegada={"tempo": 5, "conhece": ["lily"]})
+
+cena("c18_ligacao_fim", [
+    n("Há uma pausa curta do outro lado da linha.", {"flag": "resposta_lily", "valor": "estranho"}),
+    f("lily", "Entendo. É assim mesmo no começo.", {"flag": "resposta_lily", "valor": "estranho"}),
+    f("lily", "Que bom que está tudo bem.", {"flag": "resposta_lily", "valor": "tranquilo"}),
+    f("lily", "Aproveite sua estadia, Thiago. Voltaremos a conversar."),
+    "A linha fica muda. Você deixa o fone no gancho.",
+], destino_auto="c18_mapa", chegada={"tempo": 5, "flags": {"lily_ligou_manha": True}})
+
+cena("c18_mapa", [
+    "No lugar da bandeja, sobre a cama, há um mapa dobrado.",
     item("mapa_hotel"),
     sis("<b>MAPA DO HOTEL</b><br>O botão <b>Mapa</b>, no canto inferior direito, mostra as áreas que você já conhece e as missões liberadas. Áreas sempre liberadas: Suíte 14, corredores públicos, hall de entrada, refeitório e biblioteca."),
     n("Se você seguiu o piano, uma área a mais aparece no mapa: a <b>sala de música</b>.", VIU_ELI),
     "Dois pontos de interrogação já aparecem: um no refeitório e outro na biblioteca.",
-], destino_auto="c19_fim",
-   chegada={"tempo": 10, "hud": ["mapa"],
+], destino_auto="c18_janela",
+   chegada={"tempo": 5, "hud": ["mapa"],
             "mapa": ["suite14", "corredores", "hall", "refeitorio", "biblioteca"],
             "marcadores": [{"area": "refeitorio", "texto": "Missão de Jonathan"},
                            {"area": "biblioteca", "texto": "Missão de Mavis"}]})
+
+cena("c18_janela", [
+    "Você desdobra o mapa sobre a cama. Uma sombra clara cruza a janela.",
+    "Você levanta os olhos. No parapeito, do lado de fora, uma gata branca de olhos azuis observa você através do vidro.",
+    "Ela fica imóvel por um instante. Então salta para o vazio.",
+    pens("Este quarto fica no sétimo andar."),
+], destino_auto="c19_fim", chegada={"tempo": 2})
 
 cena("c19_fim", [
     "Capítulo 1 — A Chegada.",
