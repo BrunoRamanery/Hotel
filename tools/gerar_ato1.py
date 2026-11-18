@@ -621,5 +621,24 @@ cena("c19_fim", [
     "Obrigado por jogar esta primeira parte. Se algo parecer estranho, anote a cena e a hora que aparece no relógio e me conte.",
 ], dados={"final": True, "mostrar_tempo": True})
 
+
+# ---- imagem de fundo de cada cena (arquivo em img/fundos/NOME.jpg; None = sem imagem) ----
+FUNDOS = {
+ "c01_bilhete":None, "c02_viagem":None, "c03_ponto":"estrada", "c04_carruagem":"carruagem",
+ "c04b_chegada":"portao", "c05_porteiro":"portao", "c05b_porteiro_fim":"portao",
+ "c06_sorteio":"hall", "c06_recepcao":"hall", "c06_regras":"hall", "c07_elevador":"hall",
+ "c08_suite":"suite14", "c08b_suspeita":"suite14", "c09_jantar":"suite14", "c10_fome":"suite14", "c10_espelho":"suite14",
+ "c11_musica":"sala_musica", "c11a_piano":"sala_musica", "c11a_pos":"sala_musica", "c11a_acorda":"suite14",
+ "c11b_telefone":"suite14", "c11b_lily":"suite14", "c11b_lily_fim":"suite14",
+ "c12_sonho":None, "c13_despertar":"suite14", "c14_retrato":"corredor",
+ "c15_refeitorio":"refeitorio", "c16_arthur":"refeitorio", "c16_casal":"refeitorio", "c16_eugenie":"refeitorio",
+ "c17_tutorial":"refeitorio", "c17_sorteio":"refeitorio", "c17_despedida":"refeitorio",
+ "c18_corredor":"corredor", "c18_cond":"suite14", "c18_ligacao":"suite14", "c18_ligacao_fim":"suite14",
+ "c18_mapa":"suite14", "c18_janela":"suite14", "c19_fim":"suite14",
+}
+for _c in C:
+    if _c["id"] in FUNDOS: _c["fundo"] = FUNDOS[_c["id"]]
+    else: print("AVISO: cena sem fundo definido:", _c["id"])
+
 json.dump(C, open(sys.argv[1], "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 print(len(C), "cenas geradas")

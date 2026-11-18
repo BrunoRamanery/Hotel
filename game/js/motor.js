@@ -254,6 +254,22 @@ function substituirNome(texto) {
     .replace(/\{sobrenome\}/g, estado.flags.sobrenome || "");
 }
 
+/* ----- imagem de fundo da cena -----
+ * Cada cena pode ter "fundo": "hall" (arquivo img/fundos/hall.jpg) ou null (sem imagem).
+ * A imagem troca com um desvanecer suave. Se o arquivo não existir, fica só o preto. */
+let fundoAtual = null;
+function pintarFundo(nome) {
+  if (nome === undefined || nome === fundoAtual) return;
+  fundoAtual = nome;
+  const el = document.getElementById("fundo");
+  if (!el) return;
+  el.classList.remove("visivel");
+  setTimeout(() => {
+    el.style.backgroundImage = nome ? `url("img/fundos/${nome}.jpg")` : "none";
+    if (nome) el.classList.add("visivel");
+  }, 350);
+}
+
 /* ----- mostrar uma cena na tela ----- */
 function mostrarCena(id, restaurando = false) {
   cenaAtual = id;
@@ -273,6 +289,8 @@ function mostrarCena(id, restaurando = false) {
     palco.innerHTML = `<div class="cena"><p>[erro] cena '${id}' não encontrada.</p></div>`;
     return;
   }
+
+  pintarFundo(cena.fundo);
 
   // cenas especiais
   if (cena.tipo === "espelho") return mostrarEspelho(cena);

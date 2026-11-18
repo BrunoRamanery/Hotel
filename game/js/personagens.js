@@ -15,20 +15,20 @@
 const SOBRENOME_THIAGO = "Silva";
 
 const PERSONAGENS = {
-  thiago:   { nome: "Thiago",   retrato: null },
-  mavis:    { nome: "Mavis",    retrato: null },
-  jonathan: { nome: "Jonathan", retrato: null },
+  thiago:   { nome: "Thiago",   retrato: "img/retratos/thiago.jpg" },
+  mavis:    { nome: "Mavis",    retrato: "img/retratos/mavis.jpg" },
+  jonathan: { nome: "Jonathan", retrato: "img/retratos/jonathan.jpg" },
   lily:     { nome: "Lily",     retrato: null },
   nix:      { nome: "Nix",      retrato: null },
-  louise:   { nome: "Louise",   retrato: null },
-  gabriel:  { nome: "Gabriel",  retrato: null },
-  eugenie:  { nome: "Eugénie",  retrato: null },
-  arthur:   { nome: "Arthur",   retrato: null },
-  cocheiro: { nome: "Cocheiro", retrato: null },
-  porteiro: { nome: "Porteiro", retrato: null },
+  louise:   { nome: "Louise",   retrato: "img/retratos/louise.jpg" },
+  gabriel:  { nome: "Gabriel",  retrato: "img/retratos/gabriel.jpg" },
+  eugenie:  { nome: "Eugénie",  retrato: "img/retratos/eugenie.jpg" },
+  arthur:   { nome: "Arthur",   retrato: "img/retratos/arthur.jpg" },
+  cocheiro: { nome: "Cocheiro", retrato: "img/retratos/cocheiro.jpg" },
+  porteiro: { nome: "Porteiro", retrato: "img/retratos/porteiro.jpg" },
   desconhecida: { nome: "Desconhecida", retrato: null },
   // A mulher do piano é a Elisabeta, mas o jogo ainda não pode dizer isso.
-  mulher_piano: { nome: "Mulher do Piano", retrato: null }
+  mulher_piano: { nome: "Mulher do Piano", retrato: "img/retratos/mulher_piano.jpg" }
 };
 
 // Como cada personagem aparece no painel "Social" (estado da relação).

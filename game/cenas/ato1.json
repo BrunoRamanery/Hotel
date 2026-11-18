@@ -67,7 +67,8 @@
       },
       "O bilhete desaparece. Ainda no escuro, começa o som do motor de um ônibus."
     ],
-    "destino_auto": "c02_viagem"
+    "destino_auto": "c02_viagem",
+    "fundo": null
   },
   {
     "id": "c02_viagem",
@@ -97,7 +98,8 @@
       },
       "O ônibus passa por um desnível e a imagem treme. A voz do motorista anuncia a chegada ao ponto."
     ],
-    "destino_auto": "c03_ponto"
+    "destino_auto": "c03_ponto",
+    "fundo": null
   },
   {
     "id": "c03_ponto",
@@ -172,7 +174,8 @@
       "Você não diz nada. Segura o bilhete e observa o grupo.",
       "Ao longe, o som de cascos se aproxima. As duas pessoas acinzentadas viram a cabeça, ao mesmo tempo, para a estrada."
     ],
-    "destino_auto": "c04_carruagem"
+    "destino_auto": "c04_carruagem",
+    "fundo": "estrada"
   },
   {
     "id": "c04_carruagem",
@@ -257,7 +260,8 @@
           }
         }
       }
-    ]
+    ],
+    "fundo": "carruagem"
   },
   {
     "id": "c04b_chegada",
@@ -312,7 +316,8 @@
         "texto": "Correr até o portão.",
         "destino": "c05_porteiro"
       }
-    ]
+    ],
+    "fundo": "portao"
   },
   {
     "id": "c05_porteiro",
@@ -359,7 +364,8 @@
         "texto": "“Sim.”",
         "destino": "c05b_porteiro_fim"
       }
-    ]
+    ],
+    "fundo": "portao"
   },
   {
     "id": "c05b_porteiro_fim",
@@ -376,7 +382,8 @@
       "Ele conduz você até o hall. A porta se fecha atrás de vocês e, quando você se vira, o Porteiro já desapareceu.",
       "Ao longe, você vê Arthur, o último dos turistas, entrando no elevador. Depois, caminha até a recepção."
     ],
-    "destino_auto": "c06_sorteio"
+    "destino_auto": "c06_sorteio",
+    "fundo": "portao"
   },
   {
     "id": "c06_sorteio",
@@ -400,7 +407,8 @@
           }
         }
       ]
-    }
+    },
+    "fundo": "hall"
   },
   {
     "id": "c06_recepcao",
@@ -628,7 +636,8 @@
           "valor": "jonathan"
         }
       }
-    ]
+    ],
+    "fundo": "hall"
   },
   {
     "id": "c06_regras",
@@ -783,7 +792,8 @@
         }
       }
     ],
-    "destino_auto": "c07_elevador"
+    "destino_auto": "c07_elevador",
+    "fundo": "hall"
   },
   {
     "id": "c07_elevador",
@@ -847,7 +857,8 @@
         }
       }
     ],
-    "destino_auto": "c08_suite"
+    "destino_auto": "c08_suite",
+    "fundo": "hall"
   },
   {
     "id": "c08_suite",
@@ -923,7 +934,8 @@
           "tempo": 15
         }
       }
-    ]
+    ],
+    "fundo": "suite14"
   },
   {
     "id": "c08b_suspeita",
@@ -967,7 +979,8 @@
         }
       }
     ],
-    "destino_auto": "c09_jantar"
+    "destino_auto": "c09_jantar",
+    "fundo": "suite14"
   },
   {
     "id": "c09_jantar",
@@ -1079,7 +1092,8 @@
         "texto": "Comer o jantar.",
         "destino": "c10_fome"
       }
-    ]
+    ],
+    "fundo": "suite14"
   },
   {
     "id": "c10_fome",
@@ -1099,7 +1113,8 @@
       "",
       "Você se levanta, ainda mastigando o último pedaço, e para diante do espelho da penteadeira."
     ],
-    "destino_auto": "c10_espelho"
+    "destino_auto": "c10_espelho",
+    "fundo": "suite14"
   },
   {
     "id": "c10_espelho",
@@ -1124,7 +1139,8 @@
       "max": 80,
       "base": 50
     },
-    "destino_auto": "c11_musica"
+    "destino_auto": "c11_musica",
+    "fundo": "suite14"
   },
   {
     "id": "c11_musica",
@@ -1152,7 +1168,8 @@
         "texto": "Ignorar e tentar dormir.",
         "destino": "c11b_telefone"
       }
-    ]
+    ],
+    "fundo": "sala_musica"
   },
   {
     "id": "c11a_piano",
@@ -1218,7 +1235,8 @@
           }
         }
       }
-    ]
+    ],
+    "fundo": "sala_musica"
   },
   {
     "id": "c11a_pos",
@@ -1260,7 +1278,8 @@
       "Ela se levanta e se aproxima. Antes que você possa recuar, ela sopra um pó branco no seu rosto.",
       "As pernas cedem. Você cai para trás, e a última coisa que vê é o vestido branco se afastando na penumbra."
     ],
-    "destino_auto": "c11a_acorda"
+    "destino_auto": "c11a_acorda",
+    "fundo": "sala_musica"
   },
   {
     "id": "c11a_acorda",
@@ -1279,7 +1298,8 @@
       },
       "Você puxa o cobertor até o queixo e, depois de muito tempo olhando para o teto, volta a dormir."
     ],
-    "destino_auto": "c12_sonho"
+    "destino_auto": "c12_sonho",
+    "fundo": "suite14"
   },
   {
     "id": "c11b_telefone",
@@ -1305,7 +1325,8 @@
           }
         }
       }
-    ]
+    ],
+    "fundo": "suite14"
   },
   {
     "id": "c11b_lily",
@@ -1354,7 +1375,8 @@
           }
         }
       }
-    ]
+    ],
+    "fundo": "suite14"
   },
   {
     "id": "c11b_lily_fim",
@@ -1404,7 +1426,8 @@
       },
       "A linha fica muda. Você deixa o fone no gancho e volta a se deitar, sem conseguir tirar a voz da cabeça."
     ],
-    "destino_auto": "c12_sonho"
+    "destino_auto": "c12_sonho",
+    "fundo": "suite14"
   },
   {
     "id": "c12_sonho",
@@ -1421,7 +1444,8 @@
       "virtudes": 2,
       "vicios": 1
     },
-    "destino_auto": "c13_despertar"
+    "destino_auto": "c13_despertar",
+    "fundo": null
   },
   {
     "id": "c13_despertar",
@@ -1445,7 +1469,8 @@
         "texto": "<b>SEU PERFIL</b><br>Agora você pode consultar seus atributos, suas características (duas virtudes e um vício) e suas habilidades no botão <b>Perfil</b>, no topo da tela. As barras de <b>Vida</b> e <b>Sanidade</b> também aparecem ali."
       }
     ],
-    "destino_auto": "c14_retrato"
+    "destino_auto": "c14_retrato",
+    "fundo": "suite14"
   },
   {
     "id": "c14_retrato",
@@ -1616,7 +1641,8 @@
         ]
       }
     ],
-    "destino_auto": "c15_refeitorio"
+    "destino_auto": "c15_refeitorio",
+    "fundo": "corredor"
   },
   {
     "id": "c15_refeitorio",
@@ -1699,7 +1725,8 @@
           }
         }
       }
-    ]
+    ],
+    "fundo": "refeitorio"
   },
   {
     "id": "c16_arthur",
@@ -1810,7 +1837,8 @@
       },
       "Arthur racionaliza tudo com um sorriso torto, anotando alguma coisa no caderno. Mas, por um momento, você nota que ele não tira os olhos da porta da cozinha."
     ],
-    "destino_auto": "c17_tutorial"
+    "destino_auto": "c17_tutorial",
+    "fundo": "refeitorio"
   },
   {
     "id": "c16_casal",
@@ -1841,7 +1869,8 @@
       },
       "Os dois riem. É uma risada sem maldade, de gente que sempre teve tudo. Você sente que vai gostar deles, mesmo que eles sejam um pouco insuportáveis."
     ],
-    "destino_auto": "c17_tutorial"
+    "destino_auto": "c17_tutorial",
+    "fundo": "refeitorio"
   },
   {
     "id": "c16_eugenie",
@@ -1868,7 +1897,8 @@
       },
       "Ela diz isso com um brilho de admiração profissional, sem notar o olhar de Mavis, do outro lado do salão, que se vira bruscamente em sua direção."
     ],
-    "destino_auto": "c17_tutorial"
+    "destino_auto": "c17_tutorial",
+    "fundo": "refeitorio"
   },
   {
     "id": "c17_tutorial",
@@ -1893,7 +1923,8 @@
       "",
       "Quando o salão volta ao foco, você termina o café e anuncia que vai voltar ao quarto."
     ],
-    "destino_auto": "c17_sorteio"
+    "destino_auto": "c17_sorteio",
+    "fundo": "refeitorio"
   },
   {
     "id": "c17_sorteio",
@@ -1917,7 +1948,8 @@
           }
         }
       ]
-    }
+    },
+    "fundo": "refeitorio"
   },
   {
     "id": "c17_despedida",
@@ -1945,7 +1977,8 @@
         }
       }
     ],
-    "destino_auto": "c18_corredor"
+    "destino_auto": "c18_corredor",
+    "fundo": "refeitorio"
   },
   {
     "id": "c18_corredor",
@@ -1987,7 +2020,8 @@
       "",
       "Você entra na Suíte 14. A bandeja suja da noite passada desapareceu, e ninguém bateu na porta."
     ],
-    "destino_auto": "c18_cond"
+    "destino_auto": "c18_cond",
+    "fundo": "corredor"
   },
   {
     "id": "c18_cond",
@@ -1998,7 +2032,8 @@
         "true": "c18_mapa"
       },
       "padrao": "c18_ligacao"
-    }
+    },
+    "fundo": "suite14"
   },
   {
     "id": "c18_ligacao",
@@ -2045,7 +2080,8 @@
           }
         }
       }
-    ]
+    ],
+    "fundo": "suite14"
   },
   {
     "id": "c18_ligacao_fim",
@@ -2085,7 +2121,8 @@
       },
       "A linha fica muda. Você deixa o fone no gancho."
     ],
-    "destino_auto": "c18_mapa"
+    "destino_auto": "c18_mapa",
+    "fundo": "suite14"
   },
   {
     "id": "c18_mapa",
@@ -2130,7 +2167,8 @@
       },
       "Dois pontos de interrogação já aparecem: um no refeitório e outro na biblioteca."
     ],
-    "destino_auto": "c18_janela"
+    "destino_auto": "c18_janela",
+    "fundo": "suite14"
   },
   {
     "id": "c18_janela",
@@ -2146,7 +2184,8 @@
         "texto": "Este quarto fica no sétimo andar."
       }
     ],
-    "destino_auto": "c19_fim"
+    "destino_auto": "c19_fim",
+    "fundo": "suite14"
   },
   {
     "id": "c19_fim",
@@ -2161,6 +2200,7 @@
     "dados": {
       "final": true,
       "mostrar_tempo": true
-    }
+    },
+    "fundo": "suite14"
   }
 ]

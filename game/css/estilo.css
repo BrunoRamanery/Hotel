@@ -128,9 +128,9 @@ body.perigo{background:radial-gradient(130% 90% at 50% -10%, #2a1416 0%, var(--n
 
 /* bloco de fala de personagem: quadradinho (com nome embaixo) + texto(s) */
 .fala{display:flex; gap:10px; align-items:flex-start; margin:0 0 12px}
-.avatar{flex:0 0 auto; width:46px; display:flex; flex-direction:column; align-items:center; gap:3px}
+.avatar{flex:0 0 auto; width:72px; display:flex; flex-direction:column; align-items:center; gap:3px}
 .avatar > img, .avatar > .interrogacao{
-  width:40px; height:40px; border-radius:6px; border:1px solid var(--borda);
+  width:64px; height:64px; border-radius:8px; border:1px solid var(--vela);
   background:var(--painel); display:flex; align-items:center; justify-content:center;
   font-family:"Cinzel",serif; font-size:15px; color:var(--tinta-suave);
 }
@@ -234,3 +234,14 @@ body.perigo{background:radial-gradient(130% 90% at 50% -10%, #2a1416 0%, var(--n
   .barras{grid-template-columns:1fr}
   .topo{flex-direction:column}
 }
+
+
+/* ----- imagem de fundo da cena ----- */
+.fundo{position:fixed; inset:0; z-index:-1; background:#000 center/cover no-repeat;
+  opacity:0; transition:opacity .35s ease}
+.fundo.visivel{opacity:1}
+/* escurece a imagem para o texto continuar legível */
+.fundo::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(rgba(8,9,13,.15), rgba(8,9,13,.30) 60%, rgba(8,9,13,.45))}
+.moldura{background:rgba(10,12,17,.66); box-shadow:0 0 70px 40px rgba(10,12,17,.66);
+  min-height:100vh}
