@@ -20,10 +20,9 @@ const visitadas = new Set(); const finais = []; const problemas = []; let caminh
 function entrar(id, st) {            // aplica o que o motor aplica ao entrar numa cena
   estado = st; const c = CENAS[id];
   if (c.chegada) aplicarEfeitos(estado, c.chegada);
-  darItensDaCena(c);
   visitadas.add(id);
   // texto monta sem erro?
-  if (c.narrativa) montarBlocosNarrativa(c.narrativa);
+  if (c.narrativa) { const bl = montarBlocosNarrativa(c.narrativa); (bl.acoes || []).forEach(a => (a || []).forEach(ef => aplicarEfeitos(estado, ef))); }
   return c;
 }
 function andar(id, st, trilha) {

@@ -14,10 +14,13 @@ VIU_ELI = {"flag": "conheceu_elisabeta", "valor": True}
 NAO_VIU_ELI = {"flag": "conheceu_elisabeta", "valor": False}
 ATENDEU = {"flag": "lily_conhecida", "valor": True}
 
-def f(q, t, se=None):
+def f(q, t, se=None, ao=None):
     d = {"quem": q, "texto": t}
     if se: d["se"] = se
+    if ao: d["ao_mostrar"] = ao
     return d
+def com(t, ao):
+    return {"texto": t, "ao_mostrar": ao}
 def n(t, se=None):
     return t if se is None else {"texto": t, "se": se}
 def pens(t, se=None):
@@ -96,11 +99,11 @@ cena("c03_ponto", [
     "O ônibus para num local isolado. Você desce meio torto, quase tropeça no último degrau e segura a mochila contra o corpo.",
     "Também descem quatro outros passageiros: um casal elegante, uma senhora de postura firme e um homem de olhar atento, com um caderno no bolso do casaco.",
     "No ponto, duas pessoas de pele acinzentada esperam em silêncio. Observam o grupo sem demonstrar reação alguma.",
-    "O ônibus parte. Os cinco ficam sozinhos, cada um segurando um bilhete dourado.",
+    com("O ônibus parte. Os cinco ficam sozinhos, cada um segurando um bilhete dourado.", {"itens": ["bilhete_dourado"]}),
     "",
     f("louise", "Parece que todos estamos esperando o mesmo transporte."),
     "Ela mostra o próprio bilhete.",
-    f("louise", "Eu sou Louise de Bellacourt. Este é Gabriel, meu marido."),
+    f("louise", "Eu sou Louise de Bellacourt. Este é Gabriel, meu marido.", ao={"conhece": ["gabriel"], "hud": ["social"]}),
     f("louise", "Nós nos casamos recentemente. Ganhamos dois bilhetes para passar um ano aqui. Consideramos uma espécie de lua de mel prolongada."),
     "Gabriel apenas cumprimenta o grupo com a cabeça.",
     "",
@@ -116,8 +119,7 @@ cena("c03_ponto", [
     "Você não diz nada. Segura o bilhete e observa o grupo.",
     "Ao longe, o som de cascos se aproxima. As duas pessoas acinzentadas viram a cabeça, ao mesmo tempo, para a estrada.",
 ], destino_auto="c04_carruagem",
-   chegada={"hud": ["tempo", "social"], "itens": ["bilhete_dourado"],
-            "conhece": ["louise", "gabriel", "eugenie", "arthur"]})
+   chegada={"hud": ["tempo"]})
 
 # =====================================================================
 # CENA 4 — A CARRUAGEM
@@ -147,7 +149,7 @@ cena("c04_carruagem", [
        {"flags": {"cocheiro_impressao": "reservado"}}),
     op("otimista", "“Sou um cara de muita sorte. Um órfão que ganhou um ano inteiro num hotel, com tudo pago.”", "c04b_chegada",
        {"flags": {"cocheiro_impressao": "otimista"}}),
-], chegada={"tempo": 10, "conhece": ["cocheiro"]})
+], chegada={"tempo": 10})
 
 # =====================================================================
 # CENA 4 (cont.) — A CHEGADA E O CARTÃO
@@ -190,7 +192,7 @@ cena("c05_porteiro", [
     f("porteiro", "Você realmente deseja estar aqui?"),
 ], opcoes=[
     op("sim", "“Sim.”", "c05b_porteiro_fim"),
-], chegada={"tempo": 5, "conhece": ["porteiro"]})
+], chegada={"tempo": 5})
 
 cena("c05b_porteiro_fim", [
     f("thiago", "Eu sou órfão. Não tenho outro lugar para onde ir."),
@@ -204,8 +206,8 @@ cena("c05b_porteiro_fim", [
 # CENA 6 — BEM-VINDO AO HOTEL LOS SEGREDOS
 # =====================================================================
 cena("c06_sorteio", None, tipo="sorteio", dados={"opcoes": [
-    {"destino": "c06_recepcao", "efeitos": {"flags": {"recepcionista": "mavis"}, "conhece": ["mavis"]}},
-    {"destino": "c06_recepcao", "efeitos": {"flags": {"recepcionista": "jonathan"}, "conhece": ["jonathan"]}},
+    {"destino": "c06_recepcao", "efeitos": {"flags": {"recepcionista": "mavis"}}},
+    {"destino": "c06_recepcao", "efeitos": {"flags": {"recepcionista": "jonathan"}}},
 ]})
 
 cena("c06_recepcao", [
@@ -374,7 +376,7 @@ cena("c11a_piano", [
     op("sim", "“Acredito, sim.”", "c11a_pos", {"flags": {"resposta_fantasmas": "sim"}}),
     op("nao", "“Não. Fantasmas não existem.”", "c11a_pos", {"flags": {"resposta_fantasmas": "nao"}}),
 ], chegada={"tempo": 15, "flags": {"conheceu_elisabeta": True},
-            "mapa": ["sala_musica"], "conhece": ["mulher_piano"]})
+            "mapa": ["sala_musica"]})
 
 cena("c11a_pos", [
     n("Ela inclina a cabeça, com um brilho de curiosidade nos olhos.", {"flag": "resposta_fantasmas", "valor": "sim"}),
@@ -410,14 +412,13 @@ cena("c11b_lily", [
 ], opcoes=[
     op("tranquilo", "“Está tudo tranquilo.”", "c11b_lily_fim", {"flags": {"resposta_lily": "tranquilo"}}),
     op("estranho", "“O hotel é velho e estranho.”", "c11b_lily_fim", {"flags": {"resposta_lily": "estranho"}}),
-], chegada={"tempo": 10, "flags": {"lily_conhecida": True},
-            "conhece": ["lily", "nix"]})
+], chegada={"tempo": 10, "flags": {"lily_conhecida": True}})
 
 cena("c11b_lily_fim", [
     n("Há uma pausa curta do outro lado da linha.", {"flag": "resposta_lily", "valor": "estranho"}),
     f("lily", "Entendo. É assim mesmo no começo.", {"flag": "resposta_lily", "valor": "estranho"}),
     f("lily", "Que bom que está tudo bem.", {"flag": "resposta_lily", "valor": "tranquilo"}),
-    f("lily", "Tenho uma amiga que trabalha aí. O nome dela é Nix."),
+    f("lily", "Tenho uma amiga que trabalha aí. O nome dela é Nix.", ao={"conhece": ["nix"]}),
     f("lily", "Se precisar de ajuda, pode procurá-la."),
     f("lily", "Aproveite sua estadia, Thiago. Voltaremos a conversar."),
     "A linha fica muda. Você deixa o fone no gancho e volta a se deitar, sem conseguir tirar a voz da cabeça.",
@@ -473,7 +474,7 @@ cena("c14_retrato", [
     f("mavis", "Nix? Ela é nova aqui. Por favor, não atrapalhe o trabalho dela, tá?", [ATENDEU, OUTRO_MAVIS]),
     f("jonathan", "Lily? Estranho. Recomendo que você não interfira nos funcionários.", [ATENDEU, OUTRO_JON]),
 ], destino_auto="c15_refeitorio",
-   chegada={"tempo": 15, "conhece": ["mavis", "jonathan"]})
+   chegada={"tempo": 15})
 
 # =====================================================================
 # CENA 15 — APRESENTAÇÃO NO REFEITÓRIO
@@ -582,7 +583,7 @@ cena("c18_ligacao", [
 ], opcoes=[
     op("tranquilo", "“Está tudo tranquilo.”", "c18_ligacao_fim", {"flags": {"resposta_lily": "tranquilo"}}),
     op("estranho", "“O hotel é velho e estranho.”", "c18_ligacao_fim", {"flags": {"resposta_lily": "estranho"}}),
-], chegada={"tempo": 5, "conhece": ["lily"]})
+], chegada={"tempo": 5})
 
 cena("c18_ligacao_fim", [
     n("Há uma pausa curta do outro lado da linha.", {"flag": "resposta_lily", "valor": "estranho"}),
@@ -596,7 +597,7 @@ cena("c18_mapa", [
     "No lugar da bandeja, sobre a cama, há um mapa dobrado.",
     item("mapa_hotel"),
     sis("<b>MAPA DO HOTEL</b><br>O botão <b>Mapa</b>, no canto inferior direito, mostra as áreas que você já conhece e as missões liberadas. Áreas sempre liberadas: Suíte 14, corredores públicos, hall de entrada, refeitório e biblioteca."),
-    n("Se você seguiu o piano, uma área a mais aparece no mapa: a <b>sala de música</b>.", VIU_ELI),
+    n("A <b>sala de música</b> também aparece no mapa.", VIU_ELI),
     "Dois pontos de interrogação já aparecem: um no refeitório e outro na biblioteca.",
 ], destino_auto="c18_janela",
    chegada={"tempo": 5, "hud": ["mapa"],

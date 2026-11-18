@@ -149,21 +149,32 @@ function desenharPainel(qual) {
  */
 function montarBlocosNarrativa(linhas) {
   const blocos = [];
+  const acoes = [];          // acoes[i] = efeitos que acontecem quando o bloco i APARECE
+  let acaoPend = [];         // efeitos das linhas do bloco que ainda está sendo montado
   let paragrafoAtual = [];   // narração acumulada
   let falaAtual = null;      // { quem, paragrafos: [] }
 
+  function empurrar(html) {
+    blocos.push(html);
+    acoes[blocos.length - 1] = acaoPend;
+    acaoPend = [];
+  }
   function fecharParagrafo() {
     if (paragrafoAtual.length) {
-      blocos.push(`<p>${paragrafoAtual.join(" ")}</p>`);
+      const texto = paragrafoAtual.join(" ");
+      // letra grande (capitular) só em parágrafos longos
+      empurrar(`<p class="${texto.length > 140 ? "longo" : "curto"}">${texto}</p>`);
       paragrafoAtual = [];
     }
   }
   function fecharFala() {
     if (falaAtual) {
-      blocos.push(montarBlocoDeFala(falaAtual.quem, falaAtual.paragrafos));
+      empurrar(montarBlocoDeFala(falaAtual.quem, falaAtual.paragrafos));
       falaAtual = null;
     }
   }
+  // quem fala passa a ser "conhecido" (painel Social) no momento em que aparece
+  const NAO_CONHECIVEIS = ["thiago", "desconhecida"];
 
   // só o que vale para o estado atual (campo "se")
   linhas.filter(l => typeof l === "string" || condicaoSe(estado, l.se)).forEach(linha => {
@@ -177,19 +188,27 @@ function montarBlocosNarrativa(linhas) {
           fecharFala();
           falaAtual = { quem: linha.quem, paragrafos: [substituirNome(linha.texto)] };
         }
+        if (!NAO_CONHECIVEIS.includes(linha.quem)) {
+          acaoPend.push({ conhece: [linha.quem], hud: ["social"] });
+        }
+        if (linha.ao_mostrar) acaoPend.push(linha.ao_mostrar);
       } else if (linha.item) {
         fecharParagrafo(); fecharFala();
         const it = ITENS[linha.item] || { nome: linha.item };
-        blocos.push(`<p class="estilo-item">Item recebido: <b>${it.nome}</b></p>`);
+        acaoPend.push({ itens: [linha.item], hud: ["inventario"] });
+        if (linha.ao_mostrar) acaoPend.push(linha.ao_mostrar);
+        empurrar(`<p class="estilo-item">Item recebido: <b>${it.nome}</b></p>`);
       } else if (linha.estilo) {
         fecharParagrafo(); fecharFala();
         const t = substituirNome(linha.texto);
-        blocos.push(linha.estilo === "sistema"
+        if (linha.ao_mostrar) acaoPend.push(linha.ao_mostrar);
+        empurrar(linha.estilo === "sistema"
           ? `<div class="estilo-sistema"><p>${t}</p></div>`
           : `<p class="estilo-${linha.estilo}">${t}</p>`);
       } else {
         fecharFala();
         paragrafoAtual.push(substituirNome(linha.texto));
+        if (linha.ao_mostrar) acaoPend.push(linha.ao_mostrar);
       }
     } else if (linha === "") {
       fecharParagrafo();
@@ -201,6 +220,7 @@ function montarBlocosNarrativa(linhas) {
   });
   fecharParagrafo();
   fecharFala();
+  blocos.acoes = acoes;
   return blocos;
 }
 
@@ -234,15 +254,6 @@ function substituirNome(texto) {
     .replace(/\{sobrenome\}/g, estado.flags.sobrenome || "");
 }
 
-/** Quando a narração diz "Item recebido", o item entra no inventário de verdade. */
-function darItensDaCena(cena) {
-  (cena.narrativa || []).forEach(l => {
-    if (typeof l === "object" && l.item && condicaoSe(estado, l.se)) {
-      aplicarEfeitos(estado, { itens: [l.item], hud: ["inventario"] });
-    }
-  });
-}
-
 /* ----- mostrar uma cena na tela ----- */
 function mostrarCena(id, restaurando = false) {
   cenaAtual = id;
@@ -254,7 +265,6 @@ function mostrarCena(id, restaurando = false) {
   // Se a cena só está sendo recarregada de um save, não aplica de novo.
   if (cena && !restaurando) {
     if (cena.chegada) aplicarEfeitos(estado, cena.chegada);
-    darItensDaCena(cena);
   }
   pintarStatus();
   window.scrollTo && window.scrollTo(0, 0);
@@ -299,6 +309,12 @@ function mostrarCena(id, restaurando = false) {
  * seguir, se a cena tem só "destino_auto"; ou o recomeçar, se for final). */
 function avancarLeitura(cena, blocos, indice, ehFinal) {
   const palco = document.getElementById("palco");
+  // itens, pessoas conhecidas etc. só valem a partir do momento em que o bloco aparece
+  const acaoDoBloco = blocos.acoes && blocos.acoes[indice];
+  if (acaoDoBloco && acaoDoBloco.length) {
+    acaoDoBloco.forEach(ef => aplicarEfeitos(estado, ef));
+    pintarStatus();
+  }
   const textoAtual = blocos[indice] || "";
   const ehUltimoBloco = indice >= blocos.length - 1;
   const classe = `cena ${cena.classe || ""} ${ehFinal ? "final" : ""}`;

@@ -103,24 +103,21 @@
     "id": "c03_ponto",
     "chegada": {
       "hud": [
-        "tempo",
-        "social"
-      ],
-      "itens": [
-        "bilhete_dourado"
-      ],
-      "conhece": [
-        "louise",
-        "gabriel",
-        "eugenie",
-        "arthur"
+        "tempo"
       ]
     },
     "narrativa": [
       "O ônibus para num local isolado. Você desce meio torto, quase tropeça no último degrau e segura a mochila contra o corpo.",
       "Também descem quatro outros passageiros: um casal elegante, uma senhora de postura firme e um homem de olhar atento, com um caderno no bolso do casaco.",
       "No ponto, duas pessoas de pele acinzentada esperam em silêncio. Observam o grupo sem demonstrar reação alguma.",
-      "O ônibus parte. Os cinco ficam sozinhos, cada um segurando um bilhete dourado.",
+      {
+        "texto": "O ônibus parte. Os cinco ficam sozinhos, cada um segurando um bilhete dourado.",
+        "ao_mostrar": {
+          "itens": [
+            "bilhete_dourado"
+          ]
+        }
+      },
       "",
       {
         "quem": "louise",
@@ -129,7 +126,15 @@
       "Ela mostra o próprio bilhete.",
       {
         "quem": "louise",
-        "texto": "Eu sou Louise de Bellacourt. Este é Gabriel, meu marido."
+        "texto": "Eu sou Louise de Bellacourt. Este é Gabriel, meu marido.",
+        "ao_mostrar": {
+          "conhece": [
+            "gabriel"
+          ],
+          "hud": [
+            "social"
+          ]
+        }
       },
       {
         "quem": "louise",
@@ -172,10 +177,7 @@
   {
     "id": "c04_carruagem",
     "chegada": {
-      "tempo": 10,
-      "conhece": [
-        "cocheiro"
-      ]
+      "tempo": 10
     },
     "narrativa": [
       "Uma carruagem antiga surge pela estrada, puxada por dois cavalos completamente brancos.",
@@ -315,10 +317,7 @@
   {
     "id": "c05_porteiro",
     "chegada": {
-      "tempo": 5,
-      "conhece": [
-        "porteiro"
-      ]
+      "tempo": 5
     },
     "narrativa": [
       "Você atravessa o portão no último instante.",
@@ -389,10 +388,7 @@
           "efeitos": {
             "flags": {
               "recepcionista": "mavis"
-            },
-            "conhece": [
-              "mavis"
-            ]
+            }
           }
         },
         {
@@ -400,10 +396,7 @@
           "efeitos": {
             "flags": {
               "recepcionista": "jonathan"
-            },
-            "conhece": [
-              "jonathan"
-            ]
+            }
           }
         }
       ]
@@ -1170,9 +1163,6 @@
       },
       "mapa": [
         "sala_musica"
-      ],
-      "conhece": [
-        "mulher_piano"
       ]
     },
     "narrativa": [
@@ -1323,11 +1313,7 @@
       "tempo": 10,
       "flags": {
         "lily_conhecida": true
-      },
-      "conhece": [
-        "lily",
-        "nix"
-      ]
+      }
     },
     "narrativa": [
       {
@@ -1401,7 +1387,12 @@
       },
       {
         "quem": "lily",
-        "texto": "Tenho uma amiga que trabalha aí. O nome dela é Nix."
+        "texto": "Tenho uma amiga que trabalha aí. O nome dela é Nix.",
+        "ao_mostrar": {
+          "conhece": [
+            "nix"
+          ]
+        }
       },
       {
         "quem": "lily",
@@ -1459,11 +1450,7 @@
   {
     "id": "c14_retrato",
     "chegada": {
-      "tempo": 15,
-      "conhece": [
-        "mavis",
-        "jonathan"
-      ]
+      "tempo": 15
     },
     "narrativa": [
       {
@@ -2016,10 +2003,7 @@
   {
     "id": "c18_ligacao",
     "chegada": {
-      "tempo": 5,
-      "conhece": [
-        "lily"
-      ]
+      "tempo": 5
     },
     "narrativa": [
       "O telefone do quarto começa a tocar. Desta vez, você atende.",
@@ -2138,7 +2122,7 @@
         "texto": "<b>MAPA DO HOTEL</b><br>O botão <b>Mapa</b>, no canto inferior direito, mostra as áreas que você já conhece e as missões liberadas. Áreas sempre liberadas: Suíte 14, corredores públicos, hall de entrada, refeitório e biblioteca."
       },
       {
-        "texto": "Se você seguiu o piano, uma área a mais aparece no mapa: a <b>sala de música</b>.",
+        "texto": "A <b>sala de música</b> também aparece no mapa.",
         "se": {
           "flag": "conheceu_elisabeta",
           "valor": true
