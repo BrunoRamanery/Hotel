@@ -22,8 +22,14 @@ const ITENS = {
   chave_misteriosa:   { nome: "Chave misteriosa", peso: 1 },
   vassoura:           { nome: "Vassoura de palha", peso: 2 },
   // comida e água: "usar" = botão no inventário (come/bebe e o item some)
-  marmita:         { nome: "Marmita do refeitório", peso: 2, usar: { barras: { fome: 35 }, texto: "Você come tudo, devagar. O estômago agradece." } },
+  // a marmita NÃO se come: é para levar (ex.: Maya). Comer, só nos horários de refeição ou com a Cozinha Básica.
+  marmita:         { nome: "Marmita do refeitório", peso: 2 },
   agua:            { nome: "Garrafa d'água",      peso: 1, usar: { barras: { fome: 3 },  texto: "Você bebe a água fria." } }
+};
+
+/** Habilidades que Thiago pode aprender (aparecem no Perfil). */
+const HABILIDADES = {
+  cozinha_basica: { nome: "Cozinha Básica", dica: "Uma vez por dia, fora dos horários de refeição, prepara uma refeição simples com os ingredientes que carrega." }
 };
 
 /** Peso total carregado agora. */
@@ -46,4 +52,5 @@ const AREAS = {
 };
 
 // Quantos minutos leva ir de um lugar a outro (padrão 5; estoque fica mais longe).
+const TEMPO_POR_CENA = 2;   // minutos que cada cena de história/diálogo consome
 const TEMPO_VIAGEM = { padrao: 5, estoque: 10, clinica: 8 };

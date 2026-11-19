@@ -95,7 +95,10 @@ function desenharPainel(qual) {
     corpo += (v.length || vicio)
       ? `<p>${v.map(n => `<span class="tag tag-virtude">${n}</span>`).join("")}${vicio ? `<span class="tag tag-vicio">${vicio}</span>` : ""}</p>`
       : `<p class="vazio">Ainda por descobrir.</p>`;
-    corpo += `<h4>Habilidades</h4><p class="vazio">Nenhuma aprendida ainda.</p>`;
+    const hab = (estado.habilidades || []).map(id => HABILIDADES[id]).filter(Boolean);
+    corpo += `<h4>Habilidades</h4>` + (hab.length
+      ? `<p>${hab.map(h => `<span class="tag tag-virtude" title="${h.dica}">${h.nome}</span>`).join("")}</p>`
+      : `<p class="vazio">Nenhuma aprendida ainda.</p>`);
   }
   if (qual === "social") {
     titulo = "Social";
@@ -300,6 +303,12 @@ function mostrarCena(id, restaurando = false) {
   // Se a cena só está sendo recarregada de um save, não aplica de novo.
   if (cena && !restaurando) {
     if (cena.chegada) aplicarEfeitos(estado, cena.chegada);
+    // conversar e agir também gasta tempo: cenas de história (fora dos lugares do mapa)
+    // que não declaram tempo próprio passam 2 minutos — só depois do tutorial da Fome.
+    const ch = cena.chegada || {};
+    if (estado.flags.fome_ativa && !cena.tipo && !(cena.dados && cena.dados.hub) && !ch.tempo && !ch.ate) {
+      avancarTempo(estado, TEMPO_POR_CENA);
+    }
   }
   pintarStatus();
   window.scrollTo && window.scrollTo(0, 0);

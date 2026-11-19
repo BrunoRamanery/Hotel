@@ -184,7 +184,7 @@ cena("maya_encontro", [
     "Ninguém mais no hall parece vê-la.",
     "Ela encosta o focinho na sua mão. Depois olha para a porta do refeitório, e de novo para você. As costelas aparecem sob o pelo claro.",
     pens("Ela está com fome. E com sede."),
-    sis("Dica: no refeitório você pode pegar <b>comida</b> e <b>água</b> para levar. Uma vez por dia, você pode alimentar a Maya, e isso aproxima vocês.",
+    sis("Dica: no refeitório você pode pegar <b>comida</b> e <b>água</b> para levar. Uma vez por dia você pode dar <b>água</b> a ela, e uma vez por dia, <b>comida</b>. Cada gesto aproxima vocês.",
         ao={"flags": {"maya_vista": True}, "conhece": ["maya"], "hud": ["social"],
             "marcadores": [{"area": "hall", "texto": "Maya está com fome"}]}),
 ], destino_auto="hall_base", dados={"raiz": True}, fundo="hall")
@@ -192,33 +192,48 @@ cena("maya_encontro", [
 cena("hall_base", [
     "O hall de entrada. O balcão da recepção, o elevador de grades douradas e, ao fundo, as portas pesadas que dão para o portão. Estão fechadas.",
     n("Desde ontem, o hotel parece outro: guirlandas escuras, fitas douradas e cartazes do aniversário se espalham por todo canto.", se={"flag": "clinica_ataque"}),
-    n("Maya cochila aos seus pés, quase invisível à luz do lustre.", se=[{"flag": "maya_vista"}, {"flag": "maya_dia", "valor": "@dia"}]),
-    n("Maya olha para você, esperançosa. Você não tem o que oferecer a ela.", se=[{"flag": "maya_vista"}, {"flag": "maya_dia", "diferente": "@dia"}]),
+    n("Maya cochila aos seus pés, quase invisível à luz do lustre, de barriga cheia e satisfeita.", se=[{"flag": "maya_vista"}, {"flag": "maya_agua_dia", "valor": "@dia"}, {"flag": "maya_comida_dia", "valor": "@dia"}]),
+    n("Maya olha para você, esperançosa. Ela já bebeu, mas ainda parece com fome.", se=[{"flag": "maya_vista"}, {"flag": "maya_agua_dia", "valor": "@dia"}, {"flag": "maya_comida_dia", "diferente": "@dia"}]),
+    n("Maya olha para você, esperançosa. Ela já comeu, mas ainda parece com sede.", se=[{"flag": "maya_vista"}, {"flag": "maya_comida_dia", "valor": "@dia"}, {"flag": "maya_agua_dia", "diferente": "@dia"}]),
+    n("Maya olha para você, esperançosa. Você não tem o que oferecer a ela.", se=[{"flag": "maya_vista"}, {"flag": "maya_agua_dia", "diferente": "@dia"}, {"flag": "maya_comida_dia", "diferente": "@dia"}]),
 ], opcoes=[
-    op("maya_dar", "Dar comida e água à Maya", "maya_come",
-       se=[{"flag": "maya_vista"}, {"flag": "maya_dia", "diferente": "@dia"}],
-       requisitos={"itens": ["marmita", "agua"]}),
+    op("maya_dar_agua", "Dar água à Maya", "maya_bebe",
+       se=[{"flag": "maya_vista"}, {"flag": "maya_agua_dia", "diferente": "@dia"}],
+       requisitos={"itens": ["agua"]}),
+    op("maya_dar_comida", "Dar comida à Maya", "maya_come",
+       se=[{"flag": "maya_vista"}, {"flag": "maya_comida_dia", "diferente": "@dia"}],
+       requisitos={"itens": ["marmita"]}),
     op("macha_sair", "Tentar sair pelo portão", "macha_porta"),
     MAPA,
 ], dados=HUB, fundo="hall")
 
+cena("maya_bebe", [
+    "Você se agacha e derrama um pouco de água na tampa da garrafa, bem perto do focinho dela.",
+    "Maya bebe com pressa, depois devagar, e levanta os olhos escuros para você. Parece dizer obrigada do único jeito que sabe.",
+    sis("Sua relação com <b>Maya</b> aumentou. Uma vez por dia você pode dar água a ela, e uma vez por dia, comida."),
+], destino_auto="hall_base",
+   chegada={"tirar_itens": ["agua"], "flags": {"maya_agua_dia": "@dia"},
+            "relacoes": {"maya": {"afeto": 5}}, "tempo": 5, "barras": {"sanidade": 1},
+            "tirar_marcadores": ["hall"]}, dados={"raiz": True}, fundo="hall")
+
 cena("maya_come", [
-    "Você se agacha e coloca a comida e a água no chão, perto do focinho dela.",
+    "Você se agacha e abre a marmita no chão, perto do focinho dela.",
     "Maya cheira, hesita, e então come com cuidado, como quem não quer incomodar. Depois lambe a sua mão, e a sensação é de uma brisa fria e boa.",
     "Quando ela se deita ao seu lado, de barriga cheia, o hall parece menos frio.",
     sis("Sua relação com <b>Maya</b> aumentou."),
 ], destino_auto="hall_base",
-   chegada={"tirar_itens": ["marmita", "agua"], "flags": {"maya_dia": "@dia"},
-            "relacoes": {"maya": {"afeto": 10}}, "tempo": 10, "barras": {"sanidade": 3},
+   chegada={"tirar_itens": ["marmita"], "flags": {"maya_comida_dia": "@dia"},
+            "relacoes": {"maya": {"afeto": 8}}, "tempo": 8, "barras": {"sanidade": 2},
             "tirar_marcadores": ["hall"]}, dados={"raiz": True}, fundo="hall")
 
 # --- refeitório ---
 cena("hub_refeitorio", [
     n("O refeitório recende a pão quente e café. Mesas compridas, toalhas brancas, vapor subindo das travessas.", se=REFEICAO),
-    n("O refeitório está quase vazio. As mesas foram postas, mas a comida do próximo horário ainda não chegou.", se=FORA_REFEICAO),
+    n("O refeitório está quase vazio. As mesas foram postas, mas a comida do próximo horário ainda não chegou. A água do bebedouro, essa sim, está sempre ali.", se=FORA_REFEICAO),
+    n("Você já comeu neste horário. Os pratos vão sendo recolhidos.", se=[REFEICAO, {"flag": "comeu_turno", "valor": "@turno"}]),
     n("Desde ontem, o hotel parece outro: guirlandas escuras, fitas douradas e cartazes do aniversário se espalham por todo canto.", se={"flag": "clinica_ataque"}),
 ], opcoes=[
-    op("comer", "Fazer uma refeição", "refeicao", se=REFEICAO),
+    op("comer", "Fazer uma refeição", "refeicao", se=[REFEICAO, {"flag": "comeu_turno", "diferente": "@turno"}]),
     op("jon_falar", "Falar com Jonathan, que corre entre as mesas", "jonathan_oferta",
        se={"flag": "jon_estado", "diferente": "aceita"} if False else [{"flag": "jon_estado", "diferente": "aceita"}, {"flag": "jon_estado", "diferente": "recusada"}, {"flag": "jon_estado", "diferente": "concluida"}]),
     op("jon_voltar", "Procurar Jonathan para contar sobre os convites", "jonathan_conclusao",
@@ -232,18 +247,18 @@ cena("hub_refeitorio", [
     op("cozinhar", "Preparar uma refeição simples (Cozinha Básica)", "cozinhou",
        se=[{"flag": "cozinha_basica"}, {"flag": "@refeicao", "valor": False}, {"flag": "cozinhou_dia", "diferente": "@dia"}],
        requisitos={"itens": ["ingredientes"]}),
-    op("levar_comida", "Pegar uma marmita para levar", "pegou_marmita", se=REFEICAO, requisitos={"sem_itens": ["marmita"]}),
+    op("levar_comida", "Pegar uma marmita para levar", "pegou_marmita", se=[REFEICAO, {"flag": "marmita_turno", "diferente": "@turno"}], requisitos={"sem_itens": ["marmita"]}),
     op("levar_agua", "Pegar uma garrafa d'água", "pegou_agua", requisitos={"sem_itens": ["agua"]}),
     MAPA,
 ], dados=HUB, fundo="refeitorio")
 
 cena("refeicao", [
     "Você se serve de pão, ovos, uma sopa grossa e uma xícara de algo quente. Come sem pressa, ouvindo os murmúrios das outras mesas.",
-], destino_auto="@hub", chegada={"tempo": 35, "barras": {"fome": 55, "sanidade": 2}}, dados={"raiz": True}, fundo="refeitorio")
+], destino_auto="@hub", chegada={"tempo": 35, "barras": {"fome": 55, "sanidade": 2}, "flags": {"comeu_turno": "@turno"}}, dados={"raiz": True}, fundo="refeitorio")
 cena("pegou_marmita", [
     "Uma atendente de olhos fundos embrulha pão, queijo e um pedaço de torta numa marmita de papel encerado. Ela não diz nada, apenas empurra o embrulho na sua direção.",
     item("marmita"),
-], destino_auto="@hub", chegada={"tempo": 3}, dados={"raiz": True}, fundo="refeitorio")
+], destino_auto="@hub", chegada={"tempo": 3, "flags": {"marmita_turno": "@turno"}}, dados={"raiz": True}, fundo="refeitorio")
 cena("pegou_agua", [
     "Você enche uma garrafa de vidro no bebedouro de bronze. A água é gelada e tem um leve gosto de pedra.",
     item("agua"),
@@ -792,7 +807,7 @@ cena("eugenie_aula", [
     "Ela empurra a porta, entra, e a porta se fecha atrás dela sem fazer o menor ruído. Você espera. Nenhum som volta.",
     sis("Habilidade aprendida: <b>Cozinha Básica</b>. Os ingredientes continuam com você: uma vez por dia, fora dos horários de refeição, você pode preparar uma refeição simples no refeitório."),
 ], destino_auto="hub_refeitorio",
-   chegada={"flags": {"eug_estado": "concluida", "cozinha_basica": True}, "barras": {"fome": 25},
+   chegada={"habilidades": ["cozinha_basica"], "flags": {"eug_estado": "concluida", "cozinha_basica": True}, "barras": {"fome": 25},
             "relacoes": {"eugenie": {"afeto": 8}}, "tempo": 40},
    dados={"raiz": True}, fundo="refeitorio")
 
@@ -1204,6 +1219,8 @@ cena("morte_agradece", [
    chegada={"flags": {"morte_estado": "concluida", "lugar": "refeitorio"}, "tirar_itens": ["bandeja_morte"],
             "barras": {"fome": 50, "sanidade": 3}, "tempo": 5},
    dados={"raiz": True}, fundo="refeitorio")
+
+exec(open(__file__.rsplit("/",1)[0] + "/vida_hotel.py", encoding="utf-8").read())
 
 json.dump(C, open(sys.argv[1], "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 print(len(C), "cenas geradas (parte 2)")

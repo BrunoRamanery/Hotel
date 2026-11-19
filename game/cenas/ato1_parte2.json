@@ -375,6 +375,54 @@
         }
       },
       {
+        "id": "papo_nix_op",
+        "texto": "Conversar com Nix, que esfrega o rodapé do corredor",
+        "destino": "papo_nix",
+        "se": [
+          {
+            "flag": "nix_estado",
+            "valor": "concluida"
+          },
+          {
+            "flag": "@hora",
+            "min": 8,
+            "max": 18
+          },
+          {
+            "flag": "papo_nix_dia",
+            "diferente": "@dia"
+          }
+        ]
+      },
+      {
+        "id": "papo_vovo_op",
+        "texto": "Bater na porta da Vovó, que cuida de uma planta no corredor",
+        "destino": "papo_vovo",
+        "se": [
+          {
+            "flag": "conv_vovo"
+          },
+          {
+            "flag": "@hora",
+            "min": 14,
+            "max": 20
+          },
+          {
+            "flag": "papo_vovo_dia",
+            "diferente": "@dia"
+          }
+        ]
+      },
+      {
+        "id": "obs_corredores_op",
+        "texto": "Ficar um pouco observando o movimento",
+        "destino": "obs_corredores",
+        "se": {
+          "flag": "@noite",
+          "valor": false
+        }
+      },
+      {
         "id": "mapa",
         "texto": "Abrir o mapa",
         "destino": "@mapa"
@@ -435,6 +483,71 @@
         ]
       },
       {
+        "id": "papo_enola_op",
+        "texto": "Conversar com Enola, que arruma livros na mesa",
+        "destino": "papo_enola",
+        "se": [
+          {
+            "flag": "enola_conhecida"
+          },
+          {
+            "flag": "@noite",
+            "valor": false
+          },
+          {
+            "flag": "papo_enola_dia",
+            "diferente": "@dia"
+          }
+        ]
+      },
+      {
+        "id": "papo_nosferatu_op",
+        "texto": "Conversar com o idoso pálido da mesa afastada",
+        "destino": "papo_nosferatu",
+        "se": [
+          {
+            "flag": "conv_biblio"
+          },
+          {
+            "flag": "@noite",
+            "valor": false
+          },
+          {
+            "flag": "papo_nosferatu_dia",
+            "diferente": "@dia"
+          }
+        ]
+      },
+      {
+        "id": "papo_arthur_op",
+        "texto": "Conversar com Arthur, que cruza anotações numa mesa",
+        "destino": "papo_arthur",
+        "se": [
+          {
+            "flag": "arthur_estado",
+            "valor": "concluido"
+          },
+          {
+            "flag": "@hora",
+            "min": 9,
+            "max": 19
+          },
+          {
+            "flag": "papo_arthur_dia",
+            "diferente": "@dia"
+          }
+        ]
+      },
+      {
+        "id": "obs_biblioteca_op",
+        "texto": "Ficar um pouco observando o movimento",
+        "destino": "obs_biblioteca",
+        "se": {
+          "flag": "@noite",
+          "valor": false
+        }
+      },
+      {
         "id": "mapa",
         "texto": "Abrir o mapa",
         "destino": "@mapa"
@@ -472,6 +585,15 @@
         }
       },
       {
+        "id": "obs_musica_op",
+        "texto": "Ficar um pouco observando o movimento",
+        "destino": "obs_musica",
+        "se": {
+          "flag": "@noite",
+          "valor": false
+        }
+      },
+      {
         "id": "mapa",
         "texto": "Abrir o mapa",
         "destino": "@mapa"
@@ -505,7 +627,7 @@
       },
       {
         "estilo": "sistema",
-        "texto": "Dica: no refeitório você pode pegar <b>comida</b> e <b>água</b> para levar. Uma vez por dia, você pode alimentar a Maya, e isso aproxima vocês.",
+        "texto": "Dica: no refeitório você pode pegar <b>comida</b> e <b>água</b> para levar. Uma vez por dia você pode dar <b>água</b> a ela, e uma vez por dia, <b>comida</b>. Cada gesto aproxima vocês.",
         "ao_mostrar": {
           "flags": {
             "maya_vista": true
@@ -542,14 +664,50 @@
         }
       },
       {
-        "texto": "Maya cochila aos seus pés, quase invisível à luz do lustre.",
+        "texto": "Maya cochila aos seus pés, quase invisível à luz do lustre, de barriga cheia e satisfeita.",
         "se": [
           {
             "flag": "maya_vista"
           },
           {
-            "flag": "maya_dia",
+            "flag": "maya_agua_dia",
             "valor": "@dia"
+          },
+          {
+            "flag": "maya_comida_dia",
+            "valor": "@dia"
+          }
+        ]
+      },
+      {
+        "texto": "Maya olha para você, esperançosa. Ela já bebeu, mas ainda parece com fome.",
+        "se": [
+          {
+            "flag": "maya_vista"
+          },
+          {
+            "flag": "maya_agua_dia",
+            "valor": "@dia"
+          },
+          {
+            "flag": "maya_comida_dia",
+            "diferente": "@dia"
+          }
+        ]
+      },
+      {
+        "texto": "Maya olha para você, esperançosa. Ela já comeu, mas ainda parece com sede.",
+        "se": [
+          {
+            "flag": "maya_vista"
+          },
+          {
+            "flag": "maya_comida_dia",
+            "valor": "@dia"
+          },
+          {
+            "flag": "maya_agua_dia",
+            "diferente": "@dia"
           }
         ]
       },
@@ -560,7 +718,11 @@
             "flag": "maya_vista"
           },
           {
-            "flag": "maya_dia",
+            "flag": "maya_agua_dia",
+            "diferente": "@dia"
+          },
+          {
+            "flag": "maya_comida_dia",
             "diferente": "@dia"
           }
         ]
@@ -571,22 +733,40 @@
     },
     "opcoes": [
       {
-        "id": "maya_dar",
-        "texto": "Dar comida e água à Maya",
+        "id": "maya_dar_agua",
+        "texto": "Dar água à Maya",
+        "destino": "maya_bebe",
+        "se": [
+          {
+            "flag": "maya_vista"
+          },
+          {
+            "flag": "maya_agua_dia",
+            "diferente": "@dia"
+          }
+        ],
+        "requisitos": {
+          "itens": [
+            "agua"
+          ]
+        }
+      },
+      {
+        "id": "maya_dar_comida",
+        "texto": "Dar comida à Maya",
         "destino": "maya_come",
         "se": [
           {
             "flag": "maya_vista"
           },
           {
-            "flag": "maya_dia",
+            "flag": "maya_comida_dia",
             "diferente": "@dia"
           }
         ],
         "requisitos": {
           "itens": [
-            "marmita",
-            "agua"
+            "marmita"
           ]
         }
       },
@@ -594,6 +774,37 @@
         "id": "macha_sair",
         "texto": "Tentar sair pelo portão",
         "destino": "macha_porta"
+      },
+      {
+        "id": "papo_macha_op",
+        "texto": "Conversar com Macha, que encosta na moto perto do portão",
+        "destino": "papo_macha",
+        "se": [
+          {
+            "flag": "macha_conhecida"
+          },
+          {
+            "flag": "@noite",
+            "valor": false
+          },
+          {
+            "flag": "clinica_ataque",
+            "diferente": true
+          },
+          {
+            "flag": "papo_macha_dia",
+            "diferente": "@dia"
+          }
+        ]
+      },
+      {
+        "id": "obs_hall_op",
+        "texto": "Ficar um pouco observando o movimento",
+        "destino": "obs_hall",
+        "se": {
+          "flag": "@noite",
+          "valor": false
+        }
       },
       {
         "id": "mapa",
@@ -604,30 +815,65 @@
     "fundo": "hall"
   },
   {
-    "id": "maya_come",
+    "id": "maya_bebe",
     "chegada": {
       "tirar_itens": [
-        "marmita",
         "agua"
       ],
       "flags": {
-        "maya_dia": "@dia"
+        "maya_agua_dia": "@dia"
       },
       "relacoes": {
         "maya": {
-          "afeto": 10
+          "afeto": 5
         }
       },
-      "tempo": 10,
+      "tempo": 5,
       "barras": {
-        "sanidade": 3
+        "sanidade": 1
       },
       "tirar_marcadores": [
         "hall"
       ]
     },
     "narrativa": [
-      "Você se agacha e coloca a comida e a água no chão, perto do focinho dela.",
+      "Você se agacha e derrama um pouco de água na tampa da garrafa, bem perto do focinho dela.",
+      "Maya bebe com pressa, depois devagar, e levanta os olhos escuros para você. Parece dizer obrigada do único jeito que sabe.",
+      {
+        "estilo": "sistema",
+        "texto": "Sua relação com <b>Maya</b> aumentou. Uma vez por dia você pode dar água a ela, e uma vez por dia, comida."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hall_base",
+    "fundo": "hall"
+  },
+  {
+    "id": "maya_come",
+    "chegada": {
+      "tirar_itens": [
+        "marmita"
+      ],
+      "flags": {
+        "maya_comida_dia": "@dia"
+      },
+      "relacoes": {
+        "maya": {
+          "afeto": 8
+        }
+      },
+      "tempo": 8,
+      "barras": {
+        "sanidade": 2
+      },
+      "tirar_marcadores": [
+        "hall"
+      ]
+    },
+    "narrativa": [
+      "Você se agacha e abre a marmita no chão, perto do focinho dela.",
       "Maya cheira, hesita, e então come com cuidado, como quem não quer incomodar. Depois lambe a sua mão, e a sensação é de uma brisa fria e boa.",
       "Quando ela se deita ao seu lado, de barriga cheia, o hall parece menos frio.",
       {
@@ -651,11 +897,23 @@
         }
       },
       {
-        "texto": "O refeitório está quase vazio. As mesas foram postas, mas a comida do próximo horário ainda não chegou.",
+        "texto": "O refeitório está quase vazio. As mesas foram postas, mas a comida do próximo horário ainda não chegou. A água do bebedouro, essa sim, está sempre ali.",
         "se": {
           "flag": "@refeicao",
           "valor": false
         }
+      },
+      {
+        "texto": "Você já comeu neste horário. Os pratos vão sendo recolhidos.",
+        "se": [
+          {
+            "flag": "@refeicao"
+          },
+          {
+            "flag": "comeu_turno",
+            "valor": "@turno"
+          }
+        ]
       },
       {
         "texto": "Desde ontem, o hotel parece outro: guirlandas escuras, fitas douradas e cartazes do aniversário se espalham por todo canto.",
@@ -672,9 +930,15 @@
         "id": "comer",
         "texto": "Fazer uma refeição",
         "destino": "refeicao",
-        "se": {
-          "flag": "@refeicao"
-        }
+        "se": [
+          {
+            "flag": "@refeicao"
+          },
+          {
+            "flag": "comeu_turno",
+            "diferente": "@turno"
+          }
+        ]
       },
       {
         "id": "jon_falar",
@@ -791,9 +1055,15 @@
         "id": "levar_comida",
         "texto": "Pegar uma marmita para levar",
         "destino": "pegou_marmita",
-        "se": {
-          "flag": "@refeicao"
-        },
+        "se": [
+          {
+            "flag": "@refeicao"
+          },
+          {
+            "flag": "marmita_turno",
+            "diferente": "@turno"
+          }
+        ],
         "requisitos": {
           "sem_itens": [
             "marmita"
@@ -811,6 +1081,36 @@
         }
       },
       {
+        "id": "papo_jonathan_op",
+        "texto": "Conversar com Jonathan, que passa entre as mesas",
+        "destino": "papo_jonathan",
+        "se": [
+          {
+            "flag": "@propostas"
+          },
+          {
+            "flag": "jon_estado",
+            "diferente": "recusada"
+          },
+          {
+            "flag": "@refeicao"
+          },
+          {
+            "flag": "papo_jonathan_dia",
+            "diferente": "@dia"
+          }
+        ]
+      },
+      {
+        "id": "obs_refeitorio_op",
+        "texto": "Ficar um pouco observando o movimento",
+        "destino": "obs_refeitorio",
+        "se": {
+          "flag": "@noite",
+          "valor": false
+        }
+      },
+      {
         "id": "mapa",
         "texto": "Abrir o mapa",
         "destino": "@mapa"
@@ -825,6 +1125,9 @@
       "barras": {
         "fome": 55,
         "sanidade": 2
+      },
+      "flags": {
+        "comeu_turno": "@turno"
       }
     },
     "narrativa": [
@@ -839,7 +1142,10 @@
   {
     "id": "pegou_marmita",
     "chegada": {
-      "tempo": 3
+      "tempo": 3,
+      "flags": {
+        "marmita_turno": "@turno"
+      }
     },
     "narrativa": [
       "Uma atendente de olhos fundos embrulha pão, queijo e um pedaço de torta numa marmita de papel encerado. Ela não diz nada, apenas empurra o embrulho na sua direção.",
@@ -2099,6 +2405,38 @@
         }
       },
       {
+        "id": "papo_mavis_op",
+        "texto": "Conversar com Mavis, que prende faixas no teto",
+        "destino": "papo_mavis",
+        "se": [
+          {
+            "flag": "@propostas"
+          },
+          {
+            "flag": "mavis_estado",
+            "diferente": "recusada"
+          },
+          {
+            "flag": "@hora",
+            "min": 9,
+            "max": 18
+          },
+          {
+            "flag": "papo_mavis_dia",
+            "diferente": "@dia"
+          }
+        ]
+      },
+      {
+        "id": "obs_salao_op",
+        "texto": "Ficar um pouco observando o movimento",
+        "destino": "obs_salao",
+        "se": {
+          "flag": "@noite",
+          "valor": false
+        }
+      },
+      {
         "id": "mapa",
         "texto": "Abrir o mapa",
         "destino": "@mapa"
@@ -2362,6 +2700,35 @@
             "max": 21
           }
         ]
+      },
+      {
+        "id": "papo_jehan_op",
+        "texto": "Pedir uma bebida e conversar com Jehan",
+        "destino": "papo_jehan",
+        "se": [
+          {
+            "flag": "jehan_estado",
+            "valor": "concluido"
+          },
+          {
+            "flag": "@hora",
+            "min": 19,
+            "max": 21
+          },
+          {
+            "flag": "papo_jehan_dia",
+            "diferente": "@dia"
+          }
+        ]
+      },
+      {
+        "id": "obs_bar_op",
+        "texto": "Ficar um pouco observando o movimento",
+        "destino": "obs_bar",
+        "se": {
+          "flag": "@noite",
+          "valor": false
+        }
       },
       {
         "id": "mapa",
@@ -2900,6 +3267,9 @@
   {
     "id": "eugenie_aula",
     "chegada": {
+      "habilidades": [
+        "cozinha_basica"
+      ],
       "flags": {
         "eug_estado": "concluida",
         "cozinha_basica": true
@@ -4443,5 +4813,2421 @@
     },
     "destino_auto": "hub_refeitorio",
     "fundo": "refeitorio"
+  },
+  {
+    "id": "papo_jonathan_1",
+    "chegada": {
+      "somar": {
+        "papo_jonathan_n": 1
+      },
+      "flags": {
+        "papo_jonathan_dia": "@dia"
+      },
+      "relacoes": {
+        "jonathan": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "Jonathan está encostado numa coluna, com uma bandeja vazia debaixo do braço, vendo o salão como quem conta cabeças.",
+      {
+        "quem": "jonathan",
+        "texto": "Thiago! Sente aí um minuto. O pão hoje está bom, ninguém reclamou."
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Está se acostumando? Os primeiros dias aqui são sempre os mais esquisitos. Depois a gente aprende o ritmo da casa."
+      },
+      {
+        "quem": "thiago",
+        "texto": "O ritmo da casa?"
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Comer na hora certa, dormir na hora certa, não perguntar demais. Parece pouco. Quase ninguém consegue."
+      },
+      "Ele sorri, bate de leve no seu ombro e volta para as mesas."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "papo_jonathan_2",
+    "chegada": {
+      "somar": {
+        "papo_jonathan_n": 1
+      },
+      "flags": {
+        "papo_jonathan_dia": "@dia"
+      },
+      "relacoes": {
+        "jonathan": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "jonathan",
+        "texto": "Você anda bastante pelo hotel, não é? Vejo você na biblioteca, nos corredores, no hall."
+      },
+      {
+        "quem": "thiago",
+        "texto": "É um lugar grande. Eu ainda me perco."
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Que bom. Quem se perde, olha melhor. E me diga, o que mais chamou a sua atenção até agora?"
+      },
+      "A pergunta soa casual. Mas ele espera a resposta com uma atenção grande demais para uma conversa de refeitório.",
+      {
+        "quem": "thiago",
+        "texto": "Os corredores. À noite, principalmente."
+      },
+      {
+        "quem": "jonathan",
+        "texto": "À noite os corredores são do hotel. De dia, deixam a gente passar."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Ele disse isso rindo. Eu acho que riu."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "papo_jonathan_3",
+    "chegada": {
+      "somar": {
+        "papo_jonathan_n": 1
+      },
+      "flags": {
+        "papo_jonathan_dia": "@dia"
+      },
+      "relacoes": {
+        "jonathan": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "jonathan",
+        "texto": "Sabe o que eu mais gosto neste trabalho? Ver os hóspedes chegarem assustados e irem embora... diferentes."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Diferentes como?"
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Mais atentos. Mais cuidadosos. Alguns, mais gratos."
+      },
+      "Ele arruma uma cadeira que já estava no lugar.",
+      {
+        "quem": "jonathan",
+        "texto": "A Mavis cuida da casa com o coração. Eu cuido com a cabeça. Entre os dois, o hotel anda de pé."
+      },
+      "Há um peso curioso na frase, como uma conta feita em voz baixa."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "papo_jonathan_4",
+    "chegada": {
+      "somar": {
+        "papo_jonathan_n": 1
+      },
+      "flags": {
+        "papo_jonathan_dia": "@dia"
+      },
+      "relacoes": {
+        "jonathan": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "jonathan",
+        "texto": "Hoje o salão está calmo. É nessas horas que dá para ouvir o hotel."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Ouvir o quê?"
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Tudo. As portas, os passos, o encanamento. Quem presta atenção descobre que esta casa conversa o tempo todo."
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Tome o seu café, Thiago. E continue prestando atenção."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "papo_jonathan_vario",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "papo_jonathan_1",
+        "papo_jonathan_2",
+        "papo_jonathan_3",
+        "papo_jonathan_4"
+      ]
+    }
+  },
+  {
+    "id": "papo_jonathan",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "papo_jonathan_n",
+      "casos": {
+        "1": "papo_jonathan_2",
+        "2": "papo_jonathan_3",
+        "3": "papo_jonathan_4",
+        "4": "papo_jonathan_vario",
+        "5": "papo_jonathan_vario",
+        "6": "papo_jonathan_vario",
+        "7": "papo_jonathan_vario",
+        "8": "papo_jonathan_vario",
+        "9": "papo_jonathan_vario",
+        "10": "papo_jonathan_vario",
+        "11": "papo_jonathan_vario",
+        "12": "papo_jonathan_vario",
+        "13": "papo_jonathan_vario",
+        "14": "papo_jonathan_vario",
+        "15": "papo_jonathan_vario",
+        "16": "papo_jonathan_vario",
+        "17": "papo_jonathan_vario",
+        "18": "papo_jonathan_vario",
+        "19": "papo_jonathan_vario",
+        "20": "papo_jonathan_vario",
+        "21": "papo_jonathan_vario",
+        "22": "papo_jonathan_vario",
+        "23": "papo_jonathan_vario",
+        "24": "papo_jonathan_vario",
+        "25": "papo_jonathan_vario",
+        "26": "papo_jonathan_vario",
+        "27": "papo_jonathan_vario",
+        "28": "papo_jonathan_vario",
+        "29": "papo_jonathan_vario",
+        "30": "papo_jonathan_vario",
+        "31": "papo_jonathan_vario",
+        "32": "papo_jonathan_vario",
+        "33": "papo_jonathan_vario",
+        "34": "papo_jonathan_vario",
+        "35": "papo_jonathan_vario",
+        "36": "papo_jonathan_vario",
+        "37": "papo_jonathan_vario",
+        "38": "papo_jonathan_vario",
+        "39": "papo_jonathan_vario",
+        "40": "papo_jonathan_vario",
+        "41": "papo_jonathan_vario",
+        "42": "papo_jonathan_vario",
+        "43": "papo_jonathan_vario",
+        "44": "papo_jonathan_vario",
+        "45": "papo_jonathan_vario",
+        "46": "papo_jonathan_vario",
+        "47": "papo_jonathan_vario",
+        "48": "papo_jonathan_vario",
+        "49": "papo_jonathan_vario",
+        "50": "papo_jonathan_vario",
+        "51": "papo_jonathan_vario",
+        "52": "papo_jonathan_vario",
+        "53": "papo_jonathan_vario",
+        "54": "papo_jonathan_vario",
+        "55": "papo_jonathan_vario",
+        "56": "papo_jonathan_vario",
+        "57": "papo_jonathan_vario",
+        "58": "papo_jonathan_vario",
+        "59": "papo_jonathan_vario"
+      },
+      "padrao": "papo_jonathan_1",
+      "raiz": true
+    }
+  },
+  {
+    "id": "papo_mavis_1",
+    "chegada": {
+      "somar": {
+        "papo_mavis_n": 1
+      },
+      "flags": {
+        "papo_mavis_dia": "@dia"
+      },
+      "relacoes": {
+        "mavis": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "Mavis está equilibrada na escada, com uma fita de cetim entre os dentes. Ao ver você, ela quase a engole.",
+      {
+        "quem": "mavis",
+        "texto": "Thiago! Pode segurar a escada? Obrigada. Não, não, mais firme. Esse piso tem vontade própria."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Falta muito para a festa?"
+      },
+      {
+        "quem": "mavis",
+        "texto": "Falta tempo para tudo. Eu faço uma lista, a lista cresce, e quando eu risco um item nascem três."
+      },
+      "Ela desce, bufa uma mecha de cabelo da testa e sorri, cansada e sincera.",
+      {
+        "quem": "mavis",
+        "texto": "Mas está ficando bonito, não está? Diga que está ficando bonito."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Está ficando bonito."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_salao_festas",
+    "fundo": "salao_festas"
+  },
+  {
+    "id": "papo_mavis_2",
+    "chegada": {
+      "somar": {
+        "papo_mavis_n": 1
+      },
+      "flags": {
+        "papo_mavis_dia": "@dia"
+      },
+      "relacoes": {
+        "mavis": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "mavis",
+        "texto": "Você dorme bem? Aqui o pessoal reclama dos sons à noite. Canos, madeira velha, esse tipo de coisa."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu escuto um piano, às vezes."
+      },
+      "Mavis para de mexer na faixa. Por um segundo, o rosto dela fica sem cor, depois se recompõe.",
+      {
+        "quem": "mavis",
+        "texto": "Piano. É... eco. A sala de música fica longe, mas o som corre pelas paredes. Não ligue."
+      },
+      {
+        "quem": "mavis",
+        "texto": "Se algum dia o susto for demais, me procure. Eu sempre estou por aqui. Quer dizer, sempre atrasada, mas por aqui."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_salao_festas",
+    "fundo": "salao_festas"
+  },
+  {
+    "id": "papo_mavis_3",
+    "chegada": {
+      "somar": {
+        "papo_mavis_n": 1
+      },
+      "flags": {
+        "papo_mavis_dia": "@dia"
+      },
+      "relacoes": {
+        "mavis": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "mavis",
+        "texto": "Posso te contar uma coisa boba? Eu adoro quando o salão está vazio assim. Dá para imaginar a música, as pessoas, os vestidos."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Você já viu uma festa por aqui?"
+      },
+      {
+        "quem": "mavis",
+        "texto": "Muitas. Mas é sempre a primeira vez para alguém. Este ano, é a primeira vez para você."
+      },
+      "Ela olha o teto, onde um lustre coberto por pano balança de leve, sem vento.",
+      {
+        "quem": "mavis",
+        "texto": "Eu quero que seja bonita. Para todo mundo. Até para quem não gosta de festas."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_salao_festas",
+    "fundo": "salao_festas"
+  },
+  {
+    "id": "papo_mavis_4",
+    "chegada": {
+      "somar": {
+        "papo_mavis_n": 1
+      },
+      "flags": {
+        "papo_mavis_dia": "@dia"
+      },
+      "relacoes": {
+        "mavis": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "mavis",
+        "texto": "Eu tenho uma gata que vive sumindo. Se vir uma bolinha de pelo atravessando o corredor, não corre atrás. Ela odeia."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu não sabia que você tinha uma gata."
+      },
+      {
+        "quem": "mavis",
+        "texto": "Todo mundo tem uma coisa que não conta de primeira. Aquela é a minha."
+      },
+      "Ela ri baixinho e volta para a escada."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_salao_festas",
+    "fundo": "salao_festas"
+  },
+  {
+    "id": "papo_mavis_vario",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "papo_mavis_1",
+        "papo_mavis_2",
+        "papo_mavis_3",
+        "papo_mavis_4"
+      ]
+    }
+  },
+  {
+    "id": "papo_mavis",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "papo_mavis_n",
+      "casos": {
+        "1": "papo_mavis_2",
+        "2": "papo_mavis_3",
+        "3": "papo_mavis_4",
+        "4": "papo_mavis_vario",
+        "5": "papo_mavis_vario",
+        "6": "papo_mavis_vario",
+        "7": "papo_mavis_vario",
+        "8": "papo_mavis_vario",
+        "9": "papo_mavis_vario",
+        "10": "papo_mavis_vario",
+        "11": "papo_mavis_vario",
+        "12": "papo_mavis_vario",
+        "13": "papo_mavis_vario",
+        "14": "papo_mavis_vario",
+        "15": "papo_mavis_vario",
+        "16": "papo_mavis_vario",
+        "17": "papo_mavis_vario",
+        "18": "papo_mavis_vario",
+        "19": "papo_mavis_vario",
+        "20": "papo_mavis_vario",
+        "21": "papo_mavis_vario",
+        "22": "papo_mavis_vario",
+        "23": "papo_mavis_vario",
+        "24": "papo_mavis_vario",
+        "25": "papo_mavis_vario",
+        "26": "papo_mavis_vario",
+        "27": "papo_mavis_vario",
+        "28": "papo_mavis_vario",
+        "29": "papo_mavis_vario",
+        "30": "papo_mavis_vario",
+        "31": "papo_mavis_vario",
+        "32": "papo_mavis_vario",
+        "33": "papo_mavis_vario",
+        "34": "papo_mavis_vario",
+        "35": "papo_mavis_vario",
+        "36": "papo_mavis_vario",
+        "37": "papo_mavis_vario",
+        "38": "papo_mavis_vario",
+        "39": "papo_mavis_vario",
+        "40": "papo_mavis_vario",
+        "41": "papo_mavis_vario",
+        "42": "papo_mavis_vario",
+        "43": "papo_mavis_vario",
+        "44": "papo_mavis_vario",
+        "45": "papo_mavis_vario",
+        "46": "papo_mavis_vario",
+        "47": "papo_mavis_vario",
+        "48": "papo_mavis_vario",
+        "49": "papo_mavis_vario",
+        "50": "papo_mavis_vario",
+        "51": "papo_mavis_vario",
+        "52": "papo_mavis_vario",
+        "53": "papo_mavis_vario",
+        "54": "papo_mavis_vario",
+        "55": "papo_mavis_vario",
+        "56": "papo_mavis_vario",
+        "57": "papo_mavis_vario",
+        "58": "papo_mavis_vario",
+        "59": "papo_mavis_vario"
+      },
+      "padrao": "papo_mavis_1",
+      "raiz": true
+    }
+  },
+  {
+    "id": "papo_macha_1",
+    "chegada": {
+      "somar": {
+        "papo_macha_n": 1
+      },
+      "flags": {
+        "papo_macha_dia": "@dia"
+      },
+      "relacoes": {
+        "macha": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "Macha está sentada de lado na moto preta, girando uma chave entre os dedos. Quando você se aproxima, ela nem finge que não viu.",
+      {
+        "quem": "macha",
+        "texto": "Veio tentar a porta de novo ou só veio me fazer companhia?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Companhia. Hoje, só isso."
+      },
+      {
+        "quem": "macha",
+        "texto": "Boa resposta. Pode ficar."
+      },
+      {
+        "quem": "macha",
+        "texto": "Sabe o que é bom em moto? Ninguém conversa com você enquanto você anda. Aqui dentro todo mundo fala demais."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hall_base",
+    "fundo": "hall"
+  },
+  {
+    "id": "papo_macha_2",
+    "chegada": {
+      "somar": {
+        "papo_macha_n": 1
+      },
+      "flags": {
+        "papo_macha_dia": "@dia"
+      },
+      "relacoes": {
+        "macha": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "macha",
+        "texto": "Pergunta boba: você sabe o que é uma curva fechada?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Uma curva muito... fechada?"
+      },
+      {
+        "quem": "macha",
+        "texto": "Meu Deus. Vai precisar de aula de tudo."
+      },
+      "Ela ri com vontade, e por um instante o hall inteiro parece menos frio.",
+      {
+        "quem": "macha",
+        "texto": "Meu pai trabalha com rotas. Eu cresci vendo mapas, estradas, atalhos. Quando eu falo que a porta fica fechada, é porque eu sei o que tem lá fora."
+      },
+      {
+        "quem": "thiago",
+        "texto": "E o que tem lá fora?"
+      },
+      {
+        "quem": "macha",
+        "texto": "Caminho. Muito caminho. Ninguém atravessa sem saber para onde vai."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hall_base",
+    "fundo": "hall"
+  },
+  {
+    "id": "papo_macha_3",
+    "chegada": {
+      "somar": {
+        "papo_macha_n": 1
+      },
+      "flags": {
+        "papo_macha_dia": "@dia"
+      },
+      "relacoes": {
+        "macha": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "macha",
+        "texto": "Você tem cara de quem nunca teve brinquedo novo."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu tinha o que o orfanato dava."
+      },
+      "Macha fica quieta por um momento, e o sorriso de lado desaparece.",
+      {
+        "quem": "macha",
+        "texto": "Desculpa. Falei sem pensar."
+      },
+      {
+        "quem": "macha",
+        "texto": "Olha, quando eu te ensinar a pilotar, a primeira moto vai ser pequena. Mas vai ser sua pelo tempo que você precisar dela."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hall_base",
+    "fundo": "hall"
+  },
+  {
+    "id": "papo_macha_4",
+    "chegada": {
+      "somar": {
+        "papo_macha_n": 1
+      },
+      "flags": {
+        "papo_macha_dia": "@dia"
+      },
+      "relacoes": {
+        "macha": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "macha",
+        "texto": "Sabia que a minha moto some quando alguém tenta tocar nela sem eu deixar?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu já vi sumir. Eu achei que era truque de luz."
+      },
+      {
+        "quem": "macha",
+        "texto": "Truque de luz. Gostei. Vou usar isso."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hall_base",
+    "fundo": "hall"
+  },
+  {
+    "id": "papo_macha_vario",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "papo_macha_1",
+        "papo_macha_2",
+        "papo_macha_3",
+        "papo_macha_4"
+      ]
+    }
+  },
+  {
+    "id": "papo_macha",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "papo_macha_n",
+      "casos": {
+        "1": "papo_macha_2",
+        "2": "papo_macha_3",
+        "3": "papo_macha_4",
+        "4": "papo_macha_vario",
+        "5": "papo_macha_vario",
+        "6": "papo_macha_vario",
+        "7": "papo_macha_vario",
+        "8": "papo_macha_vario",
+        "9": "papo_macha_vario",
+        "10": "papo_macha_vario",
+        "11": "papo_macha_vario",
+        "12": "papo_macha_vario",
+        "13": "papo_macha_vario",
+        "14": "papo_macha_vario",
+        "15": "papo_macha_vario",
+        "16": "papo_macha_vario",
+        "17": "papo_macha_vario",
+        "18": "papo_macha_vario",
+        "19": "papo_macha_vario",
+        "20": "papo_macha_vario",
+        "21": "papo_macha_vario",
+        "22": "papo_macha_vario",
+        "23": "papo_macha_vario",
+        "24": "papo_macha_vario",
+        "25": "papo_macha_vario",
+        "26": "papo_macha_vario",
+        "27": "papo_macha_vario",
+        "28": "papo_macha_vario",
+        "29": "papo_macha_vario",
+        "30": "papo_macha_vario",
+        "31": "papo_macha_vario",
+        "32": "papo_macha_vario",
+        "33": "papo_macha_vario",
+        "34": "papo_macha_vario",
+        "35": "papo_macha_vario",
+        "36": "papo_macha_vario",
+        "37": "papo_macha_vario",
+        "38": "papo_macha_vario",
+        "39": "papo_macha_vario",
+        "40": "papo_macha_vario",
+        "41": "papo_macha_vario",
+        "42": "papo_macha_vario",
+        "43": "papo_macha_vario",
+        "44": "papo_macha_vario",
+        "45": "papo_macha_vario",
+        "46": "papo_macha_vario",
+        "47": "papo_macha_vario",
+        "48": "papo_macha_vario",
+        "49": "papo_macha_vario",
+        "50": "papo_macha_vario",
+        "51": "papo_macha_vario",
+        "52": "papo_macha_vario",
+        "53": "papo_macha_vario",
+        "54": "papo_macha_vario",
+        "55": "papo_macha_vario",
+        "56": "papo_macha_vario",
+        "57": "papo_macha_vario",
+        "58": "papo_macha_vario",
+        "59": "papo_macha_vario"
+      },
+      "padrao": "papo_macha_1",
+      "raiz": true
+    }
+  },
+  {
+    "id": "papo_enola_1",
+    "chegada": {
+      "somar": {
+        "papo_enola_n": 1
+      },
+      "flags": {
+        "papo_enola_dia": "@dia"
+      },
+      "relacoes": {
+        "enola": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "Enola mal ergue os olhos de um volume encadernado em couro. A coruja pequena no ombro dela acompanha você com um olhar redondo e atento.",
+      {
+        "quem": "enola",
+        "texto": "Senhor Thiago. Os livros comuns estão à sua disposição, como eu disse. Mas a boa leitura começa por saber o que se procura."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu ainda não sei o que procuro."
+      },
+      {
+        "quem": "enola",
+        "texto": "A maioria dos hóspedes também não. É por isso que ficam. Procurar dá trabalho, e o trabalho é a melhor forma de passar o tempo."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "papo_enola_2",
+    "chegada": {
+      "somar": {
+        "papo_enola_n": 1
+      },
+      "flags": {
+        "papo_enola_dia": "@dia"
+      },
+      "relacoes": {
+        "enola": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "thiago",
+        "texto": "A senhora conhece todos os livros daqui?"
+      },
+      {
+        "quem": "enola",
+        "texto": "Conheço cada lombada. O conteúdo, nem sempre. Alguns volumes mudam de ideia."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Mudam de ideia?"
+      },
+      {
+        "quem": "enola",
+        "texto": "Figura de linguagem, senhor Thiago. Tome nota: aqui, às vezes, as figuras de linguagem têm pés."
+      },
+      "A coruja pia, baixinho, como quem concorda."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "papo_enola_3",
+    "chegada": {
+      "somar": {
+        "papo_enola_n": 1
+      },
+      "flags": {
+        "papo_enola_dia": "@dia"
+      },
+      "relacoes": {
+        "enola": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "enola",
+        "texto": "Posso lhe dar um conselho? Não leia depois da meia-noite. Os livros ficam mais honestos, e a honestidade cansa."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu não circulo depois das dez, de qualquer jeito."
+      },
+      {
+        "quem": "enola",
+        "texto": "Ótimo. Já é um bom começo de leitor."
+      },
+      "Ela volta ao trabalho. Um livro desliza sozinho de uma estante alta para a mesa, e ela o recebe sem olhar."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "papo_enola_4",
+    "chegada": {
+      "somar": {
+        "papo_enola_n": 1
+      },
+      "flags": {
+        "papo_enola_dia": "@dia"
+      },
+      "relacoes": {
+        "enola": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "enola",
+        "texto": "Há perguntas que a biblioteca responde e perguntas que ela guarda. Eu aprendi a diferença com os anos."
+      },
+      {
+        "quem": "thiago",
+        "texto": "E qual é a diferença?"
+      },
+      {
+        "quem": "enola",
+        "texto": "As primeiras têm resposta. As segundas têm dono."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "papo_enola_vario",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "papo_enola_1",
+        "papo_enola_2",
+        "papo_enola_3",
+        "papo_enola_4"
+      ]
+    }
+  },
+  {
+    "id": "papo_enola",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "papo_enola_n",
+      "casos": {
+        "1": "papo_enola_2",
+        "2": "papo_enola_3",
+        "3": "papo_enola_4",
+        "4": "papo_enola_vario",
+        "5": "papo_enola_vario",
+        "6": "papo_enola_vario",
+        "7": "papo_enola_vario",
+        "8": "papo_enola_vario",
+        "9": "papo_enola_vario",
+        "10": "papo_enola_vario",
+        "11": "papo_enola_vario",
+        "12": "papo_enola_vario",
+        "13": "papo_enola_vario",
+        "14": "papo_enola_vario",
+        "15": "papo_enola_vario",
+        "16": "papo_enola_vario",
+        "17": "papo_enola_vario",
+        "18": "papo_enola_vario",
+        "19": "papo_enola_vario",
+        "20": "papo_enola_vario",
+        "21": "papo_enola_vario",
+        "22": "papo_enola_vario",
+        "23": "papo_enola_vario",
+        "24": "papo_enola_vario",
+        "25": "papo_enola_vario",
+        "26": "papo_enola_vario",
+        "27": "papo_enola_vario",
+        "28": "papo_enola_vario",
+        "29": "papo_enola_vario",
+        "30": "papo_enola_vario",
+        "31": "papo_enola_vario",
+        "32": "papo_enola_vario",
+        "33": "papo_enola_vario",
+        "34": "papo_enola_vario",
+        "35": "papo_enola_vario",
+        "36": "papo_enola_vario",
+        "37": "papo_enola_vario",
+        "38": "papo_enola_vario",
+        "39": "papo_enola_vario",
+        "40": "papo_enola_vario",
+        "41": "papo_enola_vario",
+        "42": "papo_enola_vario",
+        "43": "papo_enola_vario",
+        "44": "papo_enola_vario",
+        "45": "papo_enola_vario",
+        "46": "papo_enola_vario",
+        "47": "papo_enola_vario",
+        "48": "papo_enola_vario",
+        "49": "papo_enola_vario",
+        "50": "papo_enola_vario",
+        "51": "papo_enola_vario",
+        "52": "papo_enola_vario",
+        "53": "papo_enola_vario",
+        "54": "papo_enola_vario",
+        "55": "papo_enola_vario",
+        "56": "papo_enola_vario",
+        "57": "papo_enola_vario",
+        "58": "papo_enola_vario",
+        "59": "papo_enola_vario"
+      },
+      "padrao": "papo_enola_1",
+      "raiz": true
+    }
+  },
+  {
+    "id": "papo_nosferatu_1",
+    "chegada": {
+      "somar": {
+        "papo_nosferatu_n": 1
+      },
+      "flags": {
+        "papo_nosferatu_dia": "@dia"
+      },
+      "relacoes": {
+        "nosferatu": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "O velho ergue o rosto devagar. A pele é de cera, os olhos cansados e atentos. Ele marca a página com um dedo longo antes de fechar o livro.",
+      {
+        "quem": "nosferatu",
+        "texto": "O jovem do convite. Sente-se, se quiser. Eu falo pouco, mas escuto com paciência."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Desculpe incomodar. Eu só queria agradecer pela atenção."
+      },
+      {
+        "quem": "nosferatu",
+        "texto": "Gratidão é raridade. Guarde-a para quem merece."
+      },
+      "Há uma delicadeza antiga na voz dele, como seda guardada demais."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "papo_nosferatu_2",
+    "chegada": {
+      "somar": {
+        "papo_nosferatu_n": 1
+      },
+      "flags": {
+        "papo_nosferatu_dia": "@dia"
+      },
+      "relacoes": {
+        "nosferatu": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "nosferatu",
+        "texto": "Quantos anos o senhor tem, rapaz?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Dezenove."
+      },
+      {
+        "quem": "nosferatu",
+        "texto": "Dezenove. Uma idade em que tudo parece começar. E também a idade em que tantas coisas já terminaram."
+      },
+      {
+        "quem": "nosferatu",
+        "texto": "Não responda. Falei sozinho."
+      },
+      "Ele abre o livro de novo, mas não lê. Apenas observa você de canto de olho, como quem conta algo que não é número."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "papo_nosferatu_3",
+    "chegada": {
+      "somar": {
+        "papo_nosferatu_n": 1
+      },
+      "flags": {
+        "papo_nosferatu_dia": "@dia"
+      },
+      "relacoes": {
+        "nosferatu": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "nosferatu",
+        "texto": "A biblioteca é boa companheira. Não pede nada, não julga, e esquece quando a gente quer ser esquecido."
+      },
+      {
+        "quem": "thiago",
+        "texto": "E se a gente não quiser ser esquecido?"
+      },
+      {
+        "quem": "nosferatu",
+        "texto": "Então escreva. A tinta dura mais que a memória."
+      },
+      "Ele sorri de leve, sem mostrar os dentes."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "papo_nosferatu_vario",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "papo_nosferatu_1",
+        "papo_nosferatu_2",
+        "papo_nosferatu_3"
+      ]
+    }
+  },
+  {
+    "id": "papo_nosferatu",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "papo_nosferatu_n",
+      "casos": {
+        "1": "papo_nosferatu_2",
+        "2": "papo_nosferatu_3",
+        "3": "papo_nosferatu_vario",
+        "4": "papo_nosferatu_vario",
+        "5": "papo_nosferatu_vario",
+        "6": "papo_nosferatu_vario",
+        "7": "papo_nosferatu_vario",
+        "8": "papo_nosferatu_vario",
+        "9": "papo_nosferatu_vario",
+        "10": "papo_nosferatu_vario",
+        "11": "papo_nosferatu_vario",
+        "12": "papo_nosferatu_vario",
+        "13": "papo_nosferatu_vario",
+        "14": "papo_nosferatu_vario",
+        "15": "papo_nosferatu_vario",
+        "16": "papo_nosferatu_vario",
+        "17": "papo_nosferatu_vario",
+        "18": "papo_nosferatu_vario",
+        "19": "papo_nosferatu_vario",
+        "20": "papo_nosferatu_vario",
+        "21": "papo_nosferatu_vario",
+        "22": "papo_nosferatu_vario",
+        "23": "papo_nosferatu_vario",
+        "24": "papo_nosferatu_vario",
+        "25": "papo_nosferatu_vario",
+        "26": "papo_nosferatu_vario",
+        "27": "papo_nosferatu_vario",
+        "28": "papo_nosferatu_vario",
+        "29": "papo_nosferatu_vario",
+        "30": "papo_nosferatu_vario",
+        "31": "papo_nosferatu_vario",
+        "32": "papo_nosferatu_vario",
+        "33": "papo_nosferatu_vario",
+        "34": "papo_nosferatu_vario",
+        "35": "papo_nosferatu_vario",
+        "36": "papo_nosferatu_vario",
+        "37": "papo_nosferatu_vario",
+        "38": "papo_nosferatu_vario",
+        "39": "papo_nosferatu_vario",
+        "40": "papo_nosferatu_vario",
+        "41": "papo_nosferatu_vario",
+        "42": "papo_nosferatu_vario",
+        "43": "papo_nosferatu_vario",
+        "44": "papo_nosferatu_vario",
+        "45": "papo_nosferatu_vario",
+        "46": "papo_nosferatu_vario",
+        "47": "papo_nosferatu_vario",
+        "48": "papo_nosferatu_vario",
+        "49": "papo_nosferatu_vario",
+        "50": "papo_nosferatu_vario",
+        "51": "papo_nosferatu_vario",
+        "52": "papo_nosferatu_vario",
+        "53": "papo_nosferatu_vario",
+        "54": "papo_nosferatu_vario",
+        "55": "papo_nosferatu_vario",
+        "56": "papo_nosferatu_vario",
+        "57": "papo_nosferatu_vario",
+        "58": "papo_nosferatu_vario",
+        "59": "papo_nosferatu_vario"
+      },
+      "padrao": "papo_nosferatu_1",
+      "raiz": true
+    }
+  },
+  {
+    "id": "papo_arthur_1",
+    "chegada": {
+      "somar": {
+        "papo_arthur_n": 1
+      },
+      "flags": {
+        "papo_arthur_dia": "@dia"
+      },
+      "relacoes": {
+        "arthur": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "Arthur tem a mesa tomada por cadernos, canetas e um bule de chá frio. Ele levanta a cabeça como quem acorda.",
+      {
+        "quem": "arthur",
+        "texto": "Thiago! Chegou na hora certa. Eu preciso de alguém que discorde de mim."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Sobre o quê?"
+      },
+      {
+        "quem": "arthur",
+        "texto": "Tudo. Hipóteses. Quanto mais eu escrevo, mais elas parecem sensatas, e isso é péssimo sinal."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "papo_arthur_2",
+    "chegada": {
+      "somar": {
+        "papo_arthur_n": 1
+      },
+      "flags": {
+        "papo_arthur_dia": "@dia"
+      },
+      "relacoes": {
+        "arthur": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "arthur",
+        "texto": "Anotei os horários de cada coisa estranha. Portas, passos, objetos. Veja: nenhuma acontece na frente de mais de duas pessoas."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Isso quer dizer o quê?"
+      },
+      {
+        "quem": "arthur",
+        "texto": "Quer dizer que quem faz isso sabe quando estamos olhando. Ou que é muito azarado."
+      },
+      "Ele ri sozinho, mas a caneta continua batucando na mesa."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "papo_arthur_3",
+    "chegada": {
+      "somar": {
+        "papo_arthur_n": 1
+      },
+      "flags": {
+        "papo_arthur_dia": "@dia"
+      },
+      "relacoes": {
+        "arthur": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "arthur",
+        "texto": "Eu era do tipo que acreditava em tudo que fosse explicado em três parágrafos. Este hotel me deixou sem parágrafos."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Isso é ruim?"
+      },
+      {
+        "quem": "arthur",
+        "texto": "É interessante. Perigoso, mas interessante. Tome cuidado, Thiago. E me avise se encontrar outro diário."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "papo_arthur_vario",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "papo_arthur_1",
+        "papo_arthur_2",
+        "papo_arthur_3"
+      ]
+    }
+  },
+  {
+    "id": "papo_arthur",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "papo_arthur_n",
+      "casos": {
+        "1": "papo_arthur_2",
+        "2": "papo_arthur_3",
+        "3": "papo_arthur_vario",
+        "4": "papo_arthur_vario",
+        "5": "papo_arthur_vario",
+        "6": "papo_arthur_vario",
+        "7": "papo_arthur_vario",
+        "8": "papo_arthur_vario",
+        "9": "papo_arthur_vario",
+        "10": "papo_arthur_vario",
+        "11": "papo_arthur_vario",
+        "12": "papo_arthur_vario",
+        "13": "papo_arthur_vario",
+        "14": "papo_arthur_vario",
+        "15": "papo_arthur_vario",
+        "16": "papo_arthur_vario",
+        "17": "papo_arthur_vario",
+        "18": "papo_arthur_vario",
+        "19": "papo_arthur_vario",
+        "20": "papo_arthur_vario",
+        "21": "papo_arthur_vario",
+        "22": "papo_arthur_vario",
+        "23": "papo_arthur_vario",
+        "24": "papo_arthur_vario",
+        "25": "papo_arthur_vario",
+        "26": "papo_arthur_vario",
+        "27": "papo_arthur_vario",
+        "28": "papo_arthur_vario",
+        "29": "papo_arthur_vario",
+        "30": "papo_arthur_vario",
+        "31": "papo_arthur_vario",
+        "32": "papo_arthur_vario",
+        "33": "papo_arthur_vario",
+        "34": "papo_arthur_vario",
+        "35": "papo_arthur_vario",
+        "36": "papo_arthur_vario",
+        "37": "papo_arthur_vario",
+        "38": "papo_arthur_vario",
+        "39": "papo_arthur_vario",
+        "40": "papo_arthur_vario",
+        "41": "papo_arthur_vario",
+        "42": "papo_arthur_vario",
+        "43": "papo_arthur_vario",
+        "44": "papo_arthur_vario",
+        "45": "papo_arthur_vario",
+        "46": "papo_arthur_vario",
+        "47": "papo_arthur_vario",
+        "48": "papo_arthur_vario",
+        "49": "papo_arthur_vario",
+        "50": "papo_arthur_vario",
+        "51": "papo_arthur_vario",
+        "52": "papo_arthur_vario",
+        "53": "papo_arthur_vario",
+        "54": "papo_arthur_vario",
+        "55": "papo_arthur_vario",
+        "56": "papo_arthur_vario",
+        "57": "papo_arthur_vario",
+        "58": "papo_arthur_vario",
+        "59": "papo_arthur_vario"
+      },
+      "padrao": "papo_arthur_1",
+      "raiz": true
+    }
+  },
+  {
+    "id": "papo_jehan_1",
+    "chegada": {
+      "somar": {
+        "papo_jehan_n": 1
+      },
+      "flags": {
+        "papo_jehan_dia": "@dia"
+      },
+      "relacoes": {
+        "jehan": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "Jehan desliza um copo de suco gelado para você, sem perguntar o que você quer. Acerta mesmo assim.",
+      {
+        "quem": "jehan",
+        "texto": "Dia comprido?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Todos são."
+      },
+      {
+        "quem": "jehan",
+        "texto": "É assim no começo. Depois você descobre que o dia é só o tempo entre uma noite e outra."
+      },
+      "Ele enxuga o balcão com um pano branco, devagar, como quem tem todo o tempo do mundo."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "bar_base",
+    "fundo": "bar"
+  },
+  {
+    "id": "papo_jehan_2",
+    "chegada": {
+      "somar": {
+        "papo_jehan_n": 1
+      },
+      "flags": {
+        "papo_jehan_dia": "@dia"
+      },
+      "relacoes": {
+        "jehan": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "jehan",
+        "texto": "Quer um conselho gratuito? Coma sempre que puder, durma cedo e ande acompanhado depois das nove."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Parece conselho de pai."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Parece, é? Já tive filhos. Ou quase. Esquece. Bebe."
+      },
+      "Há um brilho de aliança na mão dele, e algo mais distante nos olhos."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "bar_base",
+    "fundo": "bar"
+  },
+  {
+    "id": "papo_jehan_3",
+    "chegada": {
+      "somar": {
+        "papo_jehan_n": 1
+      },
+      "flags": {
+        "papo_jehan_dia": "@dia"
+      },
+      "relacoes": {
+        "jehan": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "jehan",
+        "texto": "Sabe o que eu mais gosto no bar? As pessoas falam aqui o que não falam em lugar nenhum."
+      },
+      {
+        "quem": "thiago",
+        "texto": "E o senhor guarda tudo?"
+      },
+      {
+        "quem": "jehan",
+        "texto": "Guardo o que merece ser guardado. O resto eu deixo no balcão. Se alguém quiser levar, que leve."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "bar_base",
+    "fundo": "bar"
+  },
+  {
+    "id": "papo_jehan_vario",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "papo_jehan_1",
+        "papo_jehan_2",
+        "papo_jehan_3"
+      ]
+    }
+  },
+  {
+    "id": "papo_jehan",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "papo_jehan_n",
+      "casos": {
+        "1": "papo_jehan_2",
+        "2": "papo_jehan_3",
+        "3": "papo_jehan_vario",
+        "4": "papo_jehan_vario",
+        "5": "papo_jehan_vario",
+        "6": "papo_jehan_vario",
+        "7": "papo_jehan_vario",
+        "8": "papo_jehan_vario",
+        "9": "papo_jehan_vario",
+        "10": "papo_jehan_vario",
+        "11": "papo_jehan_vario",
+        "12": "papo_jehan_vario",
+        "13": "papo_jehan_vario",
+        "14": "papo_jehan_vario",
+        "15": "papo_jehan_vario",
+        "16": "papo_jehan_vario",
+        "17": "papo_jehan_vario",
+        "18": "papo_jehan_vario",
+        "19": "papo_jehan_vario",
+        "20": "papo_jehan_vario",
+        "21": "papo_jehan_vario",
+        "22": "papo_jehan_vario",
+        "23": "papo_jehan_vario",
+        "24": "papo_jehan_vario",
+        "25": "papo_jehan_vario",
+        "26": "papo_jehan_vario",
+        "27": "papo_jehan_vario",
+        "28": "papo_jehan_vario",
+        "29": "papo_jehan_vario",
+        "30": "papo_jehan_vario",
+        "31": "papo_jehan_vario",
+        "32": "papo_jehan_vario",
+        "33": "papo_jehan_vario",
+        "34": "papo_jehan_vario",
+        "35": "papo_jehan_vario",
+        "36": "papo_jehan_vario",
+        "37": "papo_jehan_vario",
+        "38": "papo_jehan_vario",
+        "39": "papo_jehan_vario",
+        "40": "papo_jehan_vario",
+        "41": "papo_jehan_vario",
+        "42": "papo_jehan_vario",
+        "43": "papo_jehan_vario",
+        "44": "papo_jehan_vario",
+        "45": "papo_jehan_vario",
+        "46": "papo_jehan_vario",
+        "47": "papo_jehan_vario",
+        "48": "papo_jehan_vario",
+        "49": "papo_jehan_vario",
+        "50": "papo_jehan_vario",
+        "51": "papo_jehan_vario",
+        "52": "papo_jehan_vario",
+        "53": "papo_jehan_vario",
+        "54": "papo_jehan_vario",
+        "55": "papo_jehan_vario",
+        "56": "papo_jehan_vario",
+        "57": "papo_jehan_vario",
+        "58": "papo_jehan_vario",
+        "59": "papo_jehan_vario"
+      },
+      "padrao": "papo_jehan_1",
+      "raiz": true
+    }
+  },
+  {
+    "id": "papo_nix_1",
+    "chegada": {
+      "somar": {
+        "papo_nix_n": 1
+      },
+      "flags": {
+        "papo_nix_dia": "@dia"
+      },
+      "relacoes": {
+        "nix": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "Nix está de joelhos, esfregando uma mancha do rodapé que parece não querer sair. Quando percebe você, ergue uma sobrancelha.",
+      {
+        "quem": "nix",
+        "texto": "Se for pedir toalha, é no balcão. Se for pedir conversa, eu cobro por minuto."
+      },
+      {
+        "quem": "thiago",
+        "texto": "E se for só passar?"
+      },
+      {
+        "quem": "nix",
+        "texto": "Então passa. Pisa devagar que o chão está molhado."
+      },
+      "Mesmo assim, ela continua a falar, em voz baixa, sem olhar para você.",
+      {
+        "quem": "nix",
+        "texto": "Esse hotel tem mais fofoca por metro quadrado do que quarto por andar. Mas dizem que você é o único hóspede que fala 'obrigado'."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "papo_nix_2",
+    "chegada": {
+      "somar": {
+        "papo_nix_n": 1
+      },
+      "flags": {
+        "papo_nix_dia": "@dia"
+      },
+      "relacoes": {
+        "nix": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "nix",
+        "texto": "Sua suíte é a 14, né? Tem boa luz de manhã. Eu cuido do corredor, se precisar de alguma coisa."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Você cuida de todos os quartos?"
+      },
+      {
+        "quem": "nix",
+        "texto": "De todos que importam."
+      },
+      "Ela abre um sorriso curto, treinado demais, e volta a esfregar.",
+      {
+        "estilo": "pensamento",
+        "texto": "Ela perguntou do meu quarto como se já soubesse a resposta."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "papo_nix_3",
+    "chegada": {
+      "somar": {
+        "papo_nix_n": 1
+      },
+      "flags": {
+        "papo_nix_dia": "@dia"
+      },
+      "relacoes": {
+        "nix": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "nix",
+        "texto": "O pessoal da copa deixa um bolinho para mim às vezes. Tomei um hoje. Quer metade?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Aceito."
+      },
+      "Ela parte o bolo ao meio, entrega a maior parte e finge que não percebeu.",
+      {
+        "quem": "nix",
+        "texto": "Não conta para ninguém que eu sou boazinha. Estraga a reputação."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "papo_nix_vario",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "papo_nix_1",
+        "papo_nix_2",
+        "papo_nix_3"
+      ]
+    }
+  },
+  {
+    "id": "papo_nix",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "papo_nix_n",
+      "casos": {
+        "1": "papo_nix_2",
+        "2": "papo_nix_3",
+        "3": "papo_nix_vario",
+        "4": "papo_nix_vario",
+        "5": "papo_nix_vario",
+        "6": "papo_nix_vario",
+        "7": "papo_nix_vario",
+        "8": "papo_nix_vario",
+        "9": "papo_nix_vario",
+        "10": "papo_nix_vario",
+        "11": "papo_nix_vario",
+        "12": "papo_nix_vario",
+        "13": "papo_nix_vario",
+        "14": "papo_nix_vario",
+        "15": "papo_nix_vario",
+        "16": "papo_nix_vario",
+        "17": "papo_nix_vario",
+        "18": "papo_nix_vario",
+        "19": "papo_nix_vario",
+        "20": "papo_nix_vario",
+        "21": "papo_nix_vario",
+        "22": "papo_nix_vario",
+        "23": "papo_nix_vario",
+        "24": "papo_nix_vario",
+        "25": "papo_nix_vario",
+        "26": "papo_nix_vario",
+        "27": "papo_nix_vario",
+        "28": "papo_nix_vario",
+        "29": "papo_nix_vario",
+        "30": "papo_nix_vario",
+        "31": "papo_nix_vario",
+        "32": "papo_nix_vario",
+        "33": "papo_nix_vario",
+        "34": "papo_nix_vario",
+        "35": "papo_nix_vario",
+        "36": "papo_nix_vario",
+        "37": "papo_nix_vario",
+        "38": "papo_nix_vario",
+        "39": "papo_nix_vario",
+        "40": "papo_nix_vario",
+        "41": "papo_nix_vario",
+        "42": "papo_nix_vario",
+        "43": "papo_nix_vario",
+        "44": "papo_nix_vario",
+        "45": "papo_nix_vario",
+        "46": "papo_nix_vario",
+        "47": "papo_nix_vario",
+        "48": "papo_nix_vario",
+        "49": "papo_nix_vario",
+        "50": "papo_nix_vario",
+        "51": "papo_nix_vario",
+        "52": "papo_nix_vario",
+        "53": "papo_nix_vario",
+        "54": "papo_nix_vario",
+        "55": "papo_nix_vario",
+        "56": "papo_nix_vario",
+        "57": "papo_nix_vario",
+        "58": "papo_nix_vario",
+        "59": "papo_nix_vario"
+      },
+      "padrao": "papo_nix_1",
+      "raiz": true
+    }
+  },
+  {
+    "id": "papo_vovo_1",
+    "chegada": {
+      "somar": {
+        "papo_vovo_n": 1
+      },
+      "flags": {
+        "papo_vovo_dia": "@dia"
+      },
+      "relacoes": {
+        "vovo": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "A velha senhora rega uma samambaia ao lado da porta com um bule de chá. Os cabelos brancos estão presos num lenço, e o xale parece mais velho que o hotel.",
+      {
+        "quem": "vovo",
+        "texto": "Ah, o rapazinho do convite. Pode chegar mais perto, mas no quarto eu não convido ninguém."
+      },
+      {
+        "quem": "thiago",
+        "texto": "A senhora cuida bem das plantas."
+      },
+      {
+        "quem": "vovo",
+        "texto": "Planta é como gente: cresce para o lado de quem fala com ela."
+      },
+      "Ela dá tapinhas na samambaia, que se inclina devagar na sua direção, e você prefere acreditar que foi o vento."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "papo_vovo_2",
+    "chegada": {
+      "somar": {
+        "papo_vovo_n": 1
+      },
+      "flags": {
+        "papo_vovo_dia": "@dia"
+      },
+      "relacoes": {
+        "vovo": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "vovo",
+        "texto": "Tem comido direito? Magro desse jeito, vai o vento levar."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Estou comendo nos horários."
+      },
+      {
+        "quem": "vovo",
+        "texto": "Os horários são bons. A comida é que às vezes engana."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Como assim, engana?"
+      },
+      {
+        "quem": "vovo",
+        "texto": "Ah, meu bem. A gente só descobre o tempero depois de engolir."
+      },
+      "Ela ri baixinho, como uma chaleira esquecida no fogo."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "papo_vovo_3",
+    "chegada": {
+      "somar": {
+        "papo_vovo_n": 1
+      },
+      "flags": {
+        "papo_vovo_dia": "@dia"
+      },
+      "relacoes": {
+        "vovo": {
+          "afeto": 2
+        }
+      },
+      "barras": {
+        "sanidade": 1
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      {
+        "quem": "vovo",
+        "texto": "Eu moro aqui há tanto tempo que as paredes me conhecem pelo nome."
+      },
+      {
+        "quem": "thiago",
+        "texto": "As paredes?"
+      },
+      {
+        "quem": "vovo",
+        "texto": "As paredes e o que mora em cima delas. Mas isso é conversa de velha."
+      },
+      "Lá no alto, na junção do forro com a parede, uma sombra se move, devagar, como se escutasse."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "papo_vovo_vario",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "papo_vovo_1",
+        "papo_vovo_2",
+        "papo_vovo_3"
+      ]
+    }
+  },
+  {
+    "id": "papo_vovo",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "papo_vovo_n",
+      "casos": {
+        "1": "papo_vovo_2",
+        "2": "papo_vovo_3",
+        "3": "papo_vovo_vario",
+        "4": "papo_vovo_vario",
+        "5": "papo_vovo_vario",
+        "6": "papo_vovo_vario",
+        "7": "papo_vovo_vario",
+        "8": "papo_vovo_vario",
+        "9": "papo_vovo_vario",
+        "10": "papo_vovo_vario",
+        "11": "papo_vovo_vario",
+        "12": "papo_vovo_vario",
+        "13": "papo_vovo_vario",
+        "14": "papo_vovo_vario",
+        "15": "papo_vovo_vario",
+        "16": "papo_vovo_vario",
+        "17": "papo_vovo_vario",
+        "18": "papo_vovo_vario",
+        "19": "papo_vovo_vario",
+        "20": "papo_vovo_vario",
+        "21": "papo_vovo_vario",
+        "22": "papo_vovo_vario",
+        "23": "papo_vovo_vario",
+        "24": "papo_vovo_vario",
+        "25": "papo_vovo_vario",
+        "26": "papo_vovo_vario",
+        "27": "papo_vovo_vario",
+        "28": "papo_vovo_vario",
+        "29": "papo_vovo_vario",
+        "30": "papo_vovo_vario",
+        "31": "papo_vovo_vario",
+        "32": "papo_vovo_vario",
+        "33": "papo_vovo_vario",
+        "34": "papo_vovo_vario",
+        "35": "papo_vovo_vario",
+        "36": "papo_vovo_vario",
+        "37": "papo_vovo_vario",
+        "38": "papo_vovo_vario",
+        "39": "papo_vovo_vario",
+        "40": "papo_vovo_vario",
+        "41": "papo_vovo_vario",
+        "42": "papo_vovo_vario",
+        "43": "papo_vovo_vario",
+        "44": "papo_vovo_vario",
+        "45": "papo_vovo_vario",
+        "46": "papo_vovo_vario",
+        "47": "papo_vovo_vario",
+        "48": "papo_vovo_vario",
+        "49": "papo_vovo_vario",
+        "50": "papo_vovo_vario",
+        "51": "papo_vovo_vario",
+        "52": "papo_vovo_vario",
+        "53": "papo_vovo_vario",
+        "54": "papo_vovo_vario",
+        "55": "papo_vovo_vario",
+        "56": "papo_vovo_vario",
+        "57": "papo_vovo_vario",
+        "58": "papo_vovo_vario",
+        "59": "papo_vovo_vario"
+      },
+      "padrao": "papo_vovo_1",
+      "raiz": true
+    }
+  },
+  {
+    "id": "obs_hall_1",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Um casal de hóspedes de pele pálida atravessa o hall conversando em voz baixa. O homem tira o chapéu para a recepção. A recepção, sem ninguém atrás do balcão, tilinta o sino sozinha, como se agradecesse."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hall_base",
+    "fundo": "hall"
+  },
+  {
+    "id": "obs_hall_2",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Um carregador empurra um carrinho de malas até o elevador. Há três malas, mas o carrinho range como se levasse dez. Ninguém comenta."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hall_base",
+    "fundo": "hall"
+  },
+  {
+    "id": "obs_hall_3",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "O relógio de pêndulo do hall bate a hora com um segundo de atraso em relação ao sino do hotel. Você fica atento, e ele de novo atrasa. Parece uma briga antiga entre dois relógios."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hall_base",
+    "fundo": "hall"
+  },
+  {
+    "id": "obs_hall",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "obs_hall_1",
+        "obs_hall_2",
+        "obs_hall_3"
+      ]
+    }
+  },
+  {
+    "id": "obs_refeitorio_1",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Uma atendente de olhos fundos dobra guardanapos em formato de cisnes. Ela faz isso sem olhar, e cada cisne fica perfeito. Quando percebe você, desfaz um, como se tivesse sido flagrada em algo íntimo."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "obs_refeitorio_2",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Numa mesa ao fundo, uma família de hóspedes discute o cardápio com um respeito quase religioso. A criança, de rosto cinzento e olhos grandes, rouba um pão e esconde no bolso do casaquinho."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "obs_refeitorio_3",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Do lado de dentro da cozinha, bem longe, vem o barulho cadenciado de uma faca na tábua. É lento, grave, e pontuado por uma risada rouca que não combina com o ritmo."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "obs_refeitorio",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "obs_refeitorio_1",
+        "obs_refeitorio_2",
+        "obs_refeitorio_3"
+      ]
+    }
+  },
+  {
+    "id": "obs_corredores_1",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Uma porta entreaberta deixa escapar o cheiro doce de bolo no forno. Lá dentro, alguém cantarola uma música sem letra. Quando você passa de novo, a porta está fechada e o cheiro, apagado."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "obs_corredores_2",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "As armaduras estão alinhadas como sempre. Você conta: onze. Na volta, conta onze outra vez. Mas jura que uma está com a mão em posição diferente."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "obs_corredores_3",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Dois funcionários cruzam o corredor carregando um espelho enorme coberto por um pano. Um deles dá um passo para o lado, como se abrisse espaço para alguém que não está lá."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "obs_corredores",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "obs_corredores_1",
+        "obs_corredores_2",
+        "obs_corredores_3"
+      ]
+    }
+  },
+  {
+    "id": "obs_biblioteca_1",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Uma escada de madeira desliza sozinha por um trilho até o alto de uma estante. Enola, sem erguer os olhos do livro, diz: “Ainda não, querida.” A escada para, obediente."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "obs_biblioteca_2",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "A coruja pequena abre uma asa, depois a outra, e vira a cabeça num ângulo que um bicho normal não alcançaria. Ela encara um canto da sala por longos segundos, e então volta a dormir."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "obs_biblioteca_3",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Um livro cai de uma prateleira baixa, aberto numa página em branco. Você o devolve ao lugar. Ao largar, a página escreve, sozinha, uma única palavra: “Obrigado.” Depois some."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "obs_biblioteca",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "obs_biblioteca_1",
+        "obs_biblioteca_2",
+        "obs_biblioteca_3"
+      ]
+    }
+  },
+  {
+    "id": "obs_salao_1",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Os lustres cobertos por panos balançam um pouco, como cabeças de gigantes adormecidos. Em algum ponto do teto, um morcego grande de asas marrons ajeita os pendurados com o cuidado de quem enfeita bolo."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_salao_festas",
+    "fundo": "salao_festas"
+  },
+  {
+    "id": "obs_salao_2",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Uma pilha de cadeiras se desfaz e se refaz, em silêncio, cada uma encontrando seu lugar. Ninguém empurra nenhuma. Você prefere acreditar que são os trabalhadores de madrugada."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_salao_festas",
+    "fundo": "salao_festas"
+  },
+  {
+    "id": "obs_salao_3",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Você pisa no piso quadriculado e o reflexo parece sorrir meio segundo antes de você. Só então você nota que o reflexo usa um smoking. Você, não."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_salao_festas",
+    "fundo": "salao_festas"
+  },
+  {
+    "id": "obs_salao",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "obs_salao_1",
+        "obs_salao_2",
+        "obs_salao_3"
+      ]
+    }
+  },
+  {
+    "id": "obs_musica_1",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "A poeira sobre o piano desenha, ao luar, o contorno de duas mãos. As marcas estão frescas. Você olha as próprias mãos: limpas."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_sala_musica",
+    "fundo": "sala_musica"
+  },
+  {
+    "id": "obs_musica_2",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "A tampa do piano estala, como se alguém acabasse de se sentar. O ar fica gelado por um instante. Depois, o silêncio volta, mais denso do que antes."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_sala_musica",
+    "fundo": "sala_musica"
+  },
+  {
+    "id": "obs_musica",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "obs_musica_1",
+        "obs_musica_2"
+      ]
+    }
+  },
+  {
+    "id": "obs_bar_1",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "As garrafas atrás do balcão refletem a luz âmbar, e em cada uma delas há um rosto que não é o seu. Quando você pisca, os rostos desaparecem. As garrafas, não."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "bar_base",
+    "fundo": "bar"
+  },
+  {
+    "id": "obs_bar_2",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "O relógio de parede marca uma hora, mas as sombras dizem outra. Você não sabe em qual acreditar, e decide que é melhor sentar e esperar a certa."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "bar_base",
+    "fundo": "bar"
+  },
+  {
+    "id": "obs_bar",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "obs_bar_1",
+        "obs_bar_2"
+      ]
+    }
   }
 ]

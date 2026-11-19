@@ -68,6 +68,13 @@ function checarRequisitos(estado, req) {
  *   @refeicao  true nos horários de comer (café 7-9, almoço 12-14, jantar 19-21)
  *   @noite     true na noite proibida (22h às 6h)
  */
+/** Qual refeição do dia está servida agora: "3-cafe", "3-almoco", "3-jantar" (ou "" fora do horário). */
+function turnoAtual(estado) {
+  const h = Math.floor((estado.minutos % MIN_POR_DIA) / 60);
+  const nome = (h >= 7 && h < 9) ? "cafe" : (h >= 12 && h < 14) ? "almoco" : (h >= 19 && h < 21) ? "jantar" : "";
+  return nome ? diaAtual(estado) + "-" + nome : "";
+}
+
 function valorDeFlag(estado, nome) {
   if (nome[0] !== "@") return estado.flags[nome];
   // @pronto:X  -> o relógio já passou do horário guardado na flag X (em minutos)
@@ -100,6 +107,7 @@ function valorDeFlag(estado, nome) {
   if (nome === "@dia") return diaAtual(estado);
   if (nome === "@refeicao") return (h >= 7 && h < 9) || (h >= 12 && h < 14) || (h >= 19 && h < 21);
   if (nome === "@noite") return h >= 22 || h < 6;
+  if (nome === "@turno") return turnoAtual(estado);
   return undefined;
 }
 
@@ -113,7 +121,7 @@ function valorDeFlag(estado, nome) {
 function condicaoSe(estado, se) {
   if (!se) return true;
   const lista = Array.isArray(se) ? se : [se];
-  const resolver = v => (v === "@dia" ? diaAtual(estado) : v);
+  const resolver = v => (v === "@dia" ? diaAtual(estado) : v === "@turno" ? turnoAtual(estado) : v);
   return lista.every(c => {
     const atual = valorDeFlag(estado, c.flag);
     let ok = true, temRegra = false;
@@ -137,6 +145,7 @@ function condicaoSe(estado, se) {
  *     "tempo": 25,                          // gasta 25 minutos
  *     "ate": "03:10", "sono": true,         // pula até a hora (dormindo)
  *     "somar": {"fragmentos": 1},           // soma 1 num contador (flag numérica)
+ *     "habilidades": ["cozinha_basica"],  // aparece no Perfil
  *     "itens": ["chave_quarto"],            // entra no inventário
  *     "conhece": ["mavis"],                 // aparece no painel Social
  *     "hud": ["suspeita"],                  // a tela "acorda" esse elemento
@@ -160,6 +169,7 @@ function aplicarEfeitos(estado, ef) {
   for (const nome in (ef.flags || {})) {
     const v = ef.flags[nome];
     if (v === "@dia") estado.flags[nome] = diaAtual(estado);
+    else if (v === "@turno") estado.flags[nome] = turnoAtual(estado);
     else if (typeof v === "string" && v.startsWith("@+")) estado.flags[nome] = estado.minutos + parseInt(v.slice(2), 10); // daqui a N minutos
     else estado.flags[nome] = v;
   }
@@ -173,6 +183,7 @@ function aplicarEfeitos(estado, ef) {
       estado.relacoes[quem][eixo] = clamp(atual + ef.relacoes[quem][eixo], -100, 100);
     }
   }
+  (ef.habilidades || []).forEach(id => { estado.habilidades = estado.habilidades || []; if (!estado.habilidades.includes(id)) estado.habilidades.push(id); });
   (ef.itens || []).forEach(id => { if (!estado.inventario.includes(id)) estado.inventario.push(id); });
   (ef.tirar_itens || []).forEach(id => { estado.inventario = estado.inventario.filter(x => x !== id); });
   (ef.conhece || []).forEach(id => { if (!estado.conhecidos.includes(id)) estado.conhecidos.push(id); });

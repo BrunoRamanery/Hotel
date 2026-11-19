@@ -66,6 +66,7 @@ function novoEstado() {
     flags: { nome: "Thiago", sobrenome: SOBRENOME_THIAGO },
     tracos: { virtudes: [], vicio: null },
     relacoes: {},
+    habilidades: [],    // ids de habilidades aprendidas (ver itens.js)
     conhecidos: [],     // ids de personagens que Thiago já conheceu (painel Social)
     inventario: [],     // ids de itens carregados (ver itens.js)
     mapa: [],           // ids de áreas liberadas no mapa
@@ -84,7 +85,7 @@ function clamp(valor, minimo = 0, maximo = 100) {
  * `fator` < 1 = dormindo (gasta menos).
  */
 const FOME_POR_MINUTO = 0.12;     // ~7 pontos por hora acordado
-const CANSACO_POR_MINUTO = 0.06;  // ~3,6 pontos por hora acordado (dormindo não gasta)
+const CANSACO_POR_MINUTO = 0.10;  // ~6 pontos por hora acordado: ~16h de pé e o corpo pede cama (dormindo não gasta)
 function avancarTempo(estado, minutos = 0, fator = 1) {
   const m = Math.max(0, minutos);
   estado.minutos += m;
@@ -164,5 +165,7 @@ function resumoTempo(estado) {
 /** Saves de versões antigas do jogo não servem mais: recomeça limpo. */
 function migrarEstado(e) {
   if (!e || typeof e.fome !== "number" || typeof e.cansaco !== "number" || !Array.isArray(e.hud)) return novoEstado();
+  if (!Array.isArray(e.habilidades)) e.habilidades = [];
+  if (e.flags && e.flags.cozinha_basica && !e.habilidades.includes("cozinha_basica")) e.habilidades.push("cozinha_basica");
   return e;
 }
