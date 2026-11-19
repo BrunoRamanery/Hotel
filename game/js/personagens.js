@@ -28,7 +28,23 @@ const PERSONAGENS = {
   porteiro: { nome: "Porteiro", retrato: "img/retratos/porteiro.jpg" },
   desconhecida: { nome: "Desconhecida", retrato: null },
   // A mulher do piano é a Elisabeta, mas o jogo ainda não pode dizer isso.
-  mulher_piano: { nome: "Mulher do Piano", retrato: "img/retratos/mulher_piano.jpg" }
+  mulher_piano: { nome: "Mulher do Piano", retrato: "img/retratos/mulher_piano.jpg" },
+
+  // ---- Personagens das missões da Parte 2 (retratos já prontos, ainda sem cenas) ----
+  // Lily e Nix: os esboços estão em img/retratos/lily.jpg e nix.jpg, mas só entram no jogo
+  // (retrato preenchido aqui em cima) quando elas puderem ser vistas.
+  enola:    { nome: "Enola",    retrato: "img/retratos/enola.jpg" },
+  nosferatu:{ nome: "Nosferatu",retrato: "img/retratos/nosferatu.jpg" },
+  homem_invisivel: { nome: "Homem Invisível", retrato: "img/retratos/homem_invisivel.jpg" },
+  vovo:     { nome: "Vovó",     retrato: "img/retratos/vovo.jpg" },
+  jehan:    { nome: "Jehan",    retrato: "img/retratos/jehan.jpg" },
+  viviane:  { nome: "Viviane",  retrato: "img/retratos/viviane.jpg" },
+  macha:    { nome: "Macha",    retrato: "img/retratos/macha.jpg" },
+  amanda:   { nome: "Amanda",   retrato: "img/retratos/amanda.jpg" },
+  rafaela:  { nome: "Rafaela",  retrato: "img/retratos/rafaela.jpg" },
+  maya:     { nome: "Maya",     retrato: "img/retratos/maya.jpg" },
+  morte:    { nome: "A Criança", retrato: "img/retratos/morte.jpg" },
+  aurora:   { nome: "Aurora",   retrato: "img/retratos/aurora.jpg" }
 };
 
 // Como cada personagem aparece no painel "Social" (estado da relação).

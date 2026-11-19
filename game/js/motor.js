@@ -258,16 +258,33 @@ function substituirNome(texto) {
  * Cada cena pode ter "fundo": "hall" (arquivo img/fundos/hall.jpg) ou null (sem imagem).
  * A imagem troca com um desvanecer suave. Se o arquivo não existir, fica só o preto. */
 let fundoAtual = null;
+// Lugares que têm uma versão de DIA (arquivo NOME_dia.jpg). De manhã e à tarde o jogo usa
+// essa versão; à noite e de madrugada usa a normal. Se o arquivo de dia não existir, usa a normal.
+const FUNDOS_COM_DIA = ["suite14", "corredor"];
+function ehDeDia() {
+  const h = Math.floor((estado.minutos % MIN_POR_DIA) / 60);
+  return h >= 6 && h < 18;
+}
 function pintarFundo(nome) {
-  if (nome === undefined || nome === fundoAtual) return;
-  fundoAtual = nome;
+  if (nome === undefined) return;
+  const arquivo = (nome && FUNDOS_COM_DIA.includes(nome) && ehDeDia()) ? nome + "_dia" : nome;
+  if (arquivo === fundoAtual) return;
+  fundoAtual = arquivo;
   const el = document.getElementById("fundo");
   if (!el) return;
   el.classList.remove("visivel");
-  setTimeout(() => {
-    el.style.backgroundImage = nome ? `url("img/fundos/${nome}.jpg")` : "none";
-    if (nome) el.classList.add("visivel");
+  const mostrar = (nomeArq) => setTimeout(() => {
+    if (fundoAtual !== arquivo) return;
+    el.style.backgroundImage = nomeArq ? `url("img/fundos/${nomeArq}.jpg")` : "none";
+    if (nomeArq) el.classList.add("visivel");
   }, 350);
+  if (arquivo && arquivo !== nome) {
+    // versão de dia: confere se o arquivo existe; se não, usa a normal
+    const teste = new Image();
+    teste.onload = () => mostrar(arquivo);
+    teste.onerror = () => mostrar(nome);
+    teste.src = `img/fundos/${arquivo}.jpg`;
+  } else mostrar(arquivo);
 }
 
 /* ----- mostrar uma cena na tela ----- */
