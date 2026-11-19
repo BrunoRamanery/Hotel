@@ -2173,7 +2173,11 @@
   {
     "id": "c18_janela",
     "chegada": {
-      "tempo": 2
+      "tempo": 2,
+      "flags": {
+        "lugar": "suite14",
+        "invisivel_ativo": true
+      }
     },
     "narrativa": [
       "Você desdobra o mapa sobre a cama. Uma sombra clara cruza a janela.",
@@ -2184,23 +2188,7 @@
         "texto": "Este quarto fica no sétimo andar."
       }
     ],
-    "destino_auto": "c19_fim",
-    "fundo": "suite14"
-  },
-  {
-    "id": "c19_fim",
-    "narrativa": [
-      "Capítulo 1 — A Chegada.",
-      "",
-      "Você tem um mapa, uma chave, um bilhete dourado e a vaga sensação de que o hotel sabe mais sobre você do que você sobre ele.",
-      "A partir daqui, o hotel se abre. As missões, as pessoas e os segredos esperam por você. Algumas desaparecem se você demorar demais.",
-      "",
-      "Obrigado por jogar esta primeira parte. Se algo parecer estranho, anote a cena e a hora que aparece no relógio e me conte."
-    ],
-    "dados": {
-      "final": true,
-      "mostrar_tempo": true
-    },
+    "destino_auto": "hub_suite14",
     "fundo": "suite14"
   }
 ]

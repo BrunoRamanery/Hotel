@@ -60,6 +60,7 @@ body{
 .preench{height:100%; width:0; border-radius:6px; transition:width .5s ease}
 .b-vida .preench{background:var(--vida)}
 .b-fome .preench{background:#c08a3e}
+.b-cansaco .preench{background:#8d7fb8}
 .b-sanidade .preench{background:var(--sanidade)}
 .b-suspeita .preench{background:var(--sangue)}
 .barra .val{font-size:11px; color:var(--tinta-suave); text-align:right; font-variant-numeric:tabular-nums}
@@ -245,3 +246,19 @@ body.perigo{background:radial-gradient(130% 90% at 50% -10%, #2a1416 0%, var(--n
   background:linear-gradient(rgba(8,9,13,.15), rgba(8,9,13,.30) 60%, rgba(8,9,13,.45))}
 .moldura{background:rgba(10,12,17,.66); box-shadow:0 0 70px 40px rgba(10,12,17,.66);
   min-height:100vh}
+
+/* botão "ir" do mapa e "usar" do inventário */
+.btn-ir{margin-left:auto; background:var(--painel2); border:1px solid var(--vela); color:var(--vela);
+  font-family:"Cinzel",serif; font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  padding:4px 12px; border-radius:6px; cursor:pointer}
+.btn-ir:hover{background:var(--vela); color:#111}
+.lista-mapa .aqui{margin-left:auto; color:var(--tinta-suave); font-size:13px}
+
+/* seleção (estoque) */
+.selecao{margin-top:22px; border:1px solid var(--borda); border-radius:6px; background:rgba(20,24,34,.5); padding:14px}
+.sel-grade{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:8px; margin:10px 0 14px}
+.sel-item{font-family:inherit; font-size:15px; color:var(--tinta); text-align:left; padding:10px 12px;
+  background:var(--painel); border:1px solid var(--borda); border-radius:4px; cursor:pointer}
+.sel-item:hover{border-color:var(--vela)}
+.sel-item.marcado{border-color:var(--vela); background:var(--painel2); color:var(--vela)}
+.selecao .confirmar{width:100%}

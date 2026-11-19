@@ -28,6 +28,10 @@ const PERSONAGENS = {
   porteiro: { nome: "Porteiro", retrato: "img/retratos/porteiro.jpg" },
   desconhecida: { nome: "Desconhecida", retrato: null },
   // A mulher do piano é a Elisabeta, mas o jogo ainda não pode dizer isso.
+  mulher_piano_medo: { nome: "Mulher do Piano", retrato: "img/retratos/mulher_piano_medo.jpg" },
+  elisabeta: { nome: "Elisabeta", retrato: "img/retratos/mulher_piano.jpg" },
+  paciente: { nome: "Paciente", retrato: null },
+  voz:      { nome: "Voz",      retrato: null },
   mulher_piano: { nome: "Mulher do Piano", retrato: "img/retratos/mulher_piano.jpg" },
 
   // ---- Personagens das missões da Parte 2 (retratos já prontos, ainda sem cenas) ----
@@ -44,6 +48,8 @@ const PERSONAGENS = {
   rafaela:  { nome: "Rafaela",  retrato: "img/retratos/rafaela.jpg" },
   maya:     { nome: "Maya",     retrato: "img/retratos/maya.jpg" },
   morte:    { nome: "A Criança", retrato: "img/retratos/morte.jpg" },
+  // A Morte muda de forma: aqui aparece como jovem adulta (nome provisório, o jogador não sabe quem é).
+  morte_jovem: { nome: "A Moça", retrato: "img/retratos/morte_jovem.jpg" },
   aurora:   { nome: "Aurora",   retrato: "img/retratos/aurora.jpg" }
 };
 

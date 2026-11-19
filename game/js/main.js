@@ -18,7 +18,7 @@ const INICIO = "c01_bilhete";
 
 // Quais arquivos de cena carregar. Ao criar um ato novo,
 // basta adicionar o arquivo aqui (ex.: "cenas/ato2.json").
-const ARQUIVOS_DE_CENA = ["cenas/ato1.json"];
+const ARQUIVOS_DE_CENA = ["cenas/ato1.json", "cenas/ato1_parte2.json"];
 
 /** Mostra uma caixa de erro grande e explicada no lugar do jogo. */
 function mostrarErro(tituloHtml, corpoHtml) {

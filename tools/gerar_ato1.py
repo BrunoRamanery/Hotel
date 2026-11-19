@@ -610,17 +610,7 @@ cena("c18_janela", [
     "Você levanta os olhos. No parapeito, do lado de fora, uma gata branca de olhos azuis observa você através do vidro.",
     "Ela fica imóvel por um instante. Então salta para o vazio.",
     pens("Este quarto fica no sétimo andar."),
-], destino_auto="c19_fim", chegada={"tempo": 2})
-
-cena("c19_fim", [
-    "Capítulo 1 — A Chegada.",
-    "",
-    "Você tem um mapa, uma chave, um bilhete dourado e a vaga sensação de que o hotel sabe mais sobre você do que você sobre ele.",
-    "A partir daqui, o hotel se abre. As missões, as pessoas e os segredos esperam por você. Algumas desaparecem se você demorar demais.",
-    "",
-    "Obrigado por jogar esta primeira parte. Se algo parecer estranho, anote a cena e a hora que aparece no relógio e me conte.",
-], dados={"final": True, "mostrar_tempo": True})
-
+], destino_auto="hub_suite14", chegada={"tempo": 2, "flags": {"lugar": "suite14", "invisivel_ativo": True}})
 
 # ---- imagem de fundo de cada cena (arquivo em img/fundos/NOME.jpg; None = sem imagem) ----
 FUNDOS = {
@@ -634,7 +624,7 @@ FUNDOS = {
  "c15_refeitorio":"refeitorio", "c16_arthur":"refeitorio", "c16_casal":"refeitorio", "c16_eugenie":"refeitorio",
  "c17_tutorial":"refeitorio", "c17_sorteio":"refeitorio", "c17_despedida":"refeitorio",
  "c18_corredor":"corredor", "c18_cond":"suite14", "c18_ligacao":"suite14", "c18_ligacao_fim":"suite14",
- "c18_mapa":"suite14", "c18_janela":"suite14", "c19_fim":"suite14",
+ "c18_mapa":"suite14", "c18_janela":"suite14",
 }
 for _c in C:
     if _c["id"] in FUNDOS: _c["fundo"] = FUNDOS[_c["id"]]

@@ -41,6 +41,10 @@ function checarRequisitos(estado, req) {
     }
   }
 
+  // exige itens no inventário / exige NÃO ter certos itens
+  for (const id of (req.itens || [])) if (!estado.inventario.includes(id)) return false;
+  for (const id of (req.sem_itens || [])) if (estado.inventario.includes(id)) return false;
+
   // exige uma flag, ex.: { "tomou_banho": true }
   const flags = req.flags || {};
   for (const nome in flags) {
@@ -57,14 +61,67 @@ function checarRequisitos(estado, req) {
  *   "se": { "flag": "tomou_banho", "valor": true }
  *   "se": { "flag": "lily_conhecida", "diferente": true }
  */
+/**
+ * Flags "virtuais": calculadas na hora, a partir do relógio. Começam com "@".
+ *   @hora      hora cheia atual (0 a 23)
+ *   @dia       número do dia desde a chegada
+ *   @refeicao  true nos horários de comer (café 7-9, almoço 12-14, jantar 19-21)
+ *   @noite     true na noite proibida (22h às 6h)
+ */
+function valorDeFlag(estado, nome) {
+  if (nome[0] !== "@") return estado.flags[nome];
+  // @pronto:X  -> o relógio já passou do horário guardado na flag X (em minutos)
+  if (nome.startsWith("@pronto:")) {
+    const alvo = estado.flags[nome.slice(8)];
+    return alvo !== undefined && estado.minutos >= alvo;
+  }
+  // @arthur -> Vestido concluído + pelo menos 6 fragmentos (e Arthur ainda não visto)
+  if (nome === "@arthur") {
+    return estado.flags.vestido_estado === "concluido" && (estado.flags.fragmentos || 0) >= 6
+        && estado.flags.arthur_estado === undefined;
+  }
+  // @jehan -> Vestido concluído e, se Arthur já está liberado, ele vem antes; Jehan ainda não visto
+  if (nome === "@jehan") {
+    return estado.flags.vestido_estado === "concluido" && estado.flags.jehan_estado === undefined
+        && (estado.flags.arthur_estado === "concluido" || (estado.flags.fragmentos || 0) < 6);
+  }
+  // @dia_passou:X -> já virou o dia depois do dia guardado na flag X (precisa dormir/virar o dia)
+  if (nome.startsWith("@dia_passou:")) {
+    const d = estado.flags[nome.slice(12)];
+    return d !== undefined && diaAtual(estado) > d;
+  }
+  // @propostas -> Jonathan e Mavis já tiveram resposta (aceita ou recusada)
+  if (nome === "@propostas") {
+    const j = estado.flags.jon_estado, m = estado.flags.mavis_estado;
+    return j !== undefined && m !== undefined && m !== "derrubou";
+  }
+  const h = Math.floor((estado.minutos % MIN_POR_DIA) / 60);
+  if (nome === "@hora") return h;
+  if (nome === "@dia") return diaAtual(estado);
+  if (nome === "@refeicao") return (h >= 7 && h < 9) || (h >= 12 && h < 14) || (h >= 19 && h < 21);
+  if (nome === "@noite") return h >= 22 || h < 6;
+  return undefined;
+}
+
+/**
+ * Uma condição "se" (uma ou várias, todas precisam ser verdadeiras):
+ *   {flag:"x"}                  a flag está ligada
+ *   {flag:"x", valor:V}         é igual a V        ("@dia" = o dia de hoje)
+ *   {flag:"x", diferente:V}     é diferente de V
+ *   {flag:"x", min:N, max:M}    número entre N e M
+ */
 function condicaoSe(estado, se) {
   if (!se) return true;
   const lista = Array.isArray(se) ? se : [se];
+  const resolver = v => (v === "@dia" ? diaAtual(estado) : v);
   return lista.every(c => {
-    const atual = estado.flags[c.flag];
-    if ("valor" in c) return atual === c.valor;
-    if ("diferente" in c) return atual !== c.diferente;
-    return !!atual;   // só "flag": basta estar ligada
+    const atual = valorDeFlag(estado, c.flag);
+    let ok = true, temRegra = false;
+    if ("valor" in c)     { temRegra = true; ok = ok && atual === resolver(c.valor); }
+    if ("diferente" in c) { temRegra = true; ok = ok && atual !== resolver(c.diferente); }
+    if ("min" in c)       { temRegra = true; ok = ok && (atual || 0) >= c.min; }
+    if ("max" in c)       { temRegra = true; ok = ok && (atual || 0) <= c.max; }
+    return temRegra ? ok : !!atual;   // sem regra: basta a flag estar ligada
   });
 }
 
@@ -79,6 +136,7 @@ function condicaoSe(estado, se) {
  *     "relacoes": { "mavis": { "afeto": 5 } },
  *     "tempo": 25,                          // gasta 25 minutos
  *     "ate": "03:10", "sono": true,         // pula até a hora (dormindo)
+ *     "somar": {"fragmentos": 1},           // soma 1 num contador (flag numérica)
  *     "itens": ["chave_quarto"],            // entra no inventário
  *     "conhece": ["mavis"],                 // aparece no painel Social
  *     "hud": ["suspeita"],                  // a tela "acorda" esse elemento
@@ -100,7 +158,13 @@ function aplicarEfeitos(estado, ef) {
     estado[nome] = ef.definir[nome];
   }
   for (const nome in (ef.flags || {})) {
-    estado.flags[nome] = ef.flags[nome];
+    const v = ef.flags[nome];
+    if (v === "@dia") estado.flags[nome] = diaAtual(estado);
+    else if (typeof v === "string" && v.startsWith("@+")) estado.flags[nome] = estado.minutos + parseInt(v.slice(2), 10); // daqui a N minutos
+    else estado.flags[nome] = v;
+  }
+  for (const nome in (ef.somar || {})) {            // contadores: "somar": {"fragmentos": 1}
+    estado.flags[nome] = (estado.flags[nome] || 0) + ef.somar[nome];
   }
   for (const quem in (ef.relacoes || {})) {
     estado.relacoes[quem] = estado.relacoes[quem] || {};
@@ -147,4 +211,25 @@ function rolarTeste(estado, teste) {
 
   const passou = (valor - dado) >= (dificuldade - 50);
   return { passou, categoria: passou ? "sucesso" : "falha" };
+}
+
+
+/**
+ * Confere se o corpo do Thiago "pede" uma cena de emergência. Chamada depois
+ * que o tempo passa (ao andar pelo mapa, dormir...). Devolve o id da cena
+ * para onde desviar, ou null se está tudo bem.
+ *   Fome 0            -> morte
+ *   Fome <= 5         -> desmaio (acorda na clínica)
+ *   Cansaço 0         -> desmaio
+ *   Fome <= 10        -> alucinação (no máximo uma a cada 3 horas)
+ */
+function situacaoCritica(estado) {
+  if (!estado.flags.fome_ativa) return null;
+  if (estado.fome <= 0) return "morte_fome";
+  if (estado.fome <= 5 || estado.cansaco <= 0) return "desmaio";
+  if (estado.fome <= 10) {
+    const bloco = Math.floor(estado.minutos / 180);
+    if (estado.flags.alucinou_bloco !== bloco) return "alucinacao";
+  }
+  return null;
 }

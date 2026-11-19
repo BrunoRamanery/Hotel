@@ -1,7 +1,7 @@
-# Hotel Los Segredos — Capítulo 1 (A Chegada)
+# Hotel Los Segredos — Ato 1 (A Chegada e o Hóspede)
 
 Jogo narrativo de texto. Roda no navegador (HTML, CSS e JavaScript).
-Esta versão cobre o **Ato 1, cenas 1 a 18**: do bilhete dourado ao mapa do hotel.
+Esta versão cobre o **Ato 1 completo**: do bilhete dourado ao pedido de desculpas da Elisabeta, com exploração livre pelo mapa, missões, fome, cansaço e horários.
 
 ## Como rodar (Windows, dois cliques)
 

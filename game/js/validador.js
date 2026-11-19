@@ -26,6 +26,8 @@
 function validarCenas(cenas, inicio) {
   const problemas = [];
   const ids = new Set(Object.keys(cenas));
+  // destinos que começam com "@" são atalhos do motor (@hub, @mapa), não cenas
+  const ehAtalho = alvo => typeof alvo === "string" && alvo[0] === "@";
 
   // a cena inicial precisa existir
   if (!ids.has(inicio)) {
@@ -41,6 +43,7 @@ function validarCenas(cenas, inicio) {
         destinos.push(typeof op === "object" ? op.destino : op);
       });
     }
+    if (cena.tipo === "selecao" && cena.dados && cena.dados.destino) destinos.push(cena.dados.destino);
     if (cena.tipo === "condicional" && cena.dados) {
       Object.values(cena.dados.casos || {}).forEach(d => destinos.push(d));
       if (cena.dados.padrao) destinos.push(cena.dados.padrao);
@@ -58,21 +61,22 @@ function validarCenas(cenas, inicio) {
   Object.values(cenas).forEach(cena => {
     let temSaida = !!cena.destino_auto
       || (cena.tipo === "sorteio" && !!(cena.dados && cena.dados.opcoes && cena.dados.opcoes.length))
-      || (cena.tipo === "condicional" && !!(cena.dados && cena.dados.casos));
+      || (cena.tipo === "condicional" && !!(cena.dados && cena.dados.casos))
+      || (cena.tipo === "selecao" && !!(cena.dados && cena.dados.destino));
 
     // conferir também se os destinos do sorteio existem de fato
     if (cena.tipo === "sorteio" && cena.dados && cena.dados.opcoes) {
       cena.dados.opcoes.forEach(op => {
         const alvo = typeof op === "object" ? op.destino : op;
-        if (!ids.has(alvo)) problemas.push(`Cena '${cena.id}' (sorteio): o destino '${alvo}' não existe.`);
+        if (!ehAtalho(alvo) && !ids.has(alvo)) problemas.push(`Cena '${cena.id}' (sorteio): o destino '${alvo}' não existe.`);
       });
     }
     // conferir os destinos do condicional
     if (cena.tipo === "condicional" && cena.dados) {
       Object.entries(cena.dados.casos || {}).forEach(([caso, alvo]) => {
-        if (!ids.has(alvo)) problemas.push(`Cena '${cena.id}' (condicional, caso '${caso}'): o destino '${alvo}' não existe.`);
+        if (!ehAtalho(alvo) && !ids.has(alvo)) problemas.push(`Cena '${cena.id}' (condicional, caso '${caso}'): o destino '${alvo}' não existe.`);
       });
-      if (cena.dados.padrao && !ids.has(cena.dados.padrao)) {
+      if (cena.dados.padrao && !ehAtalho(cena.dados.padrao) && !ids.has(cena.dados.padrao)) {
         problemas.push(`Cena '${cena.id}' (condicional, padrão): o destino '${cena.dados.padrao}' não existe.`);
       }
     }
@@ -84,7 +88,7 @@ function validarCenas(cenas, inicio) {
       if (alvos.some(Boolean)) temSaida = true;
 
       alvos.forEach(alvo => {
-        if (alvo && !ids.has(alvo)) {
+        if (alvo && !ehAtalho(alvo) && !ids.has(alvo)) {
           problemas.push(`Cena '${cena.id}', opção '${op.id}': o destino '${alvo}' não existe.`);
         }
       });
@@ -100,7 +104,11 @@ function validarCenas(cenas, inicio) {
   // 2) cenas que ninguém consegue alcançar partindo do início
   if (ids.has(inicio)) {
     const vistos = new Set();
+    // cenas que o MOTOR chama sozinho (lugares do mapa, travessuras, emergências) são pontos de partida
     const fila = [inicio];
+    Object.values(cenas).forEach(c => {
+      if (c.dados && (c.dados.hub || c.dados.evento_invisivel || c.dados.raiz)) fila.push(c.id);
+    });
     while (fila.length) {
       const atual = fila.pop();
       if (vistos.has(atual)) continue;

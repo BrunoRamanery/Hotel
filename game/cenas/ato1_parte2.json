@@ -1,0 +1,4447 @@
+[
+  {
+    "id": "regra_noite",
+    "chegada": {
+      "flags": {
+        "lugar": "suite14"
+      }
+    },
+    "narrativa": [
+      "Você mal pisa no corredor quando uma figura gigantesca surge no fim dele, a cabeça quase tocando o teto. Um homem enorme, de rosto cheio de cicatrizes, com um terno impecável.",
+      "“Hóspedes não circulam depois das dez da noite, senhor.” A voz dele é baixa, educadíssima, e por isso mesmo assusta.",
+      "Ele acompanha você de volta até a porta da suíte, sem pressa e sem fazer uma única pergunta.",
+      {
+        "estilo": "sistema",
+        "texto": "Sua Suspeita aumentou. Respeite os horários do hotel: nada de circular entre 22h e 6h."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "corredor"
+  },
+  {
+    "id": "alucinacao",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "alucinacao_1",
+        "alucinacao_2",
+        "alucinacao_3"
+      ]
+    }
+  },
+  {
+    "id": "alucinacao_1",
+    "chegada": {
+      "barras": {
+        "sanidade": -5
+      }
+    },
+    "narrativa": [
+      "O papel de parede se mexe, devagar, como se algo respirasse atrás dele. Você encara por um longo segundo.",
+      "Pisca. Tudo volta ao normal.",
+      {
+        "estilo": "sistema",
+        "texto": "A fome está alta demais e você vê coisas que não existem. Sua Sanidade caiu. Coma algo logo."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "@hub"
+  },
+  {
+    "id": "alucinacao_2",
+    "chegada": {
+      "barras": {
+        "sanidade": -5
+      }
+    },
+    "narrativa": [
+      "Há um prato fumegante sobre o balcão. O cheiro de pão quente enche o ar, tão real que sua boca chega a salivar.",
+      "Você estica a mão. O balcão está vazio.",
+      {
+        "estilo": "sistema",
+        "texto": "A fome está alta demais e você vê coisas que não existem. Sua Sanidade caiu. Coma algo logo."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "@hub"
+  },
+  {
+    "id": "alucinacao_3",
+    "chegada": {
+      "barras": {
+        "sanidade": -5
+      }
+    },
+    "narrativa": [
+      "Seus passos ecoam duas vezes. Uma terceira. Alguém caminha logo atrás de você, no mesmo ritmo.",
+      "Você se vira de uma vez. Ninguém.",
+      {
+        "estilo": "sistema",
+        "texto": "A fome está alta demais e você ouve coisas que não existem. Sua Sanidade caiu. Coma algo logo."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "@hub"
+  },
+  {
+    "id": "desmaio",
+    "chegada": {
+      "tempo": 180,
+      "definir": {
+        "fome": 45,
+        "cansaco": 55
+      },
+      "barras": {
+        "sanidade": -5
+      },
+      "flags": {
+        "lugar": "suite14"
+      }
+    },
+    "narrativa": [
+      "O chão se inclina. O corredor se alonga como um túnel e as bordas da visão escurecem, devagar, até restar nada.",
+      "Quando você volta a si, está deitado numa maca, sob uma luz amarelada. Cheiro de álcool e de ervas.",
+      "Alguém cuidou de você: há um copo d'água na mesinha e um pedaço de pão sobre um guardanapo. Quando você tenta se levantar, a cabeça gira. Você come e bebe tudo, lentamente.",
+      "Ao anoitecer, uma funcionária acompanha você de volta à suíte, em silêncio.",
+      {
+        "estilo": "sistema",
+        "texto": "Você desmaiou de fome ou de cansaço e foi levado à clínica. Cuide do corpo: coma nos horários e durma."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "clinica"
+  },
+  {
+    "id": "morte_fome",
+    "narrativa": [
+      "Você não sente mais o estômago. Nem as mãos. O corredor fica longe, como se você olhasse por um vidro sujo.",
+      "Os joelhos cedem. O tapete vem ao seu encontro com uma suavidade que você não esperava.",
+      "Ninguém aparece a tempo.",
+      "Sua história termina aqui. Lembre-se sempre de comer."
+    ],
+    "dados": {
+      "final": true,
+      "raiz": true
+    }
+  },
+  {
+    "id": "dormiu",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "barras": {
+        "cansaco": 100,
+        "sanidade": 30,
+        "vida": 10
+      },
+      "flags": {
+        "lugar": "suite14"
+      }
+    },
+    "narrativa": [
+      "Você afunda no colchão. O hotel range, respira e ao longe, quase imperceptível, uma música de piano atravessa as paredes.",
+      "Quando acorda, a luz da manhã empurra as cortinas. Seu corpo pesa menos.",
+      {
+        "estilo": "sistema",
+        "texto": "Você dormiu. Cansaço e Sanidade recuperados. A Fome, porém, também cobrou o seu preço durante a noite."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "suite14"
+  },
+  {
+    "id": "cochilo",
+    "chegada": {
+      "tempo": 180,
+      "sono": true,
+      "barras": {
+        "cansaco": 25,
+        "sanidade": 5
+      }
+    },
+    "narrativa": [
+      "Você se deita só por um momento e cai num sono leve, sem sonhos.",
+      "Quando abre os olhos, algumas horas se foram. Você se sente um pouco melhor."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "suite14"
+  },
+  {
+    "id": "suite_base",
+    "narrativa": [
+      "Sua suíte. A cama está arrumada, a janela fechada, e o abajur desenha sombras compridas nas paredes.",
+      {
+        "texto": "O quarto está em silêncio, mas você tem a sensação de que o hotel inteiro respira do outro lado da porta.",
+        "se": {
+          "flag": "@noite"
+        }
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Nova barra: <b>Cansaço</b>. Ela cai com o tempo acordado. Quando chega a zero você desmaia, e dormir é o que a recupera. Dormir também restaura a Sanidade.",
+        "se": {
+          "flag": "tut_cansaco",
+          "diferente": true
+        },
+        "ao_mostrar": {
+          "flags": {
+            "tut_cansaco": true
+          },
+          "hud": [
+            "cansaco"
+          ]
+        }
+      }
+    ],
+    "dados": {
+      "hub": true
+    },
+    "opcoes": [
+      {
+        "id": "pegar_sacola",
+        "texto": "Pegar a sacola deixada junto à porta",
+        "destino": "ingredientes_recebidos",
+        "se": [
+          {
+            "flag": "eug_estado",
+            "valor": "ingredientes"
+          },
+          {
+            "flag": "@dia_passou:ing_dia"
+          }
+        ]
+      },
+      {
+        "id": "dormir_noite",
+        "texto": "Dormir até de manhã",
+        "destino": "dormir_gate",
+        "se": {
+          "flag": "@hora",
+          "min": 19
+        }
+      },
+      {
+        "id": "dormir_madrugada",
+        "texto": "Dormir até de manhã",
+        "destino": "dormir_gate",
+        "se": {
+          "flag": "@hora",
+          "max": 5
+        }
+      },
+      {
+        "id": "cochilar",
+        "texto": "Tirar um cochilo (3 horas)",
+        "destino": "cochilo",
+        "se": [
+          {
+            "flag": "@hora",
+            "min": 6,
+            "max": 18
+          }
+        ]
+      },
+      {
+        "id": "mapa",
+        "texto": "Abrir o mapa",
+        "destino": "@mapa"
+      }
+    ],
+    "fundo": "suite14"
+  },
+  {
+    "id": "hub_corredores",
+    "narrativa": [
+      "Os corredores dos quartos: tapete vermelho, armaduras vazias alinhadas como sentinelas e portas fechadas, cada uma com um número de bronze.",
+      {
+        "texto": "A luz é fraca e o silêncio, pesado.",
+        "se": {
+          "flag": "@noite"
+        }
+      },
+      {
+        "texto": "Desde ontem, o hotel parece outro: guirlandas escuras, fitas douradas e cartazes do aniversário se espalham por todo canto.",
+        "se": {
+          "flag": "clinica_ataque"
+        }
+      }
+    ],
+    "dados": {
+      "hub": true
+    },
+    "opcoes": [
+      {
+        "id": "morte_levar",
+        "texto": "Levar a bandeja ao quarto no fim do corredor",
+        "destino": "morte_quarto_cond",
+        "se": {
+          "flag": "morte_estado",
+          "valor": "aceita"
+        },
+        "requisitos": {
+          "itens": [
+            "bandeja_morte"
+          ]
+        }
+      },
+      {
+        "id": "vestido_ir",
+        "texto": "Seguir a voz de Gabriel, que acaba de sair do quarto",
+        "destino": "vestido_inicio",
+        "se": {
+          "flag": "vestido_estado",
+          "valor": "aberto"
+        }
+      },
+      {
+        "id": "mavis_ajudar",
+        "texto": "Ajudar a moça que derrubou os papéis",
+        "destino": "mavis_oferta",
+        "se": {
+          "flag": "mavis_estado",
+          "valor": "derrubou"
+        }
+      },
+      {
+        "id": "nix_falar",
+        "texto": "Falar com a camareira que varre o corredor",
+        "destino": "nix_oferta",
+        "se": [
+          {
+            "flag": "lily_conhecida",
+            "valor": true
+          },
+          {
+            "flag": "nix_estado",
+            "diferente": "pedido"
+          },
+          {
+            "flag": "nix_estado",
+            "diferente": "concluida"
+          }
+        ]
+      },
+      {
+        "id": "nix_entregar",
+        "texto": "Entregar a vassoura à camareira",
+        "destino": "nix_entrega",
+        "se": {
+          "flag": "nix_estado",
+          "valor": "pedido"
+        },
+        "requisitos": {
+          "itens": [
+            "vassoura"
+          ]
+        }
+      },
+      {
+        "id": "vovo_entrar",
+        "texto": "Alcançar a senhora que entra no quarto",
+        "destino": "vovo_convite",
+        "se": [
+          {
+            "flag": "jon_estado",
+            "valor": "aceita"
+          },
+          {
+            "flag": "conv_vovo",
+            "diferente": true
+          }
+        ],
+        "requisitos": {
+          "itens": [
+            "convite_vovo"
+          ]
+        }
+      },
+      {
+        "id": "mapa",
+        "texto": "Abrir o mapa",
+        "destino": "@mapa"
+      }
+    ],
+    "fundo": "corredor"
+  },
+  {
+    "id": "biblioteca_base",
+    "narrativa": [
+      "A biblioteca. Estantes altas até o teto, escadas de madeira e o cheiro doce de papel antigo. Uma bibliotecária de cabelos brancos arruma livros numa mesa, com uma coruja pequena empoleirada ao lado."
+    ],
+    "dados": {
+      "hub": true
+    },
+    "opcoes": [
+      {
+        "id": "nosf_falar",
+        "texto": "Aproximar-se do idoso que lê na mesa afastada",
+        "destino": "nosferatu_convite",
+        "se": [
+          {
+            "flag": "jon_estado",
+            "valor": "aceita"
+          },
+          {
+            "flag": "conv_biblio",
+            "diferente": true
+          }
+        ],
+        "requisitos": {
+          "itens": [
+            "convite_biblioteca"
+          ]
+        }
+      },
+      {
+        "id": "arthur_falar",
+        "texto": "Aproximar-se do rapaz que lê dois diários, sozinho",
+        "destino": "arthur_intro",
+        "se": {
+          "flag": "@arthur"
+        }
+      },
+      {
+        "id": "enola_salao",
+        "texto": "Contar a Enola que as peças estão prontas",
+        "destino": "enola_salao",
+        "se": [
+          {
+            "flag": "mavis_estado",
+            "valor": "entregar"
+          },
+          {
+            "flag": "salao_liberado",
+            "diferente": true
+          }
+        ]
+      },
+      {
+        "id": "mapa",
+        "texto": "Abrir o mapa",
+        "destino": "@mapa"
+      }
+    ],
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "hub_sala_musica",
+    "narrativa": [
+      "A sala de música. O piano de cauda repousa no centro, coberto por uma poeira fina que brilha ao luar. Tudo parece esperar alguém."
+    ],
+    "dados": {
+      "hub": true
+    },
+    "opcoes": [
+      {
+        "id": "invis_convite",
+        "texto": "Entrar na sala de onde vem a música",
+        "destino": "invisivel_convite",
+        "se": [
+          {
+            "flag": "jon_estado",
+            "valor": "aceita"
+          },
+          {
+            "flag": "conv_musica",
+            "diferente": true
+          }
+        ],
+        "requisitos": {
+          "itens": [
+            "convite_musica"
+          ]
+        }
+      },
+      {
+        "id": "mapa",
+        "texto": "Abrir o mapa",
+        "destino": "@mapa"
+      }
+    ],
+    "fundo": "sala_musica"
+  },
+  {
+    "id": "hub_hall",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "maya_vista",
+      "casos": {
+        "true": "hall_base"
+      },
+      "padrao": "maya_encontro",
+      "raiz": true
+    }
+  },
+  {
+    "id": "maya_encontro",
+    "narrativa": [
+      "Algo roça seu tornozelo, frio como orvalho. Você olha para baixo.",
+      "Uma cachorrinha de pelo caramelo, com uma listra branca descendo da testa até o focinho, o peito claro e as patas da frente brancas, salpicadas de pintinhas marrons. As orelhas caem, mansas. Os olhos escuros fitam você com uma ternura que parte o coração.",
+      "Mas o pelo dela é translúcido. Através do corpo, você enxerga o desenho do mármore no chão.",
+      "Ninguém mais no hall parece vê-la.",
+      "Ela encosta o focinho na sua mão. Depois olha para a porta do refeitório, e de novo para você. As costelas aparecem sob o pelo claro.",
+      {
+        "estilo": "pensamento",
+        "texto": "Ela está com fome. E com sede."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Dica: no refeitório você pode pegar <b>comida</b> e <b>água</b> para levar. Uma vez por dia, você pode alimentar a Maya, e isso aproxima vocês.",
+        "ao_mostrar": {
+          "flags": {
+            "maya_vista": true
+          },
+          "conhece": [
+            "maya"
+          ],
+          "hud": [
+            "social"
+          ],
+          "marcadores": [
+            {
+              "area": "hall",
+              "texto": "Maya está com fome"
+            }
+          ]
+        }
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hall_base",
+    "fundo": "hall"
+  },
+  {
+    "id": "hall_base",
+    "narrativa": [
+      "O hall de entrada. O balcão da recepção, o elevador de grades douradas e, ao fundo, as portas pesadas que dão para o portão. Estão fechadas.",
+      {
+        "texto": "Desde ontem, o hotel parece outro: guirlandas escuras, fitas douradas e cartazes do aniversário se espalham por todo canto.",
+        "se": {
+          "flag": "clinica_ataque"
+        }
+      },
+      {
+        "texto": "Maya cochila aos seus pés, quase invisível à luz do lustre.",
+        "se": [
+          {
+            "flag": "maya_vista"
+          },
+          {
+            "flag": "maya_dia",
+            "valor": "@dia"
+          }
+        ]
+      },
+      {
+        "texto": "Maya olha para você, esperançosa. Você não tem o que oferecer a ela.",
+        "se": [
+          {
+            "flag": "maya_vista"
+          },
+          {
+            "flag": "maya_dia",
+            "diferente": "@dia"
+          }
+        ]
+      }
+    ],
+    "dados": {
+      "hub": true
+    },
+    "opcoes": [
+      {
+        "id": "maya_dar",
+        "texto": "Dar comida e água à Maya",
+        "destino": "maya_come",
+        "se": [
+          {
+            "flag": "maya_vista"
+          },
+          {
+            "flag": "maya_dia",
+            "diferente": "@dia"
+          }
+        ],
+        "requisitos": {
+          "itens": [
+            "marmita",
+            "agua"
+          ]
+        }
+      },
+      {
+        "id": "macha_sair",
+        "texto": "Tentar sair pelo portão",
+        "destino": "macha_porta"
+      },
+      {
+        "id": "mapa",
+        "texto": "Abrir o mapa",
+        "destino": "@mapa"
+      }
+    ],
+    "fundo": "hall"
+  },
+  {
+    "id": "maya_come",
+    "chegada": {
+      "tirar_itens": [
+        "marmita",
+        "agua"
+      ],
+      "flags": {
+        "maya_dia": "@dia"
+      },
+      "relacoes": {
+        "maya": {
+          "afeto": 10
+        }
+      },
+      "tempo": 10,
+      "barras": {
+        "sanidade": 3
+      },
+      "tirar_marcadores": [
+        "hall"
+      ]
+    },
+    "narrativa": [
+      "Você se agacha e coloca a comida e a água no chão, perto do focinho dela.",
+      "Maya cheira, hesita, e então come com cuidado, como quem não quer incomodar. Depois lambe a sua mão, e a sensação é de uma brisa fria e boa.",
+      "Quando ela se deita ao seu lado, de barriga cheia, o hall parece menos frio.",
+      {
+        "estilo": "sistema",
+        "texto": "Sua relação com <b>Maya</b> aumentou."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hall_base",
+    "fundo": "hall"
+  },
+  {
+    "id": "hub_refeitorio",
+    "narrativa": [
+      {
+        "texto": "O refeitório recende a pão quente e café. Mesas compridas, toalhas brancas, vapor subindo das travessas.",
+        "se": {
+          "flag": "@refeicao"
+        }
+      },
+      {
+        "texto": "O refeitório está quase vazio. As mesas foram postas, mas a comida do próximo horário ainda não chegou.",
+        "se": {
+          "flag": "@refeicao",
+          "valor": false
+        }
+      },
+      {
+        "texto": "Desde ontem, o hotel parece outro: guirlandas escuras, fitas douradas e cartazes do aniversário se espalham por todo canto.",
+        "se": {
+          "flag": "clinica_ataque"
+        }
+      }
+    ],
+    "dados": {
+      "hub": true
+    },
+    "opcoes": [
+      {
+        "id": "comer",
+        "texto": "Fazer uma refeição",
+        "destino": "refeicao",
+        "se": {
+          "flag": "@refeicao"
+        }
+      },
+      {
+        "id": "jon_falar",
+        "texto": "Falar com Jonathan, que corre entre as mesas",
+        "destino": "jonathan_oferta",
+        "se": [
+          {
+            "flag": "jon_estado",
+            "diferente": "aceita"
+          },
+          {
+            "flag": "jon_estado",
+            "diferente": "recusada"
+          },
+          {
+            "flag": "jon_estado",
+            "diferente": "concluida"
+          }
+        ]
+      },
+      {
+        "id": "jon_voltar",
+        "texto": "Procurar Jonathan para contar sobre os convites",
+        "destino": "jonathan_conclusao",
+        "se": [
+          {
+            "flag": "jon_estado",
+            "valor": "aceita"
+          },
+          {
+            "flag": "convites",
+            "valor": 3
+          }
+        ]
+      },
+      {
+        "id": "eug_falar",
+        "texto": "Falar com a senhora de avental, sentada a uma mesa",
+        "destino": "eugenie_primeira",
+        "se": [
+          {
+            "flag": "@propostas"
+          },
+          {
+            "flag": "eug_estado",
+            "diferente": "ingredientes"
+          },
+          {
+            "flag": "eug_estado",
+            "diferente": "levar"
+          },
+          {
+            "flag": "eug_estado",
+            "diferente": "concluida"
+          }
+        ]
+      },
+      {
+        "id": "morte_falar",
+        "texto": "Falar com a moça de preto, de cabelos longos, que não come nada",
+        "destino": "morte_pedido",
+        "se": [
+          {
+            "flag": "@propostas"
+          },
+          {
+            "flag": "morte_estado",
+            "diferente": "aceita"
+          },
+          {
+            "flag": "morte_estado",
+            "diferente": "concluida"
+          }
+        ]
+      },
+      {
+        "id": "eug_voltar",
+        "texto": "Entregar os ingredientes a Eugénie",
+        "destino": "eugenie_aula",
+        "se": {
+          "flag": "eug_estado",
+          "valor": "levar"
+        },
+        "requisitos": {
+          "itens": [
+            "ingredientes"
+          ]
+        }
+      },
+      {
+        "id": "cozinhar",
+        "texto": "Preparar uma refeição simples (Cozinha Básica)",
+        "destino": "cozinhou",
+        "se": [
+          {
+            "flag": "cozinha_basica"
+          },
+          {
+            "flag": "@refeicao",
+            "valor": false
+          },
+          {
+            "flag": "cozinhou_dia",
+            "diferente": "@dia"
+          }
+        ],
+        "requisitos": {
+          "itens": [
+            "ingredientes"
+          ]
+        }
+      },
+      {
+        "id": "levar_comida",
+        "texto": "Pegar uma marmita para levar",
+        "destino": "pegou_marmita",
+        "se": {
+          "flag": "@refeicao"
+        },
+        "requisitos": {
+          "sem_itens": [
+            "marmita"
+          ]
+        }
+      },
+      {
+        "id": "levar_agua",
+        "texto": "Pegar uma garrafa d'água",
+        "destino": "pegou_agua",
+        "requisitos": {
+          "sem_itens": [
+            "agua"
+          ]
+        }
+      },
+      {
+        "id": "mapa",
+        "texto": "Abrir o mapa",
+        "destino": "@mapa"
+      }
+    ],
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "refeicao",
+    "chegada": {
+      "tempo": 35,
+      "barras": {
+        "fome": 55,
+        "sanidade": 2
+      }
+    },
+    "narrativa": [
+      "Você se serve de pão, ovos, uma sopa grossa e uma xícara de algo quente. Come sem pressa, ouvindo os murmúrios das outras mesas."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "@hub",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "pegou_marmita",
+    "chegada": {
+      "tempo": 3
+    },
+    "narrativa": [
+      "Uma atendente de olhos fundos embrulha pão, queijo e um pedaço de torta numa marmita de papel encerado. Ela não diz nada, apenas empurra o embrulho na sua direção.",
+      {
+        "item": "marmita"
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "@hub",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "pegou_agua",
+    "chegada": {
+      "tempo": 2
+    },
+    "narrativa": [
+      "Você enche uma garrafa de vidro no bebedouro de bronze. A água é gelada e tem um leve gosto de pedra.",
+      {
+        "item": "agua"
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "@hub",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "macha_porta",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "macha_conhecida",
+      "casos": {
+        "true": "macha_de_novo"
+      },
+      "padrao": "macha_primeira",
+      "raiz": true
+    }
+  },
+  {
+    "id": "macha_primeira",
+    "narrativa": [
+      "Você empurra uma das portas pesadas. Ela cede um palmo, e o ar frio da noite entra pela fresta.",
+      "Um rugido de motor rasga o hall. Uma moto preta, que você jurava não estar ali, derrapa até parar entre você e a porta.",
+      "Quem desce dela é uma garota de jaqueta de couro, capacete debaixo do braço, cabelos negros e longos e olhos de um castanho quase vermelho. Ela sorri com dentes perfeitos, e o sorriso não é exatamente amistoso.",
+      {
+        "quem": "macha",
+        "texto": "Onde você pensa que vai?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu só queria procurar o Cocheiro. Ele me trouxe até aqui, e eu..."
+      },
+      {
+        "quem": "macha",
+        "texto": "O Cocheiro? Ele é amigo do meu pai. E o meu pai trabalha aqui, então eu cresci neste hotel. Ninguém sai por essa porta sem eu saber."
+      },
+      {
+        "quem": "macha",
+        "texto": "Aliás, você nem sabe dirigir, sabe? Dá para ver na sua cara."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu... não. Nunca tive ninguém para me ensinar."
+      },
+      {
+        "quem": "macha",
+        "texto": "Hum. Órfão, então."
+      },
+      "Ela gira o capacete nas mãos e olha para você de cima a baixo, avaliando.",
+      {
+        "quem": "macha",
+        "texto": "Quando a garagem e o resto do hotel estiverem abertos, eu posso te ensinar. Mas até lá, a porta fica fechada. Combinado?"
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "macha_aceita",
+        "texto": "“Combinado. Eu adoraria aprender.”",
+        "destino": "macha_aceitou",
+        "efeitos": {
+          "flags": {
+            "macha_conhecida": true,
+            "macha_missao": "aceita"
+          },
+          "relacoes": {
+            "macha": {
+              "afeto": 8
+            }
+          },
+          "conhece": [
+            "macha"
+          ],
+          "tempo": 5
+        }
+      },
+      {
+        "id": "macha_agora_nao",
+        "texto": "“Por enquanto, só queria passar.”",
+        "destino": "macha_negou",
+        "efeitos": {
+          "flags": {
+            "macha_conhecida": true
+          },
+          "conhece": [
+            "macha"
+          ],
+          "tempo": 5
+        }
+      }
+    ],
+    "fundo": "hall"
+  },
+  {
+    "id": "macha_aceitou",
+    "narrativa": [
+      {
+        "quem": "macha",
+        "texto": "Boa. Todo mundo devia saber pilotar alguma coisa."
+      },
+      "Ela sobe na moto e acelera uma vez, só de exibição, e a máquina desaparece no escuro do corredor lateral como se nunca tivesse existido.",
+      {
+        "estilo": "sistema",
+        "texto": "Missão secundária registrada: <b>Onde Você Pensa Que Vai</b>. Macha vai ensinar você a dirigir quando o hotel e a garagem estiverem abertos. Enquanto isso, ela vigia o portão."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_hall",
+    "fundo": "hall"
+  },
+  {
+    "id": "macha_negou",
+    "narrativa": [
+      {
+        "quem": "macha",
+        "texto": "Pode ser. Mas a porta continua fechada, e eu continuo aqui."
+      },
+      "Ela dá um sorriso de lado, monta na moto e desaparece pelo corredor lateral num ronco abafado.",
+      {
+        "estilo": "sistema",
+        "texto": "Macha vigia o portão. Se você mudar de ideia, fale com ela de novo."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_hall",
+    "fundo": "hall"
+  },
+  {
+    "id": "macha_de_novo",
+    "chegada": {
+      "relacoes": {
+        "macha": {
+          "afeto": -3
+        }
+      }
+    },
+    "narrativa": [
+      "Você mal encosta na porta e o ronco da moto vem do nada. Macha aparece ao seu lado, com o capacete na mão.",
+      {
+        "quem": "macha",
+        "texto": "Onde você pensa que vai?"
+      },
+      {
+        "quem": "macha",
+        "texto": "Já falei: a porta continua fechada. Mas eu ainda estou esperando você dizer que quer aprender a dirigir.",
+        "se": {
+          "flag": "macha_missao",
+          "diferente": "aceita"
+        }
+      },
+      {
+        "quem": "macha",
+        "texto": "Fique tranquilo. Quando a garagem abrir, eu te chamo.",
+        "se": {
+          "flag": "macha_missao",
+          "valor": "aceita"
+        }
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "macha_agora_sim",
+        "texto": "“Quero aprender, sim.”",
+        "destino": "macha_aceitou",
+        "efeitos": {
+          "flags": {
+            "macha_missao": "aceita"
+          },
+          "relacoes": {
+            "macha": {
+              "afeto": 3
+            }
+          }
+        },
+        "se": {
+          "flag": "macha_missao",
+          "diferente": "aceita"
+        }
+      },
+      {
+        "id": "macha_ok",
+        "texto": "Voltar para o hall",
+        "destino": "hub_hall",
+        "efeitos": {
+          "tempo": 2
+        }
+      }
+    ],
+    "fundo": "hall"
+  },
+  {
+    "id": "jonathan_oferta",
+    "narrativa": [
+      "Jonathan atravessa o refeitório quase correndo, uma prancheta numa mão e uma pilha de papéis na outra. Quando vê você, ele estanca.",
+      {
+        "quem": "jonathan",
+        "texto": "Thiago! Que sorte a minha. Você tem um minuto? Bem, tem que ter."
+      },
+      {
+        "quem": "jonathan",
+        "texto": "O hotel vai fazer uma festa de aniversário em breve. Uma data muito importante para o fundador, e eu... esqueci de entregar três convites especiais. Três! Se eu for atrás de cada um, perco o dia."
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Você poderia levar? Um para a sala de música, um para a biblioteca e um para uma senhora num dos quartos do corredor. É só entregar. Eu te agradeceria muito."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "jon_aceita",
+        "texto": "“Claro, eu levo.”",
+        "destino": "jonathan_aceitou",
+        "efeitos": {
+          "flags": {
+            "jon_estado": "aceita",
+            "convites": 0
+          },
+          "relacoes": {
+            "jonathan": {
+              "afeto": 8
+            }
+          },
+          "itens": [
+            "convite_musica",
+            "convite_biblioteca",
+            "convite_vovo"
+          ],
+          "mapa": [
+            "sala_musica"
+          ],
+          "marcadores": [
+            {
+              "area": "sala_musica",
+              "texto": "Convite"
+            },
+            {
+              "area": "biblioteca",
+              "texto": "Convite"
+            },
+            {
+              "area": "corredores",
+              "texto": "Convite"
+            }
+          ],
+          "conhece": [
+            "jonathan"
+          ],
+          "tirar_marcadores": [
+            "refeitorio"
+          ],
+          "tempo": 5
+        }
+      },
+      {
+        "id": "jon_recusa",
+        "texto": "“Desculpe, não posso agora.”",
+        "destino": "jonathan_recusou",
+        "efeitos": {
+          "flags": {
+            "jon_estado": "recusada"
+          },
+          "relacoes": {
+            "jonathan": {
+              "afeto": -8
+            }
+          },
+          "tirar_marcadores": [
+            "refeitorio"
+          ],
+          "tempo": 3
+        }
+      }
+    ],
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "jonathan_aceitou",
+    "narrativa": [
+      "Jonathan solta o ar como quem tirou um piano das costas.",
+      {
+        "quem": "jonathan",
+        "texto": "Obrigado, de verdade. Os convites são estes."
+      },
+      {
+        "item": "convite_musica"
+      },
+      {
+        "item": "convite_biblioteca"
+      },
+      {
+        "item": "convite_vovo"
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Na sala de música, ao Homem Invisível. Na biblioteca, a um senhor que tem o hábito de se esconder na sombra das estantes. E a Vovó... qualquer porta de quarto no corredor onde a lareira fica acesa."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Missão: <b>Os Três Convites</b>. Pontos de exclamação apareceram no mapa."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "@hub",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "jonathan_recusou",
+    "narrativa": [
+      {
+        "quem": "jonathan",
+        "texto": "Ah... entendo. Cada um tem o seu dia, imagino."
+      },
+      "Ele força um sorriso, ajeita a pilha de papéis e se afasta, apressado. Não olha para trás.",
+      {
+        "estilo": "sistema",
+        "texto": "Você recusou a missão de Jonathan. Ela se perdeu para sempre e a relação com ele diminuiu."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "@hub",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "jonathan_conclusao",
+    "chegada": {
+      "flags": {
+        "jon_estado": "concluida"
+      },
+      "relacoes": {
+        "jonathan": {
+          "afeto": 10
+        }
+      },
+      "barras": {
+        "sanidade": 5
+      },
+      "tirar_marcadores": [
+        "refeitorio"
+      ],
+      "tempo": 5
+    },
+    "narrativa": [
+      "Jonathan está de pé numa cadeira, pendurando uma guirlanda de papel. Ao ver você, quase cai.",
+      {
+        "quem": "jonathan",
+        "texto": "Os três? Você entregou os três? Thiago, eu poderia te abraçar. Não vou, porque tenho vergonha."
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Fique com isto. É pouco, mas a festa vai ser inesquecível, e você vai estar nela."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Missão <b>Os Três Convites</b> concluída. Sua relação com Jonathan aumentou."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "@hub",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "invisivel_convite",
+    "chegada": {
+      "flags": {
+        "conv_musica": true
+      },
+      "somar": {
+        "convites": 1,
+        "fragmentos": 1
+      },
+      "tirar_itens": [
+        "convite_musica"
+      ],
+      "relacoes": {
+        "homem_invisivel": {
+          "afeto": 3
+        }
+      },
+      "conhece": [
+        "homem_invisivel"
+      ],
+      "tirar_marcadores": [
+        "sala_musica"
+      ],
+      "barras": {
+        "sanidade": -2
+      },
+      "tempo": 10
+    },
+    "narrativa": [
+      "Há música no ar: um disco antigo gira num toca-discos apoiado no piano, e uma poltrona de couro está virada para a janela. Dela se ergue uma mão enluvada, marcando o compasso.",
+      "Quando a poltrona gira, você vê o dono da mão: um homem inteiro enrolado em faixas, de óculos escuros, sobretudo comprido e chapéu de aba larga. Nem um centímetro de pele aparece.",
+      {
+        "quem": "homem_invisivel",
+        "texto": "Um hóspede! Que honra. Faz tempo que ninguém me interrompe com tanta educação."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Desculpe incomodar. Tenho um convite do Jonathan, para a festa de aniversário."
+      },
+      {
+        "quem": "homem_invisivel",
+        "texto": "Festa. Que ideia sedutora. Música, gente, copos, tudo aquilo que não combina com bandagens."
+      },
+      "Ele pega o envelope com dois dedos, examina-o com a atenção de quem enxerga muito bem através das lentes escuras e o guarda no bolso do sobretudo.",
+      {
+        "quem": "thiago",
+        "texto": "O senhor... se machucou?"
+      },
+      {
+        "quem": "homem_invisivel",
+        "texto": "Ah, as faixas. Um acidente, claro. Eu escorreguei numa banheira. Ou foi uma explosão no laboratório? Não, espere, foi um duelo. Sim, um duelo. Perdi."
+      },
+      {
+        "quem": "homem_invisivel",
+        "texto": "Ou talvez tenha sido uma queda de cavalo. Escolha a versão de que mais gostar, meu jovem. Todas têm a mesma quantidade de verdade."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Isso... não faz sentido."
+      },
+      {
+        "quem": "homem_invisivel",
+        "texto": "Exatamente! Agora vá, vá. O disco está chegando na parte boa."
+      },
+      "Você se vira para sair. Na porta, ouve a voz dele de novo, mas agora ela parece vir da direita, perto da janela, quando a poltrona está à sua esquerda.",
+      {
+        "quem": "homem_invisivel",
+        "texto": "Passe bem, Thiago. E cuidado com os corredores."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Eco da sala. Só pode ser a acústica. Salas de música têm esse efeito."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_sala_musica",
+    "fundo": "sala_musica"
+  },
+  {
+    "id": "nosferatu_convite",
+    "chegada": {
+      "flags": {
+        "conv_biblio": true
+      },
+      "somar": {
+        "convites": 1
+      },
+      "tirar_itens": [
+        "convite_biblioteca"
+      ],
+      "relacoes": {
+        "nosferatu": {
+          "afeto": 4
+        }
+      },
+      "conhece": [
+        "nosferatu"
+      ],
+      "tirar_marcadores": [
+        "biblioteca"
+      ],
+      "tempo": 10
+    },
+    "narrativa": [
+      "Numa mesa de leitura afastada, sob uma lâmpada de abajur verde, um homem muito idoso lê, com um livro tão grande que quase cobre o rosto. A pele dele é de uma palidez de cera, o crânio é liso, e as mãos têm dedos finos demais para a idade que aparenta.",
+      "Quando você se aproxima, ele fecha o livro com um estalo seco, antes que você possa ver uma única palavra da capa.",
+      {
+        "quem": "nosferatu",
+        "texto": "Pois não, jovem. Você é o hóspede novo."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Sou. Meu nome é Thiago. Tenho um convite do Jonathan para o aniversário do hotel."
+      },
+      "Ele toma o envelope com as pontas dos dedos e o examina com um interesse calmo, quase afável.",
+      {
+        "quem": "nosferatu",
+        "texto": "O aniversário do fundador. Faz muito tempo que não vou a uma festa dessas. Talvez eu apareça. Talvez."
+      },
+      {
+        "quem": "nosferatu",
+        "texto": "Diga-me, o que um rapaz tão jovem veio fazer num hotel como este?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Trabalhar e... descobrir, acho."
+      },
+      {
+        "quem": "nosferatu",
+        "texto": "Descobrir. Que palavra otimista. Chame-me de Nosferatu. Pode me encontrar por aqui, na maioria das tardes."
+      },
+      "A conversa acabou. Ele abre o livro, de novo, e você nem percebe quando foi dispensado."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_biblioteca",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "vovo_convite",
+    "chegada": {
+      "flags": {
+        "conv_vovo": true
+      },
+      "somar": {
+        "convites": 1
+      },
+      "tirar_itens": [
+        "convite_vovo"
+      ],
+      "relacoes": {
+        "vovo": {
+          "afeto": 5
+        }
+      },
+      "conhece": [
+        "vovo"
+      ],
+      "tirar_marcadores": [
+        "corredores"
+      ],
+      "tempo": 8
+    },
+    "narrativa": [
+      "Mais adiante no corredor, uma porta se abre sozinha e uma senhora minúscula, de xale cinza e cabelos de algodão, entra devagar num dos quartos, apoiada numa bengala.",
+      {
+        "quem": "thiago",
+        "texto": "Com licença! A senhora tem um minuto?"
+      },
+      "Ela se volta com uma lentidão paciente e sorri. Os olhos são pequenos e muito vivos.",
+      {
+        "quem": "vovo",
+        "texto": "Ora, um rapaz novo. Eu sou a Vovó. Assim todo mundo me chama, e já não me lembro se tive outro nome."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Tenho um convite do Jonathan, para a festa de aniversário do hotel."
+      },
+      {
+        "quem": "vovo",
+        "texto": "Que gentileza. Dê aqui, querido."
+      },
+      "Ela lê o envelope sem pressa, movendo os lábios, e o guarda no bolso do xale.",
+      {
+        "quem": "vovo",
+        "texto": "Eu moro aqui há muito tempo. Conheço quase todo mundo, e todo mundo me conhece. Vou, sim, com muito prazer. Obrigada por se lembrar de uma velha."
+      },
+      {
+        "quem": "vovo",
+        "texto": "Agora entre aí na sua vida e coma alguma coisa. Está magrinho."
+      },
+      "Ela entra no quarto e fecha a porta com um clique delicado."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "ev_porta",
+    "chegada": {
+      "somar": {
+        "fragmentos": 1
+      },
+      "barras": {
+        "sanidade": -2
+      },
+      "tempo": 3
+    },
+    "narrativa": [
+      "Uma porta bate atrás de você, forte o bastante para fazer o chão vibrar. Você se vira.",
+      "Ninguém. A maçaneta ainda balança de leve, como se tivesse acabado de ser solta.",
+      {
+        "estilo": "pensamento",
+        "texto": "Corrente de ar. Só pode ser."
+      },
+      "Mas todas as janelas do corredor estão fechadas."
+    ],
+    "dados": {
+      "evento_invisivel": {
+        "areas": [
+          "corredores",
+          "hall",
+          "biblioteca"
+        ]
+      },
+      "raiz": true
+    },
+    "destino_auto": "@hub",
+    "fundo": "corredor"
+  },
+  {
+    "id": "ev_risada",
+    "chegada": {
+      "somar": {
+        "fragmentos": 1
+      },
+      "barras": {
+        "sanidade": -2
+      },
+      "tempo": 3
+    },
+    "narrativa": [
+      "Uma risada baixa, quase um suspiro, passa rente à sua nuca. Seus pelos se eriçam.",
+      "Você gira o corpo. Só o tapete, as armaduras e o silêncio de sempre.",
+      {
+        "estilo": "pensamento",
+        "texto": "Alguém riu de mim. Alguém estava aqui."
+      }
+    ],
+    "dados": {
+      "evento_invisivel": {
+        "areas": [
+          "corredores",
+          "refeitorio",
+          "sala_musica"
+        ]
+      },
+      "raiz": true
+    },
+    "destino_auto": "@hub",
+    "fundo": "corredor"
+  },
+  {
+    "id": "ev_objeto",
+    "chegada": {
+      "somar": {
+        "fragmentos": 1
+      },
+      "barras": {
+        "sanidade": -2
+      },
+      "tempo": 3
+    },
+    "narrativa": [
+      "Sobre a mesa mais próxima, uma colher flutua uns dois palmos no ar. Gira devagar, quase preguiçosa.",
+      "Quando você pisca, ela cai com um tilintar. Um rapaz de olhos fundos numa mesa vizinha olha para você e dá de ombros, como quem diz que aqui isso é normal.",
+      {
+        "estilo": "pensamento",
+        "texto": "Aqui, aparentemente, objetos fazem o que querem."
+      }
+    ],
+    "dados": {
+      "evento_invisivel": {
+        "areas": [
+          "refeitorio",
+          "biblioteca",
+          "hall"
+        ]
+      },
+      "raiz": true
+    },
+    "destino_auto": "@hub",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "ev_sussurro",
+    "chegada": {
+      "somar": {
+        "fragmentos": 1
+      },
+      "barras": {
+        "sanidade": -2
+      },
+      "tempo": 3
+    },
+    "narrativa": [
+      "“Você não pertence a este lugar.”",
+      "A frase é dita tão perto que você sente o ar morno de uma respiração. Você congela. Ninguém ao redor tem lábios que se movam.",
+      {
+        "estilo": "pensamento",
+        "texto": "Eu ouvi isso. Eu ouvi isso, não ouvi?"
+      }
+    ],
+    "dados": {
+      "evento_invisivel": {
+        "areas": [
+          "biblioteca",
+          "sala_musica",
+          "corredores"
+        ]
+      },
+      "raiz": true
+    },
+    "destino_auto": "@hub",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "hub_biblioteca",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "enola_conhecida",
+      "casos": {
+        "true": "biblioteca_base"
+      },
+      "padrao": "biblioteca_primeira",
+      "raiz": true
+    }
+  },
+  {
+    "id": "biblioteca_primeira",
+    "chegada": {
+      "flags": {
+        "enola_conhecida": true,
+        "mavis_estado": "derrubou"
+      },
+      "conhece": [
+        "mavis",
+        "enola"
+      ],
+      "tirar_marcadores": [
+        "biblioteca"
+      ],
+      "marcadores": [
+        {
+          "area": "corredores",
+          "texto": "Mavis precisa de ajuda"
+        }
+      ],
+      "tempo": 6
+    },
+    "narrativa": [
+      "A porta da biblioteca se abre antes de você tocá-la. Uma moça de cabelos escuros e olhos claros sai atropelando o ar, os braços carregados de livros, cartas e envelopes que ameaçam escorregar a cada passo.",
+      {
+        "quem": "mavis",
+        "texto": "Desculpa, desculpa, desculpa! Estou atrasadíssima!"
+      },
+      "Ela quase tromba em você, equilibra a pilha com o queixo e aponta com a cabeça para dentro da sala.",
+      {
+        "quem": "mavis",
+        "texto": "Você deve ser o Thiago. Eu sou a Mavis. Aquela é a Enola, a bibliotecária-chefe. Ela te mostra tudo. Preciso correr!"
+      },
+      "E corre mesmo. O som dos passos some pelo corredor, junto com uma bronca em voz baixa contra o relógio.",
+      "Dentro, uma névoa branca paira entre as estantes mais altas. Aos poucos ela se condensa em uma bibliotecária de cabelos prateados, com uma coruja pequena no ombro.",
+      {
+        "quem": "enola",
+        "texto": "Seja bem-vindo à biblioteca, senhor Thiago. Os livros comuns estão à sua disposição. Os outros, por ora, preferem ficar quietos."
+      },
+      {
+        "quem": "enola",
+        "texto": "A senhorita Mavis anda sobrecarregada. Se encontrá-la no corredor, talvez valha a pena oferecer ajuda."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "mavis_oferta",
+    "narrativa": [
+      "No fim do corredor, a pilha que Mavis levava terminou de desabar. Papéis, cartas e dois livros grossos formam um tapete de caos diante das armaduras.",
+      {
+        "quem": "mavis",
+        "texto": "Não acredito. Eu tinha tudo organizado. Tinha!"
+      },
+      "Você se agacha e começa a juntar as folhas. Ela suspira de alívio.",
+      {
+        "quem": "mavis",
+        "texto": "Obrigada. Você é o hóspede novo, né? Olha, vou ser sincera: preciso de ajuda de verdade."
+      },
+      {
+        "quem": "mavis",
+        "texto": "O hotel vai fazer o Baile da Fundação, e a decoração é comigo. Preciso de seis peças guardadas no estoque. Eu mesma iria, mas tenho mil coisas a resolver. Você poderia buscar?"
+      },
+      {
+        "quem": "mavis",
+        "texto": "Eu não sei explicar direito quais são. Você vai ver e escolhe o que achar que combina. Confio no seu bom gosto."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "mavis_aceita",
+        "texto": "“Pode deixar, eu busco.”",
+        "destino": "mavis_aceitou",
+        "efeitos": {
+          "flags": {
+            "mavis_estado": "estoque"
+          },
+          "relacoes": {
+            "mavis": {
+              "afeto": 8
+            }
+          },
+          "mapa": [
+            "estoque"
+          ],
+          "tirar_marcadores": [
+            "corredores"
+          ],
+          "marcadores": [
+            {
+              "area": "estoque",
+              "texto": "Decoração da Mavis"
+            }
+          ],
+          "tempo": 5
+        }
+      },
+      {
+        "id": "mavis_recusa",
+        "texto": "“Desculpe, hoje não consigo.”",
+        "destino": "mavis_recusou",
+        "efeitos": {
+          "flags": {
+            "mavis_estado": "recusada"
+          },
+          "relacoes": {
+            "mavis": {
+              "afeto": -8
+            }
+          },
+          "tirar_marcadores": [
+            "corredores"
+          ],
+          "tempo": 3
+        }
+      }
+    ],
+    "fundo": "corredor"
+  },
+  {
+    "id": "mavis_aceitou",
+    "narrativa": [
+      {
+        "quem": "mavis",
+        "texto": "Você é um anjo. Ou algo parecido. O estoque fica na ala dos fundos, pelo mapa. Eu aviso o responsável que você vai."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Missão: <b>Não Era o que Eu Pedi</b>. O <b>estoque</b> foi liberado no mapa. Escolha seis peças de decoração."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "mavis_recusou",
+    "narrativa": [
+      {
+        "quem": "mavis",
+        "texto": "Tudo bem. Eu me viro. Sempre me viro."
+      },
+      "Ela recolhe o resto dos papéis em silêncio e sai, mais devagar do que veio.",
+      {
+        "estilo": "sistema",
+        "texto": "Você recusou a missão de Mavis. Ela se perdeu para sempre e a relação com ela diminuiu."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "hub_estoque",
+    "narrativa": [
+      "O estoque ocupa um galpão enorme nos fundos, com prateleiras de ferro até o teto e um cheiro de poeira, cera e naftalina. Caixas etiquetadas à mão se empilham em corredores estreitos.",
+      {
+        "texto": "Dos fundos ecoa um barulho de caixas, como se algo mudasse de lugar sozinho.",
+        "se": {
+          "flag": "invisivel_ativo"
+        }
+      }
+    ],
+    "dados": {
+      "hub": true
+    },
+    "opcoes": [
+      {
+        "id": "estoque_decoracao",
+        "texto": "Procurar peças de decoração para Mavis",
+        "destino": "estoque_escolha",
+        "se": {
+          "flag": "mavis_estado",
+          "valor": "estoque"
+        }
+      },
+      {
+        "id": "estoque_vassoura",
+        "texto": "Procurar uma vassoura para a camareira",
+        "destino": "estoque_vassoura",
+        "se": {
+          "flag": "nix_estado",
+          "valor": "pedido"
+        },
+        "requisitos": {
+          "sem_itens": [
+            "vassoura"
+          ]
+        }
+      },
+      {
+        "id": "mapa",
+        "texto": "Abrir o mapa",
+        "destino": "@mapa"
+      }
+    ],
+    "fundo": "estoque"
+  },
+  {
+    "id": "estoque_escolha",
+    "tipo": "selecao",
+    "narrativa": [
+      "Um bilhete preso à porta, com a letra apressada de Mavis, diz apenas: “6 peças. Você vai saber.”",
+      "Entre as prateleiras, algumas caixas parecem se destacar das outras, como se esperassem ser escolhidas.",
+      {
+        "estilo": "pensamento",
+        "texto": "Seis peças. Não sei o que ela quer. Vou ter que confiar no meu gosto."
+      }
+    ],
+    "dados": {
+      "catalogo": [
+        {
+          "id": "baloes",
+          "nome": "Balões pretos, vermelhos, dourados e brancos",
+          "estilo": "alegre"
+        },
+        {
+          "id": "fitas",
+          "nome": "Rolos de fitas de cetim",
+          "estilo": "elegante"
+        },
+        {
+          "id": "cartolinas",
+          "nome": "Cartolinas e papéis para placas",
+          "estilo": "alegre"
+        },
+        {
+          "id": "globo",
+          "nome": "Globo musical luminoso",
+          "estilo": "estranho"
+        },
+        {
+          "id": "vassoura_dec",
+          "nome": "Vassoura de palha",
+          "estilo": "estranho"
+        },
+        {
+          "id": "purpurina",
+          "nome": "Potes de purpurina",
+          "estilo": "alegre"
+        },
+        {
+          "id": "recortes",
+          "nome": "Recortes de morcegos, luas, torres e castelos",
+          "estilo": "gotico"
+        },
+        {
+          "id": "velas",
+          "nome": "Caixa de velas ornamentais",
+          "estilo": "gotico"
+        },
+        {
+          "id": "candelabros",
+          "nome": "Candelabros antigos",
+          "estilo": "historico"
+        },
+        {
+          "id": "flores",
+          "nome": "Flores artificiais vermelhas, brancas e negras",
+          "estilo": "gotico"
+        },
+        {
+          "id": "luzes",
+          "nome": "Cordões de luzes",
+          "estilo": "alegre"
+        },
+        {
+          "id": "mascaras",
+          "nome": "Máscaras de baile",
+          "estilo": "elegante"
+        },
+        {
+          "id": "toalhas",
+          "nome": "Toalhas de mesa bordadas",
+          "estilo": "elegante"
+        },
+        {
+          "id": "veludo",
+          "nome": "Cortinas e tecidos de veludo",
+          "estilo": "elegante"
+        },
+        {
+          "id": "bandeirolas",
+          "nome": "Bandeirolas antigas",
+          "estilo": "historico"
+        },
+        {
+          "id": "confetes",
+          "nome": "Caixa de confetes",
+          "estilo": "alegre"
+        },
+        {
+          "id": "sinos",
+          "nome": "Pequenos sinos decorativos",
+          "estilo": "estranho"
+        },
+        {
+          "id": "miniaturas",
+          "nome": "Miniaturas das cinco torres, muralhas e portão",
+          "estilo": "historico"
+        },
+        {
+          "id": "livro_msgs",
+          "nome": "Livro de mensagens da festa",
+          "estilo": "historico"
+        },
+        {
+          "id": "tacas",
+          "nome": "Taças ornamentais",
+          "estilo": "elegante"
+        },
+        {
+          "id": "lanternas",
+          "nome": "Lanternas de papel",
+          "estilo": "alegre"
+        },
+        {
+          "id": "retratos",
+          "nome": "Retratos antigos",
+          "estilo": "historico"
+        },
+        {
+          "id": "penas",
+          "nome": "Caixa de penas coloridas",
+          "estilo": "estranho"
+        },
+        {
+          "id": "faixas",
+          "nome": "Faixas com o nome Hotel Los Segredos",
+          "estilo": "historico"
+        },
+        {
+          "id": "fumaca",
+          "nome": "Máquina de fumaça",
+          "estilo": "gotico"
+        }
+      ],
+      "sortear": 10,
+      "sortear_extra": {
+        "flag": "nix_estado",
+        "valor": "concluida",
+        "mais": 4
+      },
+      "escolher": 6,
+      "flag_sorteio": "estoque_sorteio",
+      "prefixo": "dec_",
+      "flag_estilo": "decoracao_estilo",
+      "efeitos": {
+        "flags": {
+          "mavis_estado": "entregar"
+        },
+        "tempo": 20,
+        "tirar_marcadores": [
+          "estoque"
+        ],
+        "marcadores": [
+          {
+            "area": "biblioteca",
+            "texto": "Voltar a Enola"
+          }
+        ]
+      },
+      "destino": "estoque_levou",
+      "raiz": true
+    },
+    "fundo": "estoque"
+  },
+  {
+    "id": "estoque_levou",
+    "chegada": {
+      "barras": {
+        "sanidade": -2
+      },
+      "mapa": [],
+      "tempo": 3
+    },
+    "narrativa": [
+      "Você fecha a caixa e a ergue nos braços. É mais pesada do que parece.",
+      {
+        "texto": "Um dos retratos antigos dentro da caixa parece acompanhar você com os olhos. Você prefere não olhar de novo.",
+        "se": {
+          "flag": "dec_retratos"
+        }
+      },
+      {
+        "texto": "Um dos sininhos tilinta sozinho, sem vento, e para.",
+        "se": {
+          "flag": "dec_sinos"
+        }
+      },
+      {
+        "texto": "O globo musical acende por um segundo e solta duas notas de uma melodia que você não reconhece.",
+        "se": {
+          "flag": "dec_globo"
+        }
+      },
+      {
+        "texto": "A vassoura de palha parece ter mudado de lugar dentro da caixa. Você tem quase certeza de que ela estava do outro lado.",
+        "se": {
+          "flag": "dec_vassoura_dec"
+        }
+      },
+      {
+        "estilo": "sistema",
+        "texto": "As peças são encantadas: o que acontece com elas não vem do Homem Invisível.",
+        "se": {
+          "flag": "dec_retratos"
+        }
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_estoque",
+    "fundo": "estoque"
+  },
+  {
+    "id": "enola_salao",
+    "chegada": {
+      "flags": {
+        "salao_liberado": true
+      },
+      "mapa": [
+        "salao_festas"
+      ],
+      "tirar_marcadores": [
+        "biblioteca"
+      ],
+      "marcadores": [
+        {
+          "area": "salao_festas",
+          "texto": "Entregar a decoração"
+        }
+      ],
+      "tempo": 4
+    },
+    "narrativa": [
+      {
+        "quem": "enola",
+        "texto": "O senhor voltou do estoque? E está carregando uma caixa. Que pontualidade."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Estou procurando a Mavis para entregar isto."
+      },
+      {
+        "quem": "enola",
+        "texto": "A senhorita Mavis foi ao salão de festas. É lá que o baile será montado."
+      },
+      {
+        "texto": "Você franze a testa e pensa na sala do piano, no escuro, ao luar.",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": true
+        }
+      },
+      {
+        "quem": "thiago",
+        "texto": "A sala de música?",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": true
+        }
+      },
+      {
+        "quem": "enola",
+        "texto": "Não, senhor Thiago. O salão de festas. São lugares bem diferentes.",
+        "se": {
+          "flag": "conheceu_elisabeta",
+          "valor": true
+        }
+      },
+      {
+        "estilo": "sistema",
+        "texto": "O <b>salão de festas</b> foi liberado no mapa."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "hub_salao_festas",
+    "narrativa": [
+      "O salão de festas é um espaço imenso, de teto alto e piso quadriculado, com lustres cobertos por panos. Cadeiras se empilham contra as paredes e uma escada de armar espera no centro."
+    ],
+    "dados": {
+      "hub": true
+    },
+    "opcoes": [
+      {
+        "id": "mavis_entregar",
+        "texto": "Entregar a caixa a Mavis",
+        "destino": "mavis_entrega",
+        "se": {
+          "flag": "mavis_estado",
+          "valor": "entregar"
+        }
+      },
+      {
+        "id": "mapa",
+        "texto": "Abrir o mapa",
+        "destino": "@mapa"
+      }
+    ],
+    "fundo": "salao_festas"
+  },
+  {
+    "id": "mavis_entrega",
+    "chegada": {
+      "flags": {
+        "mavis_estado": "concluida"
+      },
+      "relacoes": {
+        "mavis": {
+          "afeto": 10
+        }
+      },
+      "tirar_marcadores": [
+        "salao_festas"
+      ],
+      "barras": {
+        "sanidade": 4
+      },
+      "tempo": 10
+    },
+    "narrativa": [
+      "Mavis está de pé numa escada, tentando prender uma faixa no alto. Quando vê você, quase a derruba.",
+      {
+        "quem": "mavis",
+        "texto": "Você voltou! Deixa eu ver, deixa eu ver..."
+      },
+      "Ela abre a caixa, tira uma peça, outra, e vai franzindo a testa.",
+      {
+        "quem": "mavis",
+        "texto": "Hum. Interessante. Não era exatamente o que eu pedi. Mas..."
+      },
+      "Um sino bate no alto do hotel, longo e grave. Mavis olha para o relógio e engole em seco.",
+      {
+        "quem": "mavis",
+        "texto": "Acabou o prazo. Tudo bem, a gente improvisa. Eu gostei, na verdade. De um jeito estranho."
+      },
+      {
+        "texto": "Ela passa a mão por um tecido de veludo e sorri. Tem algo elegante no jeito como as peças se completam.",
+        "se": {
+          "flag": "decoracao_estilo",
+          "valor": "elegante"
+        }
+      },
+      {
+        "texto": "Ela ri alto, sacode um punhado de confete e o salão inteiro parece mais leve. A festa vai ser alegre.",
+        "se": {
+          "flag": "decoracao_estilo",
+          "valor": "alegre"
+        }
+      },
+      {
+        "texto": "Ela ergue um candelabro contra a luz. Sombras compridas dançam pela parede. O baile será gótico, sem dúvida.",
+        "se": {
+          "flag": "decoracao_estilo",
+          "valor": "gotico"
+        }
+      },
+      {
+        "texto": "Ela examina as peças antigas com um carinho quase respeitoso. O baile terá cara de tradição.",
+        "se": {
+          "flag": "decoracao_estilo",
+          "valor": "historico"
+        }
+      },
+      {
+        "texto": "Ela olha para a caixa e para você, desconfiada, enquanto um sininho tilinta sozinho. O baile será... esquisito.",
+        "se": {
+          "flag": "decoracao_estilo",
+          "valor": "estranho"
+        }
+      },
+      {
+        "texto": "Ela espalha as peças pelo chão, sem predominância de nada, e dá de ombros. O salão ficará deliciosamente improvisado.",
+        "se": {
+          "flag": "decoracao_estilo",
+          "valor": "improvisado"
+        }
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Missão <b>Não Era o que Eu Pedi</b> concluída. Sua relação com Mavis aumentou. A decoração escolhida vai aparecer no baile do próximo ato."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_salao_festas",
+    "fundo": "salao_festas"
+  },
+  {
+    "id": "nix_oferta",
+    "chegada": {
+      "flags": {
+        "nix_estado": "pedido"
+      },
+      "conhece": [
+        "nix"
+      ],
+      "mapa": [
+        "estoque"
+      ],
+      "marcadores": [
+        {
+          "area": "estoque",
+          "texto": "Vassoura para a Nix"
+        }
+      ],
+      "tempo": 6
+    },
+    "narrativa": [
+      "Uma camareira varre o tapete do corredor com uma pressa quase furiosa. Mal ergue os olhos, mas ao notar você, a vassoura trava no meio de um movimento.",
+      {
+        "quem": "thiago",
+        "texto": "Oi. Você é a Nix? A Lily comentou de você."
+      },
+      {
+        "quem": "nix",
+        "texto": "A Lily fala demais. Mas é, sou eu."
+      },
+      {
+        "quem": "nix",
+        "texto": "Olha, desculpa a grosseria, mas estou atrasada em tudo. Tem quarto por limpar, bandeja por levar, e a minha vassoura quebrou no meio do serviço."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Posso ajudar em alguma coisa?"
+      },
+      "Ela hesita. Dá uma olhada rápida para o corredor vazio e abaixa a voz.",
+      {
+        "quem": "nix",
+        "texto": "Pode. No estoque tem uma vassoura de palha, nova. Se você buscar, eu adianto o resto. E, olha, isso fica entre nós. Os supervisores não gostam que a gente peça favor a hóspede."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "estoque_vassoura",
+    "chegada": {
+      "tempo": 12
+    },
+    "narrativa": [
+      "Entre os cabos de pá e rolos de arame, uma vassoura de palha nova repousa num canto, amarrada com barbante.",
+      {
+        "item": "vassoura"
+      },
+      "Você ouve, lá longe, o leve rangido de uma porta. Parece que alguém limpa um quarto e abre gavetas bem rápido, mas você não dá importância."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_estoque",
+    "fundo": "estoque"
+  },
+  {
+    "id": "nix_entrega",
+    "chegada": {
+      "flags": {
+        "nix_estado": "concluida"
+      },
+      "relacoes": {
+        "nix": {
+          "afeto": 6
+        }
+      },
+      "tirar_itens": [
+        "vassoura"
+      ],
+      "tirar_marcadores": [
+        "estoque"
+      ],
+      "barras": {
+        "sanidade": 2
+      },
+      "tempo": 5
+    },
+    "narrativa": [
+      "Nix aparece sem ruído atrás de uma porta, com um pano no ombro. O corredor inteiro cheira a sabão.",
+      {
+        "quem": "nix",
+        "texto": "Você trouxe! Eu te devo uma."
+      },
+      {
+        "quem": "nix",
+        "texto": "Olha, aprecio mesmo. Aqui quase ninguém ajuda ninguém. Se precisar de alguma coisa no hotel, pode me procurar."
+      },
+      "Ela pega a vassoura e sai varrendo, mais leve, como se o corredor tivesse ficado menor.",
+      {
+        "estilo": "sistema",
+        "texto": "Missão <b>Um Favor entre Funcionários</b> concluída. Sua relação com Nix aumentou. O <b>estoque</b> ficou liberado de vez e oferece mais peças."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "hub_suite14",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "nix_gatilho",
+      "casos": {
+        "true": "nix_quarto"
+      },
+      "padrao": "suite_base",
+      "raiz": true
+    }
+  },
+  {
+    "id": "hub_bar",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "bellacourt_vistos",
+      "casos": {
+        "true": "bar_base"
+      },
+      "padrao": "bar_bellacourt",
+      "raiz": true
+    }
+  },
+  {
+    "id": "bar_base",
+    "narrativa": [
+      "O bar é uma sala de madeira escura, de balcão longo e banquetas altas. As garrafas formam um altar de vidro atrás do balcão, iluminadas por uma luz âmbar.",
+      {
+        "texto": "Ainda é cedo: ninguém atende. Apenas o tique-taque de um relógio de parede.",
+        "se": [
+          {
+            "flag": "@hora",
+            "max": 18
+          }
+        ]
+      }
+    ],
+    "dados": {
+      "hub": true
+    },
+    "opcoes": [
+      {
+        "id": "jehan_falar",
+        "texto": "Sentar no balcão e conversar com o barman",
+        "destino": "jehan_conversa",
+        "se": [
+          {
+            "flag": "@jehan"
+          },
+          {
+            "flag": "@hora",
+            "min": 19,
+            "max": 21
+          }
+        ]
+      },
+      {
+        "id": "mapa",
+        "texto": "Abrir o mapa",
+        "destino": "@mapa"
+      }
+    ],
+    "fundo": "bar"
+  },
+  {
+    "id": "bar_bellacourt",
+    "chegada": {
+      "flags": {
+        "bellacourt_vistos": true,
+        "vestido_estado": "aberto"
+      },
+      "conhece": [
+        "gabriel",
+        "louise"
+      ],
+      "relacoes": {
+        "gabriel": {
+          "afeto": 4
+        },
+        "louise": {
+          "afeto": 6
+        }
+      },
+      "tirar_marcadores": [
+        "bar"
+      ],
+      "marcadores": [
+        {
+          "area": "corredores",
+          "texto": "Discussão dos Bellacourt"
+        }
+      ],
+      "tempo": 12
+    },
+    "narrativa": [
+      "Você empurra a porta do bar e quase tropeça numa discussão. Ao fundo, junto à lareira, um casal elegante parece ter parado de se falar no meio de uma frase.",
+      "Ele é alto, de ombros largos e cabelo curto cuidadosamente bagunçado. Ela é esguia, de cabelos escuros presos num coque impecável, e um olhar capaz de cortar vidro.",
+      {
+        "quem": "louise",
+        "texto": "Você sabe muito bem o que estou dizendo, Gabriel. Ontem estava no armário e hoje sumiu."
+      },
+      {
+        "quem": "gabriel",
+        "texto": "Eu não toquei no seu vestido, Louise. Pare com isso."
+      },
+      "Os dois percebem você ao mesmo tempo. A expressão dela muda de repente, como se alguém acendesse uma luz.",
+      {
+        "quem": "louise",
+        "texto": "Meu Deus. Olha esse rosto! Gabriel, olha."
+      },
+      {
+        "quem": "gabriel",
+        "texto": "Estou olhando."
+      },
+      {
+        "quem": "louise",
+        "texto": "Pele limpa, mandíbula marcada, olhos expressivos... Jovem, você já pensou em ser modelo?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu? Modelo? Eu só vim tomar um ar."
+      },
+      {
+        "quem": "louise",
+        "texto": "Ninguém vem a este hotel sem querer ser descoberto. Aqui está meu cartão. Pense nisso."
+      },
+      {
+        "item": "cartao_bellacourt"
+      },
+      {
+        "quem": "gabriel",
+        "texto": "Desculpe pela cena. A gente se vê."
+      },
+      "Eles saem do bar em direção ao elevador, retomando a discussão em voz mais baixa antes mesmo de a porta fechar.",
+      {
+        "estilo": "sistema",
+        "texto": "Surgiu uma nova pista nos <b>corredores</b>: o casal Bellacourt voltou ao quarto discutindo."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "bar_base",
+    "fundo": "bar"
+  },
+  {
+    "id": "vestido_inicio",
+    "narrativa": [
+      "Uma porta bate com força no fim do corredor. Gabriel surge em mangas de camisa, fecha-a atrás de si e leva as mãos à cabeça.",
+      {
+        "quem": "louise",
+        "texto": "...e não volte sem o vestido, ouviu bem?"
+      },
+      "A voz de Louise abafa-se atrás da madeira. Gabriel respira fundo e só então vê você.",
+      {
+        "quem": "gabriel",
+        "texto": "Thiago, não é? Desculpe a cena do bar. E a daqui."
+      },
+      {
+        "quem": "gabriel",
+        "texto": "A Louise tem um vestido que usaria na festa do hotel. Ele sumiu do quarto e ela jura que fui eu, por ciúme. Eu juro que não fui."
+      },
+      {
+        "quem": "gabriel",
+        "texto": "Você poderia me ajudar a procurar? Quatro olhos acham mais que dois."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "vest_aceita",
+        "texto": "“Claro, vamos procurar.”",
+        "destino": "vestido_busca",
+        "efeitos": {
+          "flags": {
+            "vestido_estado": "busca"
+          },
+          "relacoes": {
+            "gabriel": {
+              "afeto": 4
+            }
+          },
+          "tempo": 3
+        }
+      },
+      {
+        "id": "vest_depois",
+        "texto": "“Agora não posso. Mais tarde.”",
+        "destino": "hub_corredores",
+        "efeitos": {
+          "tempo": 1
+        }
+      }
+    ],
+    "fundo": "corredor"
+  },
+  {
+    "id": "vestido_busca",
+    "narrativa": [
+      "Gabriel olha ao redor, impaciente. Corredores longos, vasos, armaduras vazias alinhadas, cortinas pesadas.",
+      {
+        "quem": "gabriel",
+        "texto": "Onde esconderiam um vestido de seda numa casa deste tamanho?"
+      },
+      {
+        "texto": "Gabriel baixa a voz, quase para si mesmo: “Às vezes eu juro que as armaduras estão ouvindo a gente.”",
+        "se": {
+          "flag": "vest_dica"
+        }
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "vest_cortina",
+        "texto": "Olhar atrás das cortinas pesadas",
+        "destino": "vestido_cortina"
+      },
+      {
+        "id": "vest_carrinho",
+        "texto": "Revirar o carrinho de limpeza abandonado",
+        "destino": "vestido_carrinho"
+      },
+      {
+        "id": "vest_armadura",
+        "texto": "Examinar as armaduras vazias",
+        "destino": "vestido_armadura"
+      }
+    ],
+    "fundo": "corredor"
+  },
+  {
+    "id": "vestido_cortina",
+    "chegada": {
+      "tempo": 8,
+      "flags": {
+        "vest_dica": true
+      }
+    },
+    "narrativa": [
+      "Você afasta uma cortina de veludo. Poeira, uma janela fechada e uma aranha enorme, que parece ofendida com a visita.",
+      {
+        "quem": "gabriel",
+        "texto": "Nada. Vamos tentar outro lugar."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "vestido_busca",
+    "fundo": "corredor"
+  },
+  {
+    "id": "vestido_carrinho",
+    "chegada": {
+      "tempo": 8,
+      "flags": {
+        "vest_dica": true
+      }
+    },
+    "narrativa": [
+      "Lençóis dobrados, um pano de chão, um balde e sabonetes. Nada de seda vermelha.",
+      {
+        "quem": "gabriel",
+        "texto": "Se não está aqui, deve estar escondido de um jeito mais criativo."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "vestido_busca",
+    "fundo": "corredor"
+  },
+  {
+    "id": "vestido_armadura",
+    "chegada": {
+      "flags": {
+        "vestido_estado": "concluido"
+      },
+      "somar": {
+        "fragmentos": 3
+      },
+      "relacoes": {
+        "gabriel": {
+          "afeto": 8
+        },
+        "louise": {
+          "afeto": 8
+        }
+      },
+      "tirar_marcadores": [
+        "corredores"
+      ],
+      "barras": {
+        "sanidade": -3
+      },
+      "tempo": 15,
+      "hud": [
+        "social"
+      ]
+    },
+    "narrativa": [
+      "Você vai de armadura em armadura, batendo de leve nas placas de metal. Todas soam ocas, mas uma delas, perto do quarto do casal, tem o elmo ligeiramente torto.",
+      "Você levanta a viseira. Lá dentro, comprimido como um pergaminho, há um tecido de seda cor de vinho.",
+      {
+        "quem": "gabriel",
+        "texto": "O vestido! Dentro da armadura? Quem faria uma coisa dessas?"
+      },
+      "A armadura permanece imóvel. Mas, enquanto você puxa o tecido, tem a nítida sensação de que alguém, bem perto, prende uma risadinha.",
+      {
+        "quem": "thiago",
+        "texto": "Alguém queria que você o encontrasse. Ou queria ver você procurando."
+      },
+      {
+        "quem": "gabriel",
+        "texto": "Ninguém além de nós passou por este corredor. Eu juro."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Ninguém passou por aqui. E ainda assim, o vestido estava aqui."
+      },
+      "Gabriel segura o vestido com cuidado, como quem carrega um bebê, e bate na porta do quarto.",
+      {
+        "quem": "louise",
+        "texto": "Se for você, Gabriel..."
+      },
+      {
+        "quem": "gabriel",
+        "texto": "Louise. Achamos. Estava dentro de uma armadura. Eu nem sei como."
+      },
+      "A porta se abre devagar. Louise olha o vestido, depois o marido, depois você. Cruza os braços, mas o canto da boca se curva.",
+      {
+        "quem": "louise",
+        "texto": "Dentro de uma armadura. Meu Deus. Desculpe, Gabriel. Eu estava errada."
+      },
+      {
+        "quem": "louise",
+        "texto": "E obrigada, jovem. Cartão no bolso, não esqueça."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Missão <b>O Vestido Roubado</b> concluída. Você ganhou <b>3 Fragmentos do Homem Invisível</b> permanentes."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "eugenie_primeira",
+    "chegada": {
+      "flags": {
+        "eug_estado": "ingredientes",
+        "nix_gatilho": true
+      },
+      "conhece": [
+        "eugenie"
+      ],
+      "tirar_marcadores": [
+        "refeitorio"
+      ],
+      "relacoes": {
+        "eugenie": {
+          "afeto": 3
+        }
+      },
+      "tempo": 12
+    },
+    "narrativa": [
+      "Numa mesa de canto do refeitório, uma senhora de cabelos brancos presos num coque e avental de linho observa os pratos das outras mesas com o cenho franzido, como quem avalia a nota de um aluno.",
+      {
+        "quem": "eugenie",
+        "texto": "Está pálido, rapaz. E olha que aqui a comida não é ruim. Pelo menos é mais honesta que a média."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu... estou me virando como dá. Não sei cozinhar."
+      },
+      {
+        "quem": "eugenie",
+        "texto": "Nada? Nem um ovo?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu queimaria a água."
+      },
+      "Ela solta uma risada curta e rouca.",
+      {
+        "quem": "eugenie",
+        "texto": "Eu sou Eugénie. Cozinhei para metade da Europa antes de me aposentar. Se você me trouxer ingredientes simples, eu te ensino o básico. Sem fogo, sem panela, sem cozinha."
+      },
+      {
+        "quem": "thiago",
+        "texto": "A cozinha é proibida, não é?"
+      },
+      {
+        "quem": "eugenie",
+        "texto": "Muito. Então consiga os ingredientes por fora. Pão, ovos, algum tempero, frutas. Algo que se coma sem desculpas."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Onde eu arranjo isso? Talvez alguém do hotel possa me ajudar."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "nix_quarto",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "nix_estado",
+      "casos": {
+        "concluida": "nix_q3"
+      },
+      "padrao": "nix_q_tel",
+      "raiz": true
+    }
+  },
+  {
+    "id": "nix_q_tel",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "lily_conhecida",
+      "casos": {
+        "true": "nix_q2"
+      },
+      "padrao": "nix_q1",
+      "raiz": true
+    }
+  },
+  {
+    "id": "nix_q1",
+    "chegada": {
+      "flags": {
+        "nix_gatilho": false,
+        "ing_dia": "@dia"
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "Ao girar a chave, você nota que a porta já estava destrancada. Dentro da suíte, uma camareira de uniforme cinza fecha uma gaveta com um estalo e dá um pulo ao vê-lo.",
+      {
+        "quem": "nix",
+        "texto": "Ah. Desculpe! Eu estava só conferindo o quarto. Rotina. Você é o hóspede da catorze?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Sou. E você?"
+      },
+      {
+        "quem": "nix",
+        "texto": "Nix, da governança. Me avisaram que a suíte tinha recebido visita estranha. Eu confiro."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Visita estranha?"
+      },
+      {
+        "quem": "nix",
+        "texto": "Coisa de hotel. Esquece. Quem é você, afinal? Chegou há pouco, né?"
+      },
+      "Vocês conversam um pouco. Ela pergunta do convite, de quem o enviou, e você conta sobre uma amiga que patrocina o evento.",
+      {
+        "quem": "thiago",
+        "texto": "A propósito, eu estou tentando aprender a cozinhar. Falta de ingredientes, falta de tudo."
+      },
+      {
+        "quem": "nix",
+        "texto": "Ingredientes simples? Isso eu consigo. Deixa comigo. Amanhã cedo eu deixo na sua porta."
+      },
+      "Ela sai com o pano no ombro, rápida como veio. Você olha para a gaveta que ela fechou e não consegue lembrar se estava aberta antes."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "suite_base",
+    "fundo": "suite14"
+  },
+  {
+    "id": "nix_q2",
+    "chegada": {
+      "flags": {
+        "nix_gatilho": false,
+        "ing_dia": "@dia"
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "Ao girar a chave, você nota que a porta já estava destrancada. Uma camareira de uniforme cinza vira-se com um pano na mão. Ela o reconhece no mesmo instante.",
+      {
+        "quem": "nix",
+        "texto": "Ah, então é você. O hóspede da catorze. A Lily comentou que ligou para o quarto à noite."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Ela ligou. Você é a Nix da Lily, então."
+      },
+      {
+        "quem": "nix",
+        "texto": "Se é pra ser conhecida pelo nome dela, sim. Sou a Nix. Estava só olhando o quarto."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu queria perguntar uma coisa: preciso de ingredientes simples para aprender a cozinhar."
+      },
+      {
+        "quem": "nix",
+        "texto": "Cozinhar? Hmm. Eu estou ocupada, mas dou um jeito. Amanhã cedo eu deixo na sua porta."
+      },
+      "Ela sai e deixa no ar um cheiro de sabão e de pressa. Você tem a impressão de que alguma coisa nesta suíte mudou de lugar."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "suite_base",
+    "fundo": "suite14"
+  },
+  {
+    "id": "nix_q3",
+    "chegada": {
+      "flags": {
+        "nix_gatilho": false,
+        "ing_dia": "@dia"
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "Ao girar a chave, você encontra a porta aberta. A camareira de uniforme cinza endireita a cabeça ao vê-lo, com um sorriso torto.",
+      {
+        "quem": "nix",
+        "texto": "Novamente você aqui."
+      },
+      {
+        "quem": "thiago",
+        "texto": "A suíte é minha, tecnicamente."
+      },
+      {
+        "quem": "nix",
+        "texto": "É. Eu só estava olhando o quarto. Rotina. Como você me ajudou com a vassoura, eu vou te ajudar também."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Estou procurando ingredientes simples para aprender a cozinhar."
+      },
+      {
+        "quem": "nix",
+        "texto": "Fácil. Amanhã cedo eu deixo na sua porta."
+      },
+      "Ela some pela porta antes mesmo de você piscar."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "suite_base",
+    "fundo": "suite14"
+  },
+  {
+    "id": "ingredientes_recebidos",
+    "chegada": {
+      "flags": {
+        "eug_estado": "levar"
+      },
+      "tempo": 2
+    },
+    "narrativa": [
+      "Junto à porta, uma sacola de papel pardo, dobrada no topo. Dentro: pão, ovos cozidos, queijo, duas maçãs e um pote de sal grosso.",
+      {
+        "item": "ingredientes"
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "A Nix cumpriu. Agora é hora de levar isto à Eugénie."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "suite_base",
+    "fundo": "suite14"
+  },
+  {
+    "id": "eugenie_aula",
+    "chegada": {
+      "flags": {
+        "eug_estado": "concluida",
+        "cozinha_basica": true
+      },
+      "barras": {
+        "fome": 25
+      },
+      "relacoes": {
+        "eugenie": {
+          "afeto": 8
+        }
+      },
+      "tempo": 40
+    },
+    "narrativa": [
+      "Eugénie examina a sacola como quem confere um diploma, e aprova com um aceno.",
+      {
+        "quem": "eugenie",
+        "texto": "Pão, queijo, ovos já cozidos, fruta. Perfeito. Sente aqui, rapaz."
+      },
+      {
+        "quem": "eugenie",
+        "texto": "Primeiro: cozinhar não é fogo, é ordem. Segundo: comida simples não é comida fraca."
+      },
+      "Ela mostra como cortar o pão em fatias iguais, como esmagar o ovo com um garfo e o sal para misturar com queijo, como equilibrar doce e salgado com meia maçã.",
+      {
+        "quem": "eugenie",
+        "texto": "Pronto. Você acabou de fazer o seu primeiro prato, sem uma única chama."
+      },
+      "Você prova. Está ótimo, de um jeito simples que parece abraço.",
+      {
+        "quem": "eugenie",
+        "texto": "Estou impressionada com a comida deste hotel. Alguém aqui cozinha muito bem, e eu preciso elogiar essa pessoa."
+      },
+      "Ela se levanta, ajeita o avental e caminha até a porta fechada no fundo do refeitório, aquela que ninguém ousa tocar.",
+      {
+        "quem": "thiago",
+        "texto": "Eugénie, a cozinha é proibida!"
+      },
+      {
+        "quem": "eugenie",
+        "texto": "Para você, querido. Para mim, é a minha casa."
+      },
+      "Ela empurra a porta, entra, e a porta se fecha atrás dela sem fazer o menor ruído. Você espera. Nenhum som volta.",
+      {
+        "estilo": "sistema",
+        "texto": "Habilidade aprendida: <b>Cozinha Básica</b>. Os ingredientes continuam com você: uma vez por dia, fora dos horários de refeição, você pode preparar uma refeição simples no refeitório."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "cozinhou",
+    "chegada": {
+      "tempo": 40,
+      "flags": {
+        "cozinhou_dia": "@dia"
+      },
+      "barras": {
+        "fome": 30,
+        "sanidade": 2
+      }
+    },
+    "narrativa": [
+      "Você junta o que sobrou do pão, uns pedaços de queijo e uma maçã. Cortar, esmagar, misturar, tudo na ordem certa, como Eugénie ensinou.",
+      "O resultado não é bonito, mas é seu. Você come sem pressa, com um orgulho estranho."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "@hub",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "arthur_intro",
+    "narrativa": [
+      "Numa mesa baixa da biblioteca, um rapaz de óculos redondos e blusa de lã amarrotada folheia dois livros de capa mole, anotando algo num caderno. Ao ver você, ele se endireita como quem foi pego no meio de um segredo.",
+      {
+        "quem": "arthur",
+        "texto": "Ah! Você é o Thiago, não é? Eu sou o Arthur. Estou aqui há algumas semanas. Já ouvi falar de você. Comentam que anda... vivendo experiências curiosas."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Curiosas é uma palavra educada."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Eu também sinto coisas estranhas neste hotel. Vozes, objetos que mudam de lugar. Achei que era só comigo."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Então encontrei isto. Dois diários de hóspedes antigos, esquecidos num canto da biblioteca. Quer ver comigo?"
+      },
+      "Ele empurra os dois cadernos na sua direção. O primeiro tem capa verde-musgo e a assinatura “L. Brandão”. O segundo é de capa vinho, com um nome feminino quase apagado: “Cecília”."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "arthur_leitura",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "arthur_leitura",
+    "chegada": {
+      "flags": {
+        "hip_n": 0
+      },
+      "tirar_marcadores": [
+        "biblioteca"
+      ],
+      "tempo": 10
+    },
+    "narrativa": [
+      "Você lê as páginas junto com Arthur, na luz fraca do abajur.",
+      "No diário de L. Brandão: “Terceira noite que uma voz me chama do corredor. Abro a porta, não há ninguém. Quarta noite: a mesma voz, rindo.” Mais adiante: “Meus óculos sumiram. Achei dentro do sapato. Eu não os pus lá.”",
+      "No diário de Cecília: “Hoje a xícara voou da mesa até a janela. Eu vi. Mas quando contei na recepção, riram de mim. Preciso dormir mais.” As últimas páginas têm letra tremida: “Quem está aí? Quem está aí?”",
+      {
+        "quem": "arthur",
+        "texto": "Os dois foram embora de uma hora para outra. Os quartos foram limpos, os pertences recolhidos. Ninguém soube explicar."
+      },
+      {
+        "texto": "Você percebe que várias das situações descritas parecem com as suas. Voz sem dono. Objetos fora do lugar. Uma risada curta.",
+        "se": {
+          "flag": "fragmentos",
+          "min": 6
+        }
+      },
+      {
+        "texto": "As datas das anotações coincidem com semanas em que o hotel organizou algum evento. Em festas, o hotel fica mais agitado, e as brincadeiras também.",
+        "se": {
+          "flag": "fragmentos",
+          "min": 10
+        }
+      },
+      {
+        "texto": "Você nota que as ocorrências sempre acontecem em horários em que os corredores estão vazios, e quase sempre perto de quartos específicos.",
+        "se": {
+          "flag": "fragmentos",
+          "min": 13
+        }
+      },
+      {
+        "quem": "arthur",
+        "texto": "E agora você? O que você vê, Thiago? O que acha que está acontecendo?"
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "arthur_hipoteses",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "arthur_hipoteses",
+    "narrativa": [
+      "Arthur apoia o queixo na mão, esperando. Você precisa escolher o que considera mais provável."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "hip1",
+        "texto": "“Talvez seja coincidência, cansaço, imaginação.”",
+        "destino": "hip1",
+        "se": {
+          "flag": "hip1",
+          "diferente": true
+        }
+      },
+      {
+        "id": "hip2",
+        "texto": "“Acho que alguém está pregando peças nos hóspedes.”",
+        "destino": "hip2",
+        "se": [
+          {
+            "flag": "hip2",
+            "diferente": true
+          },
+          {
+            "flag": "fragmentos",
+            "min": 7
+          }
+        ]
+      },
+      {
+        "id": "hip3",
+        "texto": "“Isso parece planejado. Talvez pelo mesmo responsável.”",
+        "destino": "hip3",
+        "se": [
+          {
+            "flag": "hip3",
+            "diferente": true
+          },
+          {
+            "flag": "fragmentos",
+            "min": 10
+          }
+        ]
+      },
+      {
+        "id": "hip4",
+        "texto": "“Quem faz isso conhece os quartos, os horários, o hotel por dentro.”",
+        "destino": "hip4",
+        "se": [
+          {
+            "flag": "hip4",
+            "diferente": true
+          },
+          {
+            "flag": "fragmentos",
+            "min": 13
+          }
+        ]
+      },
+      {
+        "id": "hip5",
+        "texto": "“E se... não for uma pessoa?”",
+        "destino": "hip5",
+        "se": [
+          {
+            "flag": "hip5",
+            "diferente": true
+          },
+          {
+            "flag": "fragmentos",
+            "min": 16
+          }
+        ]
+      },
+      {
+        "id": "hip_fim",
+        "texto": "“Já falamos o bastante por hoje.”",
+        "destino": "arthur_fim",
+        "se": {
+          "flag": "hip_n",
+          "min": 1
+        }
+      }
+    ],
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "hip1",
+    "chegada": {
+      "flags": {
+        "hip1": true
+      },
+      "somar": {
+        "hip_n": 1
+      },
+      "tempo": 4
+    },
+    "narrativa": [
+      {
+        "quem": "thiago",
+        "texto": "Talvez seja só cansaço. Estresse. A gente chega num lugar estranho e imagina coisas."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Eu pensei nisso. Pensei muito. Mas Brandão e Cecília nem se conheciam e descrevem situações parecidas. Cansaço não combina detalhes."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Mesmo assim, é bom manter a hipótese viva. Se a gente descartar tudo cedo demais, vai ver o que quiser ver."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "arthur_hipoteses",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "hip2",
+    "chegada": {
+      "flags": {
+        "hip2": true
+      },
+      "somar": {
+        "hip_n": 1
+      },
+      "tempo": 4
+    },
+    "narrativa": [
+      {
+        "quem": "thiago",
+        "texto": "Alguém pode estar pregando peças nos hóspedes. Uma brincadeira de mau gosto."
+      },
+      {
+        "quem": "arthur",
+        "texto": "É a explicação mais simples. Alguém com acesso aos quartos, que gosta de rir do susto dos outros."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Mas por que mirar em hóspedes humanos específicos? Isso me incomoda."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "arthur_hipoteses",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "hip3",
+    "chegada": {
+      "flags": {
+        "hip3": true
+      },
+      "somar": {
+        "hip_n": 1
+      },
+      "tempo": 4
+    },
+    "narrativa": [
+      {
+        "quem": "thiago",
+        "texto": "As ocorrências parecem planejadas. Não é aleatório. Talvez seja uma pessoa só."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Planejadas... Então há intenção, e intenção exige motivo. Qual motivo faria alguém atormentar hóspedes por anos?"
+      },
+      "Ele anota algo, sublinha duas vezes e olha para a página como se esperasse uma resposta."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "arthur_hipoteses",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "hip4",
+    "chegada": {
+      "flags": {
+        "hip4": true
+      },
+      "somar": {
+        "hip_n": 1
+      },
+      "tempo": 4
+    },
+    "narrativa": [
+      {
+        "quem": "thiago",
+        "texto": "Quem faz isso conhece os quartos, os horários, os corredores. Conhece o hotel por dentro."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Um funcionário, então? Ou alguém que mora aqui há muito tempo. Mas funcionários não somem do nada e não flutuam xícaras."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Isso eu não sei explicar."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "arthur_hipoteses",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "hip5",
+    "chegada": {
+      "flags": {
+        "hip5": true
+      },
+      "somar": {
+        "hip_n": 1
+      },
+      "tempo": 4
+    },
+    "narrativa": [
+      {
+        "quem": "thiago",
+        "texto": "E se... não for uma pessoa, Arthur?"
+      },
+      "O silêncio que segue é longo. Arthur tira os óculos, limpa-os na blusa e os recoloca devagar.",
+      {
+        "quem": "arthur",
+        "texto": "Sobrenatural. Eu... considero essa possibilidade quase absurda. Mas não consigo descartá-la."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Vamos tratar isso como uma hipótese de último recurso. Nada além disso. Por enquanto."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "arthur_hipoteses",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "arthur_fim",
+    "chegada": {
+      "flags": {
+        "arthur_estado": "concluido"
+      },
+      "relacoes": {
+        "arthur": {
+          "afeto": 10
+        }
+      },
+      "conhece": [
+        "arthur"
+      ],
+      "barras": {
+        "sanidade": 2
+      },
+      "tempo": 15
+    },
+    "narrativa": [
+      "Vocês fecham os diários. Nenhum dos dois chegou a uma conclusão, e ambos sabem disso.",
+      {
+        "quem": "arthur",
+        "texto": "Vou continuar investigando. Se acontecer alguma coisa nova, me procure. Combinamos de nos encontrar no bar à noite, quando a biblioteca fechar. Lá a gente conversa melhor."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Combinado."
+      },
+      "Ele guarda os dois diários debaixo do braço e segue para o corredor, ainda murmurando consigo mesmo.",
+      {
+        "estilo": "sistema",
+        "texto": "Missão <b>Dois Diários</b> concluída. Um marcador deve surgir no <b>bar</b> à noite."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "jehan_conversa",
+    "chegada": {
+      "flags": {
+        "jehan_estado": "concluido",
+        "ataque_pendente": true
+      },
+      "conhece": [
+        "jehan"
+      ],
+      "relacoes": {
+        "jehan": {
+          "afeto": 8
+        }
+      },
+      "barras": {
+        "sanidade": 3,
+        "fome": 4
+      },
+      "tirar_marcadores": [
+        "bar"
+      ],
+      "tempo": 40
+    },
+    "narrativa": [
+      "À noite, o bar muda de rosto. As luzes ficam mais baixas, a lareira estala e o balcão ganha um brilho âmbar. Atrás dele, um homem de camisa branca arregaçada e colete preto seca um copo com a calma de quem tem todo o tempo do mundo.",
+      {
+        "quem": "jehan",
+        "texto": "Boa noite. Você deve ser o Thiago. Eu sou o Jehan. O que vai ser?"
+      },
+      {
+        "texto": "Arthur já está num banquinho, com o caderno aberto, e acena para você.",
+        "se": {
+          "flag": "arthur_estado",
+          "valor": "concluido"
+        }
+      },
+      {
+        "quem": "thiago",
+        "texto": "Alguma coisa que não me faça dormir. Ou que faça."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Tenho uma bebida para cada tipo de noite. Esta serve para as duas."
+      },
+      "Ele desliza um copo na sua direção. Tem gosto de especiaria e de mel.",
+      {
+        "quem": "jehan",
+        "texto": "Então. A noite começa e eu escuto muita coisa neste balcão. Dizem que o hotel anda agitado."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Tem objetos mudando de lugar e vozes sem dono. A gente vem tentando entender.",
+        "se": {
+          "flag": "arthur_estado",
+          "valor": "concluido"
+        }
+      },
+      {
+        "quem": "thiago",
+        "texto": "Vozes sem dono, objetos que somem. Um vestido dentro de uma armadura."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Ah, a armadura. Uma boa."
+      },
+      "Ele sorri de lado, sem dizer mais nada por um momento.",
+      {
+        "quem": "jehan",
+        "texto": "Eu já vi esse tipo de brincadeira. É sempre alguém que gosta de ver humano fazendo papel de bobo. Não vou dizer quem, porque eu não tenho prova. Mas conheço o estilo."
+      },
+      {
+        "quem": "thiago",
+        "texto": "O senhor sabe quem faz isso?"
+      },
+      {
+        "quem": "jehan",
+        "texto": "Sei como funciona. Esse tipo de coisa começa de dia, com objetos, e termina à noite, com vozes. Pode ser engraçado. Mas só até alguém seguir a voz errada."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Então um conselho de barman, que vale mais que bebida: quando os corredores esvaziarem, depois da hora, e você ouvir alguém chamando, não siga. Nem que seja uma voz conhecida."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Principalmente se for uma voz conhecida."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Por que ele fala com tanta certeza?"
+      },
+      {
+        "quem": "jehan",
+        "texto": "Agora beba. Amanhã é um dia comprido."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "bar_base",
+    "fundo": "bar"
+  },
+  {
+    "id": "dormir_gate",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "ataque_pendente",
+      "casos": {
+        "true": "ataque_acorda"
+      },
+      "padrao": "dormir_gate2",
+      "raiz": true
+    }
+  },
+  {
+    "id": "dormir_gate2",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "desculpas_pendente",
+      "casos": {
+        "true": "porta_batem"
+      },
+      "padrao": "dormiu",
+      "raiz": true
+    }
+  },
+  {
+    "id": "ataque_acorda",
+    "chegada": {
+      "ate": "03:10",
+      "sono": true,
+      "barras": {
+        "cansaco": 70,
+        "sanidade": 10
+      }
+    },
+    "narrativa": [
+      "Algo desperta você no meio da noite. O quarto está escuro, o relógio marca pouco depois das três.",
+      "Então você ouve de novo: uma voz de mulher, vinda do corredor, abafada e desesperada.",
+      {
+        "quem": "voz",
+        "texto": "Socorro... por favor... alguém me ajude..."
+      },
+      "É uma voz que você acha que conhece. Não consegue dizer de quem.",
+      {
+        "estilo": "pensamento",
+        "texto": "Depois que os corredores esvaziarem... não siga a voz, mesmo que seja conhecida."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Mas e se alguém realmente precisar de ajuda?"
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "seguir_voz",
+        "texto": "Levantar e ir atrás da voz",
+        "destino": "ataque_cond",
+        "efeitos": {
+          "barras": {
+            "suspeita": 15
+          },
+          "somar": {
+            "fragmentos": 1
+          },
+          "flags": {
+            "lugar": "corredores"
+          },
+          "tempo": 5
+        }
+      },
+      {
+        "id": "ignorar_voz",
+        "texto": "Ficar na cama e ignorar",
+        "destino": "ataque_ignorou"
+      }
+    ],
+    "fundo": "suite14"
+  },
+  {
+    "id": "ataque_ignorou",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "barras": {
+        "cansaco": 100,
+        "sanidade": 15,
+        "vida": 5
+      },
+      "flags": {
+        "lugar": "suite14"
+      }
+    },
+    "narrativa": [
+      "Você aperta o cobertor contra o peito, fecha os olhos e conta até cem. A voz repete, mais fraca, até silenciar.",
+      "Você dorme de novo, mal. Pela manhã, o corredor está vazio.",
+      {
+        "estilo": "sistema",
+        "texto": "Você seguiu o conselho de Jehan. A voz pode voltar na próxima noite."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "suite14"
+  },
+  {
+    "id": "ataque_cond",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "conheceu_elisabeta",
+      "casos": {
+        "true": "ataque_corredor_a"
+      },
+      "padrao": "ataque_corredor_b",
+      "raiz": true
+    }
+  },
+  {
+    "id": "ataque_corredor_a",
+    "narrativa": [
+      "Você veste o casaco por cima do pijama e abre a porta. O corredor está iluminado só pelas lâmpadas de emergência, vermelhas e tremidas.",
+      "A voz vem de longe, e você já sabe para onde ela leva. Pelas escadas, pelo corredor lateral, até a porta entreaberta da sala de música.",
+      {
+        "estilo": "pensamento",
+        "texto": "Ela. A mulher do piano. Se ela estiver em perigo..."
+      },
+      "Você corre. O som das suas passadas desaparece no tapete."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "ataque_sala_a",
+    "fundo": "corredor"
+  },
+  {
+    "id": "ataque_corredor_b",
+    "narrativa": [
+      "Você abre a porta com cuidado. O corredor está iluminado só pelas lâmpadas de emergência, vermelhas e tremidas.",
+      "A voz muda de direção a cada passo: agora parece vir de trás, depois da esquerda. Você segue, lentamente, com a mão na parede.",
+      "Nenhuma porta está aberta. Mas, pouco a pouco, outro som se mistura: notas de piano, lentas e tristes.",
+      "O piano te guia até uma porta entreaberta no fim da ala."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "ataque_sala_b",
+    "fundo": "corredor"
+  },
+  {
+    "id": "ataque_sala_b",
+    "narrativa": [
+      "A sala de música está iluminada só pela lua. No piano, sentada de costas, uma mulher de vestido antigo toca devagar.",
+      "Você não sabe quem ela é. Mas a voz de socorro some quando você entra. Só resta o piano.",
+      "Você se aproxima. Quando está a um passo, estende a mão e toca o ombro dela.",
+      "Ela para de tocar. Vira o rosto devagar. O rosto é desfigurado: a pele cinzenta se repuxa, os olhos são dois buracos escuros e a boca se abre mais do que devia.",
+      "Você cai para trás, apoiando as mãos no chão, e se arrasta para longe.",
+      {
+        "quem": "thiago",
+        "texto": "Está... tudo bem? Eu ouvi alguém gritando. Uma mulher pedindo socorro."
+      },
+      {
+        "quem": "mulher_piano_medo",
+        "texto": "Eu só estou tocando a minha música."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "b_elogia",
+        "texto": "“É uma música bonita...”",
+        "destino": "ataque_sala_b2",
+        "efeitos": {
+          "relacoes": {
+            "mulher_piano": {
+              "afeto": 2
+            }
+          }
+        }
+      },
+      {
+        "id": "b_calado",
+        "texto": "Ficar em silêncio, sem tirar os olhos dela",
+        "destino": "ataque_sala_b2"
+      }
+    ],
+    "fundo": "sala_musica"
+  },
+  {
+    "id": "ataque_sala_b2",
+    "narrativa": [
+      {
+        "quem": "thiago",
+        "texto": "Eu ouvi uma mulher gritando agora há pouco. Você não ouviu?"
+      },
+      {
+        "quem": "mulher_piano_medo",
+        "texto": "Não ouvi."
+      },
+      "Do corredor, a voz de socorro grita de novo, nítida, bem atrás de você.",
+      {
+        "quem": "thiago",
+        "texto": "Você não ouviu? Agora?"
+      },
+      "Ela se levanta. O vestido arrasta no chão, e as teclas do piano soam sozinhas, uma nota grave e feia.",
+      {
+        "quem": "mulher_piano_medo",
+        "texto": "NÃO OUVI."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "ataque_golpe",
+    "fundo": "sala_musica"
+  },
+  {
+    "id": "ataque_sala_a",
+    "narrativa": [
+      "A sala de música está iluminada só pela lua. No piano, sentada de costas, a mulher toca. Ela ergue os olhos quando você entra, e o olhar dela é mais assustado do que da primeira vez.",
+      {
+        "quem": "thiago",
+        "texto": "Ouvi uma mulher gritando. Achei que fosse você. Está bem?"
+      },
+      {
+        "quem": "mulher_piano",
+        "texto": "Não estou bem. Nunca estou."
+      },
+      "Você se senta ao lado dela no banco do piano. Ela não para de tocar.",
+      {
+        "quem": "thiago",
+        "texto": "Quer conversar? Posso ficar aqui."
+      },
+      "Ela continua tocando, os olhos fixos nas teclas. Você, sem pensar, pousa a mão sobre a dela.",
+      "O piano se cala de uma vez. Ela vira a cabeça devagar, e o rosto está diferente: distorcido, cinzento, os olhos negros.",
+      {
+        "quem": "mulher_piano_medo",
+        "texto": "Você não quer que eu toque? Você não quer que eu toque a minha música? Você disse que gostava dela."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "ataque_golpe",
+    "fundo": "sala_musica"
+  },
+  {
+    "id": "ataque_golpe",
+    "chegada": {
+      "barras": {
+        "vida": -35,
+        "sanidade": -30
+      },
+      "flags": {
+        "lugar": "suite14",
+        "ataque_feito": true,
+        "ataque_pendente": false
+      },
+      "somar": {
+        "fragmentos": 1
+      },
+      "tempo": 20
+    },
+    "narrativa": [
+      "Ela avança. A mão dela, que era fria, é de repente uma garra. Você sente algo rasgar o seu ombro, depois o peito.",
+      "A dor é branca. O som do piano se transforma num grito só, e você não sabe se é dela ou seu.",
+      "Você tropeça, cai, levanta. Corre. Pelas escadas, pelo corredor, sem olhar para trás.",
+      "Atrás de você, uma risada longa e satisfeita. Você não sabe quem ri, e não tem tempo de perguntar.",
+      "Quando alcança a porta da suíte 14, suas mãos tremem tanto que quase não conseguem girar a chave.",
+      "Você tranca a porta, escorrega até o chão e só então vê o sangue."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "manha_ferido",
+    "fundo": "suite14"
+  },
+  {
+    "id": "manha_ferido",
+    "chegada": {
+      "ate": "07:30",
+      "sono": true,
+      "flags": {
+        "lugar": "refeitorio"
+      }
+    },
+    "narrativa": [
+      "Você desmaia em algum momento. Quando acorda, a luz da manhã empurra as cortinas.",
+      "O ombro e o peito estão grudados na camisa, em sangue seco. Você sente tontura. Quando tenta pensar na noite passada, só vêm pedaços: um rosto, um piano, uma risada.",
+      {
+        "estilo": "sistema",
+        "texto": "Você está ferido e abalado. Sua Vida e sua Sanidade estão muito baixas. Procure ajuda."
+      },
+      "Você veste um casaco por cima e desce para o café, se escorando na parede."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "jehan_cafe",
+    "fundo": "suite14"
+  },
+  {
+    "id": "jehan_cafe",
+    "chegada": {
+      "tempo": 15,
+      "relacoes": {
+        "jehan": {
+          "afeto": 5
+        }
+      }
+    },
+    "narrativa": [
+      "O refeitório está cheio de cheiro de pão e café. Numa mesa de canto, Jehan toma o dele, lendo um jornal. Quando você passa, ele ergue os olhos e a xícara pára no meio do caminho.",
+      {
+        "quem": "jehan",
+        "texto": "Thiago. Sente-se. Agora."
+      },
+      "Ele levanta o seu casaco com dois dedos e olha o ombro. A expressão dele muda: já não é o barman bem-humorado.",
+      {
+        "quem": "jehan",
+        "texto": "Você não está bem. Isso aí não é de queda, nem de caco de vidro. Vou te levar à clínica."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu... saí do quarto à noite. Ouvi uma voz..."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Depois a gente conversa sobre isso. Levante-se. Devagar."
+      },
+      "Ele passa o seu braço por cima dos ombros dele e leva você para fora do refeitório, discretamente, como quem acompanha um velho amigo bêbado."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "clinica_sorteio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "clinica_sorteio",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        {
+          "destino": "clinica_amanda",
+          "efeitos": {
+            "flags": {
+              "medica": "amanda"
+            }
+          }
+        },
+        {
+          "destino": "clinica_rafaela",
+          "efeitos": {
+            "flags": {
+              "medica": "rafaela"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "clinica_amanda",
+    "chegada": {
+      "conhece": [
+        "amanda"
+      ],
+      "relacoes": {
+        "amanda": {
+          "afeto": 6
+        }
+      }
+    },
+    "narrativa": [
+      "A clínica cheira a ervas e álcool. Sobre uma maca, sob uma luz amarelada, uma jovem médica de olhos gentis lava as mãos numa pia de porcelana.",
+      {
+        "quem": "amanda",
+        "texto": "Jehan! O que aconteceu? Deite ele aqui."
+      },
+      "Ela faz você tirar o casaco e fica um bom tempo em silêncio, analisando as marcas.",
+      {
+        "quem": "amanda",
+        "texto": "Sou a Amanda. Isso não foi acidente. Quem fez isso?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Uma mulher. Tocando piano na sala de música. Ela parecia... parecia o retrato da esposa do fundador, aquele no hall."
+      },
+      "Jehan e Amanda trocam um olhar que você não consegue ler.",
+      {
+        "quem": "amanda",
+        "texto": "Não faz sentido nenhum. Mas é assim que o hotel funciona às vezes, e eu prefiro cuidar primeiro, perguntar depois."
+      },
+      {
+        "quem": "amanda",
+        "texto": "Vou limpar e fechar. Fique tranquilo: não vou contar a ninguém. Humanos me fascinam, sabe? Você me parece um menino com muito azar."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "clinica_fim",
+    "fundo": "clinica"
+  },
+  {
+    "id": "clinica_rafaela",
+    "chegada": {
+      "conhece": [
+        "rafaela"
+      ],
+      "relacoes": {
+        "rafaela": {
+          "afeto": 6
+        }
+      }
+    },
+    "narrativa": [
+      "A clínica cheira a ervas e álcool. Uma jovem médica de olhar afiado vira-se bruscamente quando a porta se abre, com um prontuário nas mãos.",
+      {
+        "quem": "rafaela",
+        "texto": "Jehan. Está de novo trazendo criatura estranha para a minha clínica?"
+      },
+      {
+        "quem": "jehan",
+        "texto": "É o Thiago. Está bem machucado, Rafaela."
+      },
+      "Ela olha o ferimento por um tempo mais longo do que o necessário e anota alguma coisa no prontuário.",
+      {
+        "quem": "rafaela",
+        "texto": "Sou a Rafaela. Conte rápido: quem fez isso?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Uma mulher tocando piano na sala de música. Ela parecia o retrato da esposa do fundador, lá do hall."
+      },
+      "Rafaela e Jehan trocam um olhar rápido.",
+      {
+        "quem": "rafaela",
+        "texto": "Isso não é normal. Nem para este lugar. Vou tratar do ferimento. E não conte isso a ninguém, entendeu? A ninguém. Eu mesma vou investigar."
+      },
+      {
+        "quem": "rafaela",
+        "texto": "Depois volte aqui. Quero ver como cicatriza. E quero saber de qualquer detalhe novo."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "clinica_fim",
+    "fundo": "clinica"
+  },
+  {
+    "id": "clinica_fim",
+    "chegada": {
+      "barras": {
+        "vida": 25,
+        "sanidade": 5
+      },
+      "flags": {
+        "clinica_ataque": true,
+        "desculpas_pendente": true,
+        "lugar": "corredores"
+      },
+      "tempo": 35
+    },
+    "narrativa": [
+      "O curativo é apertado, mas a dor diminui. Quando você se levanta, o mundo já não gira.",
+      {
+        "quem": "jehan",
+        "texto": "Fique longe da sala de música. E, da próxima vez, escute o conselho do barman."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu escutei. Não adiantou."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Então a gente conversa mais tarde, com uma bebida na mão."
+      },
+      "A médica não entregou ninguém. Nem Jehan. Esse silêncio, de um jeito estranho, é um alívio.",
+      "No caminho de volta, você percebe que o hotel está diferente: há guirlandas, fitas e cartazes por toda parte, como se o aniversário estivesse mais perto do que você imaginava.",
+      {
+        "estilo": "sistema",
+        "texto": "Você pode <b>dormir</b> para recuperar a Sanidade, ou continuar explorando. Mas cuidado com a noite."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "clinica"
+  },
+  {
+    "id": "alto_falante",
+    "narrativa": [
+      "Um estalo metálico atravessa o corredor, seguido de um chiado. A voz do alto-falante do hotel é calma e educada, e a mesma de sempre:",
+      "“Atenção, prezados hóspedes. Por motivos de segurança, solicitamos que nenhum hóspede permaneça fora de seus aposentos depois do horário de recolhimento. Agradecemos a compreensão.”",
+      "A mensagem se repete duas vezes. Depois, só o chiado. Ninguém parece surpreso.",
+      {
+        "estilo": "pensamento",
+        "texto": "Eles sabem. De alguma forma, sabem."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "@hub",
+    "fundo": "corredor"
+  },
+  {
+    "id": "porta_batem",
+    "chegada": {
+      "ate": "02:10",
+      "sono": true,
+      "barras": {
+        "cansaco": 60,
+        "sanidade": 5
+      }
+    },
+    "narrativa": [
+      "Algo desperta você no meio da noite. O quarto está frio, e o relógio mostra pouco depois das duas.",
+      "Batem na porta. Três pancadas leves, educadas. Depois, silêncio.",
+      {
+        "estilo": "pensamento",
+        "texto": "Quem bate à essa hora? As regras do hotel..."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "porta_abrir",
+        "texto": "Levantar e abrir a porta",
+        "destino": "porta_abre"
+      },
+      {
+        "id": "porta_nao",
+        "texto": "Ficar na cama, sem se mexer",
+        "destino": "porta_nao_abre"
+      }
+    ],
+    "fundo": "suite14"
+  },
+  {
+    "id": "porta_abre",
+    "narrativa": [
+      "Você hesita, o coração martelando, mas se levanta. Quando abre a porta, não está lá a mulher desfigurada da sala de música. Está uma mulher de vestido branco antigo, pálida, de olhos baixos, com os cabelos soltos e frios.",
+      {
+        "quem": "elisabeta",
+        "texto": "Perdão. Eu sei que é tarde. Não vim fazer nada de mau."
+      },
+      {
+        "quem": "elisabeta",
+        "texto": "Meu nome é Elisabeta. Eu... acho que ainda é meu nome."
+      },
+      {
+        "quem": "elisabeta",
+        "texto": "Eu não queria machucar você. Quando disseram que a música não era real, algo dentro de mim se perdeu."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "eli1",
+        "texto": "“Você está morta?”",
+        "destino": "porta_resp",
+        "efeitos": {
+          "flags": {
+            "eli_morta": true
+          }
+        }
+      },
+      {
+        "id": "eli2",
+        "texto": "“O que você é?”",
+        "destino": "porta_resp"
+      },
+      {
+        "id": "eli3",
+        "texto": "“Quero que você vá embora.”",
+        "destino": "porta_resp"
+      }
+    ],
+    "fundo": "suite14"
+  },
+  {
+    "id": "porta_resp",
+    "narrativa": [
+      {
+        "quem": "elisabeta",
+        "texto": "Aqui as coisas são muito confusas. Às vezes eu não sei onde termina a música e começo eu."
+      },
+      {
+        "quem": "elisabeta",
+        "texto": "Eu não vou mais atormentar você. Prometo."
+      },
+      "Ela leva a mão ao pescoço, como se procurasse algo que não está lá. Depois só o frio e três notas de piano ao longe.",
+      "Quando você pisca, o corredor está vazio."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "desculpas_fim",
+    "fundo": "suite14"
+  },
+  {
+    "id": "porta_nao_abre",
+    "chegada": {
+      "barras": {
+        "sanidade": -10
+      }
+    },
+    "narrativa": [
+      "Você aperta o lençol e não se mexe. As batidas param. A porta range, mas ninguém entra.",
+      "Você vira para o outro lado. O colchão está frio. Ela está deitada ao seu lado, os olhos abertos, fixos no teto.",
+      {
+        "quem": "elisabeta",
+        "texto": "Perdão."
+      },
+      "Você pula da cama, com o coração na garganta.",
+      {
+        "quem": "elisabeta",
+        "texto": "Não grite. Por favor. Só queria dizer que não vou mais atormentar você."
+      },
+      {
+        "quem": "elisabeta",
+        "texto": "Meu nome é Elisabeta. Eu não queria machucar você. Quando disseram que a música não era real, algo dentro de mim se perdeu."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "eli_b1",
+        "texto": "“Você está morta?”",
+        "destino": "cama_resp"
+      },
+      {
+        "id": "eli_b2",
+        "texto": "Ficar calado, encostado na parede",
+        "destino": "cama_resp2"
+      }
+    ],
+    "fundo": "suite14"
+  },
+  {
+    "id": "cama_resp",
+    "narrativa": [
+      {
+        "quem": "elisabeta",
+        "texto": "Aqui as coisas são muito confusas."
+      },
+      "Ela leva a mão ao pescoço, procurando algo que não está lá. Quando você pisca, ela não está mais. Só o lençol amassado e o frio."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "desculpas_fim",
+    "fundo": "suite14"
+  },
+  {
+    "id": "cama_resp2",
+    "narrativa": [
+      "Ela leva a mão ao pescoço, procurando algo que não está lá. Quando você pisca, ela não está mais. Só o lençol amassado e o frio."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "desculpas_fim",
+    "fundo": "suite14"
+  },
+  {
+    "id": "desculpas_fim",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "flags": {
+        "desculpas_pendente": false,
+        "elisabeta_desculpou": true,
+        "biblioteca_elisabeta": true,
+        "lugar": "suite14"
+      },
+      "barras": {
+        "cansaco": 90,
+        "sanidade": 10,
+        "vida": 5
+      }
+    },
+    "narrativa": [
+      "Você passa o resto da noite sentado na cama, com a luz acesa, sem coragem de fechar os olhos.",
+      "Pela manhã, o corpo pesa, mas a cabeça está mais clara. Você sente que algo se resolveu, ainda que não entenda o quê.",
+      "Aquelas semanas foram diferentes de tudo que eu já havia vivido. Os corredores começaram a parecer familiares, mas os sons durante a noite nunca deixaram de me assustar. Quanto mais eu conhecia aquele lugar, menos conseguia acreditar nas explicações que inventava para mim mesmo.",
+      {
+        "estilo": "sistema",
+        "texto": "Uma nova pista foi liberada na <b>biblioteca</b>: a vida de Elisabeta. (Conteúdo previsto para o próximo capítulo.)"
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "suite14"
+  },
+  {
+    "id": "morte_pedido",
+    "narrativa": [
+      "Numa mesa isolada do refeitório, uma moça de vestido preto e simples, de cabelos castanhos longos e olhos azul-claros, observa a sala sem tocar na comida que tem diante de si. A pele é clara, sem ser pálida. Parece uma menina do sul, saída de uma festa de interior.",
+      "Quando você passa, ela ergue os olhos, e você tem a impressão de que ela esperava exatamente por você.",
+      {
+        "quem": "morte_jovem",
+        "texto": "Você tem as mãos livres. Isso é raro neste hotel."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Perdão?"
+      },
+      {
+        "quem": "morte_jovem",
+        "texto": "Alguém precisa muito comer. Não consegue mais levantar da cama e ninguém está olhando por ele. Eu não posso ir até lá."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Por que não pode?"
+      },
+      "Ela sorri, e o sorriso é doce e cansado.",
+      {
+        "quem": "morte_jovem",
+        "texto": "Porque eu assustaria quem eu quero ajudar. Leve esta bandeja por mim. Quarto no fim do corredor, perto da escada. Nada de pressa, mas também nada de demora."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "morte_aceita",
+        "texto": "“Pode deixar, eu levo.”",
+        "destino": "morte_aceitou",
+        "efeitos": {
+          "flags": {
+            "morte_estado": "aceita"
+          },
+          "itens": [
+            "bandeja_morte"
+          ],
+          "conhece": [
+            "morte_jovem"
+          ],
+          "tirar_marcadores": [
+            "refeitorio"
+          ],
+          "marcadores": [
+            {
+              "area": "corredores",
+              "texto": "Bandeja para o quarto do fim do corredor"
+            }
+          ],
+          "tempo": 5
+        }
+      },
+      {
+        "id": "morte_recusa",
+        "texto": "“Desculpe, não estou em condições.”",
+        "destino": "morte_recusou",
+        "efeitos": {
+          "tempo": 2
+        }
+      }
+    ],
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "morte_aceitou",
+    "narrativa": [
+      {
+        "quem": "morte_jovem",
+        "texto": "Obrigada. De verdade."
+      },
+      "Ela se levanta com uma leveza estranha, empurra uma bandeja coberta com um pano branco na sua direção e some atrás de uma coluna. Quando você olha, não há mais ninguém.",
+      {
+        "item": "bandeja_morte"
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Missão: <b>A Última Refeição</b>. Leve a bandeja ao quarto no fim do corredor."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "morte_recusou",
+    "narrativa": [
+      {
+        "quem": "morte_jovem",
+        "texto": "Entendo. Se mudar de ideia, estarei por aqui."
+      },
+      "Ela volta a observar a sala, como se tivesse todo o tempo do mundo. E, no fundo, talvez tenha."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "morte_quarto_cond",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "medica",
+      "casos": {
+        "amanda": "morte_quarto",
+        "rafaela": "morte_quarto"
+      },
+      "padrao": "morte_medica",
+      "raiz": true
+    }
+  },
+  {
+    "id": "morte_medica",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        {
+          "destino": "morte_quarto",
+          "efeitos": {
+            "flags": {
+              "medica": "amanda"
+            }
+          }
+        },
+        {
+          "destino": "morte_quarto",
+          "efeitos": {
+            "flags": {
+              "medica": "rafaela"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "morte_quarto",
+    "chegada": {
+      "definir": {
+        "fomeMax": 150
+      },
+      "tempo": 10
+    },
+    "narrativa": [
+      "No fim do corredor, perto da escada de serviço, uma porta de madeira escura tem a tinta descascada. Você ouve alguém lá dentro, tossindo baixo.",
+      "A porta se abre antes de você bater. Uma médica de jaleco sai, com uma maleta, passa por você sem olhar, como se você fosse parte da parede.",
+      {
+        "texto": "É a Amanda. Os olhos dela estão fundos, e ela segue pelo corredor sem uma palavra.",
+        "se": {
+          "flag": "medica",
+          "valor": "amanda"
+        }
+      },
+      {
+        "texto": "É a Rafaela. A boca está apertada numa linha dura, e ela segue pelo corredor sem uma palavra.",
+        "se": {
+          "flag": "medica",
+          "valor": "rafaela"
+        }
+      },
+      "O quarto é pequeno e cheira a remédio e a cera de vela. Numa cama de ferro, sob cobertores gastos, um homem muito magro e muito idoso respira com dificuldade.",
+      "Quando você coloca a bandeja na mesinha de cabeceira, ele abre os olhos, de um azul esmaecido, e sorri.",
+      {
+        "quem": "paciente",
+        "texto": "Você é um dos hóspedes novos. Não me lembro da sua cara. Mas a bandeja... ah, a bandeja eu reconheço."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Você pode deixar a bandeja e partir, ou ficar e ajudá-lo a comer."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "morte_deixar",
+        "texto": "Deixar a bandeja e ir embora",
+        "destino": "morte_deixou"
+      },
+      {
+        "id": "morte_ficar",
+        "texto": "Sentar ao lado dele e ajudá-lo a comer",
+        "destino": "morte_alimentou"
+      }
+    ],
+    "fundo": "quarto_doente"
+  },
+  {
+    "id": "morte_deixou",
+    "narrativa": [
+      {
+        "quem": "thiago",
+        "texto": "Coma devagar. Eu volto mais tarde."
+      },
+      {
+        "quem": "paciente",
+        "texto": "Obrigado, rapaz. Boa noite, ou boa tarde. Já não sei."
+      },
+      "Você sai e fecha a porta devagar. Ouve, lá dentro, o tilintar da colher na louça."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "morte_agradece",
+    "fundo": "quarto_doente"
+  },
+  {
+    "id": "morte_alimentou",
+    "chegada": {
+      "flags": {
+        "morte_chave": true,
+        "bau_sem_herdeiros": true
+      },
+      "barras": {
+        "sanidade": -5
+      },
+      "tempo": 30
+    },
+    "narrativa": [
+      "Você puxa uma cadeira e senta ao lado da cama. Com cuidado, ergue a colher, e ele aceita cada porção com a lentidão de quem saboreia.",
+      {
+        "quem": "paciente",
+        "texto": "Faz tanto tempo que ninguém fica. Nem minha mãe teve tanta paciência."
+      },
+      "Vocês conversam pouco. Ele fala de uma casa ao lado de um rio, de um cachorro de nome Barão, de uma mulher chamada Lena. Nada que lhe diga quem ele é. Nada que importe agora.",
+      "Quando o prato está limpo, ele pega algo debaixo do travesseiro: uma chave pequena, de ferro escuro, amarrada a um barbante.",
+      {
+        "quem": "paciente",
+        "texto": "Eu não tenho herdeiro. Isso abre um baú, em algum lugar deste hotel. Guarde. Alguém tem que ficar com o que sobra."
+      },
+      {
+        "item": "chave_misteriosa"
+      },
+      "Ele sorri, fecha os olhos e respira mais devagar. Você espera um tempo. Quando percebe, a respiração parou. O rosto dele está em paz.",
+      "Você puxa o cobertor até o peito dele, fica um instante em silêncio e sai."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "morte_agradece",
+    "fundo": "quarto_doente"
+  },
+  {
+    "id": "morte_agradece",
+    "chegada": {
+      "flags": {
+        "morte_estado": "concluida",
+        "lugar": "refeitorio"
+      },
+      "tirar_itens": [
+        "bandeja_morte"
+      ],
+      "barras": {
+        "fome": 50,
+        "sanidade": 3
+      },
+      "tempo": 5
+    },
+    "narrativa": [
+      "Você volta pelo refeitório. Na mesa isolada, onde a moça de preto estava, agora só há um prato intocado e um guardanapo dobrado.",
+      "Ao se aproximar, você lê, em letra miúda e elegante: “Obrigada.” O papel se desfaz em cinza fina entre os seus dedos, sem nenhum cheiro.",
+      "A cadeira está fria. Ninguém, em volta, parece ter visto a moça.",
+      {
+        "estilo": "sistema",
+        "texto": "Missão <b>A Última Refeição</b> concluída. Sua barra de <b>Fome</b> agora vai até <b>150</b>, e você se sente mais cheio e mais forte."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Você recebeu uma <b>chave misteriosa</b>. Ela abrirá algo no futuro.",
+        "se": {
+          "flag": "morte_chave"
+        }
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  }
+]

@@ -5,7 +5,7 @@
  * ------------------------------------------------------------
  * Guarda TUDO que muda durante uma partida:
  *   - os 6 atributos (Força, Agilidade, Inteligência, Peso, Carisma, Sorte)
- *   - as 4 barras (Vida, Fome, Sanidade, Suspeita)
+ *   - as 5 barras (Vida, Fome, Cansaço, Sanidade, Suspeita)
  *   - o relógio (UM contador único, em minutos)
  *   - as flags (marcações invisíveis, tipo "já tomou banho?")
  *   - inventário, personagens conhecidos, mapa
@@ -52,6 +52,7 @@ function novoEstado() {
     // barras (0 a 100) — a Fome pode passar de 100 depois (fomeMax)
     vida: 100,
     fome: 100, fomeMax: 100,   // quanto MAIOR, mais alimentado
+    cansaco: 100,              // quanto MAIOR, mais descansado (cai acordado, sobe dormindo)
     sanidade: 100,
     suspeita: 50,              // quanto MENOR, melhor. Todo humano chega "cheirando" a humano
 
@@ -82,12 +83,14 @@ function clamp(valor, minimo = 0, maximo = 100) {
  * Depois do tutorial da Fome (flag "fome_ativa"), a Fome cai com o tempo.
  * `fator` < 1 = dormindo (gasta menos).
  */
-const FOME_POR_MINUTO = 0.12;   // ~7 pontos por hora acordado
+const FOME_POR_MINUTO = 0.12;     // ~7 pontos por hora acordado
+const CANSACO_POR_MINUTO = 0.06;  // ~3,6 pontos por hora acordado (dormindo não gasta)
 function avancarTempo(estado, minutos = 0, fator = 1) {
   const m = Math.max(0, minutos);
   estado.minutos += m;
   if (estado.flags.fome_ativa) {
     estado.fome = clamp(estado.fome - m * FOME_POR_MINUTO * fator, 0, estado.fomeMax);
+    if (fator >= 1) estado.cansaco = clamp(estado.cansaco - m * CANSACO_POR_MINUTO, 0, 100);
   }
 }
 
@@ -160,6 +163,6 @@ function resumoTempo(estado) {
 
 /** Saves de versões antigas do jogo não servem mais: recomeça limpo. */
 function migrarEstado(e) {
-  if (!e || typeof e.fome !== "number" || !Array.isArray(e.hud)) return novoEstado();
+  if (!e || typeof e.fome !== "number" || typeof e.cansaco !== "number" || !Array.isArray(e.hud)) return novoEstado();
   return e;
 }

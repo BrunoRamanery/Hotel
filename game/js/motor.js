@@ -53,7 +53,7 @@ function pintarStatus() {
   document.body.classList.toggle("noite-fora", !ehDeDia(estado));
 
   // as 4 barras
-  for (const barra of ["vida", "fome", "sanidade", "suspeita"]) {
+  for (const barra of ["vida", "fome", "cansaco", "sanidade", "suspeita"]) {
     mostrarElemento("b-" + barra, hud.includes(barra));
     const max = barra === "fome" ? estado.fomeMax : 100;
     document.getElementById("p-" + barra).style.width = (estado[barra] / max * 100) + "%";
@@ -112,19 +112,24 @@ function desenharPainel(qual) {
       (estado.inventario.length
         ? `<ul class="lista-itens">` + estado.inventario.map(id => {
             const it = ITENS[id] || { nome: id, peso: 0 };
-            return `<li><span>${it.nome}</span><i>peso ${it.peso}</i></li>`;
+            const usar = it.usar ? `<button class="btn-ir" onclick="usarItem('${id}', ${estado.inventario.indexOf(id)})">usar</button>` : "";
+            return `<li><span>${it.nome}</span><i>peso ${it.peso}</i>${usar}</li>`;
           }).join("") + `</ul>`
         : `<p class="vazio">Você não está carregando nada.</p>`) +
       `<p class="dica">O que não está aqui fica guardado no armário da Suíte 14.</p>`;
   }
   if (qual === "mapa") {
     titulo = "Mapa do Hotel";
+    const podeIr = cenaEhHub(cenaAtual);
     corpo = estado.mapa.length
       ? `<ul class="lista-mapa">` + estado.mapa.map(id => {
           const marcas = estado.marcadores.filter(m => m.area === id);
+          const aqui = estado.flags.lugar === id;
+          const botao = podeIr && !aqui
+            ? `<button class="btn-ir" onclick="irParaLugar('${id}')">ir</button>` : (aqui && podeIr ? `<i class="aqui">você está aqui</i>` : "");
           return `<li><span>${AREAS[id] || id}</span>` +
-            marcas.map(m => `<i class="marcador">? ${m.texto}</i>`).join("") + `</li>`;
-        }).join("") + `</ul>`
+            marcas.map(m => `<i class="marcador">! ${m.texto}</i>`).join("") + botao + `</li>`;
+        }).join("") + `</ul>` + (podeIr ? "" : `<p class="dica">Termine a conversa para poder andar pelo hotel.</p>`)
       : `<p class="vazio">Você ainda não tem um mapa.</p>`;
   }
 
@@ -261,13 +266,9 @@ let fundoAtual = null;
 // Lugares que têm uma versão de DIA (arquivo NOME_dia.jpg). De manhã e à tarde o jogo usa
 // essa versão; à noite e de madrugada usa a normal. Se o arquivo de dia não existir, usa a normal.
 const FUNDOS_COM_DIA = ["suite14", "corredor"];
-function ehDeDia() {
-  const h = Math.floor((estado.minutos % MIN_POR_DIA) / 60);
-  return h >= 6 && h < 18;
-}
 function pintarFundo(nome) {
   if (nome === undefined) return;
-  const arquivo = (nome && FUNDOS_COM_DIA.includes(nome) && ehDeDia()) ? nome + "_dia" : nome;
+  const arquivo = (nome && FUNDOS_COM_DIA.includes(nome) && ehDeDia(estado)) ? nome + "_dia" : nome;
   if (arquivo === fundoAtual) return;
   fundoAtual = arquivo;
   const el = document.getElementById("fundo");
@@ -289,6 +290,7 @@ function pintarFundo(nome) {
 
 /* ----- mostrar uma cena na tela ----- */
 function mostrarCena(id, restaurando = false) {
+  if (id === "@hub") id = "hub_" + (estado.flags.lugar || "suite14");   // volta para o lugar onde Thiago está
   cenaAtual = id;
   const cena = CENAS[id];
   const palco = document.getElementById("palco");
@@ -312,6 +314,7 @@ function mostrarCena(id, restaurando = false) {
   // cenas especiais
   if (cena.tipo === "espelho") return mostrarEspelho(cena);
   if (cena.tipo === "tracos") return mostrarTracos(cena);
+  if (cena.tipo === "selecao") return mostrarSelecao(cena);
 
   // sorteio: escolhe um destino ao acaso (opção = id simples ou {destino, efeitos})
   if (cena.tipo === "sorteio") {
@@ -430,6 +433,7 @@ function escolher(op) {
   }
   // escolha simples
   aplicarEfeitos(estado, op.efeitos);
+  if (op.destino === "@mapa") { pintarStatus(); alternarPainelAberto("mapa"); return; }
   mostrarCena(op.destino);
 }
 
@@ -655,4 +659,154 @@ function aviso(texto) {
   el.textContent = texto;
   document.body.appendChild(el);
   setTimeout(() => el.remove(), 1600);
+}
+
+
+/* ============================================================
+ * NAVEGAÇÃO PELO MAPA
+ * ------------------------------------------------------------
+ * O mapa é um menu de lugares. Cada lugar tem uma cena-base ("hub_<lugar>",
+ * com "dados": {"hub": true}). Tocar em "ir" gasta tempo, confere as regras do
+ * hotel (noite proibida), as emergências do corpo (fome, cansaço) e, de vez
+ * em quando, sorteia uma peça do Homem Invisível. Depois mostra o lugar.
+ * Lugares secretos NÃO entram no mapa: abrem por opções dentro das cenas.
+ * ============================================================ */
+function cenaEhHub(id) {
+  const c = CENAS[id];
+  return !!(c && c.dados && c.dados.hub);
+}
+function alternarPainelAberto(qual) {   // abre (não fecha) um painel
+  painelAberto = qual;
+  desenharPainel(qual);
+}
+
+function irParaLugar(id) {
+  fecharPainel();
+  // regra do hotel: ninguém circula de 22h às 6h
+  if (valorDeFlag(estado, "@noite") && id !== "suite14" && !estado.flags.noite_livre) {
+    aplicarEfeitos(estado, { barras: { suspeita: 15 }, tempo: 5 });
+    pintarStatus();
+    return mostrarCena("regra_noite");
+  }
+  aplicarEfeitos(estado, { tempo: TEMPO_VIAGEM[id] || TEMPO_VIAGEM.padrao });
+  estado.flags.lugar = id;
+  pintarStatus();
+
+  liberarPorRegras();
+  // o corpo pede socorro (fome, cansaço)?
+  const critica = situacaoCritica(estado);
+  if (critica) {
+    if (critica === "alucinacao") estado.flags.alucinou_bloco = Math.floor(estado.minutos / 180);
+    return mostrarCena(critica);
+  }
+  // o Homem Invisível aprontou algo no caminho?
+  const evento = sortearEventoInvisivel(id);
+  if (evento) return mostrarCena(evento);
+
+  // eventos do dia seguinte (ex.: aviso no alto-falante depois do ataque)
+  if (estado.flags.clinica_ataque && !estado.flags.alto_falante) {
+    estado.flags.alto_falante = true;
+    return mostrarCena("alto_falante");
+  }
+  mostrarCena("hub_" + id);
+}
+
+/** Procura uma travessura do Homem Invisível para este lugar (ou nenhuma). */
+function sortearEventoInvisivel(area) {
+  if (!estado.flags.invisivel_ativo) return null;
+  estado.flags.viagens_desde_evento = (estado.flags.viagens_desde_evento || 0) + 1;
+  if (estado.flags.viagens_desde_evento < 3) return null;     // pelo menos 2 viagens sossegadas
+  if (Math.random() > 0.45) return null;
+  const pool = Object.values(CENAS).filter(c => {
+    const ev = c.dados && c.dados.evento_invisivel;
+    return ev && !estado.flags["ev_" + c.id]
+      && (!ev.areas || ev.areas.includes(area)) && condicaoSe(estado, ev.se);
+  });
+  if (!pool.length) return null;
+  const escolhida = pool[Math.floor(Math.random() * pool.length)];
+  estado.flags["ev_" + escolhida.id] = true;
+  estado.flags.viagens_desde_evento = 0;
+  return escolhida.id;
+}
+
+/** Usa um item do inventário (comer, beber). */
+function usarItem(id) {
+  const it = ITENS[id];
+  if (!it || !it.usar) return;
+  aplicarEfeitos(estado, it.usar);
+  estado.inventario = estado.inventario.filter(x => x !== id);
+  pintarStatus();
+  const palco = document.getElementById("palco");
+  palco.insertAdjacentHTML("afterbegin",
+    `<div class="cena" style="animation:none"><p class="aviso-teste">${it.usar.texto || ""}</p></div>`);
+}
+
+
+/* ----- cena de SELEÇÃO (ex.: estoque): sorteia N objetos do catálogo e o jogador escolhe K -----
+ * dados: { catalogo:[{id,nome,estilo}], sortear:10, sortear_extra:{flag,valor,mais},
+ *          escolher:6, destino:"cena", flag_sorteio:"x", prefixo:"dec_" , flag_estilo:"decoracao_estilo" }
+ * Guarda o sorteio numa flag (continua o mesmo se o jogador sair e voltar),
+ * liga uma flag "<prefixo><id>" para cada escolhido e a flag do estilo dominante. */
+function mostrarSelecao(cena) {
+  const palco = document.getElementById("palco");
+  const d = cena.dados;
+  let total = d.sortear;
+  if (d.sortear_extra && estado.flags[d.sortear_extra.flag] === d.sortear_extra.valor) total += d.sortear_extra.mais;
+  if (!Array.isArray(estado.flags[d.flag_sorteio]) || estado.flags[d.flag_sorteio].length !== total) {
+    const emb = d.catalogo.map(x => x.id).sort(() => Math.random() - 0.5);
+    estado.flags[d.flag_sorteio] = emb.slice(0, total);
+  }
+  const ofertados = d.catalogo.filter(x => estado.flags[d.flag_sorteio].includes(x.id));
+  const marcados = new Set();
+
+  function desenhar() {
+    const lista = ofertados.map(x => `<button class="sel-item ${marcados.has(x.id) ? "marcado" : ""}" data-id="${x.id}">${x.nome}</button>`).join("");
+    palco.innerHTML = `<div class="cena">
+      <div class="narrativa">${montarNarrativa(cena.narrativa)}</div>
+      <div class="selecao"><p class="restam">escolhidos: <b>${marcados.size}</b> de ${d.escolher}</p>
+        <div class="sel-grade">${lista}</div>
+        <button class="confirmar" ${marcados.size !== d.escolher ? "disabled" : ""}>Levar estas peças</button></div></div>`;
+    palco.querySelectorAll(".sel-item").forEach(b => b.onclick = () => {
+      const id = b.dataset.id;
+      if (marcados.has(id)) marcados.delete(id);
+      else if (marcados.size < d.escolher) marcados.add(id);
+      desenhar();
+    });
+    palco.querySelector(".confirmar").onclick = () => {
+      const cont = {};
+      marcados.forEach(id => {
+        estado.flags[d.prefixo + id] = true;
+        const est = ofertados.find(x => x.id === id).estilo;
+        cont[est] = (cont[est] || 0) + 1;
+      });
+      const ordenado = Object.entries(cont).sort((a, b) => b[1] - a[1]);
+      estado.flags[d.flag_estilo] = (ordenado[0][1] >= 3) ? ordenado[0][0] : "improvisado";
+      aplicarEfeitos(estado, d.efeitos);
+      pintarStatus();
+      mostrarCena(d.destino);
+    };
+  }
+  desenhar();
+}
+
+
+/** Liberações automáticas do mapa (regras que não pertencem a uma cena só). */
+function liberarPorRegras() {
+  if (valorDeFlag(estado, "@propostas") && !estado.flags.liberou_bar) {
+    estado.flags.liberou_bar = true;
+    if (!estado.mapa.includes("bar")) estado.mapa.push("bar");
+    estado.marcadores.push({ area: "bar", texto: "Há movimento no bar" });
+    if (estado.flags.eug_estado === undefined) estado.marcadores.push({ area: "refeitorio", texto: "Uma senhora de avental" });
+    if (estado.flags.morte_estado === undefined) estado.marcadores.push({ area: "refeitorio", texto: "Uma moça de preto" });
+  }
+  // Arthur: some do mapa até as duas condições valerem juntas; depois aparece e nunca mais some
+  if (valorDeFlag(estado, "@arthur") && !estado.flags.liberou_arthur) {
+    estado.flags.liberou_arthur = true;
+    estado.marcadores.push({ area: "biblioteca", texto: "Arthur quer mostrar algo" });
+  }
+  // Jehan: só à noite (19h às 22h), depois do Vestido (e de Arthur, se ele foi liberado)
+  if (valorDeFlag(estado, "@jehan") && !estado.flags.liberou_jehan) {
+    estado.flags.liberou_jehan = true;
+    estado.marcadores.push({ area: "bar", texto: "O barman (à noite)" });
+  }
 }
