@@ -286,7 +286,49 @@
       }
     ],
     "dados": {
-      "hub": true
+      "hub": true,
+      "presencas": [
+        {
+          "quem": "nix",
+          "horas": "8h–18h",
+          "base": [
+            {
+              "flag": "nix_estado",
+              "valor": "concluida"
+            }
+          ],
+          "se": [
+            {
+              "flag": "nix_estado",
+              "valor": "concluida"
+            },
+            {
+              "flag": "@hora",
+              "min": 8,
+              "max": 18
+            }
+          ]
+        },
+        {
+          "quem": "vovo",
+          "horas": "14h–20h",
+          "base": [
+            {
+              "flag": "conv_vovo"
+            }
+          ],
+          "se": [
+            {
+              "flag": "conv_vovo"
+            },
+            {
+              "flag": "@hora",
+              "min": 14,
+              "max": 20
+            }
+          ]
+        }
+      ]
     },
     "opcoes": [
       {
@@ -436,7 +478,66 @@
       "A biblioteca. Estantes altas até o teto, escadas de madeira e o cheiro doce de papel antigo. Uma bibliotecária de cabelos brancos arruma livros numa mesa, com uma coruja pequena empoleirada ao lado."
     ],
     "dados": {
-      "hub": true
+      "hub": true,
+      "presencas": [
+        {
+          "quem": "enola",
+          "horas": "de dia",
+          "base": [
+            {
+              "flag": "enola_conhecida"
+            }
+          ],
+          "se": [
+            {
+              "flag": "enola_conhecida"
+            },
+            {
+              "flag": "@noite",
+              "valor": false
+            }
+          ]
+        },
+        {
+          "quem": "nosferatu",
+          "horas": "de dia",
+          "base": [
+            {
+              "flag": "conv_biblio"
+            }
+          ],
+          "se": [
+            {
+              "flag": "conv_biblio"
+            },
+            {
+              "flag": "@noite",
+              "valor": false
+            }
+          ]
+        },
+        {
+          "quem": "arthur",
+          "horas": "9h–19h",
+          "base": [
+            {
+              "flag": "arthur_estado",
+              "valor": "concluido"
+            }
+          ],
+          "se": [
+            {
+              "flag": "arthur_estado",
+              "valor": "concluido"
+            },
+            {
+              "flag": "@hora",
+              "min": 9,
+              "max": 19
+            }
+          ]
+        }
+      ]
     },
     "opcoes": [
       {
@@ -729,7 +830,35 @@
       }
     ],
     "dados": {
-      "hub": true
+      "hub": true,
+      "presencas": [
+        {
+          "quem": "macha",
+          "horas": "de dia",
+          "base": [
+            {
+              "flag": "macha_conhecida"
+            },
+            {
+              "flag": "clinica_ataque",
+              "diferente": true
+            }
+          ],
+          "se": [
+            {
+              "flag": "macha_conhecida"
+            },
+            {
+              "flag": "@noite",
+              "valor": false
+            },
+            {
+              "flag": "clinica_ataque",
+              "diferente": true
+            }
+          ]
+        }
+      ]
     },
     "opcoes": [
       {
@@ -923,7 +1052,34 @@
       }
     ],
     "dados": {
-      "hub": true
+      "hub": true,
+      "presencas": [
+        {
+          "quem": "jonathan",
+          "horas": "nas refeições",
+          "base": [
+            {
+              "flag": "@propostas"
+            },
+            {
+              "flag": "jon_estado",
+              "diferente": "recusada"
+            }
+          ],
+          "se": [
+            {
+              "flag": "@propostas"
+            },
+            {
+              "flag": "jon_estado",
+              "diferente": "recusada"
+            },
+            {
+              "flag": "@refeicao"
+            }
+          ]
+        }
+      ]
     },
     "opcoes": [
       {
@@ -2392,7 +2548,36 @@
       "O salão de festas é um espaço imenso, de teto alto e piso quadriculado, com lustres cobertos por panos. Cadeiras se empilham contra as paredes e uma escada de armar espera no centro."
     ],
     "dados": {
-      "hub": true
+      "hub": true,
+      "presencas": [
+        {
+          "quem": "mavis",
+          "horas": "9h–18h",
+          "base": [
+            {
+              "flag": "@propostas"
+            },
+            {
+              "flag": "mavis_estado",
+              "diferente": "recusada"
+            }
+          ],
+          "se": [
+            {
+              "flag": "@propostas"
+            },
+            {
+              "flag": "mavis_estado",
+              "diferente": "recusada"
+            },
+            {
+              "flag": "@hora",
+              "min": 9,
+              "max": 18
+            }
+          ]
+        }
+      ]
     },
     "opcoes": [
       {
@@ -2683,7 +2868,30 @@
       }
     ],
     "dados": {
-      "hub": true
+      "hub": true,
+      "presencas": [
+        {
+          "quem": "jehan",
+          "horas": "19h–21h",
+          "base": [
+            {
+              "flag": "jehan_estado",
+              "valor": "concluido"
+            }
+          ],
+          "se": [
+            {
+              "flag": "jehan_estado",
+              "valor": "concluido"
+            },
+            {
+              "flag": "@hora",
+              "min": 19,
+              "max": 21
+            }
+          ]
+        }
+      ]
     },
     "opcoes": [
       {
@@ -6925,6 +7133,34 @@
     "fundo": "hall"
   },
   {
+    "id": "obs_hall_4",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Há uma mala parada ao lado do balcão, mas ninguém a reclama. Depois de alguns minutos, ela é levantada por mãos que você não vê direito e carregada pela escada. Um funcionário, sem pressa, explica: “Hóspede tímido.”"
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hall_base",
+    "fundo": "hall"
+  },
+  {
+    "id": "obs_hall_5",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Pela fresta da porta do portão entra uma corrente de ar que cheira a estrada e a terra molhada. Do lado de fora, alguém tosse, bem baixo, e todos no hall fingem não escutar."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hall_base",
+    "fundo": "hall"
+  },
+  {
     "id": "obs_hall",
     "tipo": "sorteio",
     "dados": {
@@ -6932,7 +7168,9 @@
       "opcoes": [
         "obs_hall_1",
         "obs_hall_2",
-        "obs_hall_3"
+        "obs_hall_3",
+        "obs_hall_4",
+        "obs_hall_5"
       ]
     }
   },
@@ -6979,6 +7217,34 @@
     "fundo": "refeitorio"
   },
   {
+    "id": "obs_refeitorio_4",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Você nota que alguns hóspedes só mexem na comida, sem levar nada à boca. Quando percebem que você olha, sorriem educados e começam a cortar o prato em pedaços muito pequenos."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "obs_refeitorio_5",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "O pão sobre a mesa é partido por uma mão pálida e comprida que some atrás de uma coluna. Na cadeira, fica só o guardanapo dobrado, perfeito."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_refeitorio",
+    "fundo": "refeitorio"
+  },
+  {
     "id": "obs_refeitorio",
     "tipo": "sorteio",
     "dados": {
@@ -6986,7 +7252,9 @@
       "opcoes": [
         "obs_refeitorio_1",
         "obs_refeitorio_2",
-        "obs_refeitorio_3"
+        "obs_refeitorio_3",
+        "obs_refeitorio_4",
+        "obs_refeitorio_5"
       ]
     }
   },
@@ -7033,6 +7301,34 @@
     "fundo": "corredor"
   },
   {
+    "id": "obs_corredores_4",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Você pisa num trecho do tapete e escuta, bem abaixo do chão, um barulho de pedra sendo arrastada. Ele para quando você para. Recomeça quando você anda."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "obs_corredores_5",
+    "chegada": {
+      "tempo": 6
+    },
+    "narrativa": [
+      "Uma porta tem marcas fundas na madeira, como de garras grandes. Uma camareira passa uma tinta fresca por cima, sem olhar para você, e murmura: “Gato do hotel.”"
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
     "id": "obs_corredores",
     "tipo": "sorteio",
     "dados": {
@@ -7040,7 +7336,9 @@
       "opcoes": [
         "obs_corredores_1",
         "obs_corredores_2",
-        "obs_corredores_3"
+        "obs_corredores_3",
+        "obs_corredores_4",
+        "obs_corredores_5"
       ]
     }
   },

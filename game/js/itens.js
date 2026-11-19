@@ -52,5 +52,25 @@ const AREAS = {
 };
 
 // Quantos minutos leva ir de um lugar a outro (padrão 5; estoque fica mais longe).
+// Em qual cena-base de cada lugar ficam as "presenças" (quem costuma estar ali).
+const HUB_DA_AREA = {
+  hall: "hall_base", refeitorio: "hub_refeitorio", corredores: "hub_corredores", biblioteca: "biblioteca_base",
+  salao_festas: "hub_salao_festas", bar: "bar_base", sala_musica: "hub_sala_musica"
+};
+
+// O que aparece no Diário depois que uma missão termina: [flag, valor, título]
+const DIARIO_MISSOES = [
+  ["jon_estado", "concluida", "Os Três Convites"],
+  ["jon_estado", "recusada", "Os Três Convites (recusada)"],
+  ["mavis_estado", "concluida", "Não Era o que Eu Pedi"],
+  ["mavis_estado", "recusada", "Não Era o que Eu Pedi (recusada)"],
+  ["vestido_estado", "concluido", "O Vestido Roubado"],
+  ["eug_estado", "concluida", "A Cozinha Básica"],
+  ["nix_estado", "concluida", "Um Favor entre Funcionários"],
+  ["arthur_estado", "concluido", "Os Dois Diários"],
+  ["jehan_estado", "concluido", "Uma Conversa no Bar"],
+  ["morte_estado", "concluida", "A Última Refeição"]
+];
+
 const TEMPO_POR_CENA = 2;   // minutos que cada cena de história/diálogo consome
 const TEMPO_VIAGEM = { padrao: 5, estoque: 10, clinica: 8 };

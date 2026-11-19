@@ -250,3 +250,26 @@ function situacaoCritica(estado) {
   }
   return null;
 }
+
+
+/** "O jantar é às 19h" / "A refeição está servida agora": ajuda o jogador a entender as regras. */
+function textoProximaRefeicao(estado) {
+  const h = Math.floor((estado.minutos % MIN_POR_DIA) / 60);
+  if ((h >= 7 && h < 9) || (h >= 12 && h < 14) || (h >= 19 && h < 21)) return "A refeição está sendo servida agora no refeitório";
+  if (h < 7) return "O café da manhã é às 7h";
+  if (h < 12) return "O almoço é às 12h";
+  if (h < 19) return "O jantar é às 19h";
+  return "O café da manhã é às 7h";
+}
+
+/** Avisos curtos sob as barras (no máximo 2). */
+function avisosDeStatus(estado) {
+  if (!estado.flags.fome_ativa) return [];
+  const h = Math.floor((estado.minutos % MIN_POR_DIA) / 60);
+  const a = [];
+  if (estado.fome <= 35) a.push(`Você está com fome. ${textoProximaRefeicao(estado)}; a água do refeitório está sempre disponível.`);
+  if (estado.cansaco <= 30) a.push(`Você está exausto. Um cochilo ajuda, e à noite o certo é dormir na Suíte 14.`);
+  if (h >= 21 && h < 22) a.push(`Falta pouco para as 22h: depois disso, os corredores são proibidos.`);
+  else if (h >= 22 || h < 6) a.push(`Os corredores são proibidos a esta hora. Volte para a Suíte 14.`);
+  return a.slice(0, 2);
+}

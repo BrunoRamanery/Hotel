@@ -74,6 +74,7 @@ async function iniciar() {
   // botões da interface (painéis)
   document.getElementById("btn-perfil").onclick = () => alternarPainel("perfil");
   document.getElementById("btn-social").onclick = () => alternarPainel("social");
+  document.getElementById("btn-diario").onclick = () => alternarPainel("diario");
   document.getElementById("btn-inventario").onclick = () => alternarPainel("inventario");
   document.getElementById("btn-mapa").onclick = () => alternarPainel("mapa");
 

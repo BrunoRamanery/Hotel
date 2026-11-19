@@ -25,7 +25,7 @@ def _inserir_opcao(cena_id, opcao):
             return
     raise SystemExit("cena não encontrada: " + cena_id)
 
-def papos(chave, cena_hub, rotulo, fundo, volta, conversas, presenca):
+def papos(chave, cena_hub, rotulo, fundo, volta, conversas, presenca, horas=""):
     """Cria as conversas de `chave` e a opção no hub. `presenca` = condições do 'se'."""
     ids = []
     for i, linhas in enumerate(conversas, 1):
@@ -43,6 +43,14 @@ def papos(chave, cena_hub, rotulo, fundo, volta, conversas, presenca):
          dados={"flag": f"papo_{chave}_n", "casos": casos, "padrao": ids[0], "raiz": True})
     _inserir_opcao(cena_hub, op(f"papo_{chave}_op", rotulo, f"papo_{chave}",
                                 se=list(presenca) + [{"flag": f"papo_{chave}_dia", "diferente": "@dia"}]))
+    # quem costuma estar aqui (aparece no Mapa): base = condições sem horário; se = com horário
+    base = [c for c in presenca if c.get("flag") not in ("@hora", "@noite", "@refeicao")]
+    for c in C:
+        if c["id"] == cena_hub:
+            c["dados"] = dict(c.get("dados") or {})                      # cópia: os hubs compartilham o mesmo dicionário
+            c["dados"]["presencas"] = list(c["dados"].get("presencas", []))
+            c["dados"]["presencas"].append(
+                {"quem": chave, "horas": horas, "base": base, "se": list(presenca)})
 
 DIA = lambda a, b: {"flag": "@hora", "min": a, "max": b}
 NAO_ATAQUE = {"flag": "clinica_ataque", "diferente": True}
@@ -80,7 +88,7 @@ papos("jonathan", "hub_refeitorio", "Conversar com Jonathan, que passa entre as 
         f("jonathan", "Tudo. As portas, os passos, o encanamento. Quem presta atenção descobre que esta casa conversa o tempo todo."),
         f("jonathan", "Tome o seu café, Thiago. E continue prestando atenção."),
     ],
-], [{"flag": "@propostas"}, {"flag": "jon_estado", "diferente": "recusada"}, REFEICAO])
+], [{"flag": "@propostas"}, {"flag": "jon_estado", "diferente": "recusada"}, REFEICAO], horas="nas refeições")
 
 # ---------------------------------------------------------------- MAVIS (salão de festas, de dia)
 papos("mavis", "hub_salao_festas", "Conversar com Mavis, que prende faixas no teto", "salao_festas", "hub_salao_festas", [
@@ -113,7 +121,7 @@ papos("mavis", "hub_salao_festas", "Conversar com Mavis, que prende faixas no te
         f("mavis", "Todo mundo tem uma coisa que não conta de primeira. Aquela é a minha."),
         "Ela ri baixinho e volta para a escada.",
     ],
-], [{"flag": "@propostas"}, {"flag": "mavis_estado", "diferente": "recusada"}, DIA(9, 18)])
+], [{"flag": "@propostas"}, {"flag": "mavis_estado", "diferente": "recusada"}, DIA(9, 18)], horas="9h–18h")
 
 # ---------------------------------------------------------------- MACHA (hall)
 papos("macha", "hall_base", "Conversar com Macha, que encosta na moto perto do portão", "hall", "hall_base", [
@@ -145,7 +153,7 @@ papos("macha", "hall_base", "Conversar com Macha, que encosta na moto perto do p
         f("thiago", "Eu já vi sumir. Eu achei que era truque de luz."),
         f("macha", "Truque de luz. Gostei. Vou usar isso."),
     ],
-], [{"flag": "macha_conhecida"}, {"flag": "@noite", "valor": False}, NAO_ATAQUE])
+], [{"flag": "macha_conhecida"}, {"flag": "@noite", "valor": False}, NAO_ATAQUE], horas="de dia")
 
 # ---------------------------------------------------------------- ENOLA (biblioteca)
 papos("enola", "biblioteca_base", "Conversar com Enola, que arruma livros na mesa", "biblioteca", "biblioteca_base", [
@@ -173,7 +181,7 @@ papos("enola", "biblioteca_base", "Conversar com Enola, que arruma livros na mes
         f("thiago", "E qual é a diferença?"),
         f("enola", "As primeiras têm resposta. As segundas têm dono."),
     ],
-], [{"flag": "enola_conhecida"}, {"flag": "@noite", "valor": False}])
+], [{"flag": "enola_conhecida"}, {"flag": "@noite", "valor": False}], horas="de dia")
 
 # ---------------------------------------------------------------- NOSFERATU (biblioteca)
 papos("nosferatu", "biblioteca_base", "Conversar com o idoso pálido da mesa afastada", "biblioteca", "biblioteca_base", [
@@ -197,7 +205,7 @@ papos("nosferatu", "biblioteca_base", "Conversar com o idoso pálido da mesa afa
         f("nosferatu", "Então escreva. A tinta dura mais que a memória."),
         "Ele sorri de leve, sem mostrar os dentes.",
     ],
-], [{"flag": "conv_biblio"}, {"flag": "@noite", "valor": False}])
+], [{"flag": "conv_biblio"}, {"flag": "@noite", "valor": False}], horas="de dia")
 
 # ---------------------------------------------------------------- ARTHUR (biblioteca)
 papos("arthur", "biblioteca_base", "Conversar com Arthur, que cruza anotações numa mesa", "biblioteca", "biblioteca_base", [
@@ -218,7 +226,7 @@ papos("arthur", "biblioteca_base", "Conversar com Arthur, que cruza anotações 
         f("thiago", "Isso é ruim?"),
         f("arthur", "É interessante. Perigoso, mas interessante. Tome cuidado, Thiago. E me avise se encontrar outro diário."),
     ],
-], [{"flag": "arthur_estado", "valor": "concluido"}, DIA(9, 19)])
+], [{"flag": "arthur_estado", "valor": "concluido"}, DIA(9, 19)], horas="9h–19h")
 
 # ---------------------------------------------------------------- JEHAN (bar, à noite)
 papos("jehan", "bar_base", "Pedir uma bebida e conversar com Jehan", "bar", "bar_base", [
@@ -240,7 +248,7 @@ papos("jehan", "bar_base", "Pedir uma bebida e conversar com Jehan", "bar", "bar
         f("thiago", "E o senhor guarda tudo?"),
         f("jehan", "Guardo o que merece ser guardado. O resto eu deixo no balcão. Se alguém quiser levar, que leve."),
     ],
-], [{"flag": "jehan_estado", "valor": "concluido"}, DIA(19, 21)])
+], [{"flag": "jehan_estado", "valor": "concluido"}, DIA(19, 21)], horas="19h–21h")
 
 # ---------------------------------------------------------------- NIX (corredores, de dia)
 papos("nix", "hub_corredores", "Conversar com Nix, que esfrega o rodapé do corredor", "corredor", "hub_corredores", [
@@ -265,7 +273,7 @@ papos("nix", "hub_corredores", "Conversar com Nix, que esfrega o rodapé do corr
         "Ela parte o bolo ao meio, entrega a maior parte e finge que não percebeu.",
         f("nix", "Não conta para ninguém que eu sou boazinha. Estraga a reputação."),
     ],
-], [{"flag": "nix_estado", "valor": "concluida"}, DIA(8, 18)])
+], [{"flag": "nix_estado", "valor": "concluida"}, DIA(8, 18)], horas="8h–18h")
 
 # ---------------------------------------------------------------- VOVÓ (corredores, tarde)
 papos("vovo", "hub_corredores", "Bater na porta da Vovó, que cuida de uma planta no corredor", "corredor", "hub_corredores", [
@@ -290,7 +298,7 @@ papos("vovo", "hub_corredores", "Bater na porta da Vovó, que cuida de uma plant
         f("vovo", "As paredes e o que mora em cima delas. Mas isso é conversa de velha."),
         "Lá no alto, na junção do forro com a parede, uma sombra se move, devagar, como se escutasse.",
     ],
-], [{"flag": "conv_vovo"}, DIA(14, 20)])
+], [{"flag": "conv_vovo"}, DIA(14, 20)], horas="14h–20h")
 
 # =====================================================================
 # OBSERVAR — pequenas cenas da vida do hotel (sempre disponíveis)
@@ -310,16 +318,22 @@ observar("hall", "hall_base", "hall", "hall_base", [
     ["Um casal de hóspedes de pele pálida atravessa o hall conversando em voz baixa. O homem tira o chapéu para a recepção. A recepção, sem ninguém atrás do balcão, tilinta o sino sozinha, como se agradecesse."],
     ["Um carregador empurra um carrinho de malas até o elevador. Há três malas, mas o carrinho range como se levasse dez. Ninguém comenta."],
     ["O relógio de pêndulo do hall bate a hora com um segundo de atraso em relação ao sino do hotel. Você fica atento, e ele de novo atrasa. Parece uma briga antiga entre dois relógios."],
+    ["Há uma mala parada ao lado do balcão, mas ninguém a reclama. Depois de alguns minutos, ela é levantada por mãos que você não vê direito e carregada pela escada. Um funcionário, sem pressa, explica: “Hóspede tímido.”"],
+    ["Pela fresta da porta do portão entra uma corrente de ar que cheira a estrada e a terra molhada. Do lado de fora, alguém tosse, bem baixo, e todos no hall fingem não escutar."],
 ])
 observar("refeitorio", "hub_refeitorio", "refeitorio", "hub_refeitorio", [
     ["Uma atendente de olhos fundos dobra guardanapos em formato de cisnes. Ela faz isso sem olhar, e cada cisne fica perfeito. Quando percebe você, desfaz um, como se tivesse sido flagrada em algo íntimo."],
     ["Numa mesa ao fundo, uma família de hóspedes discute o cardápio com um respeito quase religioso. A criança, de rosto cinzento e olhos grandes, rouba um pão e esconde no bolso do casaquinho."],
     ["Do lado de dentro da cozinha, bem longe, vem o barulho cadenciado de uma faca na tábua. É lento, grave, e pontuado por uma risada rouca que não combina com o ritmo."],
+    ["Você nota que alguns hóspedes só mexem na comida, sem levar nada à boca. Quando percebem que você olha, sorriem educados e começam a cortar o prato em pedaços muito pequenos."],
+    ["O pão sobre a mesa é partido por uma mão pálida e comprida que some atrás de uma coluna. Na cadeira, fica só o guardanapo dobrado, perfeito."],
 ])
 observar("corredores", "hub_corredores", "corredor", "hub_corredores", [
     ["Uma porta entreaberta deixa escapar o cheiro doce de bolo no forno. Lá dentro, alguém cantarola uma música sem letra. Quando você passa de novo, a porta está fechada e o cheiro, apagado."],
     ["As armaduras estão alinhadas como sempre. Você conta: onze. Na volta, conta onze outra vez. Mas jura que uma está com a mão em posição diferente."],
     ["Dois funcionários cruzam o corredor carregando um espelho enorme coberto por um pano. Um deles dá um passo para o lado, como se abrisse espaço para alguém que não está lá."],
+    ["Você pisa num trecho do tapete e escuta, bem abaixo do chão, um barulho de pedra sendo arrastada. Ele para quando você para. Recomeça quando você anda."],
+    ["Uma porta tem marcas fundas na madeira, como de garras grandes. Uma camareira passa uma tinta fresca por cima, sem olhar para você, e murmura: “Gato do hotel.”"],
 ])
 observar("biblioteca", "biblioteca_base", "biblioteca", "biblioteca_base", [
     ["Uma escada de madeira desliza sozinha por um trilho até o alto de uma estante. Enola, sem erguer os olhos do livro, diz: “Ainda não, querida.” A escada para, obediente."],

@@ -322,3 +322,16 @@ body.no-titulo .moldura, body.no-titulo .btn-mapa{visibility:hidden}
 .rel-barra-lig i{display:block;height:100%;border-radius:3px;background:var(--vela,#c9a24b)}
 .rel-pontas{display:flex;justify-content:space-between;font-size:.68rem;opacity:.7;margin-bottom:6px}
 .rel-pontas em{font-style:normal}
+
+/* ---------- avisos sob as barras, indicador de save, presenças no mapa, diário ---------- */
+.alerta-status{margin-top:8px;padding:6px 10px;border-left:3px solid var(--vela,#c9a24b);background:rgba(201,162,75,.08);border-radius:4px;font-size:.82rem}
+.alerta-status p{margin:2px 0}
+.salvo-ind{position:fixed;right:14px;bottom:12px;font-size:.72rem;letter-spacing:.06em;opacity:0;transition:opacity .4s;pointer-events:none;color:var(--vela,#c9a24b)}
+.salvo-ind.ligado{opacity:.85}
+.presencas{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;width:100%}
+.presenca{font-size:.7rem;opacity:.6;padding:1px 8px;border:1px solid rgba(255,255,255,.15);border-radius:10px}
+.presenca.agora{opacity:1;border-color:var(--vela,#c9a24b);color:var(--vela,#c9a24b)}
+.lista-mapa li{flex-wrap:wrap}
+.lista-diario{margin:4px 0 10px;padding-left:18px}
+.lista-diario li{margin:3px 0}
+.lista-diario.feitas li::marker{content:"✓ "}

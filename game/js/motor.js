@@ -38,6 +38,7 @@ function pintarStatus() {
   mostrarElemento("bloco-tempo", hud.includes("tempo"));
   mostrarElemento("btn-perfil", hud.includes("perfil"));
   mostrarElemento("btn-social", hud.includes("social"));
+  mostrarElemento("btn-diario", hud.includes("mapa"));
   mostrarElemento("btn-inventario", hud.includes("inventario"));
   mostrarElemento("btn-mapa", hud.includes("mapa"));
 
@@ -63,8 +64,25 @@ function pintarStatus() {
   // quando a suspeita passa de 50, a tela "esquenta" de perigo
   document.body.classList.toggle("perigo", hud.includes("suspeita") && estado.suspeita >= 50);
 
+  // avisos de fome, cansaço e horário
+  const avisos = avisosDeStatus(estado);
+  const caixa = document.getElementById("alerta-status");
+  if (caixa) { caixa.innerHTML = avisos.map(t => `<p>${t}</p>`).join(""); mostrarElemento("alerta-status", avisos.length > 0); }
+
   // se um painel está aberto, mantém ele atualizado
   if (painelAberto) desenharPainel(painelAberto);
+}
+
+/** Quem costuma estar num lugar (só gente que Thiago já conhece e que ainda circula por lá). */
+function presencasDoLugar(area) {
+  const hub = CENAS[HUB_DA_AREA[area]];
+  const lista = (hub && hub.dados && hub.dados.presencas) || [];
+  const linhas = lista.filter(p => condicaoSe(estado, p.base)).map(p => {
+    const nome = PERSONAGENS[p.quem] ? PERSONAGENS[p.quem].nome : p.quem;
+    const agora = condicaoSe(estado, p.se);
+    return `<span class="presenca${agora ? " agora" : ""}">${nome} · ${p.horas}${agora ? " · agora" : ""}</span>`;
+  });
+  return linhas.length ? `<div class="presencas">${linhas.join("")}</div>` : "";
 }
 
 /* ----- PAINÉIS (Perfil, Social, Inventário, Mapa) -----
@@ -137,6 +155,16 @@ function desenharPainel(qual) {
         : `<p class="vazio">Você não está carregando nada.</p>`) +
       `<p class="dica">O que não está aqui fica guardado no armário da Suíte 14.</p>`;
   }
+  if (qual === "diario") {
+    titulo = "Diário";
+    const abertas = estado.marcadores.map(m => `<li><b>${AREAS[m.area] || m.area}:</b> ${m.texto}</li>`).join("");
+    const feitas = DIARIO_MISSOES.filter(([f, v]) => estado.flags[f] === v).map(([, , t]) => `<li>${t}</li>`).join("");
+    const estranhos = estado.flags.fragmentos || 0;
+    corpo = `<h4>Em aberto</h4>` + (abertas ? `<ul class="lista-diario">${abertas}</ul>` : `<p class="vazio">Nada pendente no mapa agora.</p>`) +
+      `<h4>Resolvido</h4>` + (feitas ? `<ul class="lista-diario feitas">${feitas}</ul>` : `<p class="vazio">Ainda nada.</p>`) +
+      (estranhos ? `<h4>Coisas sem explicação</h4><p>Você anotou ${estranhos} ${estranhos === 1 ? "acontecimento" : "acontecimentos"} que não consegue explicar.</p>` : "") +
+      `<h4>As regras da casa</h4><ul class="lista-diario"><li>Refeições: café 7h–9h, almoço 12h–14h, jantar 19h–21h.</li><li>Não circule pelos corredores entre 22h e 6h.</li><li>Não entre em áreas proibidas.</li></ul>`;
+  }
   if (qual === "mapa") {
     titulo = "Mapa do Hotel";
     const podeIr = cenaEhHub(cenaAtual);
@@ -147,7 +175,7 @@ function desenharPainel(qual) {
           const botao = podeIr && !aqui
             ? `<button class="btn-ir" onclick="irParaLugar('${id}')">ir</button>` : (aqui && podeIr ? `<i class="aqui">você está aqui</i>` : "");
           return `<li><span>${AREAS[id] || id}</span>` +
-            marcas.map(m => `<i class="marcador">! ${m.texto}</i>`).join("") + botao + `</li>`;
+            marcas.map(m => `<i class="marcador">! ${m.texto}</i>`).join("") + botao + presencasDoLugar(id) + `</li>`;
         }).join("") + `</ul>` + (podeIr ? "" : `<p class="dica">Termine a conversa para poder andar pelo hotel.</p>`)
       : `<p class="vazio">Você ainda não tem um mapa.</p>`;
   }
@@ -636,7 +664,11 @@ function salvar() {
   } catch (e) { aviso("não foi possível salvar aqui"); }
 }
 function autoSalvar() {
-  try { localStorage.setItem("hotel_auto", JSON.stringify({ estado, cenaAtual, quando: Date.now() })); } catch (e) {}
+  try {
+    localStorage.setItem("hotel_auto", JSON.stringify({ estado, cenaAtual, quando: Date.now() }));
+    const ind = document.getElementById("salvo-ind");
+    if (ind) { ind.classList.add("ligado"); clearTimeout(autoSalvar._t); autoSalvar._t = setTimeout(() => ind.classList.remove("ligado"), 1800); }
+  } catch (e) {}
 }
 function continuar() {
   const dados = ultimoSave();
