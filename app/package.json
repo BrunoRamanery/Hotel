@@ -1,6 +1,6 @@
 {
   "name": "hotel-los-segredos",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "description": "Hotel Los Segredos",
   "main": "main.js",
   "scripts": { "start": "electron ." },

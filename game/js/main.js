@@ -59,7 +59,7 @@ async function iniciar() {
   // 3) ligar os botões do rodapé
   // Interruptor dos botões de save. No Dia 1 (demo curta) ficam escondidos;
   // na atualização do save é só trocar para true.
-  const MOSTRAR_SAVE = false;
+  const MOSTRAR_SAVE = true;
   for (const id of ["btn-salvar", "btn-continuar", "btn-exportar", "btn-importar"]) {
     document.getElementById(id).hidden = !MOSTRAR_SAVE;
   }
@@ -69,6 +69,7 @@ async function iniciar() {
   document.getElementById("btn-exportar").onclick = exportarSave;
   document.getElementById("btn-importar").onclick = importarSave;
   document.getElementById("btn-reiniciar").onclick = reiniciar;
+  document.getElementById("btn-menu").onclick = () => mostrarTitulo();
 
   // botões da interface (painéis)
   document.getElementById("btn-perfil").onclick = () => alternarPainel("perfil");
@@ -76,8 +77,9 @@ async function iniciar() {
   document.getElementById("btn-inventario").onclick = () => alternarPainel("inventario");
   document.getElementById("btn-mapa").onclick = () => alternarPainel("mapa");
 
-  // 4) começar!
-  mostrarCena(INICIO);
+  // 4) tela de entrada (Jogar / Carregar save / Atualizar)
+  ligarTitulo();
+  mostrarTitulo();
 }
 
 // dispara quando a página termina de carregar

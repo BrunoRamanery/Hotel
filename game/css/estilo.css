@@ -262,3 +262,47 @@ body.perigo{background:radial-gradient(130% 90% at 50% -10%, #2a1416 0%, var(--n
 .sel-item:hover{border-color:var(--vela)}
 .sel-item.marcado{border-color:var(--vela); background:var(--painel2); color:var(--vela)}
 .selecao .confirmar{width:100%}
+
+/* ============================================================
+   TELA DE ENTRADA
+   ============================================================ */
+.titulo{position:fixed; inset:0; z-index:50; overflow:hidden; background:#07080c; color:var(--tinta)}
+.titulo-fundo{position:absolute; inset:0; background:url("../img/fundos/portao.jpg") center/cover no-repeat;
+  animation:respira 28s ease-in-out infinite alternate}
+.titulo-fundo::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(90deg, rgba(6,7,11,.88) 0%, rgba(6,7,11,.45) 40%, rgba(6,7,11,.2) 70%, rgba(6,7,11,.55) 100%),
+             linear-gradient(0deg, rgba(6,7,11,.85) 0%, rgba(6,7,11,0) 35%)}
+@keyframes respira{from{transform:scale(1.02)} to{transform:scale(1.09) translateX(-1%)}}
+.titulo-topo{position:absolute; top:18px; right:22px; z-index:2; display:flex; align-items:center; gap:12px}
+.atu-texto{font-size:14px; color:var(--tinta-suave); letter-spacing:.02em}
+.atu-btn{font-family:inherit; font-size:15px; color:var(--tinta); background:rgba(20,24,34,.8); border:1px solid var(--borda);
+  border-radius:999px; padding:6px 18px; cursor:pointer}
+.atu-btn:hover:not(:disabled){border-color:var(--vela); color:var(--vela)}
+.atu-btn:disabled{opacity:.6; cursor:default}
+.atu-btn.pronto{border-color:var(--vela); color:#15110a; background:var(--vela); font-weight:600}
+.titulo-miolo{position:relative; z-index:1; height:100%; display:flex; align-items:center; justify-content:space-between;
+  gap:40px; padding:0 7vw}
+.titulo-nome small{font-family:"Cinzel",serif; letter-spacing:.35em; text-transform:uppercase; font-size:14px; color:var(--tinta-suave)}
+.titulo-nome h1{font-family:"Cinzel",serif; font-weight:600; font-size:clamp(46px,7.5vw,104px); line-height:.98; margin:12px 0 16px;
+  color:var(--vela); text-shadow:0 0 36px rgba(217,164,65,.28), 0 3px 0 rgba(0,0,0,.6)}
+.titulo-frase{font-style:italic; font-size:21px; color:var(--tinta); opacity:.85; margin:0}
+.titulo-menu{width:min(420px,42vw); display:flex; flex-direction:column; gap:12px}
+.t-btn{font-family:"Cinzel",serif; font-weight:600; letter-spacing:.08em; text-transform:uppercase; text-align:left;
+  color:var(--tinta); background:rgba(20,24,34,.82); border:1px solid var(--borda); border-left:3px solid var(--sangue);
+  border-radius:4px; padding:14px 20px; font-size:17px; cursor:pointer; transition:border-color .15s, background .15s, transform .1s}
+.t-btn small{display:block; font-family:"EB Garamond",serif; font-weight:400; letter-spacing:0; text-transform:none;
+  font-size:15px; color:var(--tinta-suave); margin-top:2px}
+.t-grande{padding:18px 22px; font-size:22px}
+.t-btn:hover:not(:disabled){border-color:var(--vela); border-left-color:var(--vela); background:rgba(27,32,44,.95); transform:translateX(3px)}
+.t-btn:disabled{opacity:.5; cursor:default}
+.t-principal{background:linear-gradient(90deg, rgba(150,40,40,.88), rgba(110,28,28,.88)); border-color:#7a2a2a}
+.t-principal small{color:#e3b9b9}
+.t-linha{display:flex; gap:12px}
+.t-linha .t-btn{flex:1; text-align:center; font-size:14px; padding:11px 14px}
+.titulo-rodape{position:absolute; bottom:14px; left:7vw; z-index:1; font-size:14px; color:var(--tinta-suave)}
+body.no-titulo .moldura, body.no-titulo .btn-mapa{visibility:hidden}
+@media (max-width:820px){
+  .titulo-miolo{flex-direction:column; justify-content:center; align-items:flex-start; gap:26px; padding:0 8vw}
+  .titulo-menu{width:100%}
+  .titulo-topo{top:10px; right:12px}
+}

@@ -310,6 +310,7 @@ function mostrarCena(id, restaurando = false) {
   }
 
   pintarFundo(cena.fundo);
+  if (cena.dados && cena.dados.hub) autoSalvar();       // salvamento automático nos lugares do mapa
 
   // cenas especiais
   if (cena.tipo === "espelho") return mostrarEspelho(cena);
@@ -584,24 +585,48 @@ function mostrarTracos(cena) {
   desenharVirtudes();
 }
 
-/* ----- salvar / continuar / recomeçar (gaveta do navegador — rápido) ----- */
+/* ----- salvar / continuar / recomeçar (gaveta do navegador — rápido) -----
+ * Dois lugares: "hotel_save" (botão Salvar) e "hotel_auto" (automático, toda vez
+ * que Thiago chega a um lugar do mapa). Carregar usa o mais recente. */
+function lerSave(chave) {
+  try { const d = JSON.parse(localStorage.getItem(chave)); return (d && d.estado && d.cenaAtual) ? d : null; }
+  catch (e) { return null; }
+}
+function ultimoSave() {
+  const a = lerSave("hotel_save"), b = lerSave("hotel_auto");
+  if (a && b) return (b.quando || 0) > (a.quando || 0) ? b : a;
+  return a || b;
+}
+function descreverSave(d) {
+  if (!d) return "nenhum save encontrado";
+  const nome = (d.estado.flags && d.estado.flags.nome) || "Thiago";
+  let quando = "";
+  if (d.quando) { const dt = new Date(d.quando); quando = " · salvo " + dt.toLocaleDateString("pt-BR") + " " + dt.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }); }
+  return nome + ", dia " + (diaAtual(d.estado) || 1) + quando;
+}
 function salvar() {
   try {
-    localStorage.setItem("hotel_save", JSON.stringify({ estado, cenaAtual }));
-    aviso("jogo salvo (neste navegador)");
+    localStorage.setItem("hotel_save", JSON.stringify({ estado, cenaAtual, quando: Date.now() }));
+    aviso("jogo salvo (neste computador)");
   } catch (e) { aviso("não foi possível salvar aqui"); }
 }
+function autoSalvar() {
+  try { localStorage.setItem("hotel_auto", JSON.stringify({ estado, cenaAtual, quando: Date.now() })); } catch (e) {}
+}
 function continuar() {
+  const dados = ultimoSave();
+  if (!dados) { aviso("nenhum jogo salvo"); return false; }
   try {
-    const dados = JSON.parse(localStorage.getItem("hotel_save"));
-    if (!dados) { aviso("nenhum jogo salvo"); return; }
     estado = migrarEstado(dados.estado);
+    esconderTitulo();
     mostrarCena(dados.cenaAtual, true);
-  } catch (e) { aviso("nenhum jogo salvo"); }
+    return true;
+  } catch (e) { aviso("não consegui carregar este save"); return false; }
 }
 function reiniciar() {
   estado = novoEstado();
   fecharPainel();
+  esconderTitulo();
   mostrarCena(INICIO);
 }
 
@@ -641,6 +666,7 @@ function importarSave() {
         const dados = JSON.parse(leitor.result);
         if (!dados.estado || !dados.cenaAtual) throw new Error("arquivo inválido");
         estado = migrarEstado(dados.estado);
+        esconderTitulo();
         mostrarCena(dados.cenaAtual, true);
         aviso("save carregado");
       } catch (e) {

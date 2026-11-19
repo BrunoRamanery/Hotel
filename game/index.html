@@ -10,6 +10,32 @@
 <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
+<!-- TELA DE ENTRADA (título, Jogar, Carregar save, Atualizar) -->
+<div id="titulo" class="titulo oculto">
+  <div class="titulo-fundo"></div>
+  <div class="titulo-topo">
+    <span id="atu-texto" class="atu-texto"></span>
+    <button id="btn-atualizar" class="atu-btn oculto">Atualizar</button>
+  </div>
+  <div class="titulo-miolo">
+    <div class="titulo-nome">
+      <small>Um RPG de texto</small>
+      <h1>Hotel<br>Los Segredos</h1>
+      <p class="titulo-frase">Algumas portas é melhor não abrir.</p>
+    </div>
+    <nav class="titulo-menu">
+      <button id="t-continuar" class="t-btn t-grande oculto">Continuar jogo<small>voltar de onde parou</small></button>
+      <button id="t-jogar" class="t-btn t-grande t-principal">Jogar<small>começar uma nova história</small></button>
+      <button id="t-carregar" class="t-btn t-grande">Carregar save<small id="t-carregar-info">nenhum save encontrado</small></button>
+      <div class="t-linha">
+        <button id="t-importar" class="t-btn">Importar arquivo</button>
+        <button id="t-sair" class="t-btn oculto">Sair</button>
+      </div>
+    </nav>
+  </div>
+  <div class="titulo-rodape"><span id="t-versao"></span></div>
+</div>
+
 <!-- imagem de fundo da cena (muda sozinha conforme a cena) -->
 <div id="fundo" class="fundo"></div>
 
@@ -48,6 +74,7 @@
     <button id="btn-continuar" title="Carrega o save rápido deste navegador">Continuar</button>
     <button id="btn-exportar" title="Baixa um arquivo de save de verdade">Exportar arquivo</button>
     <button id="btn-importar" title="Carrega um arquivo de save">Importar arquivo</button>
+    <button id="btn-menu">Menu inicial</button>
     <button id="btn-reiniciar">Recomeçar</button>
   </div>
 </div>
@@ -64,6 +91,7 @@
 <script src="js/regras.js"></script>
 <script src="js/validador.js"></script>
 <script src="js/motor.js"></script>
+<script src="js/titulo.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
