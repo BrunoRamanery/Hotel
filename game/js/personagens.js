@@ -56,3 +56,26 @@ const PERSONAGENS = {
 // Como cada personagem aparece no painel "Social" (estado da relação).
 // Por enquanto todo mundo é "conhecendo"; depois os romances e rivalidades entram aqui.
 const RELACAO_INICIAL = "conhecendo";
+
+/* Etiqueta da relação a partir do afeto (-100 a +100). Sem números na tela: só a barra e a palavra. */
+const FAIXAS_AFETO = [
+  [-100, "Inimigo"], [-59, "Hostil"], [-19, "Conhecendo"], [10, "Simpático"], [40, "Amigo"], [70, "Confidente"]
+];
+function etiquetaAfeto(afeto) {
+  let nome = FAIXAS_AFETO[0][1];
+  for (const [min, n] of FAIXAS_AFETO) if (afeto >= min) nome = n;
+  return nome;
+}
+/* Segunda barra: só aparece quando a história deixa a ligação clara (efeito "ligacao"). */
+const TIPOS_LIGACAO = {
+  romance: { nome: "Romance",     faixas: [[0, "Interesse"], [30, "Namoro"], [70, "Amor"]] },
+  rival:   { nome: "Rivalidade",  faixas: [[0, "Provocação"], [30, "Rival"], [70, "Rival declarado"]] },
+  aliado:  { nome: "Aliança",     faixas: [[0, "Cooperação"], [30, "Aliado"], [70, "Aliado fiel"]] },
+  protegido: { nome: "Proteção",  faixas: [[0, "Cuidado"], [30, "Protegido"], [70, "Laço forte"]] }
+};
+function etiquetaLigacao(tipo, nivel) {
+  const t = TIPOS_LIGACAO[tipo]; if (!t) return "";
+  let n = t.faixas[0][1];
+  for (const [min, nome] of t.faixas) if (nivel >= min) n = nome;
+  return n;
+}

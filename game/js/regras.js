@@ -145,6 +145,7 @@ function condicaoSe(estado, se) {
  *     "tempo": 25,                          // gasta 25 minutos
  *     "ate": "03:10", "sono": true,         // pula até a hora (dormindo)
  *     "somar": {"fragmentos": 1},           // soma 1 num contador (flag numérica)
+ *     "ligacao": {"mavis":"romance"},      // mostra a 2ª barra (romance/rival/aliado/protegido); sobe com relacoes {x:{nivel:5}}
  *     "habilidades": ["cozinha_basica"],  // aparece no Perfil
  *     "itens": ["chave_quarto"],            // entra no inventário
  *     "conhece": ["mavis"],                 // aparece no painel Social
@@ -182,6 +183,11 @@ function aplicarEfeitos(estado, ef) {
       const atual = estado.relacoes[quem][eixo] || 0;
       estado.relacoes[quem][eixo] = clamp(atual + ef.relacoes[quem][eixo], -100, 100);
     }
+  }
+  for (const quem in (ef.ligacao || {})) {          // "ligacao": {"mavis": "romance"} -> liga a 2ª barra
+    estado.relacoes[quem] = estado.relacoes[quem] || {};
+    estado.relacoes[quem].tipo = ef.ligacao[quem];
+    if (estado.relacoes[quem].nivel === undefined) estado.relacoes[quem].nivel = 0;
   }
   (ef.habilidades || []).forEach(id => { estado.habilidades = estado.habilidades || []; if (!estado.habilidades.includes(id)) estado.habilidades.push(id); });
   (ef.itens || []).forEach(id => { if (!estado.inventario.includes(id)) estado.inventario.push(id); });

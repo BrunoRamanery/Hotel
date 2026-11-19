@@ -105,7 +105,23 @@ function desenharPainel(qual) {
     corpo = estado.conhecidos.length
       ? `<ul class="lista-social">` + estado.conhecidos.map(id => {
           const p = PERSONAGENS[id];
-          return `<li><span>${p ? p.nome : id}</span><i>${RELACAO_INICIAL}</i></li>`;
+          const r = estado.relacoes[id] || {};
+          const afeto = r.afeto || 0;
+          const pos = Math.round((afeto + 100) / 2);                 // 0 a 100 na barra
+          const etiqueta = etiquetaAfeto(afeto);
+          let lig = "";
+          if (r.tipo && TIPOS_LIGACAO[r.tipo]) {
+            const nv = Math.max(0, Math.min(100, r.nivel || 0));
+            lig = `<div class="rel-linha"><span>${TIPOS_LIGACAO[r.tipo].nome}</span><b>${etiquetaLigacao(r.tipo, nv)}</b></div>
+                   <div class="rel-barra rel-barra-lig"><i style="width:${nv}%"></i></div>`;
+          }
+          const foto = p && p.retrato ? `<img src="${p.retrato}" alt="">` : "";
+          return `<li tabindex="0"><span>${p ? p.nome : id}</span><i>${etiqueta}</i>
+            <div class="rel-cartao">${foto}<div class="rel-corpo">
+              <div class="rel-linha"><span>${p ? p.nome : id}</span><b>${etiqueta}</b></div>
+              <div class="rel-barra"><i class="rel-marca" style="left:${pos}%"></i></div>
+              <div class="rel-pontas"><em>Inimigo</em><em>Amigo</em></div>
+              ${lig}</div></div></li>`;
         }).join("") + `</ul>`
       : `<p class="vazio">Você ainda não conhece ninguém.</p>`;
   }

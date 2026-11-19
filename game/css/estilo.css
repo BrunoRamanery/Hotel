@@ -305,3 +305,20 @@ body.no-titulo .moldura, body.no-titulo .btn-mapa{visibility:hidden}
   .titulo-menu{width:100%}
   .titulo-topo{top:10px; right:12px}
 }
+
+/* ---------- Social: cartão de relação ao passar o mouse ---------- */
+.lista-social li{position:relative;cursor:default}
+.lista-social li:focus{outline:none}
+.rel-cartao{display:none;position:absolute;left:0;right:0;top:100%;z-index:20;margin-top:4px;padding:10px 12px;
+  background:var(--painel,#10141d);border:1px solid var(--vela,#c9a24b);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.5);gap:12px;align-items:center}
+.lista-social li:hover .rel-cartao,.lista-social li:focus .rel-cartao,.lista-social li:focus-within .rel-cartao{display:flex}
+.rel-cartao img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:1px solid var(--vela,#c9a24b);flex:none}
+.rel-corpo{flex:1;min-width:0}
+.rel-linha{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:6px}
+.rel-linha b{color:var(--vela,#c9a24b);font-weight:600}
+.rel-barra{position:relative;height:6px;border-radius:3px;margin:4px 0;background:linear-gradient(90deg,#9b3b3b,#4a4f5c 50%,#4f9b6a)}
+.rel-marca{position:absolute;top:-4px;width:4px;height:14px;margin-left:-2px;border-radius:2px;background:#fff;box-shadow:0 0 6px #fff}
+.rel-barra-lig{background:#2a2f3b}
+.rel-barra-lig i{display:block;height:100%;border-radius:3px;background:var(--vela,#c9a24b)}
+.rel-pontas{display:flex;justify-content:space-between;font-size:.68rem;opacity:.7;margin-bottom:6px}
+.rel-pontas em{font-style:normal}
