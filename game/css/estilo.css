@@ -121,8 +121,7 @@ body.perigo{background:radial-gradient(130% 90% at 50% -10%, #2a1416 0%, var(--n
 .cena{padding:26px 4px 0; animation:surgir .5s ease both}
 @keyframes surgir{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
 .narrativa p{margin:0 0 15px}
-.narrativa p.longo::first-letter{font-family:"Cinzel",serif; font-size:2.6em; line-height:.8;
-  float:left; margin:6px 10px 0 0; color:var(--vela);}
+.narrativa p.longo::first-letter{color:var(--vela)}
 .final .narrativa{color:var(--nevoa); font-style:italic}
 .aviso-teste{color:var(--vela); font-family:"Cinzel",serif; font-size:12px;
   letter-spacing:.1em; text-transform:uppercase;}

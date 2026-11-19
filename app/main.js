@@ -40,6 +40,8 @@ function pegar(url, binario, tentativas = 3) {
 async function fazerAtualizacao() {
   emitir({ fase: "verificando" });
   try {
+    // restos de uma versão antiga: apaga a cópia baixada e recomeça limpo
+    if (fs.existsSync(ATUALIZADO) && !maisNova(versaoDe(ATUALIZADO), versaoDe(EMBUTIDO))) fs.rmSync(ATUALIZADO, { recursive: true, force: true });
     const arvore = JSON.parse(await pegar(`https://api.github.com/repos/${REPO}/git/trees/${RAMO}?recursive=1`));
     const remotos = arvore.tree.filter(t => t.type === "blob" && t.path.startsWith(PASTA_REMOTA));
     if (!remotos.length) return emitir({ fase: "atualizado" });
@@ -91,7 +93,20 @@ function atualizar() {
   return rodando;
 }
 
-function pastaDoJogo() { return fs.existsSync(path.join(ATUALIZADO, "index.html")) ? ATUALIZADO : EMBUTIDO; }
+// Número da versão do jogo numa pasta ("0" se não houver). Serve para nunca usar uma cópia baixada
+// mais ANTIGA que a que veio dentro do programa (acontecia com restos de versões antigas).
+function versaoDe(pasta) {
+  try { return JSON.parse(fs.readFileSync(path.join(pasta, "versao.json"), "utf8")).versao || "0"; } catch (e) { return "0"; }
+}
+function maisNova(a, b) {   // a >= b ?
+  const x = String(a).split(".").map(Number), y = String(b).split(".").map(Number);
+  for (let i = 0; i < 3; i++) { if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) > (y[i] || 0); }
+  return true;
+}
+function pastaDoJogo() {
+  const baixada = fs.existsSync(path.join(ATUALIZADO, "index.html")) && maisNova(versaoDe(ATUALIZADO), versaoDe(EMBUTIDO));
+  return baixada ? ATUALIZADO : EMBUTIDO;
+}
 
 function servidor() {
   return new Promise(ok => {
