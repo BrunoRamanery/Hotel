@@ -340,7 +340,7 @@ cena("jonathan_aceitou", [
     "Jonathan solta o ar como quem tirou um piano das costas.",
     f("jonathan", "Obrigado, de verdade. Os convites são estes."),
     item("convite_musica"), item("convite_biblioteca"), item("convite_vovo"),
-    f("jonathan", "Na sala de música, ao Homem Invisível. Na biblioteca, a um senhor que tem o hábito de se esconder na sombra das estantes. E a Vovó... qualquer porta de quarto no corredor onde a lareira fica acesa."),
+    f("jonathan", "Na sala de música, ao Homem das Faixas. Na biblioteca, a um senhor que tem o hábito de se esconder na sombra das estantes. E a Vovó... qualquer porta de quarto no corredor onde a lareira fica acesa."),
     sis("Missão: <b>Os Três Convites</b>. Pontos de exclamação apareceram no mapa."),
 ], destino_auto="@hub", dados={"raiz": True}, fundo="refeitorio")
 
@@ -392,7 +392,7 @@ cena("nosferatu_convite", [
     f("nosferatu", "O aniversário do fundador. Faz muito tempo que não vou a uma festa dessas. Talvez eu apareça. Talvez."),
     f("nosferatu", "Diga-me, o que um rapaz tão jovem veio fazer num hotel como este?"),
     f("thiago", "Trabalhar e... descobrir, acho."),
-    f("nosferatu", "Descobrir. Que palavra otimista. Chame-me de Nosferatu. Pode me encontrar por aqui, na maioria das tardes."),
+    f("nosferatu", "Descobrir. Que palavra otimista. Aqui todos me chamam de Senhor Pálido, e eu nunca discuti. Pode me encontrar por aqui, na maioria das tardes."),
     "A conversa acabou. Ele abre o livro, de novo, e você nem percebe quando foi dispensado.",
 ], destino_auto="hub_biblioteca",
    chegada={"flags": {"conv_biblio": True}, "somar": {"convites": 1}, "tirar_itens": ["convite_biblioteca"],
@@ -556,7 +556,7 @@ cena("estoque_levou", [
     n("Um dos sininhos tilinta sozinho, sem vento, e para.", se={"flag": "dec_sinos"}),
     n("O globo musical acende por um segundo e solta duas notas de uma melodia que você não reconhece.", se={"flag": "dec_globo"}),
     n("A vassoura de palha parece ter mudado de lugar dentro da caixa. Você tem quase certeza de que ela estava do outro lado.", se={"flag": "dec_vassoura_dec"}),
-    sis("As peças são encantadas: o que acontece com elas não vem do Homem Invisível.", se={"flag": "dec_retratos"}),
+    sis("As peças são encantadas: o que acontece com elas não vem do Homem das Faixas.", se={"flag": "dec_retratos"}),
 ], destino_auto="hub_estoque", chegada={"barras": {"sanidade": -2}, "mapa": [], "tempo": 3},
    dados={"raiz": True}, fundo="estoque")
 
@@ -719,7 +719,7 @@ cena("vestido_armadura", [
     "A porta se abre devagar. Louise olha o vestido, depois o marido, depois você. Cruza os braços, mas o canto da boca se curva.",
     f("louise", "Dentro de uma armadura. Meu Deus. Desculpe, Gabriel. Eu estava errada."),
     f("louise", "E obrigada, jovem. Cartão no bolso, não esqueça."),
-    sis("Missão <b>O Vestido Roubado</b> concluída. Você ganhou <b>3 Fragmentos do Homem Invisível</b> permanentes."),
+    sis("Missão <b>O Vestido Roubado</b> concluída. Você ganhou <b>3 Fragmentos do Homem das Faixas</b> permanentes."),
 ], destino_auto="hub_corredores",
    chegada={"flags": {"vestido_estado": "concluido"}, "somar": {"fragmentos": 3},
             "relacoes": {"gabriel": {"afeto": 8}, "louise": {"afeto": 8}},

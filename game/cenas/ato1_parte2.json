@@ -1476,7 +1476,7 @@
       },
       {
         "quem": "jonathan",
-        "texto": "Na sala de música, ao Homem Invisível. Na biblioteca, a um senhor que tem o hábito de se esconder na sombra das estantes. E a Vovó... qualquer porta de quarto no corredor onde a lareira fica acesa."
+        "texto": "Na sala de música, ao Homem das Faixas. Na biblioteca, a um senhor que tem o hábito de se esconder na sombra das estantes. E a Vovó... qualquer porta de quarto no corredor onde a lareira fica acesa."
       },
       {
         "estilo": "sistema",
@@ -1680,7 +1680,7 @@
       },
       {
         "quem": "nosferatu",
-        "texto": "Descobrir. Que palavra otimista. Chame-me de Nosferatu. Pode me encontrar por aqui, na maioria das tardes."
+        "texto": "Descobrir. Que palavra otimista. Aqui todos me chamam de Senhor Pálido, e eu nunca discuti. Pode me encontrar por aqui, na maioria das tardes."
       },
       "A conversa acabou. Ele abre o livro, de novo, e você nem percebe quando foi dispensado."
     ],
@@ -2307,7 +2307,7 @@
       },
       {
         "estilo": "sistema",
-        "texto": "As peças são encantadas: o que acontece com elas não vem do Homem Invisível.",
+        "texto": "As peças são encantadas: o que acontece com elas não vem do Homem das Faixas.",
         "se": {
           "flag": "dec_retratos"
         }
@@ -3019,7 +3019,7 @@
       },
       {
         "estilo": "sistema",
-        "texto": "Missão <b>O Vestido Roubado</b> concluída. Você ganhou <b>3 Fragmentos do Homem Invisível</b> permanentes."
+        "texto": "Missão <b>O Vestido Roubado</b> concluída. Você ganhou <b>3 Fragmentos do Homem das Faixas</b> permanentes."
       }
     ],
     "dados": {

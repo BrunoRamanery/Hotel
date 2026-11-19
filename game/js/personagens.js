@@ -14,6 +14,7 @@
 // Aparece no bilhete dourado. Troque aqui e muda no jogo inteiro.
 const SOBRENOME_THIAGO = "Silva";
 
+// Nomes que o JOGADOR vê: os verdadeiros (Homem Invisível, Nosferatu) são mistério até Thiago descobrir o que são.
 const PERSONAGENS = {
   thiago:   { nome: "Thiago",   retrato: "img/retratos/thiago.jpg" },
   mavis:    { nome: "Mavis",    retrato: "img/retratos/mavis.jpg" },
@@ -38,8 +39,8 @@ const PERSONAGENS = {
   // Lily e Nix: os esboços estão em img/retratos/lily.jpg e nix.jpg, mas só entram no jogo
   // (retrato preenchido aqui em cima) quando elas puderem ser vistas.
   enola:    { nome: "Enola",    retrato: "img/retratos/enola.jpg" },
-  nosferatu:{ nome: "Nosferatu",retrato: "img/retratos/nosferatu.jpg" },
-  homem_invisivel: { nome: "Homem Invisível", retrato: "img/retratos/homem_invisivel.jpg" },
+  nosferatu:{ nome: "Senhor Pálido",retrato: "img/retratos/nosferatu.jpg" },
+  homem_invisivel: { nome: "Homem das Faixas", retrato: "img/retratos/homem_invisivel.jpg" },
   vovo:     { nome: "Vovó",     retrato: "img/retratos/vovo.jpg" },
   jehan:    { nome: "Jehan",    retrato: "img/retratos/jehan.jpg" },
   viviane:  { nome: "Viviane",  retrato: "img/retratos/viviane.jpg" },
