@@ -335,3 +335,19 @@ body.no-titulo .moldura, body.no-titulo .btn-mapa{visibility:hidden}
 .lista-diario{margin:4px 0 10px;padding-left:18px}
 .lista-diario li{margin:3px 0}
 .lista-diario.feitas li::marker{content:"✓ "}
+
+
+/* ---- combate ---- */
+.combate .cb-topo{display:flex; gap:14px; align-items:center; margin-bottom:12px}
+.combate .cb-retrato{width:92px; height:92px; object-fit:cover; border-radius:6px; border:1px solid var(--borda)}
+.combate .cb-info{flex:1; min-width:0; display:flex; flex-direction:column; gap:4px}
+.combate .cb-info b{font-family:"Cinzel",serif; letter-spacing:.08em; color:var(--vela)}
+.combate .cb-rotulo{font-size:13px; color:var(--tinta-suave); margin-top:4px}
+.combate .cb-barra{height:9px; background:var(--painel2); border:1px solid var(--borda); border-radius:5px; overflow:hidden}
+.combate .cb-barra i{display:block; height:100%; transition:width .3s}
+.combate .cb-barra.inimigo i{background:var(--sangue)}
+.combate .cb-barra.voce i{background:#4f9d6a}
+.combate .cb-log{min-height:92px; border-left:2px solid var(--borda); padding:4px 12px; margin:8px 0 12px; font-size:16px}
+.combate .cb-log p{margin:2px 0}
+.combate .cb-log p:last-child{color:var(--tinta)}
+.combate .cb-log p:not(:last-child){color:var(--tinta-suave)}

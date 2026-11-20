@@ -21,6 +21,9 @@ const ITENS = {
   bandeja_morte:      { nome: "Bandeja coberta", peso: 2 },
   chave_misteriosa:   { nome: "Chave misteriosa", peso: 1 },
   vassoura:           { nome: "Vassoura de palha", peso: 2 },
+  remedios:           { nome: "Remédios da clínica", peso: 1, usar: { barras: { vida: 15, sanidade: 3 }, texto: "Você toma os comprimidos. A dor afrouxa." } },
+  livro_palido:       { nome: "Livro de magia (Senhor Pálido)", peso: 2 },
+  livro_elisabeta:    { nome: "Livro cinza (história de Elisabeta)", peso: 2 },
   // comida e água: "usar" = botão no inventário (come/bebe e o item some)
   // a marmita NÃO se come: é para levar (ex.: Maya). Comer, só nos horários de refeição ou com a Cozinha Básica.
   marmita:         { nome: "Marmita do refeitório", peso: 2 },
@@ -29,6 +32,7 @@ const ITENS = {
 
 /** Habilidades que Thiago pode aprender (aparecem no Perfil). */
 const HABILIDADES = {
+  nocoes_magia: { nome: "Noções de Magia", dica: "Você aprendeu a reconhecer sinais de magia. Alguns diálogos mudam por causa disso." },
   cozinha_basica: { nome: "Cozinha Básica", dica: "Uma vez por dia, fora dos horários de refeição, prepara uma refeição simples com os ingredientes que carrega." }
 };
 
@@ -69,7 +73,16 @@ const DIARIO_MISSOES = [
   ["nix_estado", "concluida", "Um Favor entre Funcionários"],
   ["arthur_estado", "concluido", "Os Dois Diários"],
   ["jehan_estado", "concluido", "Uma Conversa no Bar"],
-  ["morte_estado", "concluida", "A Última Refeição"]
+  ["morte_estado", "concluida", "A Última Refeição"],
+  ["lag_estado", "ignorou", "Os Barulhos (ignorados)"],
+  ["lag_estado", "esqueceu", "O Homem Lagarto (deixado para lá)"],
+  ["lag_estado", "venceu", "O Homem Lagarto (vencido)"],
+  ["lag_estado", "resgatado", "O Homem Lagarto (resgatado)"],
+  ["lag_biblio", "concluida", "O Que Era o Homem Lagarto"],
+  ["pal_estado", "concluido", "O Livro do Senhor Pálido"],
+  ["caminho_fim", "A", "Os Contos de Jehan (Caminho A)"],
+  ["caminho_fim", "B", "A Sala de Música (Caminho B)"],
+  ["inv2_estado", "concluida", "Um Passo Mais Perto do Homem Invisível"]
 ];
 
 const TEMPO_POR_CENA = 2;   // minutos que cada cena de história/diálogo consome

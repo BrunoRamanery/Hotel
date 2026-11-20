@@ -44,6 +44,10 @@ function validarCenas(cenas, inicio) {
       });
     }
     if (cena.tipo === "selecao" && cena.dados && cena.dados.destino) destinos.push(cena.dados.destino);
+    if (cena.tipo === "combate" && cena.dados && cena.dados.combate) {
+      const cb = cena.dados.combate;
+      [cb.vitoria, cb.derrota, cb.fuga].forEach(d => { if (d) destinos.push(d); });
+    }
     if (cena.tipo === "condicional" && cena.dados) {
       Object.values(cena.dados.casos || {}).forEach(d => destinos.push(d));
       if (cena.dados.padrao) destinos.push(cena.dados.padrao);
@@ -62,7 +66,13 @@ function validarCenas(cenas, inicio) {
     let temSaida = !!cena.destino_auto
       || (cena.tipo === "sorteio" && !!(cena.dados && cena.dados.opcoes && cena.dados.opcoes.length))
       || (cena.tipo === "condicional" && !!(cena.dados && cena.dados.casos))
-      || (cena.tipo === "selecao" && !!(cena.dados && cena.dados.destino));
+      || (cena.tipo === "selecao" && !!(cena.dados && cena.dados.destino))
+      || (cena.tipo === "combate" && !!(cena.dados && cena.dados.combate));
+    if (cena.tipo === "combate" && cena.dados && cena.dados.combate) {
+      [cena.dados.combate.vitoria, cena.dados.combate.derrota].forEach(alvo => {
+        if (alvo && !ehAtalho(alvo) && !ids.has(alvo)) problemas.push(`Cena '${cena.id}' (combate): o destino '${alvo}' não existe.`);
+      });
+    }
 
     // conferir também se os destinos do sorteio existem de fato
     if (cena.tipo === "sorteio" && cena.dados && cena.dados.opcoes) {

@@ -1221,6 +1221,7 @@ cena("morte_agradece", [
    dados={"raiz": True}, fundo="refeitorio")
 
 exec(open(__file__.rsplit("/",1)[0] + "/vida_hotel.py", encoding="utf-8").read())
+exec(open(__file__.rsplit("/",1)[0] + "/arvore_v3.py", encoding="utf-8").read())
 
 json.dump(C, open(sys.argv[1], "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 print(len(C), "cenas geradas (parte 2)")

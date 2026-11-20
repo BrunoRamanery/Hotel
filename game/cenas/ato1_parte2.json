@@ -261,6 +261,62 @@
         ]
       },
       {
+        "id": "lag_barulho_op",
+        "texto": "Escutar o barulho que vem do corredor",
+        "destino": "lag_barulho",
+        "se": [
+          {
+            "flag": "lag_estado",
+            "valor": "aviso"
+          },
+          {
+            "flag": "@hora",
+            "min": 19,
+            "max": 21
+          }
+        ]
+      },
+      {
+        "id": "livro_op_noite",
+        "texto": "Ler o livro do Senhor Pálido antes de dormir",
+        "destino": "livro_ler",
+        "se": [
+          {
+            "flag": "pal_estado",
+            "valor": "livro"
+          },
+          {
+            "flag": "@hora",
+            "min": 19
+          }
+        ],
+        "requisitos": {
+          "itens": [
+            "livro_palido"
+          ]
+        }
+      },
+      {
+        "id": "livro_op_madrugada",
+        "texto": "Ler o livro do Senhor Pálido antes de dormir",
+        "destino": "livro_ler",
+        "se": [
+          {
+            "flag": "pal_estado",
+            "valor": "livro"
+          },
+          {
+            "flag": "@hora",
+            "max": 5
+          }
+        ],
+        "requisitos": {
+          "itens": [
+            "livro_palido"
+          ]
+        }
+      },
+      {
         "id": "mapa",
         "texto": "Abrir o mapa",
         "destino": "@mapa"
@@ -465,6 +521,36 @@
         }
       },
       {
+        "id": "lag_clinica_op",
+        "texto": "Voltar à clínica por causa das dores",
+        "destino": "lag_clinica",
+        "se": [
+          {
+            "flag": "elisabeta_desculpou"
+          },
+          {
+            "flag": "lag_clinica_feito",
+            "diferente": true
+          }
+        ]
+      },
+      {
+        "id": "lag_procura_op",
+        "texto": "Procurar sinais do Homem Lagarto",
+        "destino": "lag_procura",
+        "se": [
+          {
+            "flag": "lag_estado",
+            "valor": "cacando"
+          },
+          {
+            "flag": "@hora",
+            "min": 7,
+            "max": 18
+          }
+        ]
+      },
+      {
         "id": "mapa",
         "texto": "Abrir o mapa",
         "destino": "@mapa"
@@ -647,6 +733,126 @@
           "flag": "@noite",
           "valor": false
         }
+      },
+      {
+        "id": "lag_biblio_op",
+        "texto": "Pesquisar o Homem Lagarto nas estantes",
+        "destino": "lag_biblio",
+        "se": [
+          {
+            "flag": "lag_biblioteca",
+            "valor": true
+          },
+          {
+            "flag": "lag_biblio",
+            "diferente": "concluida"
+          }
+        ]
+      },
+      {
+        "id": "inv2_op",
+        "texto": "Arthur chama você: ele contou as ocorrências",
+        "destino": "inv2_arthur",
+        "se": [
+          {
+            "flag": "elisabeta_desculpou"
+          },
+          {
+            "flag": "arthur_estado",
+            "valor": "concluido"
+          },
+          {
+            "flag": "fragmentos",
+            "min": 10
+          },
+          {
+            "flag": "inv2_estado",
+            "diferente": "concluida"
+          }
+        ]
+      },
+      {
+        "id": "pal_op",
+        "texto": "Aproximar-se do Senhor Pálido, que lê na mesa afastada",
+        "destino": "pal_conversa",
+        "se": [
+          {
+            "flag": "elisabeta_desculpou"
+          },
+          {
+            "flag": "conv_biblio",
+            "valor": true
+          },
+          {
+            "flag": "pal_estado",
+            "diferente": "livro"
+          },
+          {
+            "flag": "pal_estado",
+            "diferente": "concluido"
+          },
+          {
+            "flag": "baile_inicio",
+            "diferente": true
+          }
+        ]
+      },
+      {
+        "id": "pal_fim_op",
+        "texto": "Contar ao Senhor Pálido que terminou o livro",
+        "destino": "pal_fim",
+        "se": [
+          {
+            "flag": "pal_estado",
+            "valor": "concluido"
+          },
+          {
+            "flag": "pal_fim",
+            "diferente": true
+          },
+          {
+            "flag": "baile_inicio",
+            "diferente": true
+          }
+        ]
+      },
+      {
+        "id": "b_enola_op",
+        "texto": "Perguntar a Enola sobre a mulher do quadro",
+        "destino": "b_enola",
+        "se": [
+          {
+            "flag": "elisabeta_desculpou"
+          },
+          {
+            "flag": "caminho_escolhido",
+            "diferente": true
+          },
+          {
+            "flag": "@hora",
+            "min": 8,
+            "max": 18
+          }
+        ]
+      },
+      {
+        "id": "b_arthur_op",
+        "texto": "Mostrar o livro cinza a Arthur",
+        "destino": "b_arthur",
+        "se": [
+          {
+            "flag": "b_arthur_aberto",
+            "valor": true
+          },
+          {
+            "flag": "b_noite",
+            "diferente": true
+          },
+          {
+            "flag": "arthur_estado",
+            "valor": "concluido"
+          }
+        ]
       },
       {
         "id": "mapa",
@@ -2622,6 +2828,20 @@
         }
       },
       {
+        "id": "baile_op",
+        "texto": "Entrar no Baile da Fundação",
+        "destino": "baile_entrada",
+        "se": [
+          {
+            "flag": "@baile"
+          },
+          {
+            "flag": "baile_inicio",
+            "diferente": true
+          }
+        ]
+      },
+      {
         "id": "mapa",
         "texto": "Abrir o mapa",
         "destino": "@mapa"
@@ -2937,6 +3157,41 @@
           "flag": "@noite",
           "valor": false
         }
+      },
+      {
+        "id": "lag_bar_op",
+        "texto": "Contar tudo a Jehan sobre o Homem Lagarto",
+        "destino": "lag_bar",
+        "se": [
+          {
+            "flag": "lag_estado",
+            "valor": "cacando"
+          },
+          {
+            "flag": "@hora",
+            "min": 19,
+            "max": 21
+          }
+        ]
+      },
+      {
+        "id": "a_jehan_op",
+        "texto": "Perguntar a Jehan sobre a mulher do piano",
+        "destino": "a_jehan",
+        "se": [
+          {
+            "flag": "elisabeta_desculpou"
+          },
+          {
+            "flag": "caminho_escolhido",
+            "diferente": true
+          },
+          {
+            "flag": "@hora",
+            "min": 19,
+            "max": 21
+          }
+        ]
       },
       {
         "id": "mapa",
@@ -4040,7 +4295,7 @@
       "casos": {
         "true": "porta_batem"
       },
-      "padrao": "dormiu",
+      "padrao": "dormir_gate3",
       "raiz": true
     }
   },
@@ -4710,13 +4965,32 @@
         "desculpas_pendente": false,
         "elisabeta_desculpou": true,
         "biblioteca_elisabeta": true,
-        "lugar": "suite14"
+        "lugar": "suite14",
+        "pos_estado": "aberto"
       },
       "barras": {
         "cansaco": 90,
         "sanidade": 10,
         "vida": 5
-      }
+      },
+      "marcadores": [
+        {
+          "area": "bar",
+          "texto": "Conversar com Jehan (à noite)"
+        },
+        {
+          "area": "biblioteca",
+          "texto": "Investigar a história de Elisabeta"
+        },
+        {
+          "area": "biblioteca",
+          "texto": "O Senhor Pálido"
+        },
+        {
+          "area": "corredores",
+          "texto": "Voltar à clínica (as dores)"
+        }
+      ]
     },
     "narrativa": [
       "Você passa o resto da noite sentado na cama, com a luz acesa, sem coragem de fechar os olhos.",
@@ -4724,7 +4998,7 @@
       "Aquelas semanas foram diferentes de tudo que eu já havia vivido. Os corredores começaram a parecer familiares, mas os sons durante a noite nunca deixaram de me assustar. Quanto mais eu conhecia aquele lugar, menos conseguia acreditar nas explicações que inventava para mim mesmo.",
       {
         "estilo": "sistema",
-        "texto": "Uma nova pista foi liberada na <b>biblioteca</b>: a vida de Elisabeta. (Conteúdo previsto para o próximo capítulo.)"
+        "texto": "Novas pistas surgiram: a <b>biblioteca</b>, o <b>bar</b> (à noite), a <b>clínica</b> e o <b>Senhor Pálido</b>."
       }
     ],
     "dados": {
@@ -7527,5 +7801,2399 @@
         "obs_bar_2"
       ]
     }
+  },
+  {
+    "id": "lag_clinica",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "medica",
+      "casos": {
+        "amanda": "lag_clinica_amanda",
+        "rafaela": "lag_clinica_rafaela"
+      },
+      "padrao": "lag_clinica_amanda",
+      "raiz": true
+    }
+  },
+  {
+    "id": "lag_clinica_amanda",
+    "chegada": {
+      "flags": {
+        "lag_clinica_feito": true,
+        "lag_estado": "aviso"
+      },
+      "barras": {
+        "sanidade": -4,
+        "vida": 3
+      },
+      "itens": [],
+      "tirar_marcadores_texto": [
+        {
+          "area": "corredores",
+          "texto": "Voltar à clínica (as dores)"
+        }
+      ],
+      "marcadores": [
+        {
+          "area": "suite14",
+          "texto": "Esteja no quarto à noite"
+        }
+      ],
+      "tempo": 20,
+      "relacoes": {
+        "amanda": {
+          "afeto": 3
+        }
+      }
+    },
+    "narrativa": [
+      "A clínica está silenciosa. Na maca onde você ficou, os lençóis foram trocados, e há um armário aberto, com frascos fora do lugar.",
+      {
+        "quem": "amanda",
+        "texto": "Thiago! Eu ia mesmo te procurar. Como estão as dores?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Voltam à noite. No ombro, no peito. Às vezes parece que está queimando."
+      },
+      "Ela examina o curativo com cuidado e troca a gaze. Depois separa dois frascos e uma caixinha de comprimidos.",
+      {
+        "quem": "amanda",
+        "texto": "Tome isto quando a dor apertar. Não é um milagre, mas ajuda."
+      },
+      {
+        "item": "remedios"
+      },
+      "Quando você já ia sair, ela segura a porta com a mão e baixa a voz.",
+      {
+        "quem": "amanda",
+        "texto": "Preciso te avisar de uma coisa. Um paciente fugiu da clínica ontem à noite. Ele é... um funcionário daqui. Está doente, e não sabe o que faz quando a crise vem."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Fugiu? Para onde?"
+      },
+      {
+        "quem": "amanda",
+        "texto": "Se eu soubesse, não estaria te contando no corredor. Tome cuidado. Se ouvir barulho estranho à noite, não vá ver sozinho."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Mais uma coisa para não fazer sozinho neste hotel."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "clinica"
+  },
+  {
+    "id": "lag_clinica_rafaela",
+    "chegada": {
+      "flags": {
+        "lag_clinica_feito": true,
+        "lag_estado": "aviso"
+      },
+      "barras": {
+        "sanidade": -4,
+        "vida": 3
+      },
+      "itens": [],
+      "tirar_marcadores_texto": [
+        {
+          "area": "corredores",
+          "texto": "Voltar à clínica (as dores)"
+        }
+      ],
+      "marcadores": [
+        {
+          "area": "suite14",
+          "texto": "Esteja no quarto à noite"
+        }
+      ],
+      "tempo": 20,
+      "relacoes": {
+        "rafaela": {
+          "afeto": 3
+        }
+      }
+    },
+    "narrativa": [
+      "A clínica está silenciosa. Na maca onde você ficou, os lençóis foram trocados, e há um armário aberto, com frascos fora do lugar.",
+      {
+        "quem": "rafaela",
+        "texto": "Você voltou. Ótimo. Estava esperando que voltasse sozinho. Como estão as dores?"
+      },
+      {
+        "quem": "thiago",
+        "texto": "Voltam à noite. No ombro, no peito. Às vezes parece que está queimando."
+      },
+      "Ela examina o curativo com cuidado e troca a gaze. Depois separa dois frascos e uma caixinha de comprimidos.",
+      {
+        "quem": "rafaela",
+        "texto": "Tome isto quando a dor apertar. Não é um milagre, mas ajuda."
+      },
+      {
+        "item": "remedios"
+      },
+      "Quando você já ia sair, ela segura a porta com a mão e baixa a voz.",
+      {
+        "quem": "rafaela",
+        "texto": "Preciso te avisar de uma coisa. Um paciente fugiu da clínica ontem à noite. Ele é... um funcionário daqui. Está doente, e não sabe o que faz quando a crise vem."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Fugiu? Para onde?"
+      },
+      {
+        "quem": "rafaela",
+        "texto": "Se eu soubesse, não estaria te contando no corredor. Tome cuidado. Se ouvir barulho estranho à noite, não vá ver sozinho."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Mais uma coisa para não fazer sozinho neste hotel."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "clinica"
+  },
+  {
+    "id": "lag_barulho",
+    "narrativa": [
+      "A janta terminou há pouco. Você volta para a suíte 14 com o estômago quente e a cabeça cheia. Mal gira a chave quando um som atravessa a porta.",
+      "Algo arranha o chão, longe, no fundo do corredor. Depois um resmungo baixo, quase um choro, e um corpo pesado batendo na parede.",
+      {
+        "estilo": "pensamento",
+        "texto": "O paciente que fugiu. Ela disse para não ir sozinho."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Mas e se ele estiver machucado?"
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "lag_seguir",
+        "texto": "Abrir a porta e seguir o barulho",
+        "destino": "lag_corredor",
+        "efeitos": {
+          "barras": {
+            "suspeita": 5
+          },
+          "tempo": 4
+        }
+      },
+      {
+        "id": "lag_ignorar",
+        "texto": "Trancar a porta e ignorar",
+        "destino": "lag_ignorou"
+      }
+    ],
+    "fundo": "suite14"
+  },
+  {
+    "id": "lag_ignorou",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "barras": {
+        "cansaco": 100,
+        "sanidade": 10,
+        "vida": 5
+      },
+      "flags": {
+        "lag_estado": "ignorou",
+        "lugar": "suite14"
+      },
+      "tirar_marcadores_texto": [
+        {
+          "area": "suite14",
+          "texto": "Esteja no quarto à noite"
+        }
+      ]
+    },
+    "narrativa": [
+      "Você encosta a testa na porta, respira fundo e deixa o barulho para lá. Tranca duas vezes. Os sons duram quase uma hora e param de repente.",
+      "Você dorme mal. Pela manhã, o corredor está vazio. Nenhum sinal de nada.",
+      {
+        "estilo": "sistema",
+        "texto": "Você não seguiu o barulho. O paciente não volta a aparecer, e a história dele não terá continuação nesta partida."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "suite14"
+  },
+  {
+    "id": "lag_corredor",
+    "chegada": {
+      "barras": {
+        "sanidade": -8
+      },
+      "conhece": []
+    },
+    "narrativa": [
+      "O corredor está iluminado só pelas lâmpadas de emergência, vermelhas e tremidas. O som vem do fim da ala, onde uma armadura caiu, espalhada pelo tapete.",
+      "Atrás dela, encolhido no escuro, há um homem de uniforme rasgado. Ele tem a cabeça entre os braços e treme.",
+      {
+        "quem": "thiago",
+        "texto": "Ei. Você está bem? Eu... vim ajudar."
+      },
+      "Ele levanta o rosto devagar. A pele do pescoço e da bochecha está coberta de escamas verde-acinzentadas, e os olhos são duas fendas amarelas.",
+      {
+        "quem": "lagarto",
+        "texto": "Vá embora. Por favor. Eu... não consigo... segurar..."
+      },
+      "A voz se parte em um chiado. A mão dele, de unhas curvas e escamas finas, agarra o tapete e rasga um pedaço.",
+      "Quando ele se levanta, já não é mais o mesmo homem. Ele ruge e avança."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "lag_luta1",
+    "fundo": "corredor"
+  },
+  {
+    "id": "lag_luta1",
+    "tipo": "combate",
+    "dados": {
+      "raiz": true,
+      "combate": {
+        "inimigo": {
+          "nome": "Homem Lagarto",
+          "retrato": "lagarto",
+          "vida": 120,
+          "dano": [
+            9,
+            14
+          ]
+        },
+        "intro": "O Homem Lagarto avança, mais rápido e mais forte do que qualquer coisa que você já enfrentou.",
+        "roteiro": "derrota",
+        "rodadas_derrota": 3,
+        "piso": 12,
+        "vitoria": "lag_derrotado",
+        "derrota": "lag_derrotado"
+      }
+    },
+    "fundo": "corredor"
+  },
+  {
+    "id": "lag_derrotado",
+    "chegada": {
+      "barras": {
+        "sanidade": -10
+      },
+      "tempo": 20
+    },
+    "narrativa": [
+      "Um golpe no peito tira o ar de você. Outro, nas costas. O tapete vem ao seu encontro, e o corredor se apaga em manchas vermelhas.",
+      "Você ouve um rugido, depois passos pesados se afastando. Depois só o seu próprio coração, muito devagar.",
+      {
+        "estilo": "sistema",
+        "texto": "Você perdeu a luta. Era uma luta que você não podia vencer."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "lag_cuidado",
+    "fundo": "corredor"
+  },
+  {
+    "id": "lag_cuidado",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "medica",
+      "casos": {
+        "amanda": "lag_cuidado_amanda",
+        "rafaela": "lag_cuidado_rafaela"
+      },
+      "padrao": "lag_cuidado_amanda",
+      "raiz": true
+    }
+  },
+  {
+    "id": "lag_cuidado_amanda",
+    "chegada": {
+      "ate": "07:10",
+      "sono": true,
+      "barras": {
+        "vida": 20,
+        "cansaco": 60,
+        "sanidade": 5
+      },
+      "relacoes": {
+        "jehan": {
+          "afeto": 4
+        },
+        "amanda": {
+          "afeto": 4
+        }
+      },
+      "flags": {
+        "lag_estado": "lutou",
+        "lugar": "hall"
+      },
+      "tirar_marcadores_texto": [
+        {
+          "area": "suite14",
+          "texto": "Esteja no quarto à noite"
+        }
+      ]
+    },
+    "narrativa": [
+      "Você acorda no chão, no fundo do corredor, com o rosto colado ao tapete. Tudo dói, mas o mundo está de volta.",
+      "Alguém afasta o seu cabelo da testa. Jehan, de camisa amassada e sem o colete, está agachado ao seu lado. Atrás dele, Amanda abre uma maleta de primeiros socorros.",
+      {
+        "quem": "jehan",
+        "texto": "Não se mexa. Você é teimoso, hein? Eu avisei."
+      },
+      {
+        "quem": "amanda",
+        "texto": "Respire devagar. Costelas machucadas, mas nada quebrado. Você tem muita sorte."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Era... um homem. Com escamas. Ele me atacou."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Fale baixo. Amanhã você conta direito. Agora, cama."
+      },
+      "Os dois levam você até a suíte. Amanda faz um curativo novo e deixa um copo de água na mesinha. Jehan fica na porta até você fechar os olhos."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "lag_hall",
+    "fundo": "suite14"
+  },
+  {
+    "id": "lag_cuidado_rafaela",
+    "chegada": {
+      "ate": "07:10",
+      "sono": true,
+      "barras": {
+        "vida": 20,
+        "cansaco": 60,
+        "sanidade": 5
+      },
+      "relacoes": {
+        "jehan": {
+          "afeto": 4
+        },
+        "rafaela": {
+          "afeto": 4
+        }
+      },
+      "flags": {
+        "lag_estado": "lutou",
+        "lugar": "hall"
+      },
+      "tirar_marcadores_texto": [
+        {
+          "area": "suite14",
+          "texto": "Esteja no quarto à noite"
+        }
+      ]
+    },
+    "narrativa": [
+      "Você acorda no chão, no fundo do corredor, com o rosto colado ao tapete. Tudo dói, mas o mundo está de volta.",
+      "Alguém afasta o seu cabelo da testa. Jehan, de camisa amassada e sem o colete, está agachado ao seu lado. Atrás dele, Rafaela abre uma maleta de primeiros socorros.",
+      {
+        "quem": "jehan",
+        "texto": "Não se mexa. Você é teimoso, hein? Eu avisei."
+      },
+      {
+        "quem": "rafaela",
+        "texto": "Respire devagar. Costelas machucadas, mas nada quebrado. Você tem muita sorte."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Era... um homem. Com escamas. Ele me atacou."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Fale baixo. Amanhã você conta direito. Agora, cama."
+      },
+      "Os dois levam você até a suíte. Rafaela faz um curativo novo e deixa um copo de água na mesinha. Jehan fica na porta até você fechar os olhos."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "lag_hall",
+    "fundo": "suite14"
+  },
+  {
+    "id": "lag_hall",
+    "narrativa": [
+      "Na manhã seguinte, antes do café, você desce ao hall, ainda dolorido. Mavis e Jonathan estão juntos, perto do balcão, conferindo uma lista.",
+      {
+        "quem": "mavis",
+        "texto": "Thiago? Você está horrível. O que aconteceu?"
+      },
+      "Você conta tudo: o barulho, a armadura caída, o homem de escamas, a luta que você perdeu em três golpes.",
+      {
+        "quem": "jonathan",
+        "texto": "Escamas? Thiago, o hotel é antigo. Tem cano que range e tapete que se mexe. Você bateu em algum lugar."
+      },
+      {
+        "quem": "mavis",
+        "texto": "Jonathan! Ele está machucado de verdade. Isso não é pouca coisa."
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Não disse que não está. Só digo que o cansaço prega peças. Ele está há dias dormindo mal."
+      },
+      "Mavis olha para você, preocupada. Jonathan olha para o relógio.",
+      {
+        "estilo": "pensamento",
+        "texto": "Eu sei o que eu vi. Mas e se eles estiverem certos?"
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "lag_esquecer1",
+        "texto": "“Talvez vocês tenham razão. Foi cansaço.”",
+        "destino": "lag_esquece",
+        "efeitos": {
+          "relacoes": {
+            "mavis": {
+              "afeto": 6
+            },
+            "jehan": {
+              "afeto": 4
+            },
+            "jonathan": {
+              "afeto": 2
+            }
+          }
+        }
+      },
+      {
+        "id": "lag_cacar1",
+        "texto": "“Eu sei o que vi. Vou descobrir o que é.”",
+        "destino": "lag_cacar",
+        "efeitos": {
+          "relacoes": {
+            "jonathan": {
+              "afeto": -5
+            },
+            "mavis": {
+              "afeto": -2
+            }
+          }
+        }
+      }
+    ],
+    "fundo": "hall"
+  },
+  {
+    "id": "lag_esquece",
+    "chegada": {
+      "flags": {
+        "lag_estado": "esqueceu",
+        "lugar": "hall"
+      },
+      "barras": {
+        "sanidade": 3
+      },
+      "tempo": 10
+    },
+    "narrativa": [
+      "Você respira fundo e dá de ombros, com um sorriso torto.",
+      {
+        "quem": "thiago",
+        "texto": "Deve ter sido isso. Eu preciso dormir mais."
+      },
+      {
+        "quem": "mavis",
+        "texto": "Descansa hoje, tá? Eu aviso o Jehan para pegar leve no bar. Ele se preocupa com você."
+      },
+      "Jonathan assente, aliviado. Mavis aperta o seu braço com carinho.",
+      {
+        "estilo": "sistema",
+        "texto": "Você decidiu deixar o assunto para lá. Sua relação com Mavis e com Jehan aumentou."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_hall",
+    "fundo": "hall"
+  },
+  {
+    "id": "lag_cacar",
+    "chegada": {
+      "flags": {
+        "lag_estado": "cacando",
+        "lugar": "hall"
+      },
+      "tempo": 10,
+      "marcadores": [
+        {
+          "area": "bar",
+          "texto": "Contar tudo a Jehan (à noite)"
+        }
+      ]
+    },
+    "narrativa": [
+      "Jonathan solta uma risada curta, sem humor. Mavis fica em silêncio, e o silêncio pesa mais.",
+      {
+        "quem": "mavis",
+        "texto": "Tudo bem. Mas tome cuidado. Por favor."
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Quando você encontrar uma lagartixa, me conte."
+      },
+      "Eles se afastam. Você sabe que algo no tom de Jonathan não era só ironia.",
+      {
+        "estilo": "sistema",
+        "texto": "Você decidiu caçar o Homem Lagarto. Durante o dia, procure nos corredores. À noite, fale com Jehan no bar."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_hall",
+    "fundo": "hall"
+  },
+  {
+    "id": "lag_procura",
+    "tipo": "sorteio",
+    "dados": {
+      "raiz": true,
+      "opcoes": [
+        "lag_procura_1",
+        "lag_procura_2",
+        "lag_procura_3"
+      ]
+    }
+  },
+  {
+    "id": "lag_procura_1",
+    "chegada": {
+      "tempo": 12,
+      "barras": {
+        "sanidade": -1
+      }
+    },
+    "narrativa": [
+      "Você percorre o corredor devagar, atento. Um rasgo no tapete. Uma armadura que alguém recolocou no lugar, com pressa.",
+      "Ao longe, um som de arranhão, que some quando você se aproxima."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor_dia"
+  },
+  {
+    "id": "lag_procura_2",
+    "chegada": {
+      "tempo": 12,
+      "barras": {
+        "sanidade": -1
+      }
+    },
+    "narrativa": [
+      "Você encosta a orelha em algumas portas. Só silêncio, e um perfume de lavanda numa delas.",
+      "Do último quarto do corredor vem um resmungo baixo. Mas quando você bate, ninguém responde."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor_dia"
+  },
+  {
+    "id": "lag_procura_3",
+    "chegada": {
+      "tempo": 12,
+      "barras": {
+        "sanidade": -1
+      }
+    },
+    "narrativa": [
+      "Há um risco de unhas na madeira de uma porta, a uns dois palmos do chão. Você passa o dedo sobre a marca, e ela está fria, seca, recente.",
+      "Quando olha para trás, o corredor está vazio. Mas você tem a sensação de que alguém acabou de sair."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor_dia"
+  },
+  {
+    "id": "lag_bar",
+    "narrativa": [
+      "O bar está quase vazio. Jehan enxuga um copo, e quando vê o seu rosto, deixa o pano no balcão.",
+      {
+        "quem": "jehan",
+        "texto": "Fale. Você tem cara de quem está carregando uma pedra."
+      },
+      "Você conta tudo de novo: os arranhões, o homem escamado, a luta perdida e a risada seca de Jonathan.",
+      {
+        "quem": "jehan",
+        "texto": "Eu ouvi pela Mavis. E vou te dizer o que eu diria a qualquer hóspede: esqueça isso. Vá para o quarto e durma."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Esse tipo de gente... esse tipo de doença... não é coisa para um humano caçar."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Humano. É sempre assim que você me chama quando está preocupado."
+      },
+      "Ele ri sem vontade e passa a mão pelo cabelo."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "lag_esquecer2",
+        "texto": "“Você tem razão. Vou esquecer.”",
+        "destino": "lag_esquece2",
+        "efeitos": {
+          "relacoes": {
+            "mavis": {
+              "afeto": 6
+            },
+            "jehan": {
+              "afeto": 6
+            }
+          }
+        }
+      },
+      {
+        "id": "lag_cacar2",
+        "texto": "“Não consigo. Eu vou atrás dele.”",
+        "destino": "lag_noite_caca",
+        "efeitos": {
+          "relacoes": {
+            "jehan": {
+              "afeto": 2
+            }
+          }
+        }
+      }
+    ],
+    "fundo": "bar"
+  },
+  {
+    "id": "lag_esquece2",
+    "chegada": {
+      "flags": {
+        "lag_estado": "esqueceu"
+      },
+      "barras": {
+        "sanidade": 4
+      },
+      "tirar_marcadores_texto": [
+        {
+          "area": "bar",
+          "texto": "Contar tudo a Jehan (à noite)"
+        }
+      ],
+      "tempo": 15
+    },
+    "narrativa": [
+      {
+        "quem": "thiago",
+        "texto": "Tem razão. Eu vou esquecer isso."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Esse é o meu rapaz. Bebe isso e dorme. Eu aviso a Mavis que você está bem."
+      },
+      "Ele serve um copo de leite morno, para sua surpresa, e sorri de lado.",
+      {
+        "estilo": "sistema",
+        "texto": "Você desistiu de caçar o Homem Lagarto. Sua relação com Mavis e com Jehan aumentou."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "bar_base",
+    "fundo": "bar"
+  },
+  {
+    "id": "lag_noite_caca",
+    "chegada": {
+      "ate": "23:40",
+      "tirar_marcadores_texto": [
+        {
+          "area": "bar",
+          "texto": "Contar tudo a Jehan (à noite)"
+        }
+      ],
+      "barras": {
+        "suspeita": 5
+      }
+    },
+    "narrativa": [
+      "Jehan fica em silêncio por um longo tempo. Depois tira o avental, dobra com cuidado e o põe sobre o balcão.",
+      {
+        "quem": "jehan",
+        "texto": "Eu sabia que você ia dizer isso. Então não vai sozinho."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Eu vou chamar a médica. Ela conhece esse paciente melhor do que ninguém. Esperem no corredor leste, depois da meia-noite."
+      },
+      "Você sai do bar com o coração batendo no ritmo de um relógio. O hotel parece prender a respiração."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "lag_corredor2",
+    "fundo": "bar"
+  },
+  {
+    "id": "lag_corredor2",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "medica",
+      "casos": {
+        "amanda": "lag_corredor2_amanda",
+        "rafaela": "lag_corredor2_rafaela"
+      },
+      "padrao": "lag_corredor2_amanda",
+      "raiz": true
+    }
+  },
+  {
+    "id": "lag_corredor2_amanda",
+    "narrativa": [
+      "O corredor leste está escuro, e as lâmpadas de emergência dão ao tapete a cor de ferrugem. Amanda espera encostada numa armadura, com uma seringa numa mão e uma lanterna na outra.",
+      {
+        "quem": "amanda",
+        "texto": "Jehan me contou. Você é corajoso ou teimoso, ainda não decidi."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Os dois, normalmente."
+      },
+      {
+        "quem": "amanda",
+        "texto": "Ele se chama Heitor. Trabalhava na lavanderia. A crise começa em dias de lua cheia, e ele perde o controle. Se eu chegar perto, talvez a voz dele me reconheça."
+      },
+      {
+        "quem": "jehan",
+        "texto": "E se não reconhecer, você é o primeiro a levar."
+      },
+      "Um arranhão no fim do corredor. Um chiado. Uma sombra comprida se estica sobre a parede.",
+      "O Homem Lagarto aparece. Desta vez, você tem as mãos livres e um motivo."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "lag_luta2",
+    "fundo": "corredor"
+  },
+  {
+    "id": "lag_corredor2_rafaela",
+    "narrativa": [
+      "O corredor leste está escuro, e as lâmpadas de emergência dão ao tapete a cor de ferrugem. Rafaela espera encostada numa armadura, com uma seringa numa mão e uma lanterna na outra.",
+      {
+        "quem": "rafaela",
+        "texto": "Jehan me contou. Você é corajoso ou teimoso, ainda não decidi."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Os dois, normalmente."
+      },
+      {
+        "quem": "rafaela",
+        "texto": "Ele se chama Heitor. Trabalhava na lavanderia. A crise começa em dias de lua cheia, e ele perde o controle. Se eu chegar perto, talvez a voz dele me reconheça."
+      },
+      {
+        "quem": "jehan",
+        "texto": "E se não reconhecer, você é o primeiro a levar."
+      },
+      "Um arranhão no fim do corredor. Um chiado. Uma sombra comprida se estica sobre a parede.",
+      "O Homem Lagarto aparece. Desta vez, você tem as mãos livres e um motivo."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "lag_luta2",
+    "fundo": "corredor"
+  },
+  {
+    "id": "lag_luta2",
+    "tipo": "combate",
+    "dados": {
+      "raiz": true,
+      "combate": {
+        "inimigo": {
+          "nome": "Homem Lagarto",
+          "retrato": "lagarto",
+          "vida": 70,
+          "dano": [
+            7,
+            11
+          ]
+        },
+        "intro": "O Homem Lagarto ruge. Desta vez, você não está sozinho.",
+        "roteiro": "livre",
+        "piso": 8,
+        "vitoria": "lag_vitoria",
+        "derrota": "lag_derrota2"
+      }
+    },
+    "fundo": "corredor"
+  },
+  {
+    "id": "lag_vitoria",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "medica",
+      "casos": {
+        "amanda": "lag_vitoria_amanda",
+        "rafaela": "lag_vitoria_rafaela"
+      },
+      "padrao": "lag_vitoria_amanda",
+      "raiz": true
+    }
+  },
+  {
+    "id": "lag_vitoria_amanda",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "barras": {
+        "vida": 20,
+        "cansaco": 70,
+        "sanidade": 8
+      },
+      "relacoes": {
+        "amanda": {
+          "afeto": 10,
+          "nivel": 1
+        },
+        "jehan": {
+          "afeto": 4
+        }
+      },
+      "ligacao": {
+        "amanda": "romance"
+      },
+      "conhece": [
+        "lagarto"
+      ],
+      "flags": {
+        "lag_estado": "venceu",
+        "lugar": "suite14",
+        "lag_biblioteca": true
+      },
+      "marcadores": [
+        {
+          "area": "biblioteca",
+          "texto": "Pesquisar o Homem Lagarto"
+        }
+      ]
+    },
+    "narrativa": [
+      "O último golpe encontra o ombro dele. O Homem Lagarto cai de joelhos, a respiração falhando. As escamas recuam do rosto, e ele volta a ser um homem muito magro, de olhos fundos, chorando.",
+      {
+        "quem": "lagarto_calmo",
+        "texto": "Desculpa... desculpa... eu não queria..."
+      },
+      "Amanda passa por você, ajoelha-se e encosta a seringa no braço dele, com uma delicadeza que você não esperava.",
+      {
+        "quem": "amanda",
+        "texto": "Está tudo bem, Heitor. Já passou. Eu estou aqui."
+      },
+      "Ele afunda numa respiração lenta. Dois funcionários da clínica surgem do fundo do corredor, com uma maca, e o levam sem dizer uma palavra.",
+      {
+        "quem": "amanda",
+        "texto": "Você... enfrentou ele sozinho? Quer dizer, quase sozinho."
+      },
+      "Ela desvia o olhar um segundo mais tarde do que devia, e as bochechas dela ficam um pouco rosadas.",
+      {
+        "quem": "jehan",
+        "texto": "Chega de heroísmo por hoje. Toma, bebe isso. Vai te ajudar a dormir. E esquece. É só um homem doente."
+      },
+      "Ele leva você até a suíte e põe um frasquinho na sua mão. Você bebe e adormece sem lembrar de ter deitado.",
+      {
+        "estilo": "sistema",
+        "texto": "Você venceu o Homem Lagarto. A relação com Amanda subiu, e algo mais começou a se mover. Uma nova pista foi liberada na biblioteca."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "corredor"
+  },
+  {
+    "id": "lag_vitoria_rafaela",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "barras": {
+        "vida": 20,
+        "cansaco": 70,
+        "sanidade": 8
+      },
+      "relacoes": {
+        "rafaela": {
+          "afeto": 10,
+          "nivel": 1
+        },
+        "jehan": {
+          "afeto": 4
+        }
+      },
+      "ligacao": {
+        "rafaela": "romance"
+      },
+      "conhece": [
+        "lagarto"
+      ],
+      "flags": {
+        "lag_estado": "venceu",
+        "lugar": "suite14",
+        "lag_biblioteca": true
+      },
+      "marcadores": [
+        {
+          "area": "biblioteca",
+          "texto": "Pesquisar o Homem Lagarto"
+        }
+      ]
+    },
+    "narrativa": [
+      "O último golpe encontra o ombro dele. O Homem Lagarto cai de joelhos, a respiração falhando. As escamas recuam do rosto, e ele volta a ser um homem muito magro, de olhos fundos, chorando.",
+      {
+        "quem": "lagarto_calmo",
+        "texto": "Desculpa... desculpa... eu não queria..."
+      },
+      "Rafaela passa por você, ajoelha-se e encosta a seringa no braço dele, com uma delicadeza que você não esperava.",
+      {
+        "quem": "rafaela",
+        "texto": "Está tudo bem, Heitor. Já passou. Eu estou aqui."
+      },
+      "Ele afunda numa respiração lenta. Dois funcionários da clínica surgem do fundo do corredor, com uma maca, e o levam sem dizer uma palavra.",
+      {
+        "quem": "rafaela",
+        "texto": "Você é mais resistente do que parece, Thiago. Isso foi... impressionante."
+      },
+      "Ela desvia o olhar um segundo mais tarde do que devia, e as bochechas dela ficam um pouco rosadas.",
+      {
+        "quem": "jehan",
+        "texto": "Chega de heroísmo por hoje. Toma, bebe isso. Vai te ajudar a dormir. E esquece. É só um homem doente."
+      },
+      "Ele leva você até a suíte e põe um frasquinho na sua mão. Você bebe e adormece sem lembrar de ter deitado.",
+      {
+        "estilo": "sistema",
+        "texto": "Você venceu o Homem Lagarto. A relação com Rafaela subiu, e algo mais começou a se mover. Uma nova pista foi liberada na biblioteca."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "corredor"
+  },
+  {
+    "id": "lag_derrota2",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "barras": {
+        "vida": 15,
+        "cansaco": 60,
+        "sanidade": -5
+      },
+      "flags": {
+        "lag_estado": "resgatado",
+        "lugar": "suite14",
+        "lag_biblioteca": true
+      },
+      "marcadores": [
+        {
+          "area": "biblioteca",
+          "texto": "Pesquisar o Homem Lagarto"
+        }
+      ]
+    },
+    "narrativa": [
+      "Você cai de costas, sem ar. O Homem Lagarto ergue as garras para o golpe final.",
+      "Então a voz de alguém corta o corredor, firme e baixa. Ele hesita. A seringa encontra o pescoço dele, e o rugido se desfaz num gemido.",
+      "Você ouve o corpo dele bater no chão. Depois só a respiração de três pessoas, e a de um quarto homem, que vai se acalmando.",
+      {
+        "quem": "jehan",
+        "texto": "Eu falei que você ia apanhar. Levanta. Hoje não."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Você foi salvo por Jehan e pela médica. O Homem Lagarto foi levado de volta à clínica."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "corredor"
+  },
+  {
+    "id": "lag_biblio",
+    "narrativa": [
+      "Na biblioteca, Enola aponta sem perguntar duas estantes: uma de folclore, outra de medicina antiga. O olhar dela diz que ela sabe por que você está ali.",
+      "No primeiro livro, uma lenda: um homem que, nas noites de lua cheia, vira lagarto. Pele em escamas, olhos de fenda, uma fome que ninguém explica. Um castigo, dizem, por ter roubado o que não devia.",
+      "No segundo, um tratado de 1890: uma doença rara da pele que a deixa grossa, escamosa, esverdeada. Os pacientes eram isolados. Alguns, diz o autor, perdiam a razão.",
+      {
+        "estilo": "pensamento",
+        "texto": "Lenda ou doença? As escamas estavam mesmo na pele. Mas aqueles olhos..."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Ou então... não era nada disso. Alienígena, talvez. Lagartos do espaço, num hotel perdido na estrada."
+      },
+      "Você ri sozinho. Enola, ao longe, não ri."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "lag_t1",
+        "texto": "Concluir que é uma doença",
+        "destino": "lag_biblio_fim",
+        "efeitos": {
+          "flags": {
+            "lag_teoria": "doenca"
+          }
+        }
+      },
+      {
+        "id": "lag_t2",
+        "texto": "Concluir que é uma lenda de verdade",
+        "destino": "lag_biblio_fim",
+        "efeitos": {
+          "flags": {
+            "lag_teoria": "lenda"
+          }
+        }
+      },
+      {
+        "id": "lag_t3",
+        "texto": "Não concluir nada. Anotar as duas hipóteses.",
+        "destino": "lag_biblio_fim",
+        "efeitos": {
+          "flags": {
+            "lag_teoria": "duvida"
+          }
+        }
+      }
+    ],
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "lag_biblio_fim",
+    "chegada": {
+      "flags": {
+        "lag_biblio": "concluida"
+      },
+      "barras": {
+        "sanidade": 3
+      },
+      "tempo": 40,
+      "tirar_marcadores_texto": [
+        {
+          "area": "biblioteca",
+          "texto": "Pesquisar o Homem Lagarto"
+        }
+      ]
+    },
+    "narrativa": [
+      "Você fecha os livros e devolve às estantes. A dúvida fica com você, mais pesada que os dois volumes juntos.",
+      {
+        "estilo": "sistema",
+        "texto": "Missão concluída: <b>O Que Era o Homem Lagarto</b>."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "inv2_arthur",
+    "chegada": {
+      "flags": {
+        "inv2_estado": "concluida"
+      },
+      "relacoes": {
+        "arthur": {
+          "afeto": 8
+        }
+      },
+      "barras": {
+        "sanidade": 4
+      },
+      "tempo": 25,
+      "tirar_marcadores_texto": [
+        {
+          "area": "biblioteca",
+          "texto": "Arthur tem novidades"
+        }
+      ]
+    },
+    "narrativa": [
+      "Arthur acena para você da mesa de sempre. Há papéis espalhados por todo canto, cada um com uma data e uma anotação.",
+      {
+        "quem": "arthur",
+        "texto": "Eu contei. Dez ocorrências suas, só nestes dias. Dez vezes que algo mexeu nas suas coisas, riu perto de você, fechou uma porta. Sempre em horários e lugares que se repetem."
+      },
+      {
+        "texto": "Ele pausa e olha para o seu ombro enfaixado. “Depois do que aconteceu com você, eu não posso mais chamar isso de coincidência.”",
+        "se": {
+          "flag": "lag_estado",
+          "valor": "venceu"
+        }
+      },
+      {
+        "texto": "Ele pausa e olha para o seu ombro enfaixado. “Depois do que aconteceu com você, eu não posso mais chamar isso de coincidência.”",
+        "se": {
+          "flag": "lag_estado",
+          "valor": "lutou"
+        }
+      },
+      {
+        "texto": "Ele pausa e olha para os seus olhos, que continuam fundos. “Depois do que aconteceu na sala de música, eu não posso mais chamar isso de coincidência.”",
+        "se": [
+          {
+            "flag": "lag_estado",
+            "diferente": "venceu"
+          },
+          {
+            "flag": "lag_estado",
+            "diferente": "lutou"
+          }
+        ]
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu estava errado, Arthur. Você tinha razão. Tem alguém, ou algo, que não quer ser visto. E está se divertindo."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Então somos dois que acreditam. Vamos fazer o seguinte: nada de contar ao Jehan. Ele sabe de tudo e não fala nada. Eu confio mais no Jonathan para isso."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Jonathan? Ele riu de mim no hall."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Eu sei. Mas ele organiza o baile, e o baile reúne todo mundo. Se o responsável existe, vai estar lá. Eu quero ver a cara dele."
+      },
+      {
+        "quem": "thiago",
+        "texto": "No baile, então. Nós dois vamos conversar com o Jonathan."
+      },
+      "Arthur sorri, de verdade pela primeira vez, e guarda os papéis na pasta.",
+      {
+        "estilo": "sistema",
+        "texto": "Missão concluída: <b>Um Passo Mais Perto do Homem Invisível</b>."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "O Baile da Fundação está liberado: vá ao salão de festas quando estiver pronto.",
+        "se": {
+          "flag": "@baile"
+        },
+        "ao_mostrar": {
+          "marcadores": [
+            {
+              "area": "salao_festas",
+              "texto": "Baile da Fundação"
+            }
+          ]
+        }
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "pal_conversa",
+    "chegada": {
+      "flags": {
+        "pal_estado": "livro",
+        "livro_n": 0
+      },
+      "relacoes": {
+        "nosferatu": {
+          "afeto": 6
+        }
+      },
+      "barras": {
+        "sanidade": 2
+      },
+      "tempo": 15,
+      "marcadores": [
+        {
+          "area": "suite14",
+          "texto": "Ler o livro (5 noites)"
+        }
+      ],
+      "tirar_marcadores_texto": [
+        {
+          "area": "biblioteca",
+          "texto": "O Senhor Pálido"
+        }
+      ]
+    },
+    "narrativa": [
+      "O Senhor Pálido está na mesma mesa afastada, de abajur verde. Dessa vez, o livro que ele lê é outro: capa de couro escuro, letras douradas, uma fita vermelha no meio.",
+      {
+        "quem": "nosferatu",
+        "texto": "Thiago. Fico contente que tenha voltado. Raramente alguém volta."
+      },
+      {
+        "quem": "thiago",
+        "texto": "O senhor lê muito."
+      },
+      {
+        "quem": "nosferatu",
+        "texto": "Leio magia. Não a dos palcos. A outra, que dá trabalho e não perdoa quem erra. É um hábito antigo."
+      },
+      {
+        "quem": "nosferatu",
+        "texto": "Você me parece interessante. Perdoe a franqueza. Os humanos que passam por aqui costumam ter medo de tudo, e você parece ter medo só do que merece."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu tenho medo de muita coisa."
+      },
+      {
+        "quem": "nosferatu",
+        "texto": "Tem. Mas escolhe com cuidado. É raro."
+      },
+      "Ele empurra o livro na sua direção, com as pontas dos dedos.",
+      {
+        "quem": "nosferatu",
+        "texto": "Leve este para o quarto. Leia à noite, antes de dormir, uma parte por vez. Não corra. O livro cobra o tempo de quem o lê."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Cobra como?"
+      },
+      {
+        "quem": "nosferatu",
+        "texto": "O sono, em geral. Cinco noites, se você tiver paciência. Depois me conte o que entendeu."
+      },
+      {
+        "item": "livro_palido"
+      },
+      "Ele fecha os olhos, como quem encerra a conversa, e some entre as estantes antes que você consiga falar de novo.",
+      {
+        "estilo": "sistema",
+        "texto": "Missão: <b>O Livro do Senhor Pálido</b>. Leia o livro no quarto, antes de dormir. Cada noite de leitura recupera menos descanso."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "livro_ler",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "livro_n",
+      "casos": {
+        "0": "livro_n1",
+        "1": "livro_n2",
+        "2": "livro_n3",
+        "3": "livro_n4",
+        "4": "livro_n5"
+      },
+      "padrao": "livro_n5",
+      "raiz": true
+    }
+  },
+  {
+    "id": "livro_n1",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "barras": {
+        "cansaco": 50,
+        "sanidade": 4,
+        "vida": 3
+      },
+      "somar": {
+        "livro_n": 1
+      },
+      "flags": {
+        "lugar": "suite14"
+      },
+      "relacoes": {
+        "nosferatu": {
+          "afeto": 1
+        }
+      }
+    },
+    "narrativa": [
+      "A primeira noite: o livro começa pelo silêncio. Não há feitiço nas primeiras páginas. Só um aviso: “Toda magia tem preço, e o preço se paga em tempo.”",
+      "Você lê até os olhos arderem. Antes de dormir, a letra parece se mover de leve, como se respirasse."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "suite14"
+  },
+  {
+    "id": "livro_n2",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "barras": {
+        "cansaco": 50,
+        "sanidade": 4,
+        "vida": 3
+      },
+      "somar": {
+        "livro_n": 1
+      },
+      "flags": {
+        "lugar": "suite14"
+      },
+      "relacoes": {
+        "nosferatu": {
+          "afeto": 1
+        }
+      }
+    },
+    "narrativa": [
+      "A segunda noite fala de nomes. Quem sabe o nome de uma coisa tem um pedaço dela. Você anota três nomes e se arrepende de uma das anotações.",
+      "Ao fechar o livro, um dos nomes escritos no caderno já não está lá."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "suite14"
+  },
+  {
+    "id": "livro_n3",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "barras": {
+        "cansaco": 50,
+        "sanidade": 4,
+        "vida": 3
+      },
+      "somar": {
+        "livro_n": 1
+      },
+      "flags": {
+        "lugar": "suite14"
+      },
+      "relacoes": {
+        "nosferatu": {
+          "afeto": 1
+        }
+      }
+    },
+    "narrativa": [
+      "A terceira noite é sobre símbolos. Círculos, traços, sinais de fechadura. O livro avisa que alguns desenhos só funcionam em certas horas.",
+      "Você copia um, com a mão tremendo, e o abajur pisca duas vezes."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "suite14"
+  },
+  {
+    "id": "livro_n4",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "barras": {
+        "cansaco": 50,
+        "sanidade": 4,
+        "vida": 3
+      },
+      "somar": {
+        "livro_n": 1
+      },
+      "flags": {
+        "lugar": "suite14"
+      },
+      "relacoes": {
+        "nosferatu": {
+          "afeto": 1
+        }
+      }
+    },
+    "narrativa": [
+      "A quarta noite é a mais pesada. Fala do que acontece com quem usa magia sem cuidado: o corpo se acostuma com o frio, a memória se solta, a sombra se desprende.",
+      "Você não consegue dormir logo. Fica escutando o hotel respirar."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "suite14"
+  },
+  {
+    "id": "livro_n5",
+    "chegada": {
+      "ate": "07:00",
+      "sono": true,
+      "barras": {
+        "cansaco": 50,
+        "sanidade": 8,
+        "vida": 3
+      },
+      "somar": {
+        "livro_n": 1
+      },
+      "flags": {
+        "lugar": "suite14",
+        "pal_estado": "concluido"
+      },
+      "relacoes": {
+        "nosferatu": {
+          "afeto": 1
+        }
+      },
+      "habilidades": [
+        "nocoes_magia"
+      ],
+      "tirar_marcadores_texto": [
+        {
+          "area": "suite14",
+          "texto": "Ler o livro (5 noites)"
+        }
+      ]
+    },
+    "narrativa": [
+      "A quinta noite explica por que o livro cobra o sono: a magia que se lê precisa ser sonhada para ficar. Quando você fecha a última página, a sua cabeça está estranhamente clara.",
+      "Você entende, por um segundo, o que o Senhor Pálido queria dizer.",
+      {
+        "estilo": "sistema",
+        "texto": "Você aprendeu <b>Noções de Magia</b>. Volte a falar com o Senhor Pálido, se ele ainda estiver por aí."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "suite14"
+  },
+  {
+    "id": "pal_fim",
+    "chegada": {
+      "flags": {
+        "pal_fim": true
+      },
+      "relacoes": {
+        "nosferatu": {
+          "afeto": 8
+        }
+      },
+      "barras": {
+        "sanidade": 3
+      },
+      "tempo": 12
+    },
+    "narrativa": [
+      "O Senhor Pálido ainda está na mesa. Ele ergue os olhos assim que você se aproxima.",
+      {
+        "quem": "nosferatu",
+        "texto": "Terminou. Dá para perceber. Você está mais calado."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Entendi parte. Não sei se quero entender o resto."
+      },
+      {
+        "quem": "nosferatu",
+        "texto": "É a resposta certa. Guarde o livro, ele é seu agora. E, quando quiser conversar sobre o que leu, saiba que raramente estarei de passagem."
+      },
+      "Ele sorri de lado, só com a boca, e volta a ler.",
+      {
+        "estilo": "sistema",
+        "texto": "Missão concluída: <b>O Livro do Senhor Pálido</b>."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "a_jehan",
+    "chegada": {
+      "flags": {
+        "caminho_escolhido": true,
+        "caminho": "A"
+      },
+      "relacoes": {
+        "jehan": {
+          "afeto": 3
+        }
+      },
+      "tempo": 10,
+      "tirar_marcadores_texto": [
+        {
+          "area": "bar",
+          "texto": "Conversar com Jehan (à noite)"
+        },
+        {
+          "area": "biblioteca",
+          "texto": "Investigar a história de Elisabeta"
+        }
+      ]
+    },
+    "narrativa": [
+      "O bar está quase vazio. Jehan sorri de leve quando você se senta no balcão, e já desliza o copo de sempre.",
+      {
+        "quem": "jehan",
+        "texto": "Você tem cara de quem quer perguntar uma coisa grande. Tente começar pelo pedacinho."
+      },
+      {
+        "quem": "thiago",
+        "texto": "A mulher do piano pediu desculpas. Ela se chama Elisabeta. Eu queria entender quem ela era."
+      },
+      {
+        "texto": "Ele para de enxugar o copo. “Depois do Homem Lagarto, eu devo muita explicação a você. Mais do que devo a qualquer hóspede.”",
+        "se": {
+          "flag": "lag_estado",
+          "valor": "venceu"
+        }
+      },
+      {
+        "texto": "Ele para de enxugar o copo. “Depois do que você viu no corredor, eu devo muita explicação a você.”",
+        "se": {
+          "flag": "lag_estado",
+          "valor": "lutou"
+        }
+      },
+      {
+        "texto": "Ele para de enxugar o copo e demora a falar.",
+        "se": [
+          {
+            "flag": "lag_estado",
+            "diferente": "venceu"
+          },
+          {
+            "flag": "lag_estado",
+            "diferente": "lutou"
+          }
+        ]
+      },
+      {
+        "quem": "jehan",
+        "texto": "Eu não conto essa história no balcão. A biblioteca está vazia a esta hora. Vem."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "a_biblioteca",
+    "fundo": "bar"
+  },
+  {
+    "id": "a_biblioteca",
+    "chegada": {
+      "relacoes": {
+        "enola": {
+          "afeto": -6
+        },
+        "jehan": {
+          "afeto": 6
+        }
+      },
+      "barras": {
+        "sanidade": -3
+      },
+      "tempo": 45
+    },
+    "narrativa": [
+      "A biblioteca está iluminada só por duas lâmpadas verdes. Enola está atrás do balcão, com a coruja no ombro, e franze o rosto assim que vê Jehan entrar com você.",
+      {
+        "quem": "enola",
+        "texto": "Senhor Jehan. Isto é uma biblioteca, não um confessionário."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Eu sei. Eu só preciso de uma mesa."
+      },
+      {
+        "quem": "enola",
+        "texto": "Aquilo que o senhor vai contar não deveria ser contado. Mas a casa tem regras que o senhor conhece melhor do que eu."
+      },
+      "Ela volta a arrumar livros, de costas, em um silêncio que corta. Você sente que acaba de gastar um pouco da simpatia dela.",
+      "Jehan escolhe a mesa mais afastada, olha em volta, e baixa a voz.",
+      {
+        "quem": "jehan",
+        "texto": "O hotel é mais velho do que parece. Antes de ter esse nome, era uma casa de campo de uma família que organizava saraus. Eles recebiam gente de toda parte. Músicos, poetas, forasteiros."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Numa dessas noites, chegou uma pianista. Ninguém sabia de onde. Ela tocou por três horas e ninguém conseguiu aplaudir, de tanto que a música prendia."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Dizem que o dono da casa nunca mais foi o mesmo. Que ela ficou. Que ainda toca. Que a música nunca termina."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Mas ela é filha... não, mãe da Mavis. É o que a Mavis disse. E a esposa do fundador morreu há anos."
+      },
+      "Jehan sorri, mas o sorriso não chega aos olhos.",
+      {
+        "quem": "jehan",
+        "texto": "Eu contei o que eu sei. O resto são versões. Tem versão em que ela é a esposa. Tem versão em que não. Se você quer a versão da Mavis, pergunte a ela. Quem sabe, no Baile."
+      },
+      {
+        "quem": "jehan",
+        "texto": "Mas pergunte devagar. Algumas perguntas são feridas que cicatrizaram mal."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "a_fim",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "a_fim",
+    "chegada": {
+      "flags": {
+        "pos_estado": "concluido",
+        "caminho_fim": "A",
+        "baile_mavis_a": true,
+        "lugar": "suite14"
+      },
+      "tempo": 15
+    },
+    "narrativa": [
+      "Jehan fecha o caderno de pensamentos que não escreveu e acompanha você até a porta da suíte.",
+      {
+        "quem": "jehan",
+        "texto": "Tome cuidado com o que faz com isso. Quando as pessoas aqui sabem demais, começam a procurar demais."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "A história tinha buracos. Mas os buracos têm formato. Talvez o formato diga mais do que a história."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Missão concluída: <b>Os Contos de Jehan</b> (Caminho A). No Baile, você poderá conversar com Mavis sobre a mãe dela."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "O Baile da Fundação está liberado: vá ao salão de festas quando estiver pronto.",
+        "se": {
+          "flag": "@baile"
+        },
+        "ao_mostrar": {
+          "marcadores": [
+            {
+              "area": "salao_festas",
+              "texto": "Baile da Fundação"
+            }
+          ]
+        }
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "suite14"
+  },
+  {
+    "id": "b_enola",
+    "narrativa": [
+      "Você chega à biblioteca com uma pergunta guardada no bolso. Enola está atrás do balcão, com a coruja no ombro e um livro aberto.",
+      {
+        "quem": "thiago",
+        "texto": "Enola, eu queria perguntar uma coisa. Sobre a mulher do quadro, no hall. A esposa do fundador."
+      },
+      "O livro cai da mão dela e bate na mesa com um estalo seco. A coruja arregala os olhos.",
+      {
+        "quem": "enola",
+        "texto": "Por que o senhor pergunta sobre essa mulher?"
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "b_curioso",
+        "texto": "“Curiosidade. O retrato me chamou a atenção.”",
+        "destino": "b_enola2",
+        "efeitos": {
+          "flags": {
+            "b_vi": false
+          }
+        }
+      },
+      {
+        "id": "b_vi",
+        "texto": "“Eu a vi. Tocando piano, na sala de música.”",
+        "destino": "b_enola2",
+        "efeitos": {
+          "flags": {
+            "b_vi": true
+          },
+          "barras": {
+            "suspeita": 3
+          }
+        }
+      }
+    ],
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "b_enola2",
+    "chegada": {
+      "flags": {
+        "caminho_escolhido": true,
+        "caminho": "B"
+      },
+      "relacoes": {
+        "enola": {
+          "afeto": -6
+        }
+      },
+      "tempo": 12,
+      "tirar_marcadores_texto": [
+        {
+          "area": "biblioteca",
+          "texto": "Investigar a história de Elisabeta"
+        },
+        {
+          "area": "bar",
+          "texto": "Conversar com Jehan (à noite)"
+        }
+      ]
+    },
+    "narrativa": [
+      {
+        "texto": "Enola dá um passo atrás. “O senhor não deveria. Quem vê aquela mulher, não esquece. E quem esquece, às vezes, é melhor.”",
+        "se": {
+          "flag": "b_vi",
+          "valor": true
+        }
+      },
+      {
+        "texto": "Ela aperta os lábios. “Curiosidade é como a fome, senhor Thiago. Dá a impressão de que se resolve comendo.”",
+        "se": {
+          "flag": "b_vi",
+          "diferente": true
+        }
+      },
+      {
+        "quem": "enola",
+        "texto": "Aquilo que está nos livros foi escrito por quem não viu o que aconteceu. Eu vi. E tenho razões para preferir que essa história durma."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Mas ela me procurou. Ela pediu desculpas. Eu quero saber por quê."
+      },
+      "Enola olha para a coruja, como quem pede opinião, e a coruja, claro, não responde.",
+      {
+        "quem": "enola",
+        "texto": "O senhor é teimoso. Eu aprendi a não discutir com gente teimosa. Segunda prateleira à esquerda, atrás do mapa. Um livro de capa cinza, sem título."
+      },
+      {
+        "quem": "enola",
+        "texto": "Eu não vou ajudar a ler. Também não vou impedir."
+      },
+      {
+        "item": "livro_elisabeta"
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "b_leitura",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "b_leitura",
+    "chegada": {
+      "barras": {
+        "sanidade": -4
+      },
+      "tempo": 90
+    },
+    "narrativa": [
+      "Você leva o livro cinza para uma mesa no fundo e lê por horas, até a luz amarelar nas janelas.",
+      "É uma crônica da casa antiga: um sarau, uma pianista, um casamento com o dono da casa, uma morte que ninguém descreve. Os parágrafos mais importantes foram riscados com tinta preta.",
+      "Mas sobram detalhes. Um nome, Elisabeta. Uma filha adotiva. Um retrato pintado dois dias antes da morte.",
+      {
+        "estilo": "pensamento",
+        "texto": "Mavis disse que aquela mulher era a mãe dela. Mas a esposa do fundador morreu há tantos anos que Mavis, pelo rosto, nem deveria ter conhecido."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Ou ela conheceu. E eu não sei de quanto tempo estamos falando."
+      },
+      "Você junta o que já ouviu antes: a risada de Jonathan, o silêncio de Jehan, o rosto assustado de Elisabeta no quadro. Nada fecha. Tudo se parece.",
+      "Alguém precisa explicar isso. Duas pessoas conhecem o assunto de verdade."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "b_jon",
+        "texto": "Ir atrás de Jonathan, no refeitório",
+        "destino": "b_jonathan"
+      },
+      {
+        "id": "b_mav",
+        "texto": "Ir atrás de Mavis, nos corredores",
+        "destino": "b_mavis"
+      }
+    ],
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "b_jonathan",
+    "narrativa": [
+      "Jonathan está sentado numa mesa do refeitório, conferindo uma lista. Quando vê o livro cinza nas suas mãos, o lápis para no ar.",
+      {
+        "quem": "thiago",
+        "texto": "Jonathan, tem alguma coisa errada nessa história. A esposa do fundador, a Mavis, a Elisabeta. Eu queria que você me explicasse."
+      },
+      "Ele fecha a lista, devagar, e olha em volta antes de responder.",
+      {
+        "quem": "jonathan",
+        "texto": "Você é esperto. Mais esperto do que eu imaginei quando te dei a lista de convites."
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Eu posso te explicar. Mas essa explicação tem um preço, Thiago. Você teria que ficar do meu lado no que vier depois do Baile."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Do seu lado em quê?"
+      },
+      {
+        "quem": "jonathan",
+        "texto": "Você vai entender. Quando entender, vai agradecer."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "opcoes": [
+      {
+        "id": "b_jon_sim",
+        "texto": "“Estou com você.”",
+        "destino": "b_jon_fim",
+        "efeitos": {
+          "flags": {
+            "b_lado": "jonathan",
+            "jon_aliado": true
+          },
+          "relacoes": {
+            "jonathan": {
+              "afeto": 10
+            }
+          }
+        }
+      },
+      {
+        "id": "b_jon_nao",
+        "texto": "“Preciso pensar. Não aceito nada às cegas.”",
+        "destino": "b_jon_fim",
+        "efeitos": {
+          "flags": {
+            "b_lado": "jonathan",
+            "jon_aliado": false
+          },
+          "relacoes": {
+            "jonathan": {
+              "afeto": -2
+            }
+          }
+        }
+      }
+    ],
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "b_jon_fim",
+    "chegada": {
+      "tempo": 10,
+      "barras": {
+        "suspeita": 3
+      }
+    },
+    "narrativa": [
+      "Jonathan sorri e dá um tapinha na sua mão sobre a mesa.",
+      {
+        "quem": "jonathan",
+        "texto": "Pense. Você tem até o Baile. A história de Elisabeta é mais feia do que o livro conta. E vai ficar mais feia, se você continuar fuçando sozinho."
+      },
+      "Quando ele se levanta, deixa na mesa um guardanapo dobrado. Dentro, escrito à pressa: “Pergunte ao Arthur sobre as cartas.”",
+      {
+        "estilo": "pensamento",
+        "texto": "Ele me mandou para o Arthur. Será por quê?"
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "b_arthur_ponte",
+    "fundo": "refeitorio"
+  },
+  {
+    "id": "b_mavis",
+    "chegada": {
+      "flags": {
+        "b_lado": "mavis"
+      },
+      "relacoes": {
+        "mavis": {
+          "afeto": -10
+        }
+      },
+      "barras": {
+        "sanidade": -6
+      },
+      "tempo": 12
+    },
+    "narrativa": [
+      "Você encontra Mavis ajeitando guirlandas num corredor. Ela sorri ao vê-lo, mas o sorriso some quando repara no livro cinza.",
+      {
+        "quem": "thiago",
+        "texto": "Mavis, desculpa. Eu preciso perguntar. A mulher do quadro, a esposa do fundador, você disse que era sua mãe. Isso não bate com o que está no livro."
+      },
+      "Ela desce da escada, devagar, e o silêncio entre vocês dura mais do que deveria.",
+      {
+        "quem": "mavis",
+        "texto": "Você leu isso. Sem me perguntar. Atrás de mim."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Eu... achei que você não ia querer falar."
+      },
+      {
+        "quem": "mavis",
+        "texto": "Você achou. Então não perguntou. Minha mãe não é um tema para livros, Thiago. É a minha mãe."
+      },
+      "Os olhos dela brilham, e ela se vira para esconder.",
+      {
+        "quem": "mavis",
+        "texto": "Eu preciso trabalhar."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "b_arthur_ponte",
+    "fundo": "corredor"
+  },
+  {
+    "id": "b_arthur_ponte",
+    "chegada": {
+      "flags": {
+        "b_arthur_aberto": true,
+        "lugar": "corredores"
+      },
+      "marcadores": [
+        {
+          "area": "biblioteca",
+          "texto": "Contar a Arthur"
+        }
+      ]
+    },
+    "narrativa": [
+      "Você sabe que não vai conseguir lidar com isso sozinho. Um nome vem à cabeça: Arthur. Ele passa as tardes lendo a história do hotel, e talvez já tenha chegado a esse ponto.",
+      {
+        "estilo": "sistema",
+        "texto": "Uma nova pista: fale com <b>Arthur</b> na biblioteca.",
+        "se": {
+          "flag": "arthur_estado",
+          "valor": "concluido"
+        }
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Arthur ainda não está disponível. Continue explorando o hotel: quando acontecerem mais coisas estranhas, ele vai procurar você.",
+        "se": {
+          "flag": "arthur_estado",
+          "diferente": "concluido"
+        }
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_corredores",
+    "fundo": "corredor"
+  },
+  {
+    "id": "b_arthur",
+    "chegada": {
+      "flags": {
+        "b_noite": true
+      },
+      "relacoes": {
+        "arthur": {
+          "afeto": 6
+        }
+      },
+      "tempo": 20,
+      "tirar_marcadores_texto": [
+        {
+          "area": "biblioteca",
+          "texto": "Contar a Arthur"
+        }
+      ]
+    },
+    "narrativa": [
+      "Arthur ergue os olhos quando você se aproxima com o livro cinza. Os óculos escorregam, e ele os empurra de volta.",
+      {
+        "quem": "arthur",
+        "texto": "Você achou. Eu procurei esse livro por três semanas."
+      },
+      {
+        "quem": "thiago",
+        "texto": "A Enola me deu. Disse que não ia ajudar a ler, nem impedir."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Ela ajuda mais do que parece."
+      },
+      {
+        "texto": "“O Homem Invisível já fez de tudo para me atrapalhar enquanto eu lia,” você conta. Arthur concorda, sem surpresa: “As ocorrências estão ligadas. Eu tenho mapas.”",
+        "se": {
+          "flag": "fragmentos",
+          "min": 8
+        }
+      },
+      {
+        "texto": "Você conta o que o Homem Lagarto fez, e Arthur anota tudo, num ritmo que mal o deixa respirar.",
+        "se": {
+          "flag": "lag_estado",
+          "valor": "venceu"
+        }
+      },
+      {
+        "texto": "Você conta o que o Homem Lagarto fez, e Arthur anota tudo, num ritmo que mal o deixa respirar.",
+        "se": {
+          "flag": "lag_estado",
+          "valor": "lutou"
+        }
+      },
+      {
+        "quem": "arthur",
+        "texto": "Eu quero ver a sala de música com meus olhos. Hoje à noite, depois da meia-noite. Eu bato na sua porta."
+      },
+      {
+        "quem": "thiago",
+        "texto": "É proibido sair depois das dez."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Eu sei. Mas é a única hora em que ela toca de verdade."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Arthur vai bater na sua porta à noite. Quando você dormir, ele chamará."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "biblioteca_base",
+    "fundo": "biblioteca"
+  },
+  {
+    "id": "dormir_gate3",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "b_noite",
+      "casos": {
+        "true": "b_bate_hora"
+      },
+      "padrao": "dormiu",
+      "raiz": true
+    }
+  },
+  {
+    "id": "b_bate_hora",
+    "tipo": "condicional",
+    "dados": {
+      "flag": "@hora",
+      "casos": {
+        "0": "b_bate_madrugada",
+        "1": "b_bate_madrugada",
+        "2": "b_bate_madrugada",
+        "3": "b_bate_madrugada",
+        "4": "b_bate_madrugada",
+        "5": "b_bate_madrugada"
+      },
+      "padrao": "b_bate",
+      "raiz": true
+    }
+  },
+  {
+    "id": "b_bate",
+    "chegada": {
+      "ate": "00:20",
+      "sono": true,
+      "barras": {
+        "cansaco": 30
+      },
+      "flags": {
+        "b_noite": false,
+        "lugar": "corredores"
+      }
+    },
+    "narrativa": [
+      "Algo desperta você no meio da noite. Pouco depois da meia-noite, o corredor é um poço escuro.",
+      "Duas batidas leves na porta. Depois uma. Depois, baixinho:",
+      {
+        "quem": "arthur",
+        "texto": "Thiago. Sou eu. Vamos."
+      },
+      "Arthur está do outro lado, de casaco, com uma lanterna pequena e os óculos tortos. Ele tem o rosto de quem não dormiu.",
+      {
+        "quem": "arthur",
+        "texto": "Pode vir, tem uma regra para andar à noite: não faça barulho e não olhe para as armaduras."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "b_musica",
+    "fundo": "suite14"
+  },
+  {
+    "id": "b_bate_madrugada",
+    "chegada": {
+      "tempo": 25,
+      "sono": true,
+      "barras": {
+        "cansaco": 20
+      },
+      "flags": {
+        "b_noite": false,
+        "lugar": "corredores"
+      }
+    },
+    "narrativa": [
+      "Algo desperta você no meio da noite. Pouco depois da meia-noite, o corredor é um poço escuro.",
+      "Duas batidas leves na porta. Depois uma. Depois, baixinho:",
+      {
+        "quem": "arthur",
+        "texto": "Thiago. Sou eu. Vamos."
+      },
+      "Arthur está do outro lado, de casaco, com uma lanterna pequena e os óculos tortos. Ele tem o rosto de quem não dormiu.",
+      {
+        "quem": "arthur",
+        "texto": "Pode vir, tem uma regra para andar à noite: não faça barulho e não olhe para as armaduras."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "b_musica",
+    "fundo": "suite14"
+  },
+  {
+    "id": "b_musica",
+    "chegada": {
+      "barras": {
+        "sanidade": -12,
+        "vida": -10
+      },
+      "flags": {
+        "confronto_eli": true
+      },
+      "tempo": 12
+    },
+    "narrativa": [
+      "A sala de música está banhada de lua. No piano, sentada de costas, Elisabeta toca uma melodia lenta, que desmancha no meio.",
+      "Arthur segura o seu braço e faz sinal de silêncio. Os dois ficam parados na porta, até ela parar de tocar.",
+      {
+        "quem": "elisabeta",
+        "texto": "Vocês vieram. Eu senti."
+      },
+      "Ela se vira devagar. Está pálida, de olhos baixos, o vestido branco fora de lugar.",
+      {
+        "quem": "thiago",
+        "texto": "Elisabeta. Eu li o livro. Eu quero entender. Quem era você? O que você era para a Mavis?"
+      },
+      {
+        "quem": "elisabeta",
+        "texto": "Para a Mavis eu era... eu era..."
+      },
+      "A palavra não vem. Ela leva a mão ao pescoço, como se procurasse algo que está lá e não está.",
+      {
+        "quem": "arthur",
+        "texto": "O seu nome está num retrato no hall. Há uma data. Dois dias depois, o registro acaba."
+      },
+      {
+        "quem": "elisabeta",
+        "texto": "Não. Não. Dois dias depois. Ninguém registra o que dói."
+      },
+      "O piano toca uma nota grave, sozinho. A lâmpada do corredor estala. O rosto dela cai e se repuxa, o cinza sobe pelo pescoço.",
+      {
+        "quem": "mulher_piano_medo",
+        "texto": "NÃO ME PERGUNTEM ISSO."
+      },
+      "As teclas explodem em uma dissonância. A porta atrás de vocês bate. O vidro de uma vitrine se parte.",
+      {
+        "quem": "arthur",
+        "texto": "Corre! AGORA!"
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "b_fuga",
+    "fundo": "sala_musica"
+  },
+  {
+    "id": "b_fuga",
+    "chegada": {
+      "tempo": 15
+    },
+    "narrativa": [
+      "Vocês correm. O corredor é um túnel de vermelho. O piano segue atrás, uma nota por passo, como um cachorro seguindo o cheiro.",
+      "Arthur puxa você por uma porta lateral, desce uma escada de serviço e fecha o ferrolho de uma porta de ferro: o estoque.",
+      "Dentro, o cheiro de poeira e de papel velho. Caixas empilhadas até o teto, armaduras desmontadas, um espelho coberto por um lençol.",
+      "Vocês se agacham atrás de uma pilha de baús. Do outro lado da porta, passos leves. Uma respiração. Algo roça no ferro.",
+      "Ela fica ali um longo tempo. Depois, a música se afasta, devagar, nota por nota."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "b_estoque",
+    "fundo": "estoque"
+  },
+  {
+    "id": "b_estoque",
+    "chegada": {
+      "ate": "06:30",
+      "flags": {
+        "pos_estado": "concluido",
+        "caminho_fim": "B",
+        "lugar": "suite14"
+      },
+      "relacoes": {
+        "arthur": {
+          "afeto": 10
+        }
+      },
+      "barras": {
+        "sanidade": -5,
+        "cansaco": -10
+      }
+    },
+    "narrativa": [
+      "Arthur senta no chão e tira os óculos. As mãos dele tremem.",
+      {
+        "quem": "arthur",
+        "texto": "Ela não é um fantasma, Thiago. Não do jeito que a gente imagina. É uma memória que ficou presa e perdeu a saída."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Ela não queria nos machucar. Quase."
+      },
+      {
+        "quem": "arthur",
+        "texto": "Quase é a palavra mais perigosa que existe."
+      },
+      "Vocês ficam ali até o céu clarear por uma fresta no alto. Arthur se levanta primeiro e ajuda você.",
+      {
+        "quem": "arthur",
+        "texto": "Eu volto para a biblioteca. Vou ler o livro de novo. Ela falou de um colar. E tem alguém que sabe muito sobre isso: Jonathan."
+      },
+      {
+        "estilo": "pensamento",
+        "texto": "Jonathan. Outra vez."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "Missão concluída: <b>A Sala de Música</b> (Caminho B). Arthur e você têm algo em comum agora: um segredo."
+      },
+      {
+        "estilo": "sistema",
+        "texto": "O Baile da Fundação está liberado: vá ao salão de festas quando estiver pronto.",
+        "se": {
+          "flag": "@baile"
+        },
+        "ao_mostrar": {
+          "marcadores": [
+            {
+              "area": "salao_festas",
+              "texto": "Baile da Fundação"
+            }
+          ]
+        }
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_suite14",
+    "fundo": "estoque"
+  },
+  {
+    "id": "baile_entrada",
+    "chegada": {
+      "flags": {
+        "baile_inicio": true
+      },
+      "tempo": 5
+    },
+    "narrativa": [
+      "O salão de festas brilha. Lustres, fitas, uma orquestra sem músicos visíveis. O som de passos e de risos vai tomando todo o ar.",
+      "Você respira fundo. Faz sentido que tudo comece e termine aqui.",
+      {
+        "estilo": "sistema",
+        "texto": "Fim da parte jogável desta versão. O <b>Baile da Fundação</b> será o próximo capítulo. Obrigado por testar! Seu progresso foi salvo."
+      }
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "hub_salao_festas",
+    "fundo": "salao_festas"
   }
 ]

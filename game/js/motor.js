@@ -369,6 +369,7 @@ function mostrarCena(id, restaurando = false) {
   if (cena.tipo === "espelho") return mostrarEspelho(cena);
   if (cena.tipo === "tracos") return mostrarTracos(cena);
   if (cena.tipo === "selecao") return mostrarSelecao(cena);
+  if (cena.tipo === "combate") return mostrarCombate(cena);
 
   // sorteio: escolhe um destino ao acaso (opção = id simples ou {destino, efeitos})
   if (cena.tipo === "sorteio") {
@@ -384,7 +385,7 @@ function mostrarCena(id, restaurando = false) {
   }
   // condicional: decide o destino sozinha olhando uma flag
   if (cena.tipo === "condicional") {
-    const valor = estado.flags[cena.dados.flag];
+    const valor = valorDeFlag(estado, cena.dados.flag);      // aceita flags virtuais (@baile, @hora...)
     mostrarCena(cena.dados.casos[valor] || cena.dados.padrao);
     return;
   }
@@ -892,4 +893,121 @@ function liberarPorRegras() {
     estado.flags.liberou_jehan = true;
     estado.marcadores.push({ area: "bar", texto: "O barman (à noite)" });
   }
+}
+
+
+/* ============================================================
+ * COMBATE  (cena do tipo "combate")
+ * ------------------------------------------------------------
+ * dados.combate = {
+ *   inimigo: { nome, retrato (id em PERSONAGENS), vida, dano: [min, max] },
+ *   intro: "texto",
+ *   roteiro: "derrota"  -> luta impossível de vencer: acaba depois de N rodadas (rodadas_derrota)
+ *            "livre"    -> luta normal: vence quem zerar a vida do outro
+ *   piso: vida mínima do Thiago (ele nunca morre na luta, no máximo fica no chão)
+ *   vitoria, derrota, fuga (opcional): cenas de destino
+ * }
+ * Ações: Atacar (Força), Defender, Esquivar (Agilidade), Recuar (só se houver "fuga").
+ * Virtudes e vícios mudam um pouco o resultado: Corajoso, Prudente, Covarde, Impulsivo, Determinado.
+ * ============================================================ */
+function mostrarCombate(cena) {
+  const palco = document.getElementById("palco");
+  const cb = cena.dados.combate;
+  const ini = cb.inimigo;
+  const virtudes = (estado.tracos && estado.tracos.virtudes) || [];
+  const vicio = estado.tracos && estado.tracos.vicio;
+  const piso = cb.piso !== undefined ? cb.piso : 5;
+  const ehRoteiro = cb.roteiro === "derrota";
+  let vidaIni = ini.vida, rodada = 0, fim = null;
+  let log = [cb.intro || ""];
+  const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+  const chance = p => Math.random() * 100 < p;
+
+  function dano() {   // dano do Thiago
+    let d = rnd(9, 15) + Math.floor((estado.forca - 50) / 10) * 2;
+    if (virtudes.includes("corajoso")) d += 3;
+    if (virtudes.includes("determinado")) d += 1;
+    if (vicio === "covarde") d -= 3;
+    if (vicio === "impulsivo") d += 2;
+    return Math.max(4, d);
+  }
+  function danoRecebido(defendeu) {
+    let d = rnd(ini.dano[0], ini.dano[1]);
+    if (defendeu) d = Math.round(d * (virtudes.includes("prudente") ? 0.3 : 0.5));
+    if (vicio === "impulsivo") d += 2;
+    return d;
+  }
+  const retrato = (PERSONAGENS[ini.retrato] && PERSONAGENS[ini.retrato].retrato) || "";
+
+  function desenhar() {
+    const pctIni = Math.max(0, Math.round(100 * vidaIni / ini.vida));
+    const verIni = ehRoteiro ? 100 : pctIni;      // no combate impossível a barra dele quase não desce
+    const linhas = log.slice(-4).map(l => `<p>${l}</p>`).join("");
+    let botoes = "";
+    if (!fim) {
+      botoes = `<button class="escolha" data-acao="atacar">⚔ Atacar</button>
+                <button class="escolha" data-acao="defender">🛡 Defender (recebe menos dano)</button>
+                <button class="escolha" data-acao="esquivar">💨 Esquivar (depende da Agilidade)</button>
+                ${cb.fuga ? `<button class="escolha" data-acao="recuar">↩ Recuar</button>` : ""}`;
+    } else {
+      botoes = `<button class="escolha" data-acao="seguir">continuar ▼</button>`;
+    }
+    palco.innerHTML = `<div class="cena combate">
+      <div class="cb-topo">
+        ${retrato ? `<img class="cb-retrato" src="${retrato}" alt="${ini.nome}">` : ""}
+        <div class="cb-info">
+          <b>${ini.nome}</b>
+          <div class="cb-barra inimigo"><i style="width:${verIni}%"></i></div>
+          <span class="cb-rotulo">Você: ${estado.vida} de vida</span>
+          <div class="cb-barra voce"><i style="width:${estado.vida}%"></i></div>
+        </div>
+      </div>
+      <div class="cb-log">${linhas}</div>
+      <div class="escolhas">${botoes}</div>
+    </div>`;
+    palco.querySelectorAll(".escolha").forEach(b => b.onclick = () => acao(b.dataset.acao));
+  }
+
+  function acao(tipo) {
+    if (tipo === "seguir") return mostrarCena(fim);
+    rodada++;
+    let defendeu = false, esquivou = false;
+    avancarTempo(estado, 1);
+    if (tipo === "atacar") {
+      const chanceAcerto = 62 + (estado.agilidade - 50) / 2 + (estado.sorte - 50) / 5;
+      if (chance(chanceAcerto)) {
+        const d = dano();
+        vidaIni -= ehRoteiro ? 0 : d;
+        log.push(ehRoteiro ? `Seu golpe acerta, mas mal arranha as escamas dele.` : `Você acerta o golpe (-${d}).`);
+      } else log.push("Seu golpe pega no ar.");
+    } else if (tipo === "defender") {
+      defendeu = true;
+      log.push("Você levanta os braços e se encolhe, esperando o impacto.");
+    } else if (tipo === "esquivar") {
+      const chanceEsq = 42 + (estado.agilidade - 50) + (estado.sorte - 50) / 5;
+      if (chance(chanceEsq)) { esquivou = true; log.push("Você se joga de lado. O golpe passa raspando."); }
+      else log.push("Você tenta desviar, mas tropeça.");
+    } else if (tipo === "recuar") {
+      if (chance(45 + (estado.agilidade - 50))) { fim = cb.fuga; log.push("Você recua e consegue escapar."); return desenhar(); }
+      log.push("Você tenta recuar, mas ele corta o seu caminho.");
+    }
+    // vitória?
+    if (!ehRoteiro && vidaIni <= 0) { log.push(`${ini.nome} cambaleia e cai.`); fim = cb.vitoria; return finalizar(); }
+    // contra-ataque
+    if (!esquivou) {
+      const d = danoRecebido(defendeu);
+      const novo = Math.max(piso, estado.vida - d);
+      const real = estado.vida - novo;
+      estado.vida = novo;
+      estado.sanidade = Math.max(0, estado.sanidade - 1);
+      log.push(real > 0 ? `${ini.nome} acerta você (-${real}).` : `${ini.nome} avança, mas você já está no limite.`);
+    }
+    if (ehRoteiro && rodada >= (cb.rodadas_derrota || 3)) { fim = cb.derrota; return finalizar(); }
+    if (estado.vida <= piso) { fim = cb.derrota; return finalizar(); }
+    pintarStatus(); desenhar();
+  }
+  function finalizar() { pintarStatus(); desenhar(); }
+
+  pintarStatus();
+  desenhar();
 }

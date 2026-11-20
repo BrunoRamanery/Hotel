@@ -38,6 +38,8 @@ const PERSONAGENS = {
   // ---- Personagens das missões da Parte 2 (retratos já prontos, ainda sem cenas) ----
   // Lily e Nix: os esboços estão em img/retratos/lily.jpg e nix.jpg, mas só entram no jogo
   // (retrato preenchido aqui em cima) quando elas puderem ser vistas.
+  lagarto:  { nome: "Homem Lagarto", retrato: "img/retratos/homem_lagarto.jpg" },
+  lagarto_calmo: { nome: "Heitor", retrato: "img/retratos/homem_lagarto_calmo.jpg" },
   enola:    { nome: "Enola",    retrato: "img/retratos/enola.jpg" },
   nosferatu:{ nome: "Senhor Pálido",retrato: "img/retratos/nosferatu.jpg" },
   homem_invisivel: { nome: "Homem das Faixas", retrato: "img/retratos/homem_invisivel.jpg" },

@@ -92,6 +92,10 @@ function valorDeFlag(estado, nome) {
     return estado.flags.vestido_estado === "concluido" && estado.flags.jehan_estado === undefined
         && (estado.flags.arthur_estado === "concluido" || (estado.flags.fragmentos || 0) < 6);
   }
+  // @baile -> Homem Invisível (2ª parte) concluído E um caminho do pedido de desculpa concluído (A ou B)
+  if (nome === "@baile") {
+    return estado.flags.inv2_estado === "concluida" && estado.flags.pos_estado === "concluido";
+  }
   // @dia_passou:X -> já virou o dia depois do dia guardado na flag X (precisa dormir/virar o dia)
   if (nome.startsWith("@dia_passou:")) {
     const d = estado.flags[nome.slice(12)];
@@ -197,6 +201,9 @@ function aplicarEfeitos(estado, ef) {
   (ef.mapa || []).forEach(id => { if (!estado.mapa.includes(id)) estado.mapa.push(id); });
   (ef.marcadores || []).forEach(m => {
     if (!estado.marcadores.some(x => x.area === m.area && x.texto === m.texto)) estado.marcadores.push(m);
+  });
+  (ef.tirar_marcadores_texto || []).forEach(m => {     // tira só o marcador com aquele texto naquela área
+    estado.marcadores = estado.marcadores.filter(x => !(x.area === m.area && x.texto === m.texto));
   });
   (ef.tirar_marcadores || []).forEach(area => {
     estado.marcadores = estado.marcadores.filter(x => x.area !== area);
