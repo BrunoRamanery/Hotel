@@ -182,6 +182,11 @@ function desenharPainel(qual) {
 
   el.innerHTML = `<div class="painel-topo"><h3>${titulo}</h3>
     <button class="painel-fechar" onclick="fecharPainel()">fechar ✕</button></div>${corpo}`;
+  el.querySelectorAll(".lista-social li").forEach(li => li.onclick = () => {
+    const ja = li.classList.contains("aberto");
+    el.querySelectorAll(".lista-social li.aberto").forEach(x => x.classList.remove("aberto"));
+    if (!ja) li.classList.add("aberto");
+  });
   el.classList.remove("oculto");
 }
 

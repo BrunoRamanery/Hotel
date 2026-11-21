@@ -60,14 +60,12 @@ async function iniciar() {
   // Interruptor dos botões de save. No Dia 1 (demo curta) ficam escondidos;
   // na atualização do save é só trocar para true.
   const MOSTRAR_SAVE = true;
-  for (const id of ["btn-salvar", "btn-continuar", "btn-exportar", "btn-importar"]) {
+  for (const id of ["btn-salvar", "btn-continuar"]) {
     document.getElementById(id).hidden = !MOSTRAR_SAVE;
   }
 
   document.getElementById("btn-salvar").onclick = salvar;
   document.getElementById("btn-continuar").onclick = continuar;
-  document.getElementById("btn-exportar").onclick = exportarSave;
-  document.getElementById("btn-importar").onclick = importarSave;
   document.getElementById("btn-reiniciar").onclick = reiniciar;
   document.getElementById("btn-menu").onclick = () => mostrarTitulo();
 

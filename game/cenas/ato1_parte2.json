@@ -261,6 +261,15 @@
         ]
       },
       {
+        "id": "tomar_banho",
+        "texto": "Tomar um banho (baixa a Suspeita)",
+        "destino": "tomar_banho",
+        "se": {
+          "flag": "fome_ativa",
+          "valor": true
+        }
+      },
+      {
         "id": "lag_barulho_op",
         "texto": "Escutar o barulho que vem do corredor",
         "destino": "lag_barulho",
@@ -322,6 +331,28 @@
         "destino": "@mapa"
       }
     ],
+    "fundo": "suite14"
+  },
+  {
+    "id": "tomar_banho",
+    "chegada": {
+      "barras": {
+        "suspeita": -100,
+        "sanidade": 2
+      },
+      "flags": {
+        "tomou_banho": true
+      },
+      "tempo": 25
+    },
+    "narrativa": [
+      "A água quente cai pesada e leva o cheiro dos corredores. Você esfrega a pele até ficar vermelha, como quem apaga uma assinatura.",
+      "Quando sai do banheiro, enrolado na toalha, o espelho está embaçado e o quarto cheira a sabão. Você se sente menos humano de dentro para fora."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "suite_base",
     "fundo": "suite14"
   },
   {
@@ -2120,7 +2151,7 @@
         "fragmentos": 1
       },
       "barras": {
-        "sanidade": -2
+        "sanidade": -4
       },
       "tempo": 3
     },
@@ -2153,7 +2184,7 @@
         "fragmentos": 1
       },
       "barras": {
-        "sanidade": -2
+        "sanidade": -4
       },
       "tempo": 3
     },
@@ -2185,7 +2216,7 @@
         "fragmentos": 1
       },
       "barras": {
-        "sanidade": -2
+        "sanidade": -4
       },
       "tempo": 3
     },
@@ -2217,7 +2248,7 @@
         "fragmentos": 1
       },
       "barras": {
-        "sanidade": -2
+        "sanidade": -4
       },
       "tempo": 3
     },
@@ -2285,7 +2316,7 @@
       "Ela quase tromba em você, equilibra a pilha com o queixo e aponta com a cabeça para dentro da sala.",
       {
         "quem": "mavis",
-        "texto": "Você deve ser o Thiago. Eu sou a Mavis. Aquela é a Enola, a bibliotecária-chefe. Ela te mostra tudo. Preciso correr!"
+        "texto": "Thiago! Que bom que é você. Aquela é a Enola, a bibliotecária-chefe. Ela te mostra tudo. Eu preciso correr!"
       },
       "E corre mesmo. O som dos passos some pelo corredor, junto com uma bronca em voz baixa contra o relógio.",
       "Dentro, uma névoa branca paira entre as estantes mais altas. Aos poucos ela se condensa em uma bibliotecária de cabelos prateados, com uma coruja pequena no ombro.",
@@ -3559,7 +3590,8 @@
     "dados": {
       "flag": "nix_estado",
       "casos": {
-        "concluida": "nix_q3"
+        "concluida": "nix_q3",
+        "pedido": "nix_q4"
       },
       "padrao": "nix_q_tel",
       "raiz": true
@@ -3657,6 +3689,37 @@
         "texto": "Cozinhar? Hmm. Eu estou ocupada, mas dou um jeito. Amanhã cedo eu deixo na sua porta."
       },
       "Ela sai e deixa no ar um cheiro de sabão e de pressa. Você tem a impressão de que alguma coisa nesta suíte mudou de lugar."
+    ],
+    "dados": {
+      "raiz": true
+    },
+    "destino_auto": "suite_base",
+    "fundo": "suite14"
+  },
+  {
+    "id": "nix_q4",
+    "chegada": {
+      "flags": {
+        "nix_gatilho": false,
+        "ing_dia": "@dia"
+      },
+      "tempo": 8
+    },
+    "narrativa": [
+      "Ao girar a chave, você encontra a porta aberta. A camareira de uniforme cinza se vira com um pano na mão e ergue as sobrancelhas.",
+      {
+        "quem": "nix",
+        "texto": "Você de novo. E sem a minha vassoura, pelo jeito."
+      },
+      {
+        "quem": "thiago",
+        "texto": "Ainda vou buscar no estoque. Mas queria te pedir outra coisa: ingredientes simples, para aprender a cozinhar."
+      },
+      {
+        "quem": "nix",
+        "texto": "Ingredientes? Hmm. Você me ajuda e eu te ajudo, é justo. Amanhã cedo eu deixo na sua porta. Mas traz a vassoura, hein?"
+      },
+      "Ela some pela porta com o pano no ombro."
     ],
     "dados": {
       "raiz": true
@@ -3765,18 +3828,18 @@
       "Você prova. Está ótimo, de um jeito simples que parece abraço.",
       {
         "quem": "eugenie",
-        "texto": "Estou impressionada com a comida deste hotel. Alguém aqui cozinha muito bem, e eu preciso elogiar essa pessoa."
+        "texto": "Estou impressionada com a comida deste hotel. Alguém aqui cozinha muito bem, e um dia eu ainda vou elogiar essa pessoa pessoalmente."
       },
-      "Ela se levanta, ajeita o avental e caminha até a porta fechada no fundo do refeitório, aquela que ninguém ousa tocar.",
+      "Ela olha por um instante para a porta fechada no fundo do refeitório, aquela que ninguém ousa tocar, e sorri sozinha, como quem guarda uma ideia.",
       {
         "quem": "thiago",
-        "texto": "Eugénie, a cozinha é proibida!"
+        "texto": "A cozinha é proibida, Eugénie."
       },
       {
         "quem": "eugenie",
-        "texto": "Para você, querido. Para mim, é a minha casa."
+        "texto": "Por enquanto, querido. Por enquanto."
       },
-      "Ela empurra a porta, entra, e a porta se fecha atrás dela sem fazer o menor ruído. Você espera. Nenhum som volta.",
+      "Ela ajeita o avental, volta para a mesa de canto e se serve de chá como se nada tivesse sido dito.",
       {
         "estilo": "sistema",
         "texto": "Habilidade aprendida: <b>Cozinha Básica</b>. Os ingredientes continuam com você: uma vez por dia, fora dos horários de refeição, você pode preparar uma refeição simples no refeitório."
@@ -4537,6 +4600,11 @@
         "ataque_feito": true,
         "ataque_pendente": false
       },
+      "relacoes": {
+        "mulher_piano": {
+          "afeto": -65
+        }
+      },
       "somar": {
         "fragmentos": 1
       },
@@ -4967,6 +5035,11 @@
         "biblioteca_elisabeta": true,
         "lugar": "suite14",
         "pos_estado": "aberto"
+      },
+      "relacoes": {
+        "mulher_piano": {
+          "afeto": 50
+        }
       },
       "barras": {
         "cansaco": 90,

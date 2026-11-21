@@ -61,7 +61,6 @@ function ligarTitulo() {
   document.getElementById("t-jogar").onclick = () => reiniciar();
   document.getElementById("t-continuar").onclick = () => esconderTitulo();
   document.getElementById("t-carregar").onclick = () => continuar();
-  document.getElementById("t-importar").onclick = () => importarSave();
 
   // aplicativo do Windows
   const app = window.hotelApp;

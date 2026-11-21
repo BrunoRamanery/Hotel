@@ -276,6 +276,7 @@ function avisosDeStatus(estado) {
   const a = [];
   if (estado.fome <= 35) a.push(`Você está com fome. ${textoProximaRefeicao(estado)}; a água do refeitório está sempre disponível.`);
   if (estado.cansaco <= 30) a.push(`Você está exausto. Um cochilo ajuda, e à noite o certo é dormir na Suíte 14.`);
+  if (estado.suspeita >= 40) a.push(`Você está cheirando a humano e os olhares notam. Um banho na Suíte 14 baixa a Suspeita.`);
   if (h >= 21 && h < 22) a.push(`Falta pouco para as 22h: depois disso, os corredores são proibidos.`);
   else if (h >= 22 || h < 6) a.push(`Os corredores são proibidos a esta hora. Volte para a Suíte 14.`);
   return a.slice(0, 2);

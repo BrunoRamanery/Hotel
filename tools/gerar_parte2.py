@@ -130,8 +130,15 @@ cena("suite_base", [
     op("dormir_noite", "Dormir até de manhã", "dormir_gate", se={"flag": "@hora", "min": 19}),
     op("dormir_madrugada", "Dormir até de manhã", "dormir_gate", se={"flag": "@hora", "max": 5}),
     op("cochilar", "Tirar um cochilo (3 horas)", "cochilo", se=[{"flag": "@hora", "min": 6, "max": 18}]),
+    op("tomar_banho", "Tomar um banho (baixa a Suspeita)", "tomar_banho", se={"flag": "fome_ativa", "valor": True}),
     MAPA,
 ], dados=HUB, fundo="suite14")
+
+cena("tomar_banho", [
+    "A água quente cai pesada e leva o cheiro dos corredores. Você esfrega a pele até ficar vermelha, como quem apaga uma assinatura.",
+    "Quando sai do banheiro, enrolado na toalha, o espelho está embaçado e o quarto cheira a sabão. Você se sente menos humano de dentro para fora.",
+], destino_auto="suite_base", chegada={"barras": {"suspeita": -100, "sanidade": 2}, "flags": {"tomou_banho": True}, "tempo": 25},
+   dados={"raiz": True}, fundo="suite14")
 
 cena("hub_corredores", [
     "Os corredores dos quartos: tapete vermelho, armaduras vazias alinhadas como sentinelas e portas fechadas, cada uma com um número de bronze.",
@@ -423,7 +430,7 @@ cena("vovo_convite", [
 # (cada uma soma 1 fragmento; o Thiago não sabe quem faz)
 # =====================================================================
 def evento(id, areas, texto, fundo_, extra=None):
-    ef = {"somar": {"fragmentos": 1}, "barras": {"sanidade": -2}, "tempo": 3}
+    ef = {"somar": {"fragmentos": 1}, "barras": {"sanidade": -4}, "tempo": 3}
     cena(id, texto, destino_auto="@hub", chegada=ef,
          dados={"evento_invisivel": {"areas": areas}, "raiz": True}, fundo=fundo_)
 
@@ -459,7 +466,7 @@ cena("biblioteca_primeira", [
     "A porta da biblioteca se abre antes de você tocá-la. Uma moça de cabelos escuros e olhos claros sai atropelando o ar, os braços carregados de livros, cartas e envelopes que ameaçam escorregar a cada passo.",
     f("mavis", "Desculpa, desculpa, desculpa! Estou atrasadíssima!"),
     "Ela quase tromba em você, equilibra a pilha com o queixo e aponta com a cabeça para dentro da sala.",
-    f("mavis", "Você deve ser o Thiago. Eu sou a Mavis. Aquela é a Enola, a bibliotecária-chefe. Ela te mostra tudo. Preciso correr!"),
+    f("mavis", "Thiago! Que bom que é você. Aquela é a Enola, a bibliotecária-chefe. Ela te mostra tudo. Eu preciso correr!"),
     "E corre mesmo. O som dos passos some pelo corredor, junto com uma bronca em voz baixa contra o relógio.",
     "Dentro, uma névoa branca paira entre as estantes mais altas. Aos poucos ela se condensa em uma bibliotecária de cabelos prateados, com uma coruja pequena no ombro.",
     f("enola", "Seja bem-vindo à biblioteca, senhor Thiago. Os livros comuns estão à sua disposição. Os outros, por ora, preferem ficar quietos."),
@@ -748,7 +755,7 @@ cena("eugenie_primeira", [
 
 # o encontro com a Nix no quarto (3 variações), disparado na próxima visita à suíte
 cena("nix_quarto", None, tipo="condicional",
-     dados={"flag": "nix_estado", "casos": {"concluida": "nix_q3"}, "padrao": "nix_q_tel", "raiz": True})
+     dados={"flag": "nix_estado", "casos": {"concluida": "nix_q3", "pedido": "nix_q4"}, "padrao": "nix_q_tel", "raiz": True})
 cena("nix_q_tel", None, tipo="condicional",
      dados={"flag": "lily_conhecida", "casos": {"true": "nix_q2"}, "padrao": "nix_q1", "raiz": True})
 
@@ -777,6 +784,14 @@ cena("nix_q2", [
     "Ela sai e deixa no ar um cheiro de sabão e de pressa. Você tem a impressão de que alguma coisa nesta suíte mudou de lugar.",
 ], destino_auto="suite_base", chegada=FIM_NIX, dados={"raiz": True}, fundo="suite14")
 
+cena("nix_q4", [
+    "Ao girar a chave, você encontra a porta aberta. A camareira de uniforme cinza se vira com um pano na mão e ergue as sobrancelhas.",
+    f("nix", "Você de novo. E sem a minha vassoura, pelo jeito."),
+    f("thiago", "Ainda vou buscar no estoque. Mas queria te pedir outra coisa: ingredientes simples, para aprender a cozinhar."),
+    f("nix", "Ingredientes? Hmm. Você me ajuda e eu te ajudo, é justo. Amanhã cedo eu deixo na sua porta. Mas traz a vassoura, hein?"),
+    "Ela some pela porta com o pano no ombro.",
+], destino_auto="suite_base", chegada=FIM_NIX, dados={"raiz": True}, fundo="suite14")
+
 cena("nix_q3", [
     "Ao girar a chave, você encontra a porta aberta. A camareira de uniforme cinza endireita a cabeça ao vê-lo, com um sorriso torto.",
     f("nix", "Novamente você aqui."),
@@ -800,11 +815,11 @@ cena("eugenie_aula", [
     "Ela mostra como cortar o pão em fatias iguais, como esmagar o ovo com um garfo e o sal para misturar com queijo, como equilibrar doce e salgado com meia maçã.",
     f("eugenie", "Pronto. Você acabou de fazer o seu primeiro prato, sem uma única chama."),
     "Você prova. Está ótimo, de um jeito simples que parece abraço.",
-    f("eugenie", "Estou impressionada com a comida deste hotel. Alguém aqui cozinha muito bem, e eu preciso elogiar essa pessoa."),
-    "Ela se levanta, ajeita o avental e caminha até a porta fechada no fundo do refeitório, aquela que ninguém ousa tocar.",
-    f("thiago", "Eugénie, a cozinha é proibida!"),
-    f("eugenie", "Para você, querido. Para mim, é a minha casa."),
-    "Ela empurra a porta, entra, e a porta se fecha atrás dela sem fazer o menor ruído. Você espera. Nenhum som volta.",
+    f("eugenie", "Estou impressionada com a comida deste hotel. Alguém aqui cozinha muito bem, e um dia eu ainda vou elogiar essa pessoa pessoalmente."),
+    "Ela olha por um instante para a porta fechada no fundo do refeitório, aquela que ninguém ousa tocar, e sorri sozinha, como quem guarda uma ideia.",
+    f("thiago", "A cozinha é proibida, Eugénie."),
+    f("eugenie", "Por enquanto, querido. Por enquanto."),
+    "Ela ajeita o avental, volta para a mesa de canto e se serve de chá como se nada tivesse sido dito.",
     sis("Habilidade aprendida: <b>Cozinha Básica</b>. Os ingredientes continuam com você: uma vez por dia, fora dos horários de refeição, você pode preparar uma refeição simples no refeitório."),
 ], destino_auto="hub_refeitorio",
    chegada={"habilidades": ["cozinha_basica"], "flags": {"eug_estado": "concluida", "cozinha_basica": True}, "barras": {"fome": 25},
@@ -1009,6 +1024,7 @@ cena("ataque_golpe", [
     "Você tranca a porta, escorrega até o chão e só então vê o sangue.",
 ], destino_auto="manha_ferido",
    chegada={"barras": {"vida": -35, "sanidade": -30}, "flags": {"lugar": "suite14", "ataque_feito": True, "ataque_pendente": False},
+            "relacoes": {"mulher_piano": {"afeto": -65}},
             "somar": {"fragmentos": 1}, "tempo": 20},
    dados={"raiz": True}, fundo="suite14")
 
@@ -1136,6 +1152,7 @@ cena("desculpas_fim", [
     sis("Uma nova pista foi liberada na <b>biblioteca</b>: a vida de Elisabeta. (Conteúdo previsto para o próximo capítulo.)"),
 ], destino_auto="hub_suite14",
    chegada={"ate": "07:00", "sono": True, "flags": {"desculpas_pendente": False, "elisabeta_desculpou": True, "biblioteca_elisabeta": True, "lugar": "suite14"},
+            "relacoes": {"mulher_piano": {"afeto": 50}},
             "barras": {"cansaco": 90, "sanidade": 10, "vida": 5}},
    dados={"raiz": True}, fundo="suite14")
 
