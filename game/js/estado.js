@@ -86,8 +86,8 @@ function clamp(valor, minimo = 0, maximo = 100) {
  */
 const FOME_POR_MINUTO = 0.12;     // ~7 pontos por hora acordado
 const CANSACO_POR_MINUTO = 0.10;  // ~6 pontos por hora acordado: ~16h de pé e o corpo pede cama (dormindo não gasta)
-/** Suspeita que sobe por minuto sem banho (cerca de 16 pontos por dia). */
-const SUSPEITA_POR_MINUTO = 0.011;
+/** Suspeita: quanto mais gente conhece Thiago, mais ela sobe sem banho. */
+const SUSPEITA_POR_PESSOA_POR_MINUTO = 0.0012;  // cada pessoa conhecida soma ~1,7 ponto por dia
 
 function avancarTempo(estado, minutos = 0, fator = 1) {
   const m = Math.max(0, minutos);
@@ -96,7 +96,7 @@ function avancarTempo(estado, minutos = 0, fator = 1) {
     estado.fome = clamp(estado.fome - m * FOME_POR_MINUTO * fator, 0, estado.fomeMax);
     if (fator >= 1) estado.cansaco = clamp(estado.cansaco - m * CANSACO_POR_MINUTO, 0, 100);
     // sem banho, o cheiro humano denuncia: a Suspeita sobe devagar (um banho zera)
-    estado.suspeita = clamp((estado.suspeita || 0) + m * SUSPEITA_POR_MINUTO * fator, 0, 100);
+    estado.suspeita = clamp((estado.suspeita || 0) + m * SUSPEITA_POR_PESSOA_POR_MINUTO * Math.max(1, (estado.conhecidos || []).length) * fator, 0, 100);
   }
 }
 
